@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.muyie.framework.config.aspectj.AspectJAutoConfiguration,\
+  org.muyie.framework.config.apidoc.SwaggerAutoConfiguration,\
+  org.muyie.framework.config.apidoc.SwaggerPluginsAutoConfiguration,\
+  org.muyie.framework.config.MuyieProperties,\
+  org.muyie.framework.security.uaa.UaaAutoConfiguration,\
+  org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\
+  org.muyie.framework.config.metric.MuyieMetricsEndpointConfiguration,\
+  org.muyie.framework.config.metric.MuyieLoggingMetricsExportConfiguration,\
+  org.muyie.framework.security.ssl.UndertowSSLConfiguration

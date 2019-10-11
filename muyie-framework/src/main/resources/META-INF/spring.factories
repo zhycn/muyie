@@ -4,6 +4,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.apidoc.SwaggerAutoConfiguration,\
   org.muyie.framework.config.apidoc.SwaggerPluginsAutoConfiguration,\
   org.muyie.framework.config.MuyieProperties,\
+  org.muyie.framework.config.MuyieWebConfigurer,\
   org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\
   org.muyie.framework.config.metric.MuyieMetricsEndpointConfiguration,\
   org.muyie.framework.config.metric.MuyieLoggingMetricsExportConfiguration,\

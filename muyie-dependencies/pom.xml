@@ -64,6 +64,7 @@
         <!-- Customize Dependency versions -->
         <alibaba-druid.version>1.1.17</alibaba-druid.version>
         <alibaba-fastjson.version>1.2.60</alibaba-fastjson.version>
+        <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <dozer-spring-boot.version>6.5.0</dozer-spring-boot.version>
         <hutool.version>4.6.10</hutool.version>
         <javax-jax-rs.version>2.1.1</javax-jax-rs.version>
@@ -271,11 +272,26 @@
                 <groupId>org.zalando</groupId>
                 <artifactId>problem-spring-web</artifactId>
                 <version>${problem-spring-web.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.code.findbugs</groupId>
+                        <artifactId>jsr305</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apiguardian</groupId>
+                        <artifactId>apiguardian-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.zalando</groupId>
                 <artifactId>problem-spring-webflux</artifactId>
                 <version>${problem-spring-webflux.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apiguardian</groupId>
+                <artifactId>apiguardian-api</artifactId>
+                <version>${apiguardian-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.prometheus</groupId>

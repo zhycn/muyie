@@ -27,6 +27,7 @@ public class MuyieAsyncConfigurer implements AsyncConfigurer {
   }
 
   public AsyncTaskExecutor create() {
+    log.debug("Creating Async Task Executor");
     ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
     executor.setCorePoolSize(properties.getCorePoolSize());
     executor.setMaxPoolSize(properties.getMaxPoolSize());

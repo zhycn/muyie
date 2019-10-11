@@ -39,6 +39,8 @@ public class JacksonConfiguration {
 
   /**
    * Jackson Afterburner module to speed up serialization/deserialization.
+   * 
+   * @return the Jackson Afterburner module
    */
   @Bean
   public AfterburnerModule afterburnerModule() {
@@ -47,6 +49,8 @@ public class JacksonConfiguration {
 
   /**
    * Module for serialization/deserialization of RFC7807 Problem.
+   * 
+   * @return the Problem module
    */
   @Bean
   public ProblemModule problemModule() {
@@ -55,6 +59,8 @@ public class JacksonConfiguration {
 
   /**
    * Module for serialization/deserialization of ConstraintViolationProblem.
+   * 
+   * @return the ConstraintViolationProblem
    */
   @Bean
   public ConstraintViolationProblemModule constraintViolationProblemModule() {

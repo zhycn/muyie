@@ -144,11 +144,11 @@ public interface MuyieDefaults {
     interface Authorization {
       boolean enabled = false;
       String name = "Authorization";
-      String description = "";
-      String defaultValue = "";
+      String description = null;
+      String defaultValue = null;
       boolean required = false;
       String paramType = "header";
-      String pattern = "";
+      String pattern = null;
     }
 
   }

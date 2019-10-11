@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.muyie.framework.config.MuyieProperties;
 import org.muyie.framework.config.MuyieProperties.Swagger;
 import org.muyie.framework.config.apidoc.SwaggerAutoConfiguration;
-import org.muyie.framework.config.apidoc.customizer.MuyieSwaggerCustomizer;
+import org.muyie.framework.config.apidoc.customizer.GenericSwaggerCustomizer;
 import org.muyie.framework.config.apidoc.customizer.SwaggerCustomizer;
 import org.muyie.framework.test.LogbackRecorder;
 import org.muyie.framework.test.LogbackRecorder.Event;
@@ -86,7 +86,7 @@ public class SwaggerAutoConfigurationTest {
   @Test
   public void testSwaggerSpringfoxApiDocket() {
     List<SwaggerCustomizer> customizers =
-        Lists.newArrayList(new MuyieSwaggerCustomizer(properties));
+        Lists.newArrayList(new GenericSwaggerCustomizer(properties));
     Docket docket = config.swaggerSpringfoxApiDocket(customizers, new NullProvider<>());
 
     verify(docket, never()).groupName(anyString());

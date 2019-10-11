@@ -140,6 +140,17 @@ public interface MuyieDefaults {
     String host = null;
     String[] protocols = {};
     boolean useDefaultResponseMessages = true;
+
+    interface Authorization {
+      boolean enabled = false;
+      String name = "Authorization";
+      String description = null;
+      String defaultValue = null;
+      boolean required = false;
+      String paramType = "header";
+      String pattern = null;
+    }
+
   }
 
   interface Metrics {

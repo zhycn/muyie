@@ -788,6 +788,8 @@ public class MuyieProperties {
 
     private boolean useDefaultResponseMessages = MuyieDefaults.Swagger.useDefaultResponseMessages;
 
+    private final Authorization authorization = new Authorization();
+    
     public String getTitle() {
       return title;
     }
@@ -891,6 +893,85 @@ public class MuyieProperties {
     public void setUseDefaultResponseMessages(final boolean useDefaultResponseMessages) {
       this.useDefaultResponseMessages = useDefaultResponseMessages;
     }
+    
+    public Authorization getAuthorization() {
+      return authorization;
+    }
+
+    public static class Authorization {
+
+      private boolean enabled = MuyieDefaults.Swagger.Authorization.enabled;
+
+      private String name = MuyieDefaults.Swagger.Authorization.name;
+
+      private String description = MuyieDefaults.Swagger.Authorization.description;
+
+      private String defaultValue = MuyieDefaults.Swagger.Authorization.defaultValue;
+
+      private boolean required = MuyieDefaults.Swagger.Authorization.required;
+
+      private String paramType = MuyieDefaults.Swagger.Authorization.paramType;
+
+      private String pattern = MuyieDefaults.Swagger.Authorization.pattern;
+
+      public boolean isEnabled() {
+        return enabled;
+      }
+
+      public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+      }
+
+      public String getName() {
+        return name;
+      }
+
+      public void setName(String name) {
+        this.name = name;
+      }
+
+      public String getDescription() {
+        return description;
+      }
+
+      public void setDescription(String description) {
+        this.description = description;
+      }
+
+      public String getDefaultValue() {
+        return defaultValue;
+      }
+
+      public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+      }
+
+      public boolean isRequired() {
+        return required;
+      }
+
+      public void setRequired(boolean required) {
+        this.required = required;
+      }
+
+      public String getParamType() {
+        return paramType;
+      }
+
+      public void setParamType(String paramType) {
+        this.paramType = paramType;
+      }
+
+      public String getPattern() {
+        return pattern;
+      }
+
+      public void setPattern(String pattern) {
+        this.pattern = pattern;
+      }
+
+    }
+    
   }
 
   public static class Metrics {

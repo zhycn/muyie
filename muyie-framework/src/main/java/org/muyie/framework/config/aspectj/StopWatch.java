@@ -18,6 +18,8 @@ public @interface StopWatch {
 
   /**
    * Description for interfaces
+   * 
+   * @return a description for interfaces
    */
   String value();
 

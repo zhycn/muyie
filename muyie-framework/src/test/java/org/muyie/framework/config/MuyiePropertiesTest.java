@@ -203,8 +203,7 @@ public class MuyiePropertiesTest {
 
   @Test
   public void testCacheInfinispanLocalTimeToLiveSeconds() {
-    MuyieProperties.Cache.Infinispan.Local obj =
-        properties.getCache().getInfinispan().getLocal();
+    MuyieProperties.Cache.Infinispan.Local obj = properties.getCache().getInfinispan().getLocal();
     long val = MuyieDefaults.Cache.Infinispan.Local.timeToLiveSeconds;
     assertThat(obj.getTimeToLiveSeconds()).isEqualTo(val);
     val++;
@@ -214,8 +213,7 @@ public class MuyiePropertiesTest {
 
   @Test
   public void testCacheInfinispanLocalMaxEntries() {
-    MuyieProperties.Cache.Infinispan.Local obj =
-        properties.getCache().getInfinispan().getLocal();
+    MuyieProperties.Cache.Infinispan.Local obj = properties.getCache().getInfinispan().getLocal();
     long val = MuyieDefaults.Cache.Infinispan.Local.maxEntries;
     assertThat(obj.getMaxEntries()).isEqualTo(val);
     val++;

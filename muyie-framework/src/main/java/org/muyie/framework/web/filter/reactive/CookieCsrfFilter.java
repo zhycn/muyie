@@ -13,38 +13,37 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 /**
- * <p>CookieCsrfFilter class.</p>
+ * <p>
+ * CookieCsrfFilter class.
+ * </p>
  */
 public class CookieCsrfFilter implements WebFilter {
 
-    private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
+  private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
 
-    /** {@inheritDoc} */
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        if (exchange.getRequest().getCookies().get(CSRF_COOKIE_NAME) != null) {
-            return chain.filter(exchange);
-        }
-        Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
-        if (csrfToken == null) {
-            return chain.filter(exchange);
-        }
-
-        return csrfToken.doOnSuccess(token -> {
-            ResponseCookie cookie = ResponseCookie.from(CSRF_COOKIE_NAME, token.getToken())
-                .maxAge(-1)
-                .httpOnly(false)
-                .path(getRequestContext(exchange.getRequest()))
-                .secure(Optional.ofNullable(exchange.getRequest().getSslInfo()).isPresent())
-                .build();
-            exchange.getResponse().getCookies().add(CSRF_COOKIE_NAME, cookie);
-
-        }).then(Mono.defer(() -> chain.filter(exchange)));
+  /** {@inheritDoc} */
+  @Override
+  public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    if (exchange.getRequest().getCookies().get(CSRF_COOKIE_NAME) != null) {
+      return chain.filter(exchange);
+    }
+    Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
+    if (csrfToken == null) {
+      return chain.filter(exchange);
     }
 
-    private String getRequestContext(ServerHttpRequest request) {
-        String contextPath = request.getPath().contextPath().value();
-        return StringUtils.hasLength(contextPath) ? contextPath : "/";
-    }
+    return csrfToken.doOnSuccess(token -> {
+      ResponseCookie cookie = ResponseCookie.from(CSRF_COOKIE_NAME, token.getToken()).maxAge(-1)
+          .httpOnly(false).path(getRequestContext(exchange.getRequest()))
+          .secure(Optional.ofNullable(exchange.getRequest().getSslInfo()).isPresent()).build();
+      exchange.getResponse().getCookies().add(CSRF_COOKIE_NAME, cookie);
+
+    }).then(Mono.defer(() -> chain.filter(exchange)));
+  }
+
+  private String getRequestContext(ServerHttpRequest request) {
+    String contextPath = request.getPath().contextPath().value();
+    return StringUtils.hasLength(contextPath) ? contextPath : "/";
+  }
 }
 

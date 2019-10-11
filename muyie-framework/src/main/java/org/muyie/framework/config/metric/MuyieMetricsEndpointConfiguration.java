@@ -12,24 +12,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>MuyieMetricsEndpointConfiguration class.</p>
+ * <p>
+ * MuyieMetricsEndpointConfiguration class.
+ * </p>
  */
 @Configuration
 @ConditionalOnClass(Timed.class)
 @AutoConfigureAfter(MetricsEndpointAutoConfiguration.class)
 public class MuyieMetricsEndpointConfiguration {
 
-    /**
-     * <p>muyieMetricsEndpoint.</p>
-     *
-     * @param meterRegistry a {@link io.micrometer.core.instrument.MeterRegistry} object.
-     * @return a {@link org.muyie.framework.config.metric.MuyieMetricsEndpoint} object.
-     */
-    @Bean
-    @ConditionalOnBean({MeterRegistry.class})
-    @ConditionalOnMissingBean
-    @ConditionalOnEnabledEndpoint
-    public MuyieMetricsEndpoint muyieMetricsEndpoint(MeterRegistry meterRegistry) {
-        return new MuyieMetricsEndpoint(meterRegistry);
-    }
+  /**
+   * <p>
+   * muyieMetricsEndpoint.
+   * </p>
+   *
+   * @param meterRegistry a {@link io.micrometer.core.instrument.MeterRegistry} object.
+   * @return a {@link org.muyie.framework.config.metric.MuyieMetricsEndpoint} object.
+   */
+  @Bean
+  @ConditionalOnBean({MeterRegistry.class})
+  @ConditionalOnMissingBean
+  @ConditionalOnEnabledEndpoint
+  public MuyieMetricsEndpoint muyieMetricsEndpoint(MeterRegistry meterRegistry) {
+    return new MuyieMetricsEndpoint(meterRegistry);
+  }
 }

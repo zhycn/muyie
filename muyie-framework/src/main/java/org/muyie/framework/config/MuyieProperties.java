@@ -206,31 +206,83 @@ public class MuyieProperties {
 
     private int maxPoolSize = MuyieDefaults.Async.maxPoolSize;
 
+    private int keepAliveSeconds = MuyieDefaults.Async.keepAliveSeconds;
+
     private int queueCapacity = MuyieDefaults.Async.queueCapacity;
+
+    private boolean allowCoreThreadTimeOut = MuyieDefaults.Async.allowCoreThreadTimeOut;
+
+    private boolean waitForJobsToCompleteOnShutdown =
+        MuyieDefaults.Async.waitForJobsToCompleteOnShutdown;
+
+    private int awaitTerminationSeconds = MuyieDefaults.Async.awaitTerminationSeconds;
+
+    private String threadNamePrefix = MuyieDefaults.Async.threadNamePrefix;
 
     public int getCorePoolSize() {
       return corePoolSize;
-    }
-
-    public void setCorePoolSize(int corePoolSize) {
-      this.corePoolSize = corePoolSize;
     }
 
     public int getMaxPoolSize() {
       return maxPoolSize;
     }
 
-    public void setMaxPoolSize(int maxPoolSize) {
-      this.maxPoolSize = maxPoolSize;
+    public int getKeepAliveSeconds() {
+      return keepAliveSeconds;
     }
 
     public int getQueueCapacity() {
       return queueCapacity;
     }
 
+    public boolean isAllowCoreThreadTimeOut() {
+      return allowCoreThreadTimeOut;
+    }
+
+    public boolean isWaitForJobsToCompleteOnShutdown() {
+      return waitForJobsToCompleteOnShutdown;
+    }
+
+    public int getAwaitTerminationSeconds() {
+      return awaitTerminationSeconds;
+    }
+
+    public String getThreadNamePrefix() {
+      return threadNamePrefix;
+    }
+
+    public void setCorePoolSize(int corePoolSize) {
+      this.corePoolSize = corePoolSize;
+    }
+
+    public void setMaxPoolSize(int maxPoolSize) {
+      this.maxPoolSize = maxPoolSize;
+    }
+
+    public void setKeepAliveSeconds(int keepAliveSeconds) {
+      this.keepAliveSeconds = keepAliveSeconds;
+    }
+
     public void setQueueCapacity(int queueCapacity) {
       this.queueCapacity = queueCapacity;
     }
+
+    public void setAllowCoreThreadTimeOut(boolean allowCoreThreadTimeOut) {
+      this.allowCoreThreadTimeOut = allowCoreThreadTimeOut;
+    }
+
+    public void setWaitForJobsToCompleteOnShutdown(boolean waitForJobsToCompleteOnShutdown) {
+      this.waitForJobsToCompleteOnShutdown = waitForJobsToCompleteOnShutdown;
+    }
+
+    public void setAwaitTerminationSeconds(int awaitTerminationSeconds) {
+      this.awaitTerminationSeconds = awaitTerminationSeconds;
+    }
+
+    public void setThreadNamePrefix(String threadNamePrefix) {
+      this.threadNamePrefix = threadNamePrefix;
+    }
+
   }
 
   public static class Http {

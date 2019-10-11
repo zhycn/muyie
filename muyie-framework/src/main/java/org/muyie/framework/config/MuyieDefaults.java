@@ -13,9 +13,14 @@ public interface MuyieDefaults {
 
   interface Async {
 
-    int corePoolSize = 2;
+    int corePoolSize = 8;
     int maxPoolSize = 50;
+    int keepAliveSeconds = 60 * 5;
     int queueCapacity = 10000;
+    boolean allowCoreThreadTimeOut = false;
+    boolean waitForJobsToCompleteOnShutdown = false;
+    int awaitTerminationSeconds = 60 * 15;
+    String threadNamePrefix = "MuYieAsync-";
   }
 
   interface Http {

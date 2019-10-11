@@ -76,6 +76,56 @@ public class MuyiePropertiesTest {
   }
 
   @Test
+  public void testAsyncKeepAliveSeconds() {
+    MuyieProperties.Async obj = properties.getAsync();
+    int val = MuyieDefaults.Async.keepAliveSeconds;
+    assertThat(obj.getKeepAliveSeconds()).isEqualTo(val);
+    val++;
+    obj.setKeepAliveSeconds(val);
+    assertThat(obj.getKeepAliveSeconds()).isEqualTo(val);
+  }
+
+  @Test
+  public void testAsyncAllowCoreThreadTimeOut() {
+    MuyieProperties.Async obj = properties.getAsync();
+    boolean val = MuyieDefaults.Async.allowCoreThreadTimeOut;
+    assertThat(obj.isAllowCoreThreadTimeOut()).isEqualTo(val);
+    val = !val;
+    obj.setAllowCoreThreadTimeOut(val);
+    assertThat(obj.isAllowCoreThreadTimeOut()).isEqualTo(val);
+  }
+
+  @Test
+  public void testAsyncWaitForJobsToCompleteOnShutdown() {
+    MuyieProperties.Async obj = properties.getAsync();
+    boolean val = MuyieDefaults.Async.waitForJobsToCompleteOnShutdown;
+    assertThat(obj.isWaitForJobsToCompleteOnShutdown()).isEqualTo(val);
+    val = !val;
+    obj.setWaitForJobsToCompleteOnShutdown(val);
+    assertThat(obj.isWaitForJobsToCompleteOnShutdown()).isEqualTo(val);
+  }
+
+  @Test
+  public void testAsyncAwaitTerminationSeconds() {
+    MuyieProperties.Async obj = properties.getAsync();
+    int val = MuyieDefaults.Async.awaitTerminationSeconds;
+    assertThat(obj.getAwaitTerminationSeconds()).isEqualTo(val);
+    val++;
+    obj.setAwaitTerminationSeconds(val);
+    assertThat(obj.getAwaitTerminationSeconds()).isEqualTo(val);
+  }
+
+  @Test
+  public void testAsyncThreadNamePrefix() {
+    MuyieProperties.Async obj = properties.getAsync();
+    String val = MuyieDefaults.Async.threadNamePrefix;
+    assertThat(obj.getThreadNamePrefix()).isEqualTo(val);
+    val = "1" + val;
+    obj.setThreadNamePrefix(val);
+    assertThat(obj.getThreadNamePrefix()).isEqualTo(val);
+  }
+
+  @Test
   public void testHttpCacheTimeToLiveInDays() {
     MuyieProperties.Http.Cache obj = properties.getHttp().getCache();
     int val = MuyieDefaults.Http.Cache.timeToLiveInDays;

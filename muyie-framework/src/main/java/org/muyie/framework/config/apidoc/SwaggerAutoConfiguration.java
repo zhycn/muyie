@@ -1,7 +1,8 @@
 package org.muyie.framework.config.apidoc;
 
 import org.muyie.framework.config.MuyieProperties;
-import org.muyie.framework.config.apidoc.customizer.MuyieSwaggerCustomizer;
+import org.muyie.framework.config.apidoc.customizer.AuthorizationSwaggerCustomizer;
+import org.muyie.framework.config.apidoc.customizer.GenericSwaggerCustomizer;
 import org.muyie.framework.config.apidoc.customizer.SwaggerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,13 +101,23 @@ public class SwaggerAutoConfiguration {
   }
 
   /**
-   * MuYie Swagger Customizer
+   * Generic Swagger Customizer
    *
    * @return the Swagger Customizer of MuYie
    */
   @Bean
-  public MuyieSwaggerCustomizer muyieSwaggerCustomizer() {
-    return new MuyieSwaggerCustomizer(properties);
+  public GenericSwaggerCustomizer genericSwaggerCustomizer() {
+    return new GenericSwaggerCustomizer(properties);
+  }
+  
+  /**
+   * Authorization Swagger Customizer
+   *
+   * @return the Swagger Customizer of MuYie
+   */
+  @Bean
+  public AuthorizationSwaggerCustomizer authorizationSwaggerCustomizer() {
+    return new AuthorizationSwaggerCustomizer(properties);
   }
 
   /**

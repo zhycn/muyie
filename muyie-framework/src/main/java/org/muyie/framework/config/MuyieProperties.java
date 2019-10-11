@@ -38,8 +38,6 @@ public class MuyieProperties {
 
   private final Social social = new Social();
   
-  private final StopWatch stopWatch = new StopWatch();
-
   private final Gateway gateway = new Gateway();
 
   private final Registry registry = new Registry();
@@ -167,17 +165,6 @@ public class MuyieProperties {
    */
   public Social getSocial() {
     return social;
-  }
-
-  /**
-   * <p>
-   * Getter for the field <code>stopWatch</code>.
-   * </p>
-   *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.StopWatch} object.
-   */
-  public StopWatch getStopWatch() {
-    return stopWatch;
   }
 
   /**
@@ -1013,20 +1000,6 @@ public class MuyieProperties {
     public void setRedirectAfterSignIn(String redirectAfterSignIn) {
       this.redirectAfterSignIn = redirectAfterSignIn;
     }
-  }
-  
-  public static class StopWatch {
-    
-    private boolean enabled;
-
-    public boolean isEnabled() {
-      return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-      this.enabled = enabled;
-    }
-    
   }
 
   public static class Gateway {

@@ -9,13 +9,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.muyie.framework.aop.AroundAdvice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StopWatch;
 
 @Aspect
 @Configuration
-@ConditionalOnProperty(prefix = "muyie.stopWatch", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class StopWatchConfiguration implements AroundAdvice {
 
   private static final Logger log = LoggerFactory.getLogger(StopWatchConfiguration.class);

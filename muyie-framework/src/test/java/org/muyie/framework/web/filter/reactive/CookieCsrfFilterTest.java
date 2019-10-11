@@ -25,7 +25,7 @@ public class CookieCsrfFilterTest {
 
   @Test
   public void cookieSetInResponse() {
-    final String token = "test token";
+    final String token = "test_token";
     WebFilterChain filterChain = (filterExchange) -> {
       try {
         ResponseCookie cookie =

@@ -16,6 +16,9 @@ import java.lang.annotation.Target;
 @Documented
 public @interface StopWatch {
 
+  /**
+   * Description for interfaces
+   */
   String value();
 
 }

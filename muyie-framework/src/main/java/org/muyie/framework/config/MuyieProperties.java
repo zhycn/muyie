@@ -37,7 +37,7 @@ public class MuyieProperties {
   private final CorsConfiguration cors = new CorsConfiguration();
 
   private final Social social = new Social();
-  
+
   private final Gateway gateway = new Gateway();
 
   private final Registry registry = new Registry();
@@ -309,8 +309,7 @@ public class MuyieProperties {
 
         private boolean enabled = MuyieDefaults.Cache.Hazelcast.ManagementCenter.enabled;
 
-        private int updateInterval =
-            MuyieDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
+        private int updateInterval = MuyieDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
 
         private String url = MuyieDefaults.Cache.Hazelcast.ManagementCenter.url;
 
@@ -787,8 +786,7 @@ public class MuyieProperties {
 
     private String[] protocols = MuyieDefaults.Swagger.protocols;
 
-    private boolean useDefaultResponseMessages =
-        MuyieDefaults.Swagger.useDefaultResponseMessages;
+    private boolean useDefaultResponseMessages = MuyieDefaults.Swagger.useDefaultResponseMessages;
 
     public String getTitle() {
       return title;

@@ -49,4 +49,5 @@ public interface MuyieConstants {
    * <code>SPRING_PROFILE_K8S="k8s"</code>
    */
   String SPRING_PROFILE_K8S = "k8s";
+
 }

@@ -13,4 +13,10 @@ public interface AuthoritiesConstants {
 
   String ANONYMOUS = "ROLE_ANONYMOUS";
 
+  // system user
+  String SYSTEM_USER = "system";
+  
+  // anonymous user
+  String ANONYMOUS_USER = "anonymous";
+
 }

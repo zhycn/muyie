@@ -2,8 +2,11 @@ package org.muyie.framework.security.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
+
 import javax.annotation.PostConstruct;
 
 import org.muyie.framework.config.MuyieProperties;
@@ -15,12 +18,23 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 
-import io.jsonwebtoken.*;
+import cn.hutool.crypto.digest.HMac;
+import cn.hutool.crypto.digest.HmacAlgorithm;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+/**
+ * JWT token provider
+ */
 @Component
 public class JwtTokenProvider {
 
@@ -106,4 +120,12 @@ public class JwtTokenProvider {
     }
     return false;
   }
+
+  public static void getJwtSecretKey(String data) {
+    String secretKey = new HMac(HmacAlgorithm.HmacSHA512).digestHex(data);
+    System.out.println("Using a JWT secret key: " + secretKey);
+    System.out.println("Using a Base64-encoded JWT secret key: "
+        + Base64Utils.encodeToUrlSafeString(secretKey.getBytes()));
+  }
+
 }

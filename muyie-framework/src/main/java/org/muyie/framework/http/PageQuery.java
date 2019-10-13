@@ -8,6 +8,10 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE;
+import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_2;
+import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_TIME;
+import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_TIME_2;
 
 /**
  * 分页查询实体
@@ -79,7 +83,8 @@ public class PageQuery implements Serializable {
   }
 
   public Date parseDateEt() throws ParseException {
-    Date eDate = DateUtils.parseDate(et, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", f);
+    Date eDate = DateUtils.parseDate(et, f, FORMAT_DATE, FORMAT_DATE_2, FORMAT_DATE_TIME,
+        FORMAT_DATE_TIME_2);
     if (StringUtils.equals(st, et)) {
       return DateUtils.addDays(eDate, 1);
     }
@@ -87,7 +92,8 @@ public class PageQuery implements Serializable {
   }
 
   public Date parseDateSt() throws ParseException {
-    return DateUtils.parseDate(st, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", f);
+    return DateUtils.parseDate(st, f, FORMAT_DATE, FORMAT_DATE_2, FORMAT_DATE_TIME,
+        FORMAT_DATE_TIME_2);
   }
 
   public void setQ(String q) {

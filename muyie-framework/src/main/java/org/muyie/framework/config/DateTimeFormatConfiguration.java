@@ -21,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class DateTimeFormatConfiguration implements WebMvcConfigurer, InitializingBean {
 
-  private final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
   private final JacksonProperties jacksonProperties;
 
   public DateTimeFormatConfiguration(JacksonProperties jacksonProperties) {
@@ -38,7 +37,7 @@ public class DateTimeFormatConfiguration implements WebMvcConfigurer, Initializi
   @Override
   public void afterPropertiesSet() throws Exception {
     if (StringUtils.isBlank(jacksonProperties.getDateFormat())) {
-      jacksonProperties.setDateFormat(DEFAULT_DATE_FORMAT);
+      jacksonProperties.setDateFormat(MuyieConstants.FORMAT_DATE_TIME);
     }
   }
 

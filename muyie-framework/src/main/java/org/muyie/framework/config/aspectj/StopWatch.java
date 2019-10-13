@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * StopWatch for method execute times
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target(ElementType.METHOD)
 @Inherited
 @Documented
 public @interface StopWatch {

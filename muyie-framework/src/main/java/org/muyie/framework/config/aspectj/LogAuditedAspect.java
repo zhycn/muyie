@@ -11,7 +11,6 @@ import org.muyie.framework.aop.AroundAdvice;
 import org.muyie.framework.config.MuyieConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.util.StringUtils;
@@ -21,7 +20,6 @@ import com.alibaba.fastjson.JSON;
 import cn.hutool.core.util.StrUtil;
 
 @Aspect
-@Configuration
 public class LogAuditedAspect implements AroundAdvice, AfterThrowingAdvice {
 
   private static final Logger log = LoggerFactory.getLogger(LogAuditedAspect.class);

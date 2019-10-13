@@ -7,14 +7,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.muyie.framework.aop.AroundAdvice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 
 import cn.hutool.core.util.StrUtil;
 
 @Aspect
-@Configuration
 public class StopWatchAspect implements AroundAdvice {
 
   private static final Logger log = LoggerFactory.getLogger(StopWatchAspect.class);

@@ -34,9 +34,9 @@ public class StopWatchAspect implements AroundAdvice {
   @Override
   @Around("setPointcut() && springBeanPointcut()")
   public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-    org.muyie.framework.config.aspectj.StopWatch sw =
-        this.getMethod(joinPoint).getAnnotation(org.muyie.framework.config.aspectj.StopWatch.class);
-    String value = sw.value();
+    String value = this.getMethod(joinPoint)
+        .getAnnotation(org.muyie.framework.config.aspectj.StopWatch.class).value();
+
     if (StringUtils.isEmpty(value)) {
       value = StrUtil.format("{}.{}()", joinPoint.getSignature().getDeclaringTypeName(),
           joinPoint.getSignature().getName());
@@ -44,6 +44,7 @@ public class StopWatchAspect implements AroundAdvice {
 
     StopWatch stopWatch = new StopWatch(value);
     stopWatch.start();
+
     try {
       return joinPoint.proceed();
     } finally {

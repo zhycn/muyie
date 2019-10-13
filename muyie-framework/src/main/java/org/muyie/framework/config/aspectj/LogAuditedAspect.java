@@ -1,5 +1,8 @@
 package org.muyie.framework.config.aspectj;
 
+import static org.muyie.framework.config.MuyieConstants.SPRING_PROFILE_DEBUG;
+import static org.muyie.framework.config.MuyieConstants.SPRING_PROFILE_DEVELOPMENT;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -8,27 +11,21 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.muyie.framework.aop.AfterThrowingAdvice;
 import org.muyie.framework.aop.AroundAdvice;
-import org.muyie.framework.config.MuyieConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
+import org.springframework.context.annotation.Profile;
 import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Throwables;
 
 import cn.hutool.core.util.StrUtil;
 
 @Aspect
+@Profile({SPRING_PROFILE_DEVELOPMENT, SPRING_PROFILE_DEBUG})
 public class LogAuditedAspect implements AroundAdvice, AfterThrowingAdvice {
 
   private static final Logger log = LoggerFactory.getLogger(LogAuditedAspect.class);
-
-  private final Environment env;
-
-  public LogAuditedAspect(Environment env) {
-    this.env = env;
-  }
 
   @Override
   @Pointcut("@annotation(org.muyie.framework.config.aspectj.LogAudited)")
@@ -47,42 +44,40 @@ public class LogAuditedAspect implements AroundAdvice, AfterThrowingAdvice {
   @Override
   @AfterThrowing(pointcut = "setPointcut() && springBeanPointcut()", throwing = "e")
   public void afterThrowing(JoinPoint joinPoint, Throwable e) {
-    LogAudited la = this.getMethod(joinPoint).getAnnotation(LogAudited.class);
-    String value = la.value();
+    String value = this.getMethod(joinPoint).getAnnotation(LogAudited.class).value();
+
     if (StringUtils.isEmpty(value)) {
       value = StrUtil.format("{}.{}()", joinPoint.getSignature().getDeclaringTypeName(),
           joinPoint.getSignature().getName());
     }
 
-    if (env.acceptsProfiles(Profiles.of(MuyieConstants.SPRING_PROFILE_DEVELOPMENT,
-        MuyieConstants.SPRING_PROFILE_DEBUG))) {
-      log.error("LogAudited Exception in '{}' with cause = '{}' and exception = '{}'", value,
-          e.getCause() != null ? e.getCause() : "NULL", e.getMessage(), e);
-    } else {
-      log.error("LogAudited Exception in '{}' with cause = {}", value,
-          e.getCause() != null ? e.getCause() : "NULL");
-    }
+    log.error("LogAudited Exception: '{}' with cause = {}", value,
+        Throwables.getStackTraceAsString(e));
   }
 
   @Override
   @Around("setPointcut() && springBeanPointcut()")
   public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-    LogAudited la = this.getMethod(joinPoint).getAnnotation(LogAudited.class);
-    String value = la.value();
+    String value = this.getMethod(joinPoint).getAnnotation(LogAudited.class).value();
+
     if (StringUtils.isEmpty(value)) {
       value = StrUtil.format("{}.{}()", joinPoint.getSignature().getDeclaringTypeName(),
           joinPoint.getSignature().getName());
     }
-    log.debug("LogAudited Enter: '{}' with argument[s] = {}", value,
-        JSON.toJSONString(joinPoint.getArgs()));
 
     try {
+      log.debug("LogAudited Enter: '{}' with arguments = {}", value,
+          JSON.toJSONString(joinPoint.getArgs()));
+
       Object result = joinPoint.proceed();
+
       log.debug("LogAudited Exit: '{}' with result = {}", value, JSON.toJSONString(result));
+
       return result;
     } catch (IllegalArgumentException e) {
       log.error("LogAudited Illegal argument: '{}' in {}", JSON.toJSONString(joinPoint.getArgs()),
           value);
+
       throw e;
     }
   }

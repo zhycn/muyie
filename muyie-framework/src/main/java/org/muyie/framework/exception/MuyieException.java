@@ -64,8 +64,8 @@ public class MuyieException extends RuntimeException {
 
   @Override
   public String getMessage() {
-    return StrUtil.format("ResultCode={}#{}, Message={}", resultCode.getCode(), resultCode.getMsg(),
-        super.getMessage());
+    return StrUtil.format("ResultCode '{}({})': throwing message = '{}'", resultCode.getMsg(),
+        resultCode.getCode(), super.getMessage());
   }
 
 }

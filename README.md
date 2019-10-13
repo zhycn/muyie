@@ -1,4 +1,4 @@
-# MuYie BOM and server-side library for all Spring Boot projects
+# MuYie BOM and server-side library
 
 This project is used by the Spring Boot. This is the Bill of Materials and server-side library:
 
@@ -49,8 +49,6 @@ Importing the dependency into your Spring Boot Application's pom, it provides mo
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
-
-## Overriding a version
 
 To override a property in Maven you can then declare the property in your pom’s `<properties>` section with the desired value:
 

@@ -8,6 +8,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\
   org.muyie.framework.config.metric.MuyieMetricsEndpointConfiguration,\
   org.muyie.framework.config.metric.MuyieLoggingMetricsExportConfiguration,\
+  org.muyie.framework.exception.GlobalExceptionTranslator,\
+  org.muyie.framework.exception.GlobalExceptionHandler,\
   org.muyie.framework.security.ssl.UndertowSSLConfiguration,\
   org.muyie.framework.security.uaa.UaaAutoConfiguration,\
   org.muyie.framework.data.jpa.JpaAutoConfiguration

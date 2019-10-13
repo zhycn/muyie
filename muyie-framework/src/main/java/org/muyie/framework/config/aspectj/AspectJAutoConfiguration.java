@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableAspectJAutoProxy
 @AutoConfigureAfter(MuyieProperties.class)
-@Import({StopWatchConfiguration.class})
+@Import({StopWatchAspect.class, LogAuditedAspect.class})
 public class AspectJAutoConfiguration {
 
 }

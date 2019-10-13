@@ -5,9 +5,12 @@ package org.muyie.framework.config;
  */
 public interface MuyieConstants {
 
-  // Spring profiles for development, test, sit, uat and production
+  // Spring profiles for development, debug, test, sit, uat and production
   /** Constant <code>SPRING_PROFILE_DEVELOPMENT="dev"</code> */
   String SPRING_PROFILE_DEVELOPMENT = "dev";
+
+  /** Constant <code>SPRING_PROFILE_DEBUG="debug"</code> */
+  String SPRING_PROFILE_DEBUG = "debug";
 
   /** Constant <code>SPRING_PROFILE_TEST="test"</code> */
   String SPRING_PROFILE_TEST = "test";

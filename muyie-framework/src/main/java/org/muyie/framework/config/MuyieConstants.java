@@ -49,5 +49,15 @@ public interface MuyieConstants {
    * <code>SPRING_PROFILE_K8S="k8s"</code>
    */
   String SPRING_PROFILE_K8S = "k8s";
-
+  
+  /**
+   * Date Format Constant
+   */
+  String FORMAT_DATE = "yyyy-MM-dd";
+  String FORMAT_TIME = "HH:mm:ss";
+  String FORMAT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+  String FORMAT_DATE_2 = "yyyyMMdd";
+  String FORMAT_TIME_2 = "HHmmss";
+  String FORMAT_DATE_TIME_2 = "yyyyMMddHHmmss";
+  
 }

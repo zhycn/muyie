@@ -7,8 +7,8 @@
     <artifactId>muyie-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>MuYie server-side parent</name>
-    <description>MuYie BOM and server-side library for all Spring Boot projects</description>
+    <name>MuYie server-side parent POM</name>
+    <description>MuYie BOM and server-side library</description>
     <url>https://github.com/zhycn/muyie/</url>
 
     <parent>

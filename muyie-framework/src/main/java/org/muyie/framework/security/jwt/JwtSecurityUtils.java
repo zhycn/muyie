@@ -1,5 +1,6 @@
-package org.muyie.framework.security;
+package org.muyie.framework.security.jwt;
 
+import org.muyie.framework.security.AuthoritiesConstants;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +10,9 @@ import java.util.Optional;
 /**
  * Utility class for Spring Security.
  */
-public final class SecurityUtils {
+public final class JwtSecurityUtils {
 
-  private SecurityUtils() {}
+  private JwtSecurityUtils() {}
 
   /**
    * Get the login of the current user.

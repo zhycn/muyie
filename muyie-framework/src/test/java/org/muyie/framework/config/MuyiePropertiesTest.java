@@ -515,6 +515,36 @@ public class MuyiePropertiesTest {
   }
 
   @Test
+  public void testSnowflakeWorkerId() {
+    MuyieProperties.Snowflake obj = properties.getSnowflake();
+    long val = MuyieDefaults.Snowflake.workerId;
+    assertThat(obj.getWorkerId()).isEqualTo(val);
+    val = val++;
+    obj.setWorkerId(val);
+    assertThat(obj.getWorkerId()).isEqualTo(val);
+  }
+
+  @Test
+  public void testSnowflakeDatacenterId() {
+    MuyieProperties.Snowflake obj = properties.getSnowflake();
+    long val = MuyieDefaults.Snowflake.datacenterId;
+    assertThat(obj.getDatacenterId()).isEqualTo(val);
+    val = val++;
+    obj.setDatacenterId(val);
+    assertThat(obj.getDatacenterId()).isEqualTo(val);
+  }
+
+  @Test
+  public void testSnowflakeUseSystemClock() {
+    MuyieProperties.Snowflake obj = properties.getSnowflake();
+    boolean val = MuyieDefaults.Snowflake.useSystemClock;
+    assertThat(obj.isUseSystemClock()).isEqualTo(val);
+    val = !val;
+    obj.setUseSystemClock(val);
+    assertThat(obj.isUseSystemClock()).isEqualTo(val);
+  }
+
+  @Test
   public void testSwaggerTitle() {
     MuyieProperties.Swagger obj = properties.getSwagger();
     String val = MuyieDefaults.Swagger.title;
@@ -651,7 +681,7 @@ public class MuyiePropertiesTest {
     obj.setUseDefaultResponseMessages(val);
     assertThat(obj.isUseDefaultResponseMessages()).isEqualTo(val);
   }
-  
+
   @Test
   public void testSwaggerAuthorizationEnabled() {
     MuyieProperties.Swagger.Authorization obj = properties.getSwagger().getAuthorization();

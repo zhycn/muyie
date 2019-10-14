@@ -130,6 +130,13 @@ public interface MuyieDefaults {
     }
   }
 
+  interface Snowflake {
+
+    long workerId = 0L;
+    long datacenterId = 0L;
+    boolean useSystemClock = false;
+  }
+
   interface Swagger {
 
     String title = "Application API";
@@ -147,6 +154,7 @@ public interface MuyieDefaults {
     boolean useDefaultResponseMessages = true;
 
     interface Authorization {
+
       boolean enabled = false;
       String name = "Authorization";
       String description = null;

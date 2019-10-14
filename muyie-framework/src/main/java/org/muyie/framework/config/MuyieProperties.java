@@ -28,6 +28,8 @@ public class MuyieProperties {
 
   private final Security security = new Security();
 
+  private final Snowflake snowflake = new Snowflake();
+
   private final Swagger swagger = new Swagger();
 
   private final Metrics metrics = new Metrics();
@@ -110,6 +112,17 @@ public class MuyieProperties {
    */
   public Security getSecurity() {
     return security;
+  }
+
+  /**
+   * <p>
+   * Getter for the field <code>snowflake</code>.
+   * </p>
+   *
+   * @return a {@link org.muyie.framework.config.MuyieProperties.Snowflake} object.
+   */
+  public Snowflake getSnowflake() {
+    return snowflake;
   }
 
   /**
@@ -812,6 +825,40 @@ public class MuyieProperties {
     }
   }
 
+  public static class Snowflake {
+
+    private long workerId = MuyieDefaults.Snowflake.workerId;
+
+    private long datacenterId = MuyieDefaults.Snowflake.datacenterId;
+
+    private boolean useSystemClock = MuyieDefaults.Snowflake.useSystemClock;
+
+    public long getWorkerId() {
+      return workerId;
+    }
+
+    public long getDatacenterId() {
+      return datacenterId;
+    }
+
+    public boolean isUseSystemClock() {
+      return useSystemClock;
+    }
+
+    public void setWorkerId(long workerId) {
+      this.workerId = workerId;
+    }
+
+    public void setDatacenterId(long datacenterId) {
+      this.datacenterId = datacenterId;
+    }
+
+    public void setUseSystemClock(boolean useSystemClock) {
+      this.useSystemClock = useSystemClock;
+    }
+
+  }
+  
   public static class Swagger {
 
     private String title = MuyieDefaults.Swagger.title;

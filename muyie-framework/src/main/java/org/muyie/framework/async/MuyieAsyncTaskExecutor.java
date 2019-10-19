@@ -16,48 +16,31 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
 
   private static final Logger log = LoggerFactory.getLogger(MuyieAsyncTaskExecutor.class);
 
-  private static final String EXCEPTION_MESSAGE = "Caught async exception";
+  static final String EXCEPTION_MESSAGE = "Caught async exception";
 
-  private final AsyncTaskExecutor taskExecutor;
+  private final AsyncTaskExecutor executor;
 
-  public MuyieAsyncTaskExecutor(AsyncTaskExecutor taskExecutor) {
-    this.taskExecutor = taskExecutor;
+  /**
+   * <p>
+   * Constructor for MuyieAsyncTaskExecutor.
+   * </p>
+   *
+   * @param executor a {@link org.springframework.core.task.AsyncTaskExecutor} object.
+   */
+  public MuyieAsyncTaskExecutor(AsyncTaskExecutor executor) {
+    this.executor = executor;
   }
 
+  /** {@inheritDoc} */
   @Override
   public void execute(Runnable task) {
-    taskExecutor.execute(createWrappedRunnable(task));
+    executor.execute(createWrappedRunnable(task));
   }
 
+  /** {@inheritDoc} */
   @Override
   public void execute(Runnable task, long startTimeout) {
-    taskExecutor.execute(createWrappedRunnable(task), startTimeout);
-  }
-
-  @Override
-  public Future<?> submit(Runnable task) {
-    return taskExecutor.submit(createWrappedRunnable(task));
-  }
-
-  @Override
-  public <T> Future<T> submit(Callable<T> task) {
-    return taskExecutor.submit(createCallable(task));
-  }
-
-  @Override
-  public void destroy() throws Exception {
-    if (taskExecutor instanceof DisposableBean) {
-      DisposableBean bean = (DisposableBean) taskExecutor;
-      bean.destroy();
-    }
-  }
-
-  @Override
-  public void afterPropertiesSet() throws Exception {
-    if (taskExecutor instanceof InitializingBean) {
-      InitializingBean bean = (InitializingBean) taskExecutor;
-      bean.afterPropertiesSet();
-    }
+    executor.execute(createWrappedRunnable(task), startTimeout);
   }
 
   private <T> Callable<T> createCallable(final Callable<T> task) {
@@ -81,8 +64,45 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
     };
   }
 
-  protected void handle(Throwable e) {
+  /**
+   * <p>
+   * handle.
+   * </p>
+   *
+   * @param e a {@link java.lang.Exception} object.
+   */
+  protected void handle(Exception e) {
     log.error(EXCEPTION_MESSAGE, e);
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Future<?> submit(Runnable task) {
+    return executor.submit(createWrappedRunnable(task));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public <T> Future<T> submit(Callable<T> task) {
+    return executor.submit(createCallable(task));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void destroy() throws Exception {
+    if (executor instanceof DisposableBean) {
+      DisposableBean bean = (DisposableBean) executor;
+      bean.destroy();
+    }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    if (executor instanceof InitializingBean) {
+      InitializingBean bean = (InitializingBean) executor;
+      bean.afterPropertiesSet();
+    }
   }
 
 }

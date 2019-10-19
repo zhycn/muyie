@@ -16,61 +16,61 @@ import com.google.common.collect.Maps;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * Returns the Result
+ * Returns the Response
  */
-public class Result implements Serializable {
+public class Response implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  public static Result of(@NonNull ResultCode resultCode) {
-    return of(resultCode, null, null);
+  public static Response fail(@NonNull ResponseCode responseCode) {
+    return fail(responseCode, null, null);
   }
 
-  public static Result of(@NonNull ResultCode resultCode,
+  public static Response fail(@NonNull ResponseCode responseCode,
       @Nullable MultiValueMap<String, String> headers) {
-    return of(resultCode, null, headers);
+    return fail(responseCode, null, headers);
   }
 
-  public static Result of(@NonNull ResultCode resultCode, @Nullable Object bizContent) {
-    return of(resultCode, bizContent, null);
+  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object bizContent) {
+    return fail(responseCode, bizContent, null);
   }
 
-  public static Result of(@NonNull ResultCode resultCode, @Nullable Object bizContent,
+  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object bizContent,
       @Nullable MultiValueMap<String, String> headers) {
-    Result result = new Result(resultCode.getCode(), resultCode.getMsg(), bizContent);
+    Response response = new Response(responseCode.getCode(), responseCode.getMsg(), bizContent);
     HttpHeaders tempHeaders = new HttpHeaders();
     if (headers != null) {
       tempHeaders.putAll(headers);
     }
-    result.setHeaders(HttpHeaders.readOnlyHttpHeaders(tempHeaders));
-    return result;
+    response.setHeaders(HttpHeaders.readOnlyHttpHeaders(tempHeaders));
+    return response;
   }
 
-  public static Result of(String code, String msg, Map<?, ?> map) {
-    ResultCodeBuilder builder = ResultCodeBuilder.of(code, StrUtil.format(msg, map));
-    return of(builder);
+  public static Response fail(String code, String msg, Map<?, ?> map) {
+    ResponseCodeBuilder builder = ResponseCodeBuilder.of(code, StrUtil.format(msg, map));
+    return fail(builder);
   }
 
-  public static Result of(String code, String msg, Object... params) {
-    ResultCodeBuilder builder = ResultCodeBuilder.of(code, StrUtil.format(msg, params));
-    return of(builder);
+  public static Response fail(String code, String msg, Object... params) {
+    ResponseCodeBuilder builder = ResponseCodeBuilder.of(code, StrUtil.format(msg, params));
+    return fail(builder);
   }
 
-  public static Result ok() {
-    return ok(null, null);
+  public static Response success() {
+    return success(null, null);
   }
 
-  public static Result ok(@Nullable MultiValueMap<String, String> headers) {
-    return ok(null, headers);
+  public static Response success(@Nullable MultiValueMap<String, String> headers) {
+    return success(null, headers);
   }
 
-  public static Result ok(@Nullable Object bizContent) {
-    return ok(bizContent, null);
+  public static Response success(@Nullable Object bizContent) {
+    return success(bizContent, null);
   }
 
-  public static Result ok(@Nullable Object bizContent,
+  public static Response success(@Nullable Object bizContent,
       @Nullable MultiValueMap<String, String> headers) {
-    return of(ResultCodeDefined.SC_200, bizContent, headers);
+    return fail(ResponseCodeDefaults.SC_200, bizContent, headers);
   }
 
   private String code;
@@ -84,11 +84,11 @@ public class Result implements Serializable {
 
   private String sign;
 
-  public Result() {
+  public Response() {
     super();
   }
 
-  private Result(String code, String msg, Object bizContent) {
+  private Response(String code, String msg, Object bizContent) {
     this.code = code;
     this.msg = msg;
     this.bizContent = bizContent;
@@ -115,7 +115,7 @@ public class Result implements Serializable {
   }
 
   public boolean isSuccess() {
-    return ResultCodeDefined.SC_200.getCode().equals(getCode());
+    return ResponseCodeDefaults.SC_200.getCode().equals(getCode());
   }
 
   public void setBizContent(Object bizContent) {

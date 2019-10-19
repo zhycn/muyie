@@ -1,9 +1,9 @@
 package org.muyie.framework.http;
 
 /**
- * Returns of Result code
+ * Returns of Response code
  */
-public interface ResultCode {
+public interface ResponseCode {
 
   String getCode();
 

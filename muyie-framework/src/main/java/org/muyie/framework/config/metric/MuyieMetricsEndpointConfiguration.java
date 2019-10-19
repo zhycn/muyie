@@ -1,8 +1,6 @@
 package org.muyie.framework.config.metric;
 
-import io.micrometer.core.annotation.Timed;
-import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnEnabledEndpoint;
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
 import org.springframework.boot.actuate.autoconfigure.metrics.MetricsEndpointAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -10,6 +8,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.MeterRegistry;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public class MuyieMetricsEndpointConfiguration {
   @Bean
   @ConditionalOnBean({MeterRegistry.class})
   @ConditionalOnMissingBean
-  @ConditionalOnEnabledEndpoint
+  @ConditionalOnAvailableEndpoint
   public MuyieMetricsEndpoint muyieMetricsEndpoint(MeterRegistry meterRegistry) {
     return new MuyieMetricsEndpoint(meterRegistry);
   }

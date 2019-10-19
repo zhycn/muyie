@@ -21,7 +21,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
-public class ExceptionHandlingAsyncTaskExecutorTest {
+public class MuyieAsyncTaskExecutorTest {
 
   private static final RuntimeException exception = new RuntimeException("Eek");
   private static final int testResult = 42;
@@ -29,7 +29,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
   private boolean done;
   private Exception handled;
   private MockAsyncTaskExecutor task;
-  private ExceptionHandlingAsyncTaskExecutor executor;
+  private MuyieAsyncTaskExecutor executor;
   private LogbackRecorder recorder;
 
   @BeforeEach
@@ -37,9 +37,8 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     done = false;
     handled = null;
     task = spy(new MockAsyncTaskExecutor());
-    executor = new TestExceptionHandlingAsyncTaskExecutor(task);
-    recorder =
-        LogbackRecorder.forClass(ExceptionHandlingAsyncTaskExecutor.class).reset().capture("ALL");
+    executor = new TestMuyieAsyncTaskExecutor(task);
+    recorder = LogbackRecorder.forClass(MuyieAsyncTaskExecutor.class).reset().capture("ALL");
   }
 
   @AfterEach
@@ -95,7 +94,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     assertThat(events).hasSize(1);
     Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
-    assertThat(event.getMessage()).isEqualTo(ExceptionHandlingAsyncTaskExecutor.EXCEPTION_MESSAGE);
+    assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
   }
 
@@ -127,7 +126,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     assertThat(events).hasSize(1);
     Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
-    assertThat(event.getMessage()).isEqualTo(ExceptionHandlingAsyncTaskExecutor.EXCEPTION_MESSAGE);
+    assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
   }
 
@@ -158,14 +157,14 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     assertThat(events).hasSize(1);
     Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
-    assertThat(event.getMessage()).isEqualTo(ExceptionHandlingAsyncTaskExecutor.EXCEPTION_MESSAGE);
+    assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
   }
 
   @Test
   public void testInitializingExecutor() {
     task = spy(new MockAsyncInitializingTaskExecutor());
-    executor = new TestExceptionHandlingAsyncTaskExecutor(task);
+    executor = new TestMuyieAsyncTaskExecutor(task);
     Throwable caught = catchThrowable(() -> {
       executor.afterPropertiesSet();
       verify(task).afterPropertiesSet();
@@ -185,7 +184,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
   @Test
   public void testDisposableExecutor() {
     task = spy(new MockAsyncDisposableTaskExecutor());
-    executor = new TestExceptionHandlingAsyncTaskExecutor(task);
+    executor = new TestMuyieAsyncTaskExecutor(task);
     Throwable caught = catchThrowable(() -> {
       executor.destroy();
       verify(task).destroy();
@@ -202,9 +201,9 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     assertThat(caught).isNull();
   }
 
-  private class TestExceptionHandlingAsyncTaskExecutor extends ExceptionHandlingAsyncTaskExecutor {
+  private class TestMuyieAsyncTaskExecutor extends MuyieAsyncTaskExecutor {
 
-    TestExceptionHandlingAsyncTaskExecutor(AsyncTaskExecutor executor) {
+    TestMuyieAsyncTaskExecutor(AsyncTaskExecutor executor) {
       super(executor);
     }
 

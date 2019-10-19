@@ -13,10 +13,7 @@ import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_2;
 import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_TIME;
 import static org.muyie.framework.config.MuyieConstants.FORMAT_DATE_TIME_2;
 
-/**
- * 分页查询实体
- */
-public class PageQuery implements Serializable {
+public class Pager implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -40,7 +37,7 @@ public class PageQuery implements Serializable {
   private Integer page = 1;
 
   @Min(1)
-  private Integer size = 20;
+  private Integer size = 10;
 
   public String getEq() {
     return eq;

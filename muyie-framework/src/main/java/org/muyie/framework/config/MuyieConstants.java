@@ -42,12 +42,6 @@ public interface MuyieConstants {
   String SPRING_PROFILE_SWAGGER = "swagger";
 
   /**
-   * Spring profile used to disable running liquibase Constant
-   * <code>SPRING_PROFILE_NO_LIQUIBASE="no-liquibase"</code>
-   */
-  String SPRING_PROFILE_NO_LIQUIBASE = "no-liquibase";
-
-  /**
    * Spring profile used when deploying to Kubernetes and OpenShift Constant
    * <code>SPRING_PROFILE_K8S="k8s"</code>
    */

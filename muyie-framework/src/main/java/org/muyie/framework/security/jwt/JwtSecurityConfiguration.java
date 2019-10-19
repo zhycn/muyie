@@ -41,15 +41,15 @@ public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  public void configure(WebSecurity web) throws Exception {
+  public void configure(WebSecurity web) {
     web.ignoring()
-        .antMatchers(HttpMethod.OPTIONS, "/**")
-        .antMatchers("/**/*.{js,html}")
-        .antMatchers("/i18n/**")
-        .antMatchers("/content/**")
-        .antMatchers("/h2-console/**")
-        .antMatchers("/swagger-ui/index.html")
-        .antMatchers("/test/**");
+    .antMatchers(HttpMethod.OPTIONS, "/**")
+    .antMatchers("/**/*.{js,html}")
+    .antMatchers("/i18n/**")
+    .antMatchers("/content/**")
+    .antMatchers("/h2-console/**")
+    .antMatchers("/swagger-ui/index.html")
+    .antMatchers("/test/**");
   }
 
   @Override

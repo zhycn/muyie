@@ -1,15 +1,6 @@
 package org.muyie.framework.http;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.muyie.framework.config.MuyieConstants;
-import org.springframework.util.StringUtils;
-
-/**
- * 签名请求实体
- */
-public class SignRequestEntity extends RequestEntity {
+public class SignRequest extends Request {
 
   private static final long serialVersionUID = 1L;
 
@@ -54,13 +45,11 @@ public class SignRequestEntity extends RequestEntity {
   }
 
   public String getTimestamp() {
-    return StringUtils.isEmpty(timestamp)
-        ? DateFormatUtils.format(new Date(), MuyieConstants.FORMAT_DATE_TIME)
-        : timestamp;
+    return timestamp;
   }
 
   public String getVersion() {
-    return StringUtils.isEmpty(version) ? "1.0" : version;
+    return version;
   }
 
   public void setAppAuthToken(String appAuthToken) {

@@ -1,5 +1,10 @@
 package org.muyie.framework.http;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 public class SignRequest extends Request {
 
   private static final long serialVersionUID = 1L;
@@ -82,6 +87,49 @@ public class SignRequest extends Request {
 
   public void setVersion(String version) {
     this.version = version;
+  }
+
+  public String toSignString() {
+    StringBuffer sb = new StringBuffer();
+
+    if (StringUtils.isNotEmpty(appAuthToken)) {
+      sb.append("&appAuthToken=" + appAuthToken);
+    }
+
+    if (StringUtils.isNotEmpty(appId)) {
+      sb.append("&appId=" + appId);
+    }
+
+    if (StringUtils.isNotEmpty(authToken)) {
+      sb.append("&authToken=" + authToken);
+    }
+
+    if (getBizContent() != null) {
+      String bizContent = JSON.toJSONString(getBizContent(), SerializerFeature.MapSortField);
+      sb.append("&bizContent=" + bizContent);
+    }
+
+    if (StringUtils.isNotEmpty(method)) {
+      sb.append("&method=" + method);
+    }
+
+    if (StringUtils.isNotEmpty(signType)) {
+      sb.append("&signType=" + signType);
+    }
+
+    if (StringUtils.isNotEmpty(timestamp)) {
+      sb.append("&timestamp=" + timestamp);
+    }
+
+    if (StringUtils.isNotEmpty(getTraceId())) {
+      sb.append("&traceId=" + getTraceId());
+    }
+
+    if (StringUtils.isNotEmpty(version)) {
+      sb.append("&version=" + version);
+    }
+
+    return StringUtils.substring(sb.toString(), 1);
   }
 
 }

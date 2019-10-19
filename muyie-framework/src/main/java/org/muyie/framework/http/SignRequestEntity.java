@@ -14,7 +14,7 @@ public class SignRequestEntity extends RequestEntity {
   private static final long serialVersionUID = 1L;
 
   private String appId;
-  
+
   private String method;
 
   private String timestamp;
@@ -22,11 +22,23 @@ public class SignRequestEntity extends RequestEntity {
   private String version;
 
   private String signType;
-  
+
   private String sign;
+
+  private String authToken;
+
+  private String appAuthToken;
+
+  public String getAppAuthToken() {
+    return appAuthToken;
+  }
 
   public String getAppId() {
     return appId;
+  }
+
+  public String getAuthToken() {
+    return authToken;
   }
 
   public String getMethod() {
@@ -51,8 +63,16 @@ public class SignRequestEntity extends RequestEntity {
     return StringUtils.isEmpty(version) ? "1.0" : version;
   }
 
+  public void setAppAuthToken(String appAuthToken) {
+    this.appAuthToken = appAuthToken;
+  }
+
   public void setAppId(String appId) {
     this.appId = appId;
+  }
+
+  public void setAuthToken(String authToken) {
+    this.authToken = authToken;
   }
 
   public void setMethod(String method) {

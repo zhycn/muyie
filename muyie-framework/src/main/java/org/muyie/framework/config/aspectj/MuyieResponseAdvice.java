@@ -1,7 +1,7 @@
 package org.muyie.framework.config.aspectj;
 
 import org.muyie.framework.config.MuyieProperties;
-import org.muyie.framework.http.Result;
+import org.muyie.framework.http.Response;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -34,14 +34,14 @@ public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
     // Handle Problem Exception
     if (body instanceof Problem) {
       Problem problem = (Problem) body;
-      return Result.of(String.valueOf(problem.getStatus().getStatusCode()), problem.getTitle());
+      return Response.fail(String.valueOf(problem.getStatus().getStatusCode()), problem.getTitle());
     }
 
     // Handle REST Response headers
-    if (body instanceof Result) {
-      Result result = (Result) body;
-      response.getHeaders().addAll(result.getHeaders());
-      return result;
+    if (body instanceof Response) {
+      Response resp = (Response) body;
+      response.getHeaders().addAll(resp.getHeaders());
+      return resp;
     }
 
     return body;

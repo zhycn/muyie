@@ -8,7 +8,7 @@ This project is used by the Spring Boot. This is the Bill of Materials and serve
 This project provides a pom file that you can either import into your Spring Boot Application's bom, or use as your Spring Boot Application's parent pom. 
 
 - JDK 8+
-- Spring Boot 2.1.9.RELEASE
+- Spring Boot 2.2.0.RELEASE
 - Spring Cloud Greenwich.SR3
 
 ## Quick Start

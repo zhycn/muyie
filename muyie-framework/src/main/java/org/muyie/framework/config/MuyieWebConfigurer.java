@@ -30,7 +30,11 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 @ConditionalOnWebApplication
 @AutoConfigureAfter(MuyieProperties.class)
-@Import({DateTimeFormatConfiguration.class, JacksonConfiguration.class, LocaleConfiguration.class,})
+@Import({
+  DateTimeFormatConfiguration.class, 
+  JacksonConfiguration.class, 
+  LocaleConfiguration.class
+})
 public class MuyieWebConfigurer
     implements
       ServletContextInitializer,

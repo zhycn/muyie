@@ -13,6 +13,9 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * Abstract advice to be used in the Spring AOP framework.
+ */
 public interface Advice {
 
   default Method getMethod(JoinPoint joinPoint) {

@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MuyieException.class)
   public Response handleException(MuyieException e, HttpServletResponse response) {
     int sc = e.getStatus().value();
+    response.setStatus(sc);
     log.error(sc != 200 ? Throwables.getStackTraceAsString(e) : e.getMessage());
     return Response.fail(e.getResponseCode());
   }

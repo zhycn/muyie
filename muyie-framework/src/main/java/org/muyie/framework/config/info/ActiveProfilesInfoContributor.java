@@ -1,5 +1,6 @@
 package org.muyie.framework.config.info;
 
+import org.muyie.framework.config.DefaultProfileUtil;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -24,7 +25,7 @@ public class ActiveProfilesInfoContributor implements InfoContributor {
    * @param environment a {@link org.springframework.core.env.ConfigurableEnvironment} object.
    */
   public ActiveProfilesInfoContributor(ConfigurableEnvironment environment) {
-    this.profiles = Arrays.asList(environment.getActiveProfiles());
+    this.profiles = Arrays.asList(DefaultProfileUtil.getActiveProfiles(environment));
   }
 
   /** {@inheritDoc} */

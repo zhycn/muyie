@@ -12,23 +12,45 @@ public class MuyieException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
+  public static MuyieException of(ResponseCode responseCode) {
+    return new MuyieException(responseCode);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, HttpStatus status) {
+    return new MuyieException(responseCode, status);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, HttpStatus status, String message) {
+    return new MuyieException(responseCode, status, message);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, HttpStatus status, String message,
+      Throwable cause) {
+    return new MuyieException(responseCode, status, message, cause);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, HttpStatus status, Throwable cause) {
+    return new MuyieException(responseCode, status, cause);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, String message) {
+    return new MuyieException(responseCode, message);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, String message, Throwable cause) {
+    return new MuyieException(responseCode, message, cause);
+  }
+
+  public static MuyieException of(ResponseCode responseCode, Throwable cause) {
+    return new MuyieException(responseCode, cause);
+  }
+
   private final ResponseCode responseCode;
+
   private final HttpStatus status;
 
   public MuyieException(ResponseCode responseCode) {
     this(responseCode, HttpStatus.OK);
-  }
-
-  public MuyieException(ResponseCode responseCode, String message) {
-    this(responseCode, HttpStatus.OK, message);
-  }
-
-  public MuyieException(ResponseCode responseCode, String message, Throwable cause) {
-    this(responseCode, HttpStatus.OK, message, cause);
-  }
-
-  public MuyieException(ResponseCode responseCode, Throwable cause) {
-    this(responseCode, HttpStatus.OK, cause);
   }
 
   public MuyieException(ResponseCode responseCode, HttpStatus status) {
@@ -55,18 +77,30 @@ public class MuyieException extends RuntimeException {
     this.status = status;
   }
 
-  public ResponseCode getResponseCode() {
-    return responseCode;
+  public MuyieException(ResponseCode responseCode, String message) {
+    this(responseCode, HttpStatus.OK, message);
   }
 
-  public HttpStatus getStatus() {
-    return status;
+  public MuyieException(ResponseCode responseCode, String message, Throwable cause) {
+    this(responseCode, HttpStatus.OK, message, cause);
+  }
+
+  public MuyieException(ResponseCode responseCode, Throwable cause) {
+    this(responseCode, HttpStatus.OK, cause);
   }
 
   @Override
   public String getMessage() {
     return StrUtil.format("ResponseCode '{}({})': throwing message = '{}'", responseCode.getMsg(),
         responseCode.getCode(), super.getMessage());
+  }
+
+  public ResponseCode getResponseCode() {
+    return responseCode;
+  }
+
+  public HttpStatus getStatus() {
+    return status;
   }
 
 }

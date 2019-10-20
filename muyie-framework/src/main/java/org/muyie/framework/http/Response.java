@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -136,6 +139,25 @@ public class Response implements Serializable {
 
   public void setSign(String sign) {
     this.sign = sign;
+  }
+
+  public String toSignString() {
+    StringBuffer sb = new StringBuffer();
+
+    if (getBizContent() != null) {
+      String bizContent = JSON.toJSONString(getBizContent(), SerializerFeature.MapSortField);
+      sb.append("&bizContent=" + bizContent);
+    }
+
+    if (StringUtils.isNotEmpty(code)) {
+      sb.append("&code=" + code);
+    }
+
+    if (StringUtils.isNotEmpty(msg)) {
+      sb.append("&msg=" + msg);
+    }
+
+    return StringUtils.substring(sb.toString(), 1);
   }
 
 }

@@ -4,13 +4,13 @@
     <springProperty scope="context" name="LOG_MAX_FILE_SIZE" source="logging.max-file-size" defaultValue="100MB"/>
     <springProperty scope="context" name="LOG_MAX_HISTORY" source="logging.max-history" defaultValue="30"/>
     <springProperty scope="context" name="LOG_TOTAL_SIZE_CAP" source="logging.total-size-cap" defaultValue="50GB"/>
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%traceId]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <layout class="org.muyie.framework.config.logback.TraceIdPatternLayout" >
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
+        </layout>
     </appender>
 
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -21,10 +21,9 @@
             <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
             <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <layout class="org.muyie.framework.config.logback.TraceIdPatternLayout" >
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
+        </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
@@ -40,10 +39,9 @@
             <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
             <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <layout class="org.muyie.framework.config.logback.TraceIdPatternLayout" >
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
+        </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>WARN</level>
             <onMatch>ACCEPT</onMatch>
@@ -60,10 +58,9 @@
             <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
             <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <layout class="org.muyie.framework.config.logback.TraceIdPatternLayout" >
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
+        </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
@@ -79,10 +76,9 @@
             <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
             <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <layout class="org.muyie.framework.config.logback.TraceIdPatternLayout" >
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
-        </encoder>
+        </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>

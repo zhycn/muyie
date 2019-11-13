@@ -25,6 +25,8 @@ public class SignRequest extends Request {
 
   private String appAuthToken;
 
+  private String notifyUrl;
+
   public String getAppAuthToken() {
     return appAuthToken;
   }
@@ -39,6 +41,10 @@ public class SignRequest extends Request {
 
   public String getMethod() {
     return method;
+  }
+
+  public String getNotifyUrl() {
+    return notifyUrl;
   }
 
   public String getSign() {
@@ -71,6 +77,10 @@ public class SignRequest extends Request {
 
   public void setMethod(String method) {
     this.method = method;
+  }
+
+  public void setNotifyUrl(String notifyUrl) {
+    this.notifyUrl = notifyUrl;
   }
 
   public void setSign(String sign) {
@@ -111,6 +121,10 @@ public class SignRequest extends Request {
 
     if (StringUtils.isNotEmpty(method)) {
       sb.append("&method=" + method);
+    }
+
+    if (StringUtils.isNotEmpty(notifyUrl)) {
+      sb.append("&notifyUrl=" + notifyUrl);
     }
 
     if (StringUtils.isNotEmpty(signType)) {

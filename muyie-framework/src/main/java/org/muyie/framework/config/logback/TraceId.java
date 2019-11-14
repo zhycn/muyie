@@ -9,10 +9,13 @@ public final class TraceId {
   private volatile static ThreadLocal<String> TRACE_ID = new ThreadLocal<>();
 
   public static String get() {
-    if (StringUtils.isBlank(TRACE_ID.get())) {
-      TraceId.set(IdUtil.fastSimpleUUID());
+    String traceId = TRACE_ID.get();
+    if (StringUtils.isBlank(traceId)) {
+      String uuid = IdUtil.fastSimpleUUID();
+      TraceId.set(uuid);
+      return uuid;
     }
-    return TRACE_ID.get();
+    return traceId;
   }
 
   public static void set(String traceId) {

@@ -53,9 +53,6 @@ public class SensitiveDataUtil {
 
   /**
    * 通过是否含有@符号，简单判断是否是Email地址。
-   *
-   * @param email
-   * @return
    */
   private static boolean isEmail(final String email) {
     return email.indexOf('@') > 0;
@@ -256,7 +253,7 @@ public class SensitiveDataUtil {
    * <li>SensitiveDataUtil.cellphoneHide("835358") = 8****8
    * </ul>
    *
-   * @param cellphone
+   * @param cellphone 手机号码
    * @return 隐藏后的手机号码
    */
   public static String cellphoneHide(final String cellphone) {
@@ -284,7 +281,7 @@ public class SensitiveDataUtil {
    * SensitiveDataUtil.cellphoneHideSMS("071835358") = 071*58
    * SensitiveDataUtil.cellphoneHideSMS("835358") = 8*8
    *
-   * @param cellphone
+   * @param cellphone 手机号码
    * @return 隐藏后的手机号码
    */
   public static String cellphoneHideSMS(final String cellphone) {
@@ -594,9 +591,6 @@ public class SensitiveDataUtil {
 
   /**
    * 简单判断是否为空字符串
-   *
-   * @param str
-   * @return
    */
   private static boolean isBlank(final String str) {
     int strLen;
@@ -614,7 +608,7 @@ public class SensitiveDataUtil {
   /**
    * 通过正则表达式"[0-9]{15}|[0-9]{18}|[0-9]{14}X|[0-9]{17}X"来判断是否是合法的大陆身份证号。
    *
-   * @param idCardNo
+   * @param idCardNo 身份证号
    * @return 指示入参是否身份证号的布尔值。
    */
   private static boolean isIdCardNo(final String idCardNo) {
@@ -629,7 +623,7 @@ public class SensitiveDataUtil {
   /**
    * 通过正则表达式"[0-9]{13,19}"来判断是否是合法的银行卡号。
    *
-   * @param bankCardNo
+   * @param bankCardNo 银行卡号
    * @return 指示入参是否银行卡号的布尔值。
    */
   private static boolean isBankCardNo(final String bankCardNo) {
@@ -644,7 +638,7 @@ public class SensitiveDataUtil {
   /**
    * 通过正则表达式"[0-9]{3,4}[-]?[0-9]{7,8}"来判断是否是合法的电话号码。 只判断是否符合国内电话号码
    *
-   * @param phoneOrTelNo
+   * @param phoneOrTelNo 手机或电话号码
    * @return 指示入参是否电话号码的布尔值。
    */
   private static boolean isPhoneOrTelNo(final String phoneOrTelNo) {
@@ -659,7 +653,7 @@ public class SensitiveDataUtil {
   /**
    * hideFlag setter
    *
-   * @param hideFlag
+   * @param hideFlag 是否需要进行隐藏屏蔽
    */
   public static void setHideFlag(final boolean hideFlag) {
     SensitiveDataUtil.hideFlag = hideFlag;

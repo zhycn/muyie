@@ -9,7 +9,7 @@ This project provides a pom file that you can either import into your Spring Boo
 
 - JDK 8+
 - Spring Boot 2.2.1.RELEASE
-- Spring Cloud Greenwich.SR3
+- Spring Cloud Hoxton.RELEASE
 
 ## Quick Start
 

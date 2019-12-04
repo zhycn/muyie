@@ -12,36 +12,39 @@ public class MuyieException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
-  public static MuyieException of(ResponseCode responseCode) {
+  public static MuyieException throwable(ResponseCode responseCode) {
     return new MuyieException(responseCode);
   }
 
-  public static MuyieException of(ResponseCode responseCode, HttpStatus status) {
+  public static MuyieException throwable(ResponseCode responseCode, HttpStatus status) {
     return new MuyieException(responseCode, status);
   }
 
-  public static MuyieException of(ResponseCode responseCode, HttpStatus status, String message) {
+  public static MuyieException throwable(ResponseCode responseCode, HttpStatus status,
+      String message) {
     return new MuyieException(responseCode, status, message);
   }
 
-  public static MuyieException of(ResponseCode responseCode, HttpStatus status, String message,
-      Throwable cause) {
+  public static MuyieException throwable(ResponseCode responseCode, HttpStatus status,
+      String message, Throwable cause) {
     return new MuyieException(responseCode, status, message, cause);
   }
 
-  public static MuyieException of(ResponseCode responseCode, HttpStatus status, Throwable cause) {
+  public static MuyieException throwable(ResponseCode responseCode, HttpStatus status,
+      Throwable cause) {
     return new MuyieException(responseCode, status, cause);
   }
 
-  public static MuyieException of(ResponseCode responseCode, String message) {
+  public static MuyieException throwable(ResponseCode responseCode, String message) {
     return new MuyieException(responseCode, message);
   }
 
-  public static MuyieException of(ResponseCode responseCode, String message, Throwable cause) {
+  public static MuyieException throwable(ResponseCode responseCode, String message,
+      Throwable cause) {
     return new MuyieException(responseCode, message, cause);
   }
 
-  public static MuyieException of(ResponseCode responseCode, Throwable cause) {
+  public static MuyieException throwable(ResponseCode responseCode, Throwable cause) {
     return new MuyieException(responseCode, cause);
   }
 

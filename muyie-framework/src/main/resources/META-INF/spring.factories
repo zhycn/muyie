@@ -7,8 +7,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.async.MuyieAsyncConfiguration,\
   org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\
   org.muyie.framework.config.snowflake.SnowflakeConfiguration,\
+  org.muyie.framework.config.spring.SpringContextHolder,\
   org.muyie.framework.domain.jpa.JpaAutoConfiguration,\
   org.muyie.framework.exception.GlobalExceptionTranslator,\
   org.muyie.framework.exception.GlobalExceptionHandler,\
-  org.muyie.framework.security.ssl.UndertowSSLConfiguration,\
-  org.muyie.framework.security.uaa.UaaAutoConfiguration
+  org.muyie.framework.security.ssl.UndertowSSLConfiguration

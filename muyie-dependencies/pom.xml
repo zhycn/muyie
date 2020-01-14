@@ -35,7 +35,7 @@
         <problem-spring.version>0.25.2</problem-spring.version>
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
-        <redisson.version>3.11.4</redisson.version>
+        <redisson.version>3.12.0</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <retrofit.version>2.7.1</retrofit.version>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
@@ -244,6 +244,16 @@
                         <artifactId>spring-boot-starter-tomcat</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>

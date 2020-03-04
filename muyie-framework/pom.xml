@@ -6,14 +6,14 @@
     <name>MuYie server-side framework</name>
     <description>MuYie Framework built on Spring Boot</description>
     <url>https://github.com/zhycn/muyie/</url>
-    
+
     <parent>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-dependencies</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5-SNAPSHOT</version>
         <relativePath>../muyie-dependencies/pom.xml</relativePath>
     </parent>
-    
+
     <dependencies>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -27,7 +27,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-        
+
         <!-- common tools -->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -49,7 +49,7 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
-        
+
         <!-- https://github.com/FasterXML/jackson-modules-java8 -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -67,7 +67,7 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-afterburner</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -169,7 +169,7 @@
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-gson</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -184,7 +184,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cloud-connectors</artifactId>
@@ -205,7 +205,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -216,7 +216,7 @@
             <artifactId>hibernate-jcache</artifactId>
             <optional>true</optional>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -57,4 +57,10 @@ public interface MuyieConstants {
   String FORMAT_TIME_2 = "HHmmss";
   String FORMAT_DATE_TIME_2 = "yyyyMMddHHmmss";
 
+  /**
+   * Trace logs
+   */
+  String LOG_TRACE_ID = "traceId";
+  String TRACE_ID_HEADER = "X-TRACE-ID";
+
 }

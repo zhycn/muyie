@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedBy;
@@ -22,6 +23,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class AbstractAuditingEntity extends AbstractPersistentEntity {
 
   private static final long serialVersionUID = 1L;
+
+  @Version
+  @Column(name = "revision")
+  private Integer revision;
 
   @CreatedBy
   @Length(max = 32)
@@ -65,6 +70,10 @@ public abstract class AbstractAuditingEntity extends AbstractPersistentEntity {
     return remark;
   }
 
+  public Integer getRevision() {
+    return revision;
+  }
+
   public void setCreatedBy(String createdBy) {
     this.createdBy = createdBy;
   }
@@ -83,6 +92,10 @@ public abstract class AbstractAuditingEntity extends AbstractPersistentEntity {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  public void setRevision(Integer revision) {
+    this.revision = revision;
   }
 
 }

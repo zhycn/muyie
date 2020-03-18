@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-dependencies</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6-SNAPSHOT</version>
         <relativePath>../muyie-dependencies/pom.xml</relativePath>
     </parent>
 
@@ -44,6 +44,10 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>

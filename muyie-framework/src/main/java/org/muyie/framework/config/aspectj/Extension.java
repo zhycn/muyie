@@ -8,13 +8,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Logging audited
+ * Extension Annotation
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Inherited
 @Documented
-public @interface LogAudited {
+public @interface Extension {
 
   /**
    * Description for interfaces
@@ -22,5 +22,7 @@ public @interface LogAudited {
    * @return a description for interfaces
    */
   String value() default "";
+
+  boolean logger() default true;
 
 }

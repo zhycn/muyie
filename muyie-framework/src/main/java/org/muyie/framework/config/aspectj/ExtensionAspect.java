@@ -80,7 +80,7 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
 
       return result;
     } catch (IllegalArgumentException e) {
-      log.error("Exception Illegal argument: '{}' with cause = {}", value,
+      log.error("Extension Illegal argument: '{}' with cause = {}", value,
           Throwables.getStackTraceAsString(e));
 
       throw e;

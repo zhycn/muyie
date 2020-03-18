@@ -3,7 +3,8 @@ package org.muyie.framework.config;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.muyie.framework.config.logback.TraceId;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.MDC;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -28,14 +29,16 @@ public class LogbackConfiguration implements WebMvcConfigurer {
       @Override
       public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
           Object handler) throws Exception {
-        TraceId.set(IdUtil.fastSimpleUUID());
+        String traceId = request.getHeader(MuyieConstants.TRACE_ID_HEADER);
+        String tid = StringUtils.defaultIfBlank(traceId, IdUtil.fastSimpleUUID());
+        MDC.put(MuyieConstants.LOG_TRACE_ID, tid);
         return true;
       }
 
       @Override
       public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
           Object handler, Exception ex) throws Exception {
-        TraceId.remove();
+        MDC.remove(MuyieConstants.LOG_TRACE_ID);
       }
     });
   }

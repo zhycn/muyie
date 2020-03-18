@@ -1,3 +1,6 @@
+org.springframework.context.ApplicationContextInitializer=\
+  org.muyie.framework.config.TtlMDCAdapterInitializer
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.MuyieProperties,\
   org.muyie.framework.config.MuyieWebConfigurer,\

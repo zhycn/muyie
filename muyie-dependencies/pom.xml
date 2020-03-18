@@ -20,6 +20,7 @@
         <!-- Dependency versions -->
         <alibaba-druid.version>1.1.21</alibaba-druid.version>
         <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
+        <alibaba-ttl.version>2.11.4</alibaba-ttl.version>
         <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <bucket4j.version>4.10.0</bucket4j.version>
         <commons-io.version>2.6</commons-io.version>
@@ -68,6 +69,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${alibaba-fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${alibaba-ttl.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apiguardian</groupId>

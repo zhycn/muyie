@@ -1,29 +1,29 @@
 package org.muyie.framework.config.logback;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.Optional;
+
+import org.slf4j.MDC;
 
 import cn.hutool.core.util.IdUtil;
 
 public final class TraceId {
 
-  private volatile static ThreadLocal<String> TRACE_ID = new ThreadLocal<>();
+  private static final String TRACE_ID = "traceId";
 
   public static String get() {
-    String traceId = TRACE_ID.get();
-    if (StringUtils.isBlank(traceId)) {
+    return Optional.ofNullable(MDC.get(TRACE_ID)).orElseGet(() -> {
       String uuid = IdUtil.fastSimpleUUID();
       TraceId.set(uuid);
       return uuid;
-    }
-    return traceId;
+    });
   }
 
   public static void set(String traceId) {
-    TRACE_ID.set(traceId);
+    MDC.put(TRACE_ID, traceId);
   }
 
   public static void remove() {
-    TRACE_ID.remove();
+    MDC.remove(TRACE_ID);
   }
 
 }

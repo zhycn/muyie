@@ -33,7 +33,8 @@ import org.springframework.web.filter.CorsFilter;
 @Import({
   DateTimeFormatConfiguration.class, 
   JacksonConfiguration.class, 
-  LocaleConfiguration.class
+  LocaleConfiguration.class,
+  LogbackConfiguration.class
 })
 public class MuyieWebConfigurer
     implements

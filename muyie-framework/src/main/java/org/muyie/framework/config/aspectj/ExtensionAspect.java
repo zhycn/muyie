@@ -86,7 +86,8 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
       throw e;
     } finally {
       stopWatch.stop();
-      log.info(stopWatch.shortSummary());
+      log.info("StopWatch '" + stopWatch.getId() + "': running time = "
+          + stopWatch.getTotalTimeMillis() + " ms");
     }
   }
 

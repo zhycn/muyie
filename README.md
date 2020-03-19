@@ -9,7 +9,7 @@ This project provides a pom file that you can either import into your Spring Boo
 
 - JDK 8+
 - Spring Boot 2.2.5.RELEASE
-- Spring Cloud Hoxton.SR2
+- Spring Cloud Hoxton.SR3
 
 ## Quick Start
 
@@ -21,7 +21,7 @@ The MuYie BOM uses Maven's support for dependency management to provide dependen
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -35,7 +35,7 @@ Alternatively, rather than importing the MuYie BOM, you may prefer to use it as 
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <relativePath/>
 </parent>
 ```
@@ -46,7 +46,7 @@ Importing the dependency into your Spring Boot Application's pom, it provides mo
 <dependency>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-framework</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 

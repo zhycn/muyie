@@ -1,4 +1,4 @@
-package org.muyie.framework.domain.util;
+package org.muyie.framework.sensitive;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -128,13 +128,12 @@ public class SensitiveDataUtil {
   }
 
   /**
-   * 对大陆身份证号进行部分隐藏处理，只显示前1位和后1位，其他用*代替。<br>
+   * 对大陆身份证号进行部分隐藏处理，只显示前6位和后4位，其他用*代替。<br>
    * 如果doValidate为true且传入的数据不是合法的大陆身份证号，将按敏感信息缺省隐藏方式处理，显示前1/3和后1/3，其他用*代替。 <br>
    *
    * @param idCardNo 待部分隐藏处理的身份证号。
    * @param doValidate 是否做身份证号合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
-   * @return 如果hideFlag为true，返回符合《支付宝会员信息展示规范》的身份证号部分展示字符串；否则返回原数据。
-   *
+   * @return 如果hideFlag为true，返回符合规范的身份证号部分展示字符串；否则返回原数据。
    */
   public static String idCardNoHide(final String idCardNo, final boolean doValidate) {
     if (!needHide()) {
@@ -150,14 +149,14 @@ public class SensitiveDataUtil {
         return defaultHide(idCardNo); // 不是大陆身份证号，按缺省的隐藏显示方法。
       }
     }
-    return customizeHide(idCardNo, 1, 1, idCardNo.length() - 2);
+    return customizeHide(idCardNo, 6, 4, 8);
   }
 
   /**
    * 对大陆身份证号进行部分隐藏处理的简便方法，默认不做验证，由使用者自己保障。
    *
    * @param idCardNo 待部分隐藏处理的身份证号。
-   * @return 如果hideFlag为true，返回符合《支付宝会员信息展示规范》的身份证号部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回符合规范的身份证号部分展示字符串；否则返回原数据。
    */
   public static String idCardNoHide(final String idCardNo) {
     return idCardNoHide(idCardNo, false);
@@ -170,7 +169,7 @@ public class SensitiveDataUtil {
    *
    * @param bankCardNo 待部分隐藏处理的银行卡号。
    * @param doValidate 是否做银行卡号合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
-   * @return 如果hideFlag为true，返回符合《支付宝会员信息展示规范》的银行卡号部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回符合规范的银行卡号部分展示字符串；否则返回原数据。
    */
   public static String bankCardNoHide(final String bankCardNo, final boolean doValidate) {
     if (!needHide()) return bankCardNo;
@@ -193,7 +192,7 @@ public class SensitiveDataUtil {
    * 对银行卡号进行部分隐藏处理的简便方法，默认不做验证，由使用者自己保障。
    *
    * @param bankCardNo 待部分隐藏处理的银行卡号。
-   * @return 如果hideFlag为true，返回符合《支付宝会员信息展示规范》的银行卡号部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回符合规范的银行卡号部分展示字符串；否则返回原数据。
    */
   public static String bankCardNoHide(final String bankCardNo) {
     return bankCardNoHide(bankCardNo, false);
@@ -206,7 +205,7 @@ public class SensitiveDataUtil {
    *
    * @param phoneOrTelNo 待隐藏处理的电话号码
    * @param doValidate 是否做电话号码合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的电话号码部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回符合规范的电话号码部分展示字符串；否则返回原数据。
    */
   public static String phoneOrTelNoHide(final String phoneOrTelNo, final boolean doValidate) {
     if (!needHide()) {
@@ -238,7 +237,7 @@ public class SensitiveDataUtil {
    * 对电话号码（手机号或座机号码）进行部分隐藏处理的简便方法，默认不做验证，由使用者自己保障。
    *
    * @param phoneOrTelNo 待隐藏处理的电话号码
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的电话号码部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回规范中推荐的电话号码部分展示字符串；否则返回原数据。
    */
   public static String phoneOrTelNoHide(final String phoneOrTelNo) {
     return phoneOrTelNoHide(phoneOrTelNo, false);
@@ -299,7 +298,6 @@ public class SensitiveDataUtil {
     }
     int notHideNum = tmp.length() - 4;
     return customizeHide(tmp, notHideNum / 2, notHideNum - notHideNum / 2, 1);
-
   }
 
   /**
@@ -308,7 +306,7 @@ public class SensitiveDataUtil {
    *
    * @param email 待处理的Email
    * @param doValidate 是否做Email合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的Email部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回规范中推荐的Email部分展示字符串；否则返回原数据。
    */
   public static String emailHide(final String email, final boolean doValidate) {
     if (!needHide()) {
@@ -334,7 +332,7 @@ public class SensitiveDataUtil {
    * 对Email进行部分隐藏处理的简便方法，默认不做验证，由使用者自己保障。
    *
    * @param email 待处理的Email
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的Email部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回规范中推荐的Email部分展示字符串；否则返回原数据。
    */
   public static String emailHide(final String email) {
     return emailHide(email, false);
@@ -346,7 +344,7 @@ public class SensitiveDataUtil {
    *
    * @param email 待处理的Email
    * @param doValidate 是否做Email合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的Email部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回规范中推荐的Email部分展示字符串；否则返回原数据。
    */
   public static String emailHideSMS(final String email, final boolean doValidate) {
     if (!needHide()) {
@@ -389,7 +387,7 @@ public class SensitiveDataUtil {
    * </ul>
    *
    * @param email 待处理的Email
-   * @return 如果hideFlag为true，返回《支付宝会员信息展示规范》中推荐的Email部分展示字符串；否则返回原数据。
+   * @return 如果hideFlag为true，返回规范中推荐的Email部分展示字符串；否则返回原数据。
    */
   public static String emailHideSMS(final String email) {
     return emailHideSMS(email, false);

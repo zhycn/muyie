@@ -43,7 +43,7 @@
 
     <properties>
         <!-- The muyie-framework version should be the same as the artifact version above -->
-        <muyie-framework.version>1.0.6-SNAPSHOT</muyie-framework.version>
+        <muyie-framework.version>1.0.6</muyie-framework.version>
         <!-- The spring-boot version should be the same as the parent version above -->
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
 

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.task.AsyncTaskExecutor;
 
+import com.alibaba.ttl.TtlCallable;
+import com.alibaba.ttl.TtlRunnable;
+
 /**
  * Customize the AsyncTaskExecutor.
  */
@@ -44,24 +47,24 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
   }
 
   private <T> Callable<T> createCallable(final Callable<T> task) {
-    return () -> {
+    return TtlCallable.get(() -> {
       try {
         return task.call();
       } catch (Exception e) {
         handle(e);
         throw e;
       }
-    };
+    });
   }
 
   private Runnable createWrappedRunnable(final Runnable task) {
-    return () -> {
+    return TtlRunnable.get(() -> {
       try {
         task.run();
       } catch (Exception e) {
         handle(e);
       }
-    };
+    });
   }
 
   /**

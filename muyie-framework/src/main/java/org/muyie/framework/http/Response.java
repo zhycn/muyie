@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.MultiValueMap;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -34,13 +31,13 @@ public class Response implements Serializable {
     return fail(responseCode, null, headers);
   }
 
-  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object bizContent) {
-    return fail(responseCode, bizContent, null);
+  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object result) {
+    return fail(responseCode, result, null);
   }
 
-  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object bizContent,
+  public static Response fail(@NonNull ResponseCode responseCode, @Nullable Object result,
       @Nullable MultiValueMap<String, String> headers) {
-    Response response = new Response(responseCode.getCode(), responseCode.getMsg(), bizContent);
+    Response response = new Response(responseCode.getCode(), responseCode.getMsg(), result);
     HttpHeaders tempHeaders = new HttpHeaders();
     if (headers != null) {
       tempHeaders.putAll(headers);
@@ -67,38 +64,32 @@ public class Response implements Serializable {
     return success(null, headers);
   }
 
-  public static Response success(@Nullable Object bizContent) {
-    return success(bizContent, null);
+  public static Response success(@Nullable Object result) {
+    return success(result, null);
   }
 
-  public static Response success(@Nullable Object bizContent,
+  public static Response success(@Nullable Object result,
       @Nullable MultiValueMap<String, String> headers) {
-    return fail(ResponseCodeDefaults.SC_200, bizContent, headers);
+    return fail(ResponseCodeDefaults.SC_200, result, headers);
   }
 
   private String code;
 
   private String msg;
 
-  private Object bizContent;
+  private Object result;
 
   @JsonIgnore
   private HttpHeaders headers;
-
-  private String sign;
 
   public Response() {
     super();
   }
 
-  private Response(String code, String msg, Object bizContent) {
+  private Response(String code, String msg, Object result) {
     this.code = code;
     this.msg = msg;
-    this.bizContent = bizContent;
-  }
-
-  public Object getBizContent() {
-    return Objects.nonNull(bizContent) ? bizContent : Maps.newConcurrentMap();
+    this.result = result;
   }
 
   public String getCode() {
@@ -113,16 +104,12 @@ public class Response implements Serializable {
     return Strings.nullToEmpty(msg);
   }
 
-  public String getSign() {
-    return Strings.nullToEmpty(sign);
+  public Object getResult() {
+    return Objects.nonNull(result) ? result : Maps.newConcurrentMap();
   }
 
   public boolean isSuccess() {
     return ResponseCodeDefaults.SC_200.getCode().equals(getCode());
-  }
-
-  public void setBizContent(Object bizContent) {
-    this.bizContent = bizContent;
   }
 
   public void setCode(String code) {
@@ -137,27 +124,8 @@ public class Response implements Serializable {
     this.msg = msg;
   }
 
-  public void setSign(String sign) {
-    this.sign = sign;
-  }
-
-  public String toSignString() {
-    StringBuffer sb = new StringBuffer();
-
-    if (getBizContent() != null) {
-      String bizContent = JSON.toJSONString(getBizContent(), SerializerFeature.MapSortField);
-      sb.append("&bizContent=" + bizContent);
-    }
-
-    if (StringUtils.isNotEmpty(code)) {
-      sb.append("&code=" + code);
-    }
-
-    if (StringUtils.isNotEmpty(msg)) {
-      sb.append("&msg=" + msg);
-    }
-
-    return StringUtils.substring(sb.toString(), 1);
+  public void setResult(Object result) {
+    this.result = result;
   }
 
 }

@@ -12,7 +12,7 @@
     <parent>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-parent</artifactId>
-        <version>1.0.7</version>
+        <version>1.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -26,8 +26,8 @@
         <bucket4j.version>4.10.0</bucket4j.version>
         <commons-io.version>2.6</commons-io.version>
         <dozer-spring-boot.version>6.5.0</dozer-spring-boot.version>
-        <guava.version>28.2-jre</guava.version>
-        <hutool.version>5.2.5</hutool.version>
+        <guava.version>29.0-jre</guava.version>
+        <hutool.version>5.3.5</hutool.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-impl.version>2.3.2</jaxb-impl.version>
         <jjwt.version>0.11.1</jjwt.version>
@@ -38,13 +38,13 @@
         <problem-spring.version>0.25.2</problem-spring.version>
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
-        <redisson.version>3.12.4</redisson.version>
+        <redisson.version>3.12.5</redisson.version>
         <reflections.version>0.9.12</reflections.version>
         <retrofit.version>2.8.1</retrofit.version>
         <spring-boot-admin.version>2.2.2</spring-boot-admin.version>
-        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
-        <spring-security-oauth.version>2.4.0.RELEASE</spring-security-oauth.version>
+        <spring-security-oauth.version>2.4.1.RELEASE</spring-security-oauth.version>
         <springfox.version>2.9.2</springfox.version>
         <testcontainers.version>1.12.2</testcontainers.version>
     </properties>

@@ -1,4 +1,4 @@
-package org.muyie.framework.security.topt;
+package org.muyie.framework.security.totp;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;

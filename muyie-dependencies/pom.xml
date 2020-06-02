@@ -45,6 +45,7 @@
         <retrofit.version>2.9.0</retrofit.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
         <springfox.version>2.9.2</springfox.version>
@@ -444,6 +445,13 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-releasetrain</artifactId>
                 <version>${spring-data-releasetrain.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

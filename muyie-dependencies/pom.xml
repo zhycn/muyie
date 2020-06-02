@@ -18,6 +18,7 @@
 
     <properties>
         <!-- Dependency versions -->
+        <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
         <alibaba-druid.version>1.1.22</alibaba-druid.version>
         <alibaba-fastjson.version>1.2.70</alibaba-fastjson.version>
         <alibaba-ttl.version>2.11.4</alibaba-ttl.version>
@@ -50,6 +51,7 @@
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
         <springfox.version>2.9.2</springfox.version>
         <testcontainers.version>1.12.2</testcontainers.version>
+        <zxing.version>3.4.0</zxing.version>
     </properties>
 
     <dependencyManagement>
@@ -108,6 +110,17 @@
                 <groupId>com.github.dozermapper</groupId>
                 <artifactId>dozer-spring-boot-starter</artifactId>
                 <version>${dozer-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.aerogear</groupId>
+                <artifactId>aerogear-otp-java</artifactId>
+                <version>${aerogear-otp-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
             </dependency>
 
             <dependency>

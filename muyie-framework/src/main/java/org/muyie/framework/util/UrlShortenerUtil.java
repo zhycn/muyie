@@ -1,4 +1,4 @@
-package org.muyie.framework.domain.util;
+package org.muyie.framework.util;
 
 import java.util.List;
 

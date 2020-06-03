@@ -2,7 +2,7 @@ package org.muyie.framework.exception;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.muyie.framework.http.Response;
+import org.muyie.framework.context.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;

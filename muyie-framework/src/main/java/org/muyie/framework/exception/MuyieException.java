@@ -1,6 +1,6 @@
 package org.muyie.framework.exception;
 
-import org.muyie.framework.http.ResponseCode;
+import org.muyie.framework.context.ResponseCode;
 import org.springframework.http.HttpStatus;
 
 import cn.hutool.core.util.StrUtil;

@@ -1,7 +1,7 @@
 package org.muyie.framework.config.aspectj;
 
 import org.muyie.framework.config.MuyieProperties;
-import org.muyie.framework.http.Response;
+import org.muyie.framework.context.Response;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;

@@ -2,6 +2,8 @@ package org.muyie.framework.context;
 
 import javax.validation.constraints.Min;
 
+import org.muyie.framework.sensitive.SensitiveStringBuilder;
+
 public class QueryPager<T> extends Request {
 
   private static final long serialVersionUID = 1L;
@@ -36,6 +38,11 @@ public class QueryPager<T> extends Request {
 
   public void setSize(Integer size) {
     this.size = size;
+  }
+
+  @Override
+  public String toString() {
+    return SensitiveStringBuilder.toJSONString(this);
   }
 
 }

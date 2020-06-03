@@ -12,6 +12,10 @@ public enum SensitiveType {
 
   EMAIL_HIDE,
 
+  PASSWORD_HIDE,
+
+  HASH_HIDE,
+
   CUSTOMIZE_HIDE;
 
 }

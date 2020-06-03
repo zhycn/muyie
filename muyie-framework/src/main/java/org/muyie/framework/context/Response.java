@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
+import org.muyie.framework.sensitive.SensitiveStringBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -126,6 +127,11 @@ public class Response implements Serializable {
 
   public void setResult(Object result) {
     this.result = result;
+  }
+
+  @Override
+  public String toString() {
+    return SensitiveStringBuilder.toJSONString(this);
   }
 
 }

@@ -1,7 +1,14 @@
 package org.muyie.framework.config.aspectj;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.muyie.framework.config.MuyieProperties;
 import org.muyie.framework.context.Response;
+import org.muyie.framework.context.ResponseCode;
+import org.muyie.framework.context.ResponseCodeBuilder;
+import org.muyie.framework.context.ResponseCodeDefaults;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +41,8 @@ public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
     // Handle Problem Exception
     if (body instanceof Problem) {
       Problem problem = (Problem) body;
-      return Response.fail(String.valueOf(problem.getStatus().getStatusCode()), problem.getTitle());
+      String statusCode = String.valueOf(problem.getStatus().getStatusCode());
+      return Response.fail(convert(statusCode, problem.getTitle()));
     }
 
     // Handle REST Response headers
@@ -45,6 +53,16 @@ public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
     return body;
+  }
+
+  private static ResponseCode convert(String code, String defaultMsg) {
+    List<ResponseCodeDefaults> list = Arrays.asList(ResponseCodeDefaults.values());
+    for (ResponseCodeDefaults defaults : list) {
+      if (StringUtils.equals(defaults.getCode(), code)) {
+        return defaults;
+      }
+    }
+    return ResponseCodeBuilder.of(code, defaultMsg);
   }
 
 }

@@ -1,5 +1,6 @@
 package org.muyie.framework.context;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.muyie.framework.sensitive.SensitiveStringBuilder;
@@ -8,6 +9,7 @@ public class QueryPager<T> extends Request {
 
   private static final long serialVersionUID = 1L;
 
+  @Valid
   private T body;
 
   @Min(1)

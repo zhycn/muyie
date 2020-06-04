@@ -2,7 +2,7 @@ package org.muyie.framework.exception;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.muyie.framework.http.Response;
+import org.muyie.framework.context.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +22,8 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(MuyieException.class)
   public Response handleException(MuyieException e, HttpServletResponse response) {
-    int sc = e.getStatus().value();
-    response.setStatus(sc);
-    log.error(sc != 200 ? Throwables.getStackTraceAsString(e) : e.getMessage());
+    response.setStatus(e.getStatus().value());
+    log.error(Throwables.getStackTraceAsString(e));
     return Response.fail(e.getResponseCode());
   }
 

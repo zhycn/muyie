@@ -1,7 +1,8 @@
-package org.muyie.framework.http;
+package org.muyie.framework.context;
 
 import java.io.Serializable;
 
+import org.muyie.framework.sensitive.SensitiveStringBuilder;
 import org.springframework.util.StringUtils;
 
 import cn.hutool.core.util.IdUtil;
@@ -18,6 +19,11 @@ public class Request implements Serializable {
 
   public void setTraceId(String traceId) {
     this.traceId = traceId;
+  }
+
+  @Override
+  public String toString() {
+    return SensitiveStringBuilder.toJSONString(this);
   }
 
 }

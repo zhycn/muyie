@@ -12,12 +12,13 @@
     <parent>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-parent</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>1.1.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
         <!-- Dependency versions -->
+        <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
         <alibaba-druid.version>1.1.22</alibaba-druid.version>
         <alibaba-fastjson.version>1.2.70</alibaba-fastjson.version>
         <alibaba-ttl.version>2.11.4</alibaba-ttl.version>
@@ -45,10 +46,12 @@
         <retrofit.version>2.9.0</retrofit.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
         <springfox.version>2.9.2</springfox.version>
         <testcontainers.version>1.12.2</testcontainers.version>
+        <zxing.version>3.4.0</zxing.version>
     </properties>
 
     <dependencyManagement>
@@ -107,6 +110,17 @@
                 <groupId>com.github.dozermapper</groupId>
                 <artifactId>dozer-spring-boot-starter</artifactId>
                 <version>${dozer-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.aerogear</groupId>
+                <artifactId>aerogear-otp-java</artifactId>
+                <version>${aerogear-otp-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
             </dependency>
 
             <dependency>
@@ -444,6 +458,13 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-releasetrain</artifactId>
                 <version>${spring-data-releasetrain.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

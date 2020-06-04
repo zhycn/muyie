@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * SensitiveDataUtil
  */
-public class SensitiveDataUtil {
+public final class SensitiveDataUtil {
 
   /** 是否进行敏感数据屏蔽的开关 */
   private static boolean hideFlag = true;

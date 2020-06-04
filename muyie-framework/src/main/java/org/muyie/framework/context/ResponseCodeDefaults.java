@@ -9,7 +9,7 @@ public enum ResponseCodeDefaults implements ResponseCode {
 
   SC_200("200", "成功"),
 
-  SC_400("400", "非法参数错误"),
+  SC_400("400", "非法参数"),
 
   SC_401("401", "未授权"),
 

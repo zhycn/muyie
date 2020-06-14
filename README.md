@@ -9,7 +9,7 @@ This project provides a pom file that you can either import into your Spring Boo
 
 - JDK 8+
 - Spring Boot 2.3.1.RELEASE
-- Spring Cloud Hoxton.SR4
+- Spring Cloud Hoxton.SR5
 - Hutool 6.3.7
 
 ## Quick Start

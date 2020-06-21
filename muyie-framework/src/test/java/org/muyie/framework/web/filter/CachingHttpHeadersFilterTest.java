@@ -1,17 +1,5 @@
 package org.muyie.framework.web.filter;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.config.MuyieProperties;
-import org.muyie.framework.web.filter.CachingHttpHeadersFilter;
-import org.springframework.mock.web.MockFilterChain;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-
-import javax.servlet.FilterChain;
-import java.util.concurrent.TimeUnit;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -19,6 +7,18 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.muyie.framework.web.filter.CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE;
+
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.FilterChain;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.muyie.framework.config.MuyieProperties;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 
 public class CachingHttpHeadersFilterTest {
 

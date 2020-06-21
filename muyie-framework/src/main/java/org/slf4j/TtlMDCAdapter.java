@@ -1,15 +1,15 @@
 package org.slf4j;
 
-import ch.qos.logback.classic.util.LogbackMDCAdapter;
-import com.alibaba.ttl.TransmittableThreadLocal;
-
-import org.slf4j.MDC;
-import org.slf4j.spi.MDCAdapter;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import com.alibaba.ttl.TransmittableThreadLocal;
+
+import org.slf4j.spi.MDCAdapter;
+
+import ch.qos.logback.classic.util.LogbackMDCAdapter;
 
 /**
  * 重写{@link LogbackMDCAdapter}类，搭配TransmittableThreadLocal实现父子线程之间的数据传递

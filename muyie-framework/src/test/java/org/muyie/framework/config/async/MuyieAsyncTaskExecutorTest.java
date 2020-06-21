@@ -14,7 +14,6 @@ import java.util.concurrent.Future;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.muyie.framework.config.async.MuyieAsyncTaskExecutor;
 import org.muyie.framework.test.LogbackRecorder;
 import org.muyie.framework.test.LogbackRecorder.Event;
 import org.springframework.beans.factory.DisposableBean;

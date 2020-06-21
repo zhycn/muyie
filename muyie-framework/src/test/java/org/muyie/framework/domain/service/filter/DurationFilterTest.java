@@ -1,15 +1,13 @@
 package org.muyie.framework.domain.service.filter;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.domain.service.filter.DurationFilter;
-import org.muyie.framework.domain.service.filter.Filter;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DurationFilterTest {
 

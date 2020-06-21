@@ -1,7 +1,10 @@
 package org.muyie.framework.web.filter.reactive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.Duration;
+
 import org.junit.jupiter.api.Test;
-import org.muyie.framework.web.filter.reactive.CookieCsrfFilter;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.ResponseCookie;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
@@ -11,10 +14,6 @@ import org.springframework.security.web.server.csrf.DefaultCsrfToken;
 import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
-
-import java.time.Duration;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class CookieCsrfFilterTest {
 

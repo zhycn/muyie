@@ -1,5 +1,19 @@
 package org.muyie.framework.config.apidoc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -11,7 +25,6 @@ import org.mockito.Captor;
 import org.mockito.MockitoAnnotations;
 import org.muyie.framework.config.MuyieProperties;
 import org.muyie.framework.config.MuyieProperties.Swagger;
-import org.muyie.framework.config.apidoc.SwaggerAutoConfiguration;
 import org.muyie.framework.config.apidoc.customizer.GenericSwaggerCustomizer;
 import org.muyie.framework.config.apidoc.customizer.SwaggerCustomizer;
 import org.muyie.framework.test.LogbackRecorder;
@@ -20,19 +33,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
-
-import javax.annotation.Nullable;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
 
 public class SwaggerAutoConfigurationTest {
 

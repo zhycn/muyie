@@ -1,10 +1,9 @@
 package org.muyie.framework.web.util;
 
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.web.util.HeaderUtil;
-import org.springframework.http.HttpHeaders;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
 
 public class HeaderUtilTest {
 

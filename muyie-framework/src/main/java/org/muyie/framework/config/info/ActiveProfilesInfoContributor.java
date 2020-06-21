@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * An {@link org.springframework.boot.actuate.info.InfoContributor} that exposes the list of active
- * spring profiles.
+ * An {@link org.springframework.boot.actuate.info.InfoContributor} that exposes
+ * the list of active spring profiles.
  */
 public class ActiveProfilesInfoContributor implements InfoContributor {
 
@@ -22,15 +22,17 @@ public class ActiveProfilesInfoContributor implements InfoContributor {
    * Constructor for ActiveProfilesInfoContributor.
    * </p>
    *
-   * @param environment a {@link org.springframework.core.env.ConfigurableEnvironment} object.
+   * @param environment a
+   *                    {@link org.springframework.core.env.ConfigurableEnvironment}
+   *                    object.
    */
-  public ActiveProfilesInfoContributor(ConfigurableEnvironment environment) {
+  public ActiveProfilesInfoContributor(final ConfigurableEnvironment environment) {
     this.profiles = Arrays.asList(DefaultProfileUtil.getActiveProfiles(environment));
   }
 
   /** {@inheritDoc} */
   @Override
-  public void contribute(Info.Builder builder) {
+  public void contribute(final Info.Builder builder) {
     builder.withDetail(ACTIVE_PROFILES, this.profiles);
   }
 }

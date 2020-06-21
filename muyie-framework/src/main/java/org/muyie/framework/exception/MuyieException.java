@@ -16,43 +16,43 @@ public class MuyieException extends RuntimeException {
 
   private final HttpStatus status;
 
-  public MuyieException(ResponseCode responseCode) {
+  public MuyieException(final ResponseCode responseCode) {
     this(responseCode, HttpStatus.OK);
   }
 
-  public MuyieException(ResponseCode responseCode, HttpStatus status) {
+  public MuyieException(final ResponseCode responseCode, final HttpStatus status) {
     this.responseCode = responseCode;
     this.status = status;
   }
 
-  public MuyieException(ResponseCode responseCode, HttpStatus status, String message) {
+  public MuyieException(final ResponseCode responseCode, final HttpStatus status, final String message) {
     super(message);
     this.responseCode = responseCode;
     this.status = status;
   }
 
-  public MuyieException(ResponseCode responseCode, HttpStatus status, String message,
-      Throwable cause) {
+  public MuyieException(final ResponseCode responseCode, final HttpStatus status, final String message,
+      final Throwable cause) {
     super(message, cause);
     this.responseCode = responseCode;
     this.status = status;
   }
 
-  public MuyieException(ResponseCode responseCode, HttpStatus status, Throwable cause) {
+  public MuyieException(final ResponseCode responseCode, final HttpStatus status, final Throwable cause) {
     super(cause);
     this.responseCode = responseCode;
     this.status = status;
   }
 
-  public MuyieException(ResponseCode responseCode, String message) {
+  public MuyieException(final ResponseCode responseCode, final String message) {
     this(responseCode, HttpStatus.OK, message);
   }
 
-  public MuyieException(ResponseCode responseCode, String message, Throwable cause) {
+  public MuyieException(final ResponseCode responseCode, final String message, final Throwable cause) {
     this(responseCode, HttpStatus.OK, message, cause);
   }
 
-  public MuyieException(ResponseCode responseCode, Throwable cause) {
+  public MuyieException(final ResponseCode responseCode, final Throwable cause) {
     this(responseCode, HttpStatus.OK, cause);
   }
 

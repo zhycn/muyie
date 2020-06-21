@@ -16,27 +16,27 @@ public class NotLikeSpecification<T> extends AbstractSpecification<T> {
   private final String property;
   private final List<String> patterns;
 
-  public NotLikeSpecification(String property, List<String> patterns) {
+  public NotLikeSpecification(final String property, final List<String> patterns) {
     this(property, patterns, JoinType.INNER);
   }
 
-  public NotLikeSpecification(String property, List<String> patterns, JoinType joinType) {
+  public NotLikeSpecification(final String property, final List<String> patterns, final JoinType joinType) {
     super(joinType);
     this.property = property;
     this.patterns = patterns;
   }
 
   @Override
-  public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
-      CriteriaBuilder criteriaBuilder) {
-    From<?, ?> from = getRoot(property, root);
-    String field = getProperty(property);
-    
-    Predicate[] predicates = new Predicate[patterns.size()];
+  public Predicate toPredicate(final Root<T> root, final CriteriaQuery<?> query,
+      final CriteriaBuilder criteriaBuilder) {
+    final From<?, ?> from = getRoot(property, root);
+    final String field = getProperty(property);
+
+    final Predicate[] predicates = new Predicate[patterns.size()];
     for (int i = 0; i < patterns.size(); i++) {
       predicates[i] = criteriaBuilder.notLike(from.get(field), patterns.get(i));
     }
-    
+
     return criteriaBuilder.or(predicates);
   }
 

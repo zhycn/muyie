@@ -1,21 +1,19 @@
 package org.muyie.framework.domain.service.filter;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.domain.service.filter.Filter;
-import org.muyie.framework.domain.service.filter.ZonedDateTimeFilter;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ZonedDateTimeFilterTest {
 
   private ZonedDateTimeFilter filter;
 
-  private ZonedDateTime value = ZonedDateTime.now();
+  private final ZonedDateTime value = ZonedDateTime.now();
 
   @BeforeEach
   public void setup() {
@@ -36,50 +34,50 @@ public class ZonedDateTimeFilterTest {
 
   @Test
   public void testSetEquals() {
-    Filter<ZonedDateTime> chain = filter.setEquals(value);
+    final Filter<ZonedDateTime> chain = filter.setEquals(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getEquals()).isEqualTo(value);
   }
 
   @Test
   public void testSetLessThan() {
-    Filter<ZonedDateTime> chain = filter.setLessThan(value);
+    final Filter<ZonedDateTime> chain = filter.setLessThan(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getLessThan()).isEqualTo(value);
   }
 
   @Test
   public void testSetLessThanOrEqual() {
-    Filter<ZonedDateTime> chain = filter.setLessThanOrEqual(value);
+    final Filter<ZonedDateTime> chain = filter.setLessThanOrEqual(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getLessThanOrEqual()).isEqualTo(value);
   }
 
   @Test
   public void testSetGreaterThan() {
-    Filter<ZonedDateTime> chain = filter.setGreaterThan(value);
+    final Filter<ZonedDateTime> chain = filter.setGreaterThan(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getGreaterThan()).isEqualTo(value);
   }
 
   @Test
   public void testSetGreaterThanOrEqual() {
-    Filter<ZonedDateTime> chain = filter.setGreaterThanOrEqual(value);
+    final Filter<ZonedDateTime> chain = filter.setGreaterThanOrEqual(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getGreaterThanOrEqual()).isEqualTo(value);
   }
 
   @Test
   public void testSetSpecified() {
-    Filter<ZonedDateTime> chain = filter.setSpecified(true);
+    final Filter<ZonedDateTime> chain = filter.setSpecified(true);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getSpecified()).isEqualTo(true);
   }
 
   @Test
   public void testSetIn() {
-    List<ZonedDateTime> list = new LinkedList<>();
-    Filter<ZonedDateTime> chain = filter.setIn(list);
+    final List<ZonedDateTime> list = new LinkedList<>();
+    final Filter<ZonedDateTime> chain = filter.setIn(list);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getIn()).isEqualTo(list);
   }
@@ -93,9 +91,8 @@ public class ZonedDateTimeFilterTest {
     filter.setGreaterThanOrEqual(value);
     filter.setSpecified(true);
     filter.setIn(new LinkedList<>());
-    String str = value.toString();
-    assertThat(filter.toString()).isEqualTo("ZonedDateTimeFilter " + "[greaterThan=" + str
-        + ", greaterThanOrEqual=" + str + ", lessThan=" + str + ", " + "lessThanOrEqual=" + str
-        + ", equals=" + str + ", specified=true, in=[]]");
+    final String str = value.toString();
+    assertThat(filter.toString()).isEqualTo("ZonedDateTimeFilter " + "[greaterThan=" + str + ", greaterThanOrEqual="
+        + str + ", lessThan=" + str + ", " + "lessThanOrEqual=" + str + ", equals=" + str + ", specified=true, in=[]]");
   }
 }

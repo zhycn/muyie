@@ -15,8 +15,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * Base abstract class for entities which will hold definitions for created, last modified and
- * created by date, last modified by date and remark.
+ * Base abstract class for entities which will hold definitions for created,
+ * last modified and created by date, last modified by date and remark.
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -74,27 +74,27 @@ public abstract class AbstractAuditingEntity extends AbstractPersistentEntity {
     return revision;
   }
 
-  public void setCreatedBy(String createdBy) {
+  public void setCreatedBy(final String createdBy) {
     this.createdBy = createdBy;
   }
 
-  public void setCreatedDate(Date createdDate) {
+  public void setCreatedDate(final Date createdDate) {
     this.createdDate = createdDate;
   }
 
-  public void setLastModifiedBy(String lastModifiedBy) {
+  public void setLastModifiedBy(final String lastModifiedBy) {
     this.lastModifiedBy = lastModifiedBy;
   }
 
-  public void setLastModifiedDate(Date lastModifiedDate) {
+  public void setLastModifiedDate(final Date lastModifiedDate) {
     this.lastModifiedDate = lastModifiedDate;
   }
 
-  public void setRemark(String remark) {
+  public void setRemark(final String remark) {
     this.remark = remark;
   }
 
-  public void setRevision(Integer revision) {
+  public void setRevision(final Integer revision) {
     this.revision = revision;
   }
 

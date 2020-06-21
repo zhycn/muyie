@@ -20,7 +20,7 @@ public class MuyieAsyncConfiguration implements WebMvcConfigurer {
 
   private final MuyieProperties muyieProperties;
 
-  public MuyieAsyncConfiguration(MuyieProperties muyieProperties) {
+  public MuyieAsyncConfiguration(final MuyieProperties muyieProperties) {
     this.muyieProperties = muyieProperties;
   }
 
@@ -37,7 +37,7 @@ public class MuyieAsyncConfiguration implements WebMvcConfigurer {
   }
 
   @Override
-  public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+  public void configureAsyncSupport(final AsyncSupportConfigurer configurer) {
     configurer.setTaskExecutor(muyieAsyncTaskExecutor());
   }
 
@@ -50,8 +50,7 @@ public class MuyieAsyncConfiguration implements WebMvcConfigurer {
   @Bean("muyieTaskExecutor")
   @ConditionalOnMissingBean
   public MuyieTaskExecutor muyieTaskExecutor() {
-    return new MuyieTaskExecutor(muyieAsyncTaskExecutor(),
-        muyieSchedulingConfigurer().scheduledTaskExecutor());
+    return new MuyieTaskExecutor(muyieAsyncTaskExecutor(), muyieSchedulingConfigurer().scheduledTaskExecutor());
   }
 
 }

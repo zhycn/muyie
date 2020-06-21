@@ -119,7 +119,8 @@ public class MuyieProperties {
    * Getter for the field <code>snowflake</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Snowflake} object.
+   * @return a {@link org.muyie.framework.config.MuyieProperties.Snowflake}
+   *         object.
    */
   public Snowflake getSnowflake() {
     return snowflake;
@@ -196,7 +197,8 @@ public class MuyieProperties {
    * Getter for the field <code>clientApp</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.ClientApp} object.
+   * @return a {@link org.muyie.framework.config.MuyieProperties.ClientApp}
+   *         object.
    */
   public ClientApp getClientApp() {
     return clientApp;
@@ -207,7 +209,8 @@ public class MuyieProperties {
    * Getter for the field <code>auditEvents</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.AuditEvents} object.
+   * @return a {@link org.muyie.framework.config.MuyieProperties.AuditEvents}
+   *         object.
    */
   public AuditEvents getAuditEvents() {
     return auditEvents;
@@ -225,8 +228,7 @@ public class MuyieProperties {
 
     private boolean allowCoreThreadTimeOut = MuyieDefaults.Async.allowCoreThreadTimeOut;
 
-    private boolean waitForJobsToCompleteOnShutdown =
-        MuyieDefaults.Async.waitForJobsToCompleteOnShutdown;
+    private boolean waitForJobsToCompleteOnShutdown = MuyieDefaults.Async.waitForJobsToCompleteOnShutdown;
 
     private int awaitTerminationSeconds = MuyieDefaults.Async.awaitTerminationSeconds;
 
@@ -264,35 +266,35 @@ public class MuyieProperties {
       return threadNamePrefix;
     }
 
-    public void setCorePoolSize(int corePoolSize) {
+    public void setCorePoolSize(final int corePoolSize) {
       this.corePoolSize = corePoolSize;
     }
 
-    public void setMaxPoolSize(int maxPoolSize) {
+    public void setMaxPoolSize(final int maxPoolSize) {
       this.maxPoolSize = maxPoolSize;
     }
 
-    public void setKeepAliveSeconds(int keepAliveSeconds) {
+    public void setKeepAliveSeconds(final int keepAliveSeconds) {
       this.keepAliveSeconds = keepAliveSeconds;
     }
 
-    public void setQueueCapacity(int queueCapacity) {
+    public void setQueueCapacity(final int queueCapacity) {
       this.queueCapacity = queueCapacity;
     }
 
-    public void setAllowCoreThreadTimeOut(boolean allowCoreThreadTimeOut) {
+    public void setAllowCoreThreadTimeOut(final boolean allowCoreThreadTimeOut) {
       this.allowCoreThreadTimeOut = allowCoreThreadTimeOut;
     }
 
-    public void setWaitForJobsToCompleteOnShutdown(boolean waitForJobsToCompleteOnShutdown) {
+    public void setWaitForJobsToCompleteOnShutdown(final boolean waitForJobsToCompleteOnShutdown) {
       this.waitForJobsToCompleteOnShutdown = waitForJobsToCompleteOnShutdown;
     }
 
-    public void setAwaitTerminationSeconds(int awaitTerminationSeconds) {
+    public void setAwaitTerminationSeconds(final int awaitTerminationSeconds) {
       this.awaitTerminationSeconds = awaitTerminationSeconds;
     }
 
-    public void setThreadNamePrefix(String threadNamePrefix) {
+    public void setThreadNamePrefix(final String threadNamePrefix) {
       this.threadNamePrefix = threadNamePrefix;
     }
 
@@ -314,7 +316,7 @@ public class MuyieProperties {
         return timeToLiveInDays;
       }
 
-      public void setTimeToLiveInDays(int timeToLiveInDays) {
+      public void setTimeToLiveInDays(final int timeToLiveInDays) {
         this.timeToLiveInDays = timeToLiveInDays;
       }
     }
@@ -382,7 +384,7 @@ public class MuyieProperties {
           return enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled(final boolean enabled) {
           this.enabled = enabled;
         }
 
@@ -390,7 +392,7 @@ public class MuyieProperties {
           return updateInterval;
         }
 
-        public void setUpdateInterval(int updateInterval) {
+        public void setUpdateInterval(final int updateInterval) {
           this.updateInterval = updateInterval;
         }
 
@@ -398,7 +400,7 @@ public class MuyieProperties {
           return url;
         }
 
-        public void setUrl(String url) {
+        public void setUrl(final String url) {
           this.url = url;
         }
 
@@ -408,7 +410,7 @@ public class MuyieProperties {
         return timeToLiveSeconds;
       }
 
-      public void setTimeToLiveSeconds(int timeToLiveSeconds) {
+      public void setTimeToLiveSeconds(final int timeToLiveSeconds) {
         this.timeToLiveSeconds = timeToLiveSeconds;
       }
 
@@ -416,7 +418,7 @@ public class MuyieProperties {
         return backupCount;
       }
 
-      public void setBackupCount(int backupCount) {
+      public void setBackupCount(final int backupCount) {
         this.backupCount = backupCount;
       }
     }
@@ -431,7 +433,7 @@ public class MuyieProperties {
         return timeToLiveSeconds;
       }
 
-      public void setTimeToLiveSeconds(int timeToLiveSeconds) {
+      public void setTimeToLiveSeconds(final int timeToLiveSeconds) {
         this.timeToLiveSeconds = timeToLiveSeconds;
       }
 
@@ -439,7 +441,7 @@ public class MuyieProperties {
         return maxEntries;
       }
 
-      public void setMaxEntries(long maxEntries) {
+      public void setMaxEntries(final long maxEntries) {
         this.maxEntries = maxEntries;
       }
     }
@@ -454,7 +456,7 @@ public class MuyieProperties {
         return timeToLiveSeconds;
       }
 
-      public void setTimeToLiveSeconds(int timeToLiveSeconds) {
+      public void setTimeToLiveSeconds(final int timeToLiveSeconds) {
         this.timeToLiveSeconds = timeToLiveSeconds;
       }
 
@@ -462,7 +464,7 @@ public class MuyieProperties {
         return maxEntries;
       }
 
-      public void setMaxEntries(long maxEntries) {
+      public void setMaxEntries(final long maxEntries) {
         this.maxEntries = maxEntries;
       }
     }
@@ -483,7 +485,7 @@ public class MuyieProperties {
         return configFile;
       }
 
-      public void setConfigFile(String configFile) {
+      public void setConfigFile(final String configFile) {
         this.configFile = configFile;
       }
 
@@ -491,7 +493,7 @@ public class MuyieProperties {
         return statsEnabled;
       }
 
-      public void setStatsEnabled(boolean statsEnabled) {
+      public void setStatsEnabled(final boolean statsEnabled) {
         this.statsEnabled = statsEnabled;
       }
 
@@ -517,7 +519,7 @@ public class MuyieProperties {
           return timeToLiveSeconds;
         }
 
-        public void setTimeToLiveSeconds(long timeToLiveSeconds) {
+        public void setTimeToLiveSeconds(final long timeToLiveSeconds) {
           this.timeToLiveSeconds = timeToLiveSeconds;
         }
 
@@ -525,7 +527,7 @@ public class MuyieProperties {
           return maxEntries;
         }
 
-        public void setMaxEntries(long maxEntries) {
+        public void setMaxEntries(final long maxEntries) {
           this.maxEntries = maxEntries;
         }
 
@@ -533,8 +535,7 @@ public class MuyieProperties {
 
       public static class Distributed {
 
-        private long timeToLiveSeconds =
-            MuyieDefaults.Cache.Infinispan.Distributed.timeToLiveSeconds;
+        private long timeToLiveSeconds = MuyieDefaults.Cache.Infinispan.Distributed.timeToLiveSeconds;
 
         private long maxEntries = MuyieDefaults.Cache.Infinispan.Distributed.maxEntries;
 
@@ -544,7 +545,7 @@ public class MuyieProperties {
           return timeToLiveSeconds;
         }
 
-        public void setTimeToLiveSeconds(long timeToLiveSeconds) {
+        public void setTimeToLiveSeconds(final long timeToLiveSeconds) {
           this.timeToLiveSeconds = timeToLiveSeconds;
         }
 
@@ -552,7 +553,7 @@ public class MuyieProperties {
           return maxEntries;
         }
 
-        public void setMaxEntries(long maxEntries) {
+        public void setMaxEntries(final long maxEntries) {
           this.maxEntries = maxEntries;
         }
 
@@ -560,15 +561,14 @@ public class MuyieProperties {
           return instanceCount;
         }
 
-        public void setInstanceCount(int instanceCount) {
+        public void setInstanceCount(final int instanceCount) {
           this.instanceCount = instanceCount;
         }
       }
 
       public static class Replicated {
 
-        private long timeToLiveSeconds =
-            MuyieDefaults.Cache.Infinispan.Replicated.timeToLiveSeconds;
+        private long timeToLiveSeconds = MuyieDefaults.Cache.Infinispan.Replicated.timeToLiveSeconds;
 
         private long maxEntries = MuyieDefaults.Cache.Infinispan.Replicated.maxEntries;
 
@@ -576,7 +576,7 @@ public class MuyieProperties {
           return timeToLiveSeconds;
         }
 
-        public void setTimeToLiveSeconds(long timeToLiveSeconds) {
+        public void setTimeToLiveSeconds(final long timeToLiveSeconds) {
           this.timeToLiveSeconds = timeToLiveSeconds;
         }
 
@@ -584,7 +584,7 @@ public class MuyieProperties {
           return maxEntries;
         }
 
-        public void setMaxEntries(long maxEntries) {
+        public void setMaxEntries(final long maxEntries) {
           this.maxEntries = maxEntries;
         }
 
@@ -608,7 +608,7 @@ public class MuyieProperties {
         return enabled;
       }
 
-      public void setEnabled(boolean enabled) {
+      public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
       }
 
@@ -616,7 +616,7 @@ public class MuyieProperties {
         return servers;
       }
 
-      public void setServers(String servers) {
+      public void setServers(final String servers) {
         this.servers = servers;
       }
 
@@ -624,7 +624,7 @@ public class MuyieProperties {
         return expiration;
       }
 
-      public void setExpiration(int expiration) {
+      public void setExpiration(final int expiration) {
         this.expiration = expiration;
       }
 
@@ -632,7 +632,7 @@ public class MuyieProperties {
         return useBinaryProtocol;
       }
 
-      public void setUseBinaryProtocol(boolean useBinaryProtocol) {
+      public void setUseBinaryProtocol(final boolean useBinaryProtocol) {
         this.useBinaryProtocol = useBinaryProtocol;
       }
     }
@@ -645,7 +645,7 @@ public class MuyieProperties {
         return server;
       }
 
-      public void setServer(String server) {
+      public void setServer(final String server) {
         this.server = server;
       }
 
@@ -653,7 +653,7 @@ public class MuyieProperties {
         return expiration;
       }
 
-      public void setExpiration(int expiration) {
+      public void setExpiration(final int expiration) {
         this.expiration = expiration;
       }
     }
@@ -671,7 +671,7 @@ public class MuyieProperties {
       return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
       this.enabled = enabled;
     }
 
@@ -679,7 +679,7 @@ public class MuyieProperties {
       return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(final String from) {
       this.from = from;
     }
 
@@ -687,7 +687,7 @@ public class MuyieProperties {
       return baseUrl;
     }
 
-    public void setBaseUrl(String baseUrl) {
+    public void setBaseUrl(final String baseUrl) {
       this.baseUrl = baseUrl;
     }
   }
@@ -726,7 +726,7 @@ public class MuyieProperties {
         return accessTokenUri;
       }
 
-      public void setAccessTokenUri(String accessTokenUri) {
+      public void setAccessTokenUri(final String accessTokenUri) {
         this.accessTokenUri = accessTokenUri;
       }
 
@@ -734,7 +734,7 @@ public class MuyieProperties {
         return tokenServiceId;
       }
 
-      public void setTokenServiceId(String tokenServiceId) {
+      public void setTokenServiceId(final String tokenServiceId) {
         this.tokenServiceId = tokenServiceId;
       }
 
@@ -742,7 +742,7 @@ public class MuyieProperties {
         return clientId;
       }
 
-      public void setClientId(String clientId) {
+      public void setClientId(final String clientId) {
         this.clientId = clientId;
       }
 
@@ -750,7 +750,7 @@ public class MuyieProperties {
         return clientSecret;
       }
 
-      public void setClientSecret(String clientSecret) {
+      public void setClientSecret(final String clientSecret) {
         this.clientSecret = clientSecret;
       }
     }
@@ -769,17 +769,15 @@ public class MuyieProperties {
 
         private String base64Secret = MuyieDefaults.Security.Authentication.Jwt.base64Secret;
 
-        private long tokenValidityInSeconds =
-            MuyieDefaults.Security.Authentication.Jwt.tokenValidityInSeconds;
+        private long tokenValidityInSeconds = MuyieDefaults.Security.Authentication.Jwt.tokenValidityInSeconds;
 
-        private long tokenValidityInSecondsForRememberMe =
-            MuyieDefaults.Security.Authentication.Jwt.tokenValidityInSecondsForRememberMe;
+        private long tokenValidityInSecondsForRememberMe = MuyieDefaults.Security.Authentication.Jwt.tokenValidityInSecondsForRememberMe;
 
         public String getSecret() {
           return secret;
         }
 
-        public void setSecret(String secret) {
+        public void setSecret(final String secret) {
           this.secret = secret;
         }
 
@@ -787,7 +785,7 @@ public class MuyieProperties {
           return base64Secret;
         }
 
-        public void setBase64Secret(String base64Secret) {
+        public void setBase64Secret(final String base64Secret) {
           this.base64Secret = base64Secret;
         }
 
@@ -795,7 +793,7 @@ public class MuyieProperties {
           return tokenValidityInSeconds;
         }
 
-        public void setTokenValidityInSeconds(long tokenValidityInSeconds) {
+        public void setTokenValidityInSeconds(final long tokenValidityInSeconds) {
           this.tokenValidityInSeconds = tokenValidityInSeconds;
         }
 
@@ -803,8 +801,7 @@ public class MuyieProperties {
           return tokenValidityInSecondsForRememberMe;
         }
 
-        public void setTokenValidityInSecondsForRememberMe(
-            long tokenValidityInSecondsForRememberMe) {
+        public void setTokenValidityInSecondsForRememberMe(final long tokenValidityInSecondsForRememberMe) {
           this.tokenValidityInSecondsForRememberMe = tokenValidityInSecondsForRememberMe;
         }
       }
@@ -819,7 +816,7 @@ public class MuyieProperties {
         return key;
       }
 
-      public void setKey(String key) {
+      public void setKey(final String key) {
         this.key = key;
       }
     }
@@ -845,20 +842,20 @@ public class MuyieProperties {
       return useSystemClock;
     }
 
-    public void setWorkerId(long workerId) {
+    public void setWorkerId(final long workerId) {
       this.workerId = workerId;
     }
 
-    public void setDatacenterId(long datacenterId) {
+    public void setDatacenterId(final long datacenterId) {
       this.datacenterId = datacenterId;
     }
 
-    public void setUseSystemClock(boolean useSystemClock) {
+    public void setUseSystemClock(final boolean useSystemClock) {
       this.useSystemClock = useSystemClock;
     }
 
   }
-  
+
   public static class Swagger {
 
     private String title = MuyieDefaults.Swagger.title;
@@ -888,12 +885,12 @@ public class MuyieProperties {
     private boolean useDefaultResponseMessages = MuyieDefaults.Swagger.useDefaultResponseMessages;
 
     private final Authorization authorization = new Authorization();
-    
+
     public String getTitle() {
       return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
       this.title = title;
     }
 
@@ -901,7 +898,7 @@ public class MuyieProperties {
       return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
       this.description = description;
     }
 
@@ -909,7 +906,7 @@ public class MuyieProperties {
       return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(final String version) {
       this.version = version;
     }
 
@@ -917,7 +914,7 @@ public class MuyieProperties {
       return termsOfServiceUrl;
     }
 
-    public void setTermsOfServiceUrl(String termsOfServiceUrl) {
+    public void setTermsOfServiceUrl(final String termsOfServiceUrl) {
       this.termsOfServiceUrl = termsOfServiceUrl;
     }
 
@@ -925,7 +922,7 @@ public class MuyieProperties {
       return contactName;
     }
 
-    public void setContactName(String contactName) {
+    public void setContactName(final String contactName) {
       this.contactName = contactName;
     }
 
@@ -933,7 +930,7 @@ public class MuyieProperties {
       return contactUrl;
     }
 
-    public void setContactUrl(String contactUrl) {
+    public void setContactUrl(final String contactUrl) {
       this.contactUrl = contactUrl;
     }
 
@@ -941,7 +938,7 @@ public class MuyieProperties {
       return contactEmail;
     }
 
-    public void setContactEmail(String contactEmail) {
+    public void setContactEmail(final String contactEmail) {
       this.contactEmail = contactEmail;
     }
 
@@ -949,7 +946,7 @@ public class MuyieProperties {
       return license;
     }
 
-    public void setLicense(String license) {
+    public void setLicense(final String license) {
       this.license = license;
     }
 
@@ -957,7 +954,7 @@ public class MuyieProperties {
       return licenseUrl;
     }
 
-    public void setLicenseUrl(String licenseUrl) {
+    public void setLicenseUrl(final String licenseUrl) {
       this.licenseUrl = licenseUrl;
     }
 
@@ -965,7 +962,7 @@ public class MuyieProperties {
       return defaultIncludePattern;
     }
 
-    public void setDefaultIncludePattern(String defaultIncludePattern) {
+    public void setDefaultIncludePattern(final String defaultIncludePattern) {
       this.defaultIncludePattern = defaultIncludePattern;
     }
 
@@ -992,7 +989,7 @@ public class MuyieProperties {
     public void setUseDefaultResponseMessages(final boolean useDefaultResponseMessages) {
       this.useDefaultResponseMessages = useDefaultResponseMessages;
     }
-    
+
     public Authorization getAuthorization() {
       return authorization;
     }
@@ -1017,7 +1014,7 @@ public class MuyieProperties {
         return enabled;
       }
 
-      public void setEnabled(boolean enabled) {
+      public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
       }
 
@@ -1025,7 +1022,7 @@ public class MuyieProperties {
         return name;
       }
 
-      public void setName(String name) {
+      public void setName(final String name) {
         this.name = name;
       }
 
@@ -1033,7 +1030,7 @@ public class MuyieProperties {
         return description;
       }
 
-      public void setDescription(String description) {
+      public void setDescription(final String description) {
         this.description = description;
       }
 
@@ -1041,7 +1038,7 @@ public class MuyieProperties {
         return defaultValue;
       }
 
-      public void setDefaultValue(String defaultValue) {
+      public void setDefaultValue(final String defaultValue) {
         this.defaultValue = defaultValue;
       }
 
@@ -1049,7 +1046,7 @@ public class MuyieProperties {
         return required;
       }
 
-      public void setRequired(boolean required) {
+      public void setRequired(final boolean required) {
         this.required = required;
       }
 
@@ -1057,7 +1054,7 @@ public class MuyieProperties {
         return paramType;
       }
 
-      public void setParamType(String paramType) {
+      public void setParamType(final String paramType) {
         this.paramType = paramType;
       }
 
@@ -1065,12 +1062,12 @@ public class MuyieProperties {
         return pattern;
       }
 
-      public void setPattern(String pattern) {
+      public void setPattern(final String pattern) {
         this.pattern = pattern;
       }
 
     }
-    
+
   }
 
   public static class Metrics {
@@ -1091,7 +1088,7 @@ public class MuyieProperties {
         return enabled;
       }
 
-      public void setEnabled(boolean enabled) {
+      public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
       }
 
@@ -1099,7 +1096,7 @@ public class MuyieProperties {
         return reportFrequency;
       }
 
-      public void setReportFrequency(long reportFrequency) {
+      public void setReportFrequency(final long reportFrequency) {
         this.reportFrequency = reportFrequency;
       }
     }
@@ -1115,7 +1112,7 @@ public class MuyieProperties {
       return useJsonFormat;
     }
 
-    public void setUseJsonFormat(boolean useJsonFormat) {
+    public void setUseJsonFormat(final boolean useJsonFormat) {
       this.useJsonFormat = useJsonFormat;
     }
 
@@ -1137,7 +1134,7 @@ public class MuyieProperties {
         return enabled;
       }
 
-      public void setEnabled(boolean enabled) {
+      public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
       }
 
@@ -1145,7 +1142,7 @@ public class MuyieProperties {
         return host;
       }
 
-      public void setHost(String host) {
+      public void setHost(final String host) {
         this.host = host;
       }
 
@@ -1153,7 +1150,7 @@ public class MuyieProperties {
         return port;
       }
 
-      public void setPort(int port) {
+      public void setPort(final int port) {
         this.port = port;
       }
 
@@ -1161,7 +1158,7 @@ public class MuyieProperties {
         return queueSize;
       }
 
-      public void setQueueSize(int queueSize) {
+      public void setQueueSize(final int queueSize) {
         this.queueSize = queueSize;
       }
     }
@@ -1175,7 +1172,7 @@ public class MuyieProperties {
       return redirectAfterSignIn;
     }
 
-    public void setRedirectAfterSignIn(String redirectAfterSignIn) {
+    public void setRedirectAfterSignIn(final String redirectAfterSignIn) {
       this.redirectAfterSignIn = redirectAfterSignIn;
     }
   }
@@ -1188,15 +1185,13 @@ public class MuyieProperties {
       return rateLimiting;
     }
 
-    private Map<String, List<String>> authorizedMicroservicesEndpoints =
-        MuyieDefaults.Gateway.authorizedMicroservicesEndpoints;
+    private Map<String, List<String>> authorizedMicroservicesEndpoints = MuyieDefaults.Gateway.authorizedMicroservicesEndpoints;
 
     public Map<String, List<String>> getAuthorizedMicroservicesEndpoints() {
       return authorizedMicroservicesEndpoints;
     }
 
-    public void setAuthorizedMicroservicesEndpoints(
-        Map<String, List<String>> authorizedMicroservicesEndpoints) {
+    public void setAuthorizedMicroservicesEndpoints(final Map<String, List<String>> authorizedMicroservicesEndpoints) {
       this.authorizedMicroservicesEndpoints = authorizedMicroservicesEndpoints;
     }
 
@@ -1212,7 +1207,7 @@ public class MuyieProperties {
         return enabled;
       }
 
-      public void setEnabled(boolean enabled) {
+      public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
       }
 
@@ -1220,7 +1215,7 @@ public class MuyieProperties {
         return this.limit;
       }
 
-      public void setLimit(long limit) {
+      public void setLimit(final long limit) {
         this.limit = limit;
       }
 
@@ -1228,7 +1223,7 @@ public class MuyieProperties {
         return durationInSeconds;
       }
 
-      public void setDurationInSeconds(int durationInSeconds) {
+      public void setDurationInSeconds(final int durationInSeconds) {
         this.durationInSeconds = durationInSeconds;
       }
     }
@@ -1242,7 +1237,7 @@ public class MuyieProperties {
       return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
       this.password = password;
     }
   }
@@ -1255,7 +1250,7 @@ public class MuyieProperties {
       return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
       this.name = name;
     }
   }
@@ -1267,7 +1262,7 @@ public class MuyieProperties {
       return retentionPeriod;
     }
 
-    public void setRetentionPeriod(int retentionPeriod) {
+    public void setRetentionPeriod(final int retentionPeriod) {
       this.retentionPeriod = retentionPeriod;
     }
   }

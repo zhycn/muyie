@@ -1,28 +1,27 @@
 package org.muyie.framework.security;
 
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.security.PersistentTokenCache;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+
+import org.junit.jupiter.api.Test;
 
 public class PersistentTokenCacheTest {
 
   @Test
   public void testConstructorThrows() {
-    Throwable caught = catchThrowable(() -> new PersistentTokenCache<String>(-1l));
+    final Throwable caught = catchThrowable(() -> new PersistentTokenCache<String>(-1l));
     assertThat(caught).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
   public void testAbsent() {
-    PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
+    final PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
     assertThat(cache.get("key")).isNull();
   }
 
   @Test
   public void testAccess() {
-    PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
+    final PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
     cache.put("key", "val");
     assertThat(cache.size()).isEqualTo(1);
     assertThat(cache.get("key")).isEqualTo("val");
@@ -30,7 +29,7 @@ public class PersistentTokenCacheTest {
 
   @Test
   public void testReplace() {
-    PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
+    final PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
     cache.put("key", "val");
     cache.put("key", "foo");
     assertThat(cache.get("key")).isEqualTo("foo");
@@ -38,11 +37,11 @@ public class PersistentTokenCacheTest {
 
   @Test
   public void testExpires() {
-    PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
+    final PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
     cache.put("key", "val");
     try {
-      Thread.sleep(100l);
-    } catch (InterruptedException x) {
+      Thread.sleep(100L);
+    } catch (final InterruptedException x) {
       // This should not happen
       throw new Error(x);
     }
@@ -51,11 +50,11 @@ public class PersistentTokenCacheTest {
 
   @Test
   public void testPurge() {
-    PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
+    final PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
     cache.put("key", "val");
     try {
-      Thread.sleep(100l);
-    } catch (InterruptedException x) {
+      Thread.sleep(100L);
+    } catch (final InterruptedException x) {
       // This should not happen
       throw new Error(x);
     }

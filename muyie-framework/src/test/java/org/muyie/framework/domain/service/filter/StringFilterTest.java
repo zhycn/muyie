@@ -1,22 +1,20 @@
 package org.muyie.framework.domain.service.filter;
 
-import com.google.common.collect.Lists;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.domain.service.filter.Filter;
-import org.muyie.framework.domain.service.filter.StringFilter;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.google.common.collect.Lists;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StringFilterTest {
 
   private StringFilter filter;
 
-  private String value = "foo";
+  private final String value = "foo";
 
   @BeforeEach
   public void setup() {
@@ -34,29 +32,29 @@ public class StringFilterTest {
 
   @Test
   public void testSetEquals() {
-    Filter<String> chain = filter.setEquals(value);
+    final Filter<String> chain = filter.setEquals(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getEquals()).isEqualTo(value);
   }
 
   @Test
   public void testSetContains() {
-    Filter<String> chain = filter.setContains(value);
+    final Filter<String> chain = filter.setContains(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getContains()).isEqualTo(value);
   }
 
   @Test
   public void testSetSpecified() {
-    Filter<String> chain = filter.setSpecified(true);
+    final Filter<String> chain = filter.setSpecified(true);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getSpecified()).isEqualTo(true);
   }
 
   @Test
   public void testSetIn() {
-    List<String> list = new LinkedList<>();
-    Filter<String> chain = filter.setIn(list);
+    final List<String> list = new LinkedList<>();
+    final Filter<String> chain = filter.setIn(list);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getIn()).isEqualTo(list);
   }
@@ -109,7 +107,6 @@ public class StringFilterTest {
     filter.setContains(value);
     filter.setSpecified(true);
     filter.setIn(new LinkedList<>());
-    assertThat(filter.toString())
-        .isEqualTo("StringFilter [contains=foo, equals=foo, specified=true]");
+    assertThat(filter.toString()).isEqualTo("StringFilter [contains=foo, equals=foo, specified=true]");
   }
 }

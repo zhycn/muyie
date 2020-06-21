@@ -28,21 +28,22 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
    * Constructor for MuyieAsyncTaskExecutor.
    * </p>
    *
-   * @param executor a {@link org.springframework.core.task.AsyncTaskExecutor} object.
+   * @param executor a {@link org.springframework.core.task.AsyncTaskExecutor}
+   *                 object.
    */
-  public MuyieAsyncTaskExecutor(AsyncTaskExecutor executor) {
+  public MuyieAsyncTaskExecutor(final AsyncTaskExecutor executor) {
     this.executor = executor;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void execute(Runnable task) {
+  public void execute(final Runnable task) {
     executor.execute(createWrappedRunnable(task));
   }
 
   /** {@inheritDoc} */
   @Override
-  public void execute(Runnable task, long startTimeout) {
+  public void execute(final Runnable task, final long startTimeout) {
     executor.execute(createWrappedRunnable(task), startTimeout);
   }
 
@@ -50,7 +51,7 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
     return TtlCallable.get(() -> {
       try {
         return task.call();
-      } catch (Exception e) {
+      } catch (final Exception e) {
         handle(e);
         throw e;
       }
@@ -61,7 +62,7 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
     return TtlRunnable.get(() -> {
       try {
         task.run();
-      } catch (Exception e) {
+      } catch (final Exception e) {
         handle(e);
       }
     });
@@ -74,19 +75,19 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
    *
    * @param e a {@link java.lang.Exception} object.
    */
-  protected void handle(Exception e) {
+  protected void handle(final Exception e) {
     log.error(EXCEPTION_MESSAGE, e);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Future<?> submit(Runnable task) {
+  public Future<?> submit(final Runnable task) {
     return executor.submit(createWrappedRunnable(task));
   }
 
   /** {@inheritDoc} */
   @Override
-  public <T> Future<T> submit(Callable<T> task) {
+  public <T> Future<T> submit(final Callable<T> task) {
     return executor.submit(createCallable(task));
   }
 
@@ -94,7 +95,7 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
   @Override
   public void destroy() throws Exception {
     if (executor instanceof DisposableBean) {
-      DisposableBean bean = (DisposableBean) executor;
+      final DisposableBean bean = (DisposableBean) executor;
       bean.destroy();
     }
   }
@@ -103,7 +104,7 @@ public class MuyieAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBe
   @Override
   public void afterPropertiesSet() throws Exception {
     if (executor instanceof InitializingBean) {
-      InitializingBean bean = (InitializingBean) executor;
+      final InitializingBean bean = (InitializingBean) executor;
       bean.afterPropertiesSet();
     }
   }

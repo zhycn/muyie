@@ -14,24 +14,24 @@ public class LessThanSpecification<T> extends AbstractSpecification<T> {
   private final String property;
   private final Comparable<Object> compare;
 
-  public LessThanSpecification(String property, Comparable<? extends Object> compare) {
+  public LessThanSpecification(final String property, final Comparable<? extends Object> compare) {
     this(property, compare, JoinType.INNER);
   }
 
   @SuppressWarnings("unchecked")
-  public LessThanSpecification(String property, Comparable<? extends Object> compare,
-      JoinType joinType) {
+  public LessThanSpecification(final String property, final Comparable<? extends Object> compare,
+      final JoinType joinType) {
     super(joinType);
     this.property = property;
     this.compare = (Comparable<Object>) compare;
   }
 
   @Override
-  public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
-      CriteriaBuilder criteriaBuilder) {
-    From<?, ?> from = getRoot(property, root);
-    String field = getProperty(property);
+  public Predicate toPredicate(final Root<T> root, final CriteriaQuery<?> query,
+      final CriteriaBuilder criteriaBuilder) {
+    final From<?, ?> from = getRoot(property, root);
+    final String field = getProperty(property);
     return criteriaBuilder.lessThan(from.get(field), compare);
   }
-  
+
 }

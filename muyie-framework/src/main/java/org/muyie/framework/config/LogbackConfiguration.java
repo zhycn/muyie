@@ -18,26 +18,26 @@ import cn.hutool.core.util.IdUtil;
 
 @Configuration
 @ConditionalOnWebApplication
-@AutoConfigureAfter({MuyieProperties.class})
+@AutoConfigureAfter({ MuyieProperties.class })
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class LogbackConfiguration implements WebMvcConfigurer {
 
   @Override
-  public void addInterceptors(InterceptorRegistry registry) {
+  public void addInterceptors(final InterceptorRegistry registry) {
     registry.addInterceptor(new HandlerInterceptor() {
 
       @Override
-      public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-          Object handler) throws Exception {
-        String traceId = request.getHeader(MuyieConstants.TRACE_ID_HEADER);
-        String tid = StringUtils.defaultIfBlank(traceId, IdUtil.fastSimpleUUID());
+      public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
+          final Object handler) throws Exception {
+        final String traceId = request.getHeader(MuyieConstants.TRACE_ID_HEADER);
+        final String tid = StringUtils.defaultIfBlank(traceId, IdUtil.fastSimpleUUID());
         MDC.put(MuyieConstants.LOG_TRACE_ID, tid);
         return true;
       }
 
       @Override
-      public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-          Object handler, Exception ex) throws Exception {
+      public void afterCompletion(final HttpServletRequest request, final HttpServletResponse response,
+          final Object handler, final Exception ex) throws Exception {
         MDC.remove(MuyieConstants.LOG_TRACE_ID);
       }
     });

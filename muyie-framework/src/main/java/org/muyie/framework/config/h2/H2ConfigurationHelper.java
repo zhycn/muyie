@@ -10,8 +10,9 @@ import java.sql.SQLException;
 /**
  * Utility class to configure H2 in development.
  * <p>
- * We don't want to include H2 when we are packaging for the "prod" profile and won't actually need
- * it, so we have to load / invoke things at runtime through reflection.
+ * We don't want to include H2 when we are packaging for the "prod" profile and
+ * won't actually need it, so we have to load / invoke things at runtime through
+ * reflection.
  */
 public class H2ConfigurationHelper {
 
@@ -36,13 +37,12 @@ public class H2ConfigurationHelper {
    * @return a {@link java.lang.Object} object.
    * @throws java.sql.SQLException if any.
    */
-  public static Object createServer(String port) throws SQLException {
+  public static Object createServer(final String port) throws SQLException {
     try {
-      ClassLoader loader = Thread.currentThread().getContextClassLoader();
-      Class<?> serverClass = Class.forName("org.h2.tools.Server", true, loader);
-      Method createServer = serverClass.getMethod("createTcpServer", String[].class);
-      return createServer.invoke(null,
-          new Object[] {new String[] {"-tcp", "-tcpAllowOthers", "-tcpPort", port}});
+      final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+      final Class<?> serverClass = Class.forName("org.h2.tools.Server", true, loader);
+      final Method createServer = serverClass.getMethod("createTcpServer", String[].class);
+      return createServer.invoke(null, new Object[] { new String[] { "-tcp", "-tcpAllowOthers", "-tcpPort", port } });
 
     } catch (ClassNotFoundException | LinkageError e) {
       throw new RuntimeException("Failed to load and initialize org.h2.tools.Server", e);
@@ -53,8 +53,8 @@ public class H2ConfigurationHelper {
     } catch (IllegalAccessException | IllegalArgumentException e) {
       throw new RuntimeException("Failed to invoke org.h2.tools.Server.createTcpServer()", e);
 
-    } catch (InvocationTargetException e) {
-      Throwable t = e.getTargetException();
+    } catch (final InvocationTargetException e) {
+      final Throwable t = e.getTargetException();
       if (t instanceof SQLException) {
         throw (SQLException) t;
       }
@@ -69,22 +69,22 @@ public class H2ConfigurationHelper {
    *
    * @param servletContext a {@link javax.servlet.ServletContext} object.
    */
-  public static void initH2Console(ServletContext servletContext) {
+  public static void initH2Console(final ServletContext servletContext) {
     try {
-      // We don't want to include H2 when we are packaging for the "prod" profile and won't
-      // actually need it, so we have to load / invoke things at runtime through reflection.
-      ClassLoader loader = Thread.currentThread().getContextClassLoader();
-      Class<?> servletClass = Class.forName("org.h2.server.web.WebServlet", true, loader);
-      Servlet servlet = (Servlet) servletClass.getDeclaredConstructor().newInstance();
+      // We don't want to include H2 when we are packaging for the "prod" profile and
+      // won't
+      // actually need it, so we have to load / invoke things at runtime through
+      // reflection.
+      final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+      final Class<?> servletClass = Class.forName("org.h2.server.web.WebServlet", true, loader);
+      final Servlet servlet = (Servlet) servletClass.getDeclaredConstructor().newInstance();
 
-      ServletRegistration.Dynamic h2ConsoleServlet =
-          servletContext.addServlet("H2Console", servlet);
+      final ServletRegistration.Dynamic h2ConsoleServlet = servletContext.addServlet("H2Console", servlet);
       h2ConsoleServlet.addMapping("/h2-console/*");
       h2ConsoleServlet.setInitParameter("-properties", "src/main/resources/");
       h2ConsoleServlet.setLoadOnStartup(1);
 
-    } catch (ClassNotFoundException | LinkageError | NoSuchMethodException
-        | InvocationTargetException e) {
+    } catch (ClassNotFoundException | LinkageError | NoSuchMethodException | InvocationTargetException e) {
       throw new RuntimeException("Failed to load and initialize org.h2.server.web.WebServlet", e);
 
     } catch (IllegalAccessException | InstantiationException e) {

@@ -13,13 +13,12 @@ import java.io.IOException;
  * Spring Security logout handler, specialized for Ajax requests.
  */
 public class AjaxLogoutSuccessHandler extends AbstractAuthenticationTargetUrlRequestHandler
-    implements
-      LogoutSuccessHandler {
+    implements LogoutSuccessHandler {
 
   /** {@inheritDoc} */
   @Override
-  public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-      Authentication authentication) throws IOException, ServletException {
+  public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response,
+      final Authentication authentication) throws IOException, ServletException {
     response.setStatus(HttpServletResponse.SC_OK);
   }
 }

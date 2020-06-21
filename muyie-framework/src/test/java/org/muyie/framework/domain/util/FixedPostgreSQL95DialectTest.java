@@ -1,5 +1,13 @@
 package org.muyie.framework.domain.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.sql.Types;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.dialect.Dialect;
 import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 import org.hibernate.type.descriptor.sql.BlobTypeDescriptor;
@@ -8,16 +16,7 @@ import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.muyie.framework.domain.util.FixedPostgreSQL95Dialect;
 import org.muyie.framework.test.LogbackRecorder;
-
-import java.sql.Types;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class FixedPostgreSQL95DialectTest {
 
@@ -35,7 +34,7 @@ public class FixedPostgreSQL95DialectTest {
     dialect = new FixedPostgreSQL95Dialect() {
 
       @Override
-      protected void registerColumnType(int code, String name) {
+      protected void registerColumnType(final int code, final String name) {
         registered.put(code, name);
         super.registerColumnType(code, name);
       }
@@ -57,13 +56,13 @@ public class FixedPostgreSQL95DialectTest {
 
   @Test
   public void testBlobTypeRemap() {
-    SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BlobTypeDescriptor.DEFAULT);
+    final SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BlobTypeDescriptor.DEFAULT);
     assertThat(descriptor).isEqualTo(BinaryTypeDescriptor.INSTANCE);
   }
 
   @Test
   public void testOtherTypeRemap() {
-    SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BooleanTypeDescriptor.INSTANCE);
+    final SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BooleanTypeDescriptor.INSTANCE);
     assertThat(descriptor).isEqualTo(BooleanTypeDescriptor.INSTANCE);
   }
 }

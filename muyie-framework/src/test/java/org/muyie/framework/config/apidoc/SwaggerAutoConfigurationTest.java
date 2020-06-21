@@ -1,5 +1,19 @@
 package org.muyie.framework.config.apidoc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -11,7 +25,6 @@ import org.mockito.Captor;
 import org.mockito.MockitoAnnotations;
 import org.muyie.framework.config.MuyieProperties;
 import org.muyie.framework.config.MuyieProperties.Swagger;
-import org.muyie.framework.config.apidoc.SwaggerAutoConfiguration;
 import org.muyie.framework.config.apidoc.customizer.GenericSwaggerCustomizer;
 import org.muyie.framework.config.apidoc.customizer.SwaggerCustomizer;
 import org.muyie.framework.test.LogbackRecorder;
@@ -20,19 +33,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
-
-import javax.annotation.Nullable;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
 
 public class SwaggerAutoConfigurationTest {
 
@@ -54,7 +58,7 @@ public class SwaggerAutoConfigurationTest {
     final MuyieProperties muyieProperties = new MuyieProperties();
     properties = muyieProperties.getSwagger();
     properties.setHost("test.host.org");
-    properties.setProtocols(new String[] {"http", "https"});
+    properties.setProtocols(new String[] { "http", "https" });
     properties.setTitle("test title");
     properties.setDescription("test description");
     properties.setVersion("6.6.6");
@@ -69,7 +73,7 @@ public class SwaggerAutoConfigurationTest {
     config = new SwaggerAutoConfiguration(muyieProperties) {
       @Override
       protected Docket createDocket() {
-        Docket docket = spy(super.createDocket());
+        final Docket docket = spy(super.createDocket());
         when(docket.select()).thenReturn(builder = spy(new ApiSelectorBuilder(docket)));
         return docket;
       }
@@ -85,16 +89,15 @@ public class SwaggerAutoConfigurationTest {
 
   @Test
   public void testSwaggerSpringfoxApiDocket() {
-    List<SwaggerCustomizer> customizers =
-        Lists.newArrayList(new GenericSwaggerCustomizer(properties));
-    Docket docket = config.swaggerSpringfoxApiDocket(customizers, new NullProvider<>());
+    final List<SwaggerCustomizer> customizers = Lists.newArrayList(new GenericSwaggerCustomizer(properties));
+    final Docket docket = config.swaggerSpringfoxApiDocket(customizers, new NullProvider<>());
 
     verify(docket, never()).groupName(anyString());
     verify(docket).host(properties.getHost());
     verify(docket).protocols(new HashSet<>(Arrays.asList(properties.getProtocols())));
 
     verify(docket).apiInfo(infoCaptor.capture());
-    ApiInfo info = infoCaptor.getValue();
+    final ApiInfo info = infoCaptor.getValue();
     assertThat(info.getTitle()).isEqualTo(properties.getTitle());
     assertThat(info.getDescription()).isEqualTo(properties.getDescription());
     assertThat(info.getVersion()).isEqualTo(properties.getVersion());
@@ -113,21 +116,21 @@ public class SwaggerAutoConfigurationTest {
 
     verify(docket).select();
     verify(builder).paths(pathsCaptor.capture());
-    Predicate<String> paths = pathsCaptor.getValue();
+    final Predicate<String> paths = pathsCaptor.getValue();
     assertThat(paths.apply("/api/foo")).isEqualTo(true);
     assertThat(paths.apply("/foo/api")).isEqualTo(false);
 
     verify(builder).build();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(2);
 
-    Event event0 = events.get(0);
+    final Event event0 = events.get(0);
     assertThat(event0.getLevel()).isEqualTo("DEBUG");
     assertThat(event0.getMessage()).isEqualTo(SwaggerAutoConfiguration.STARTING_MESSAGE);
     assertThat(event0.getThrown()).isNull();
 
-    Event event1 = events.get(1);
+    final Event event1 = events.get(1);
     assertThat(event1.getLevel()).isEqualTo("DEBUG");
     assertThat(event1.getMessage()).isEqualTo(SwaggerAutoConfiguration.STARTED_MESSAGE);
     assertThat(event1.getThrown()).isNull();
@@ -135,16 +138,16 @@ public class SwaggerAutoConfigurationTest {
 
   @Test
   public void testSwaggerSpringfoxManagementDocket() {
-    Docket docket = config.swaggerSpringfoxManagementDocket(properties.getTitle(), "/foo/");
+    final Docket docket = config.swaggerSpringfoxManagementDocket(properties.getTitle(), "/foo/");
 
     verify(docket).groupName(SwaggerAutoConfiguration.MANAGEMENT_GROUP_NAME);
     verify(docket).host(properties.getHost());
     verify(docket).protocols(new HashSet<>(Arrays.asList(properties.getProtocols())));
 
     verify(docket).apiInfo(infoCaptor.capture());
-    ApiInfo info = infoCaptor.getValue();
-    assertThat(info.getTitle()).isEqualTo(StringUtils.capitalize(properties.getTitle()) + " "
-        + SwaggerAutoConfiguration.MANAGEMENT_TITLE_SUFFIX);
+    final ApiInfo info = infoCaptor.getValue();
+    assertThat(info.getTitle()).isEqualTo(
+        StringUtils.capitalize(properties.getTitle()) + " " + SwaggerAutoConfiguration.MANAGEMENT_TITLE_SUFFIX);
     assertThat(info.getDescription()).isEqualTo(SwaggerAutoConfiguration.MANAGEMENT_DESCRIPTION);
     assertThat(info.getVersion()).isEqualTo(properties.getVersion());
     assertThat(info.getTermsOfServiceUrl()).isEqualTo("");
@@ -162,7 +165,7 @@ public class SwaggerAutoConfigurationTest {
 
     verify(docket).select();
     verify(builder).paths(pathsCaptor.capture());
-    Predicate<String> paths = pathsCaptor.getValue();
+    final Predicate<String> paths = pathsCaptor.getValue();
     assertThat(paths.apply("/api/foo")).isEqualTo(false);
     assertThat(paths.apply("/foo/api")).isEqualTo(true);
 
@@ -173,7 +176,7 @@ public class SwaggerAutoConfigurationTest {
 
     @Nullable
     @Override
-    public T getObject(Object... args) throws BeansException {
+    public T getObject(final Object... args) throws BeansException {
       return null;
     }
 

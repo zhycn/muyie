@@ -1,15 +1,14 @@
 package org.muyie.framework.security;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.security.AjaxLogoutSuccessHandler;
-
-import javax.servlet.http.HttpServletResponse;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AjaxLogoutSuccessHandlerTest {
 
@@ -24,7 +23,7 @@ public class AjaxLogoutSuccessHandlerTest {
 
   @Test
   public void testOnAuthenticationSuccess() {
-    Throwable caughtException = catchThrowable(() -> {
+    final Throwable caughtException = catchThrowable(() -> {
       handler.onLogoutSuccess(null, response, null);
       verify(response).setStatus(HttpServletResponse.SC_OK);
     });

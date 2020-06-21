@@ -5,12 +5,11 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 public final class SensitiveStringBuilder {
 
-  public static String toJSONString(Object object, String... ignoreFields) {
-    return JSON.toJSONString(object, buildFilter(ignoreFields),
-        SerializerFeature.WriteDateUseDateFormat);
+  public static String toJSONString(final Object object, final String... ignoreFields) {
+    return JSON.toJSONString(object, buildFilter(ignoreFields), SerializerFeature.WriteDateUseDateFormat);
   }
 
-  private static SensitiveDataFilter buildFilter(String... ignoreFields) {
+  private static SensitiveDataFilter buildFilter(final String... ignoreFields) {
     return new SensitiveDataFilter(ignoreFields);
   }
 

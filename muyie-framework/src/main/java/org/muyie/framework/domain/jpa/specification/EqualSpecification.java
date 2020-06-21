@@ -19,21 +19,21 @@ public class EqualSpecification<T> extends AbstractSpecification<T> {
   private final String property;
   private final List<Object> values;
 
-  public EqualSpecification(String property, List<Object> values) {
+  public EqualSpecification(final String property, final List<Object> values) {
     this(property, values, JoinType.INNER);
   }
 
-  public EqualSpecification(String property, List<Object> values, JoinType joinType) {
+  public EqualSpecification(final String property, final List<Object> values, final JoinType joinType) {
     super(joinType);
     this.property = property;
     this.values = values;
   }
 
   @Override
-  public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
-      CriteriaBuilder criteriaBuilder) {
-    From<?, ?> from = getRoot(property, root);
-    String field = getProperty(property);
+  public Predicate toPredicate(final Root<T> root, final CriteriaQuery<?> query,
+      final CriteriaBuilder criteriaBuilder) {
+    final From<?, ?> from = getRoot(property, root);
+    final String field = getProperty(property);
 
     if (CollectionUtils.isEmpty(values)) {
       return criteriaBuilder.isNull(from.get(field));
@@ -43,17 +43,16 @@ public class EqualSpecification<T> extends AbstractSpecification<T> {
       return getPredicate(from, criteriaBuilder, field, values.get(0));
     }
 
-    Predicate[] predicates = new Predicate[values.size()];
+    final Predicate[] predicates = new Predicate[values.size()];
     for (int i = 0; i < values.size(); i++) {
       predicates[i] = getPredicate(from, criteriaBuilder, field, values.get(i));
     }
     return criteriaBuilder.or(predicates);
   }
 
-  private Predicate getPredicate(From<?, ?> from, CriteriaBuilder criteriaBuilder, String field,
-      Object value) {
-    return Objects.isNull(value)
-        ? criteriaBuilder.isNull(from.get(field))
+  private Predicate getPredicate(final From<?, ?> from, final CriteriaBuilder criteriaBuilder, final String field,
+      final Object value) {
+    return Objects.isNull(value) ? criteriaBuilder.isNull(from.get(field))
         : criteriaBuilder.equal(from.get(field), value);
   }
 

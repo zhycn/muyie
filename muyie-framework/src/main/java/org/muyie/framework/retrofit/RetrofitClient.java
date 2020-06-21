@@ -15,20 +15,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitClient {
 
-  public static <T> T call(String baseUrl, Class<T> service) {
+  public static <T> T call(final String baseUrl, final Class<T> service) {
     return new Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient())
         .addConverterFactory(GsonConverterFactory.create()).build().create(service);
   }
 
-  public static <T> T call(String baseUrl, Class<T> service, OkHttpClient okHttpClient) {
+  public static <T> T call(final String baseUrl, final Class<T> service, final OkHttpClient okHttpClient) {
     return new Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create()).build().create(service);
   }
 
   private static OkHttpClient okHttpClient() {
-    return new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS)
-        .connectionPool(new ConnectionPool(32, 5, TimeUnit.SECONDS)).build();
+    return new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS).connectionPool(new ConnectionPool(32, 5, TimeUnit.SECONDS)).build();
   }
 
 }

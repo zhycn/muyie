@@ -23,13 +23,16 @@ public class MuyieInfoContributorConfiguration {
    * activeProfilesInfoContributor.
    * </p>
    *
-   * @param environment a {@link org.springframework.core.env.ConfigurableEnvironment} object.
-   * @return a {@link org.muyie.framework.config.info.ActiveProfilesInfoContributor} object.
+   * @param environment a
+   *                    {@link org.springframework.core.env.ConfigurableEnvironment}
+   *                    object.
+   * @return a
+   *         {@link org.muyie.framework.config.info.ActiveProfilesInfoContributor}
+   *         object.
    */
   @Bean
   @ConditionalOnEnabledInfoContributor("active-profiles")
-  public ActiveProfilesInfoContributor activeProfilesInfoContributor(
-      ConfigurableEnvironment environment) {
+  public ActiveProfilesInfoContributor activeProfilesInfoContributor(final ConfigurableEnvironment environment) {
     return new ActiveProfilesInfoContributor(environment);
   }
 }

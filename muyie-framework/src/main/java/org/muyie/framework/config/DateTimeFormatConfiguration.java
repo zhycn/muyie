@@ -17,19 +17,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @ConditionalOnWebApplication
-@AutoConfigureAfter({MuyieProperties.class, JacksonProperties.class})
+@AutoConfigureAfter({ MuyieProperties.class, JacksonProperties.class })
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class DateTimeFormatConfiguration implements WebMvcConfigurer, InitializingBean {
 
   private final JacksonProperties jacksonProperties;
 
-  public DateTimeFormatConfiguration(JacksonProperties jacksonProperties) {
+  public DateTimeFormatConfiguration(final JacksonProperties jacksonProperties) {
     this.jacksonProperties = jacksonProperties;
   }
 
   @Override
-  public void addFormatters(FormatterRegistry registry) {
-    DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+  public void addFormatters(final FormatterRegistry registry) {
+    final DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
     registrar.setUseIsoFormat(true);
     registrar.registerFormatters(registry);
   }

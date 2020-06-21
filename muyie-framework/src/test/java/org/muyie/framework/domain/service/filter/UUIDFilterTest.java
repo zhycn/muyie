@@ -15,7 +15,7 @@ public class UUIDFilterTest {
 
   private UUIDFilter filter;
 
-  private UUID value = UUID.fromString("dbc36987-d354-4ddf-9b53-38ca19b5a409");
+  private final UUID value = UUID.fromString("dbc36987-d354-4ddf-9b53-38ca19b5a409");
 
   @BeforeEach
   public void setup() {
@@ -32,22 +32,22 @@ public class UUIDFilterTest {
 
   @Test
   public void testSetEquals() {
-    Filter<UUID> chain = filter.setEquals(value);
+    final Filter<UUID> chain = filter.setEquals(value);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getEquals()).isEqualTo(value);
   }
 
   @Test
   public void testSetSpecified() {
-    Filter<UUID> chain = filter.setSpecified(true);
+    final Filter<UUID> chain = filter.setSpecified(true);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getSpecified()).isEqualTo(true);
   }
 
   @Test
   public void testSetIn() {
-    List<UUID> list = new LinkedList<>();
-    Filter<UUID> chain = filter.setIn(list);
+    final List<UUID> list = new LinkedList<>();
+    final Filter<UUID> chain = filter.setIn(list);
     assertThat(chain).isEqualTo(filter);
     assertThat(filter.getIn()).isEqualTo(list);
   }
@@ -57,7 +57,7 @@ public class UUIDFilterTest {
     filter.setEquals(value);
     filter.setSpecified(true);
     filter.setIn(new LinkedList<>());
-    assertThat(filter.toString()).isEqualTo(
-        "UUIDFilter [equals=dbc36987-d354-4ddf-9b53-38ca19b5a409, in=[], specified=true]");
+    assertThat(filter.toString())
+        .isEqualTo("UUIDFilter [equals=dbc36987-d354-4ddf-9b53-38ca19b5a409, in=[], specified=true]");
   }
 }

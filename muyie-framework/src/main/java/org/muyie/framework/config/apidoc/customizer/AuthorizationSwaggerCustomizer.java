@@ -14,7 +14,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * A authorization swagger customizer to setup
- * {@link springfox.documentation.spring.web.plugins.Docket} with MuYie settings.
+ * {@link springfox.documentation.spring.web.plugins.Docket} with MuYie
+ * settings.
  */
 @Order(1)
 public class AuthorizationSwaggerCustomizer implements SwaggerCustomizer {
@@ -26,23 +27,25 @@ public class AuthorizationSwaggerCustomizer implements SwaggerCustomizer {
    * Constructor for AuthorizationSwaggerCustomizer.
    * </p>
    *
-   * @param properties a {@link org.muyie.framework.config.MuyieProperties.Swagger} object.
+   * @param properties a
+   *                   {@link org.muyie.framework.config.MuyieProperties.Swagger}
+   *                   object.
    */
-  public AuthorizationSwaggerCustomizer(MuyieProperties.Swagger properties) {
+  public AuthorizationSwaggerCustomizer(final MuyieProperties.Swagger properties) {
     this.properties = properties;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void customize(Docket docket) {
+  public void customize(final Docket docket) {
     if (properties.getAuthorization().isEnabled()) {
-      Parameter parameter = new ParameterBuilder().name(properties.getAuthorization().getName())
+      final Parameter parameter = new ParameterBuilder().name(properties.getAuthorization().getName())
           .description(properties.getAuthorization().getDescription())
           .defaultValue(properties.getAuthorization().getDefaultValue())
           .required(properties.getAuthorization().isRequired()).modelRef(new ModelRef("string"))
           .parameterType(properties.getAuthorization().getParamType())
           .pattern(properties.getAuthorization().getPattern()).build();
-      List<Parameter> parameters = Lists.newArrayList();
+      final List<Parameter> parameters = Lists.newArrayList();
       parameters.add(parameter);
       docket.globalOperationParameters(parameters);
     }

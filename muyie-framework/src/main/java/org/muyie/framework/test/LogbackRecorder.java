@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * Utility, mainly for unit tests, to assert content written to logback. A classical usage would be
- * the following.
+ * Utility, mainly for unit tests, to assert content written to logback. A
+ * classical usage would be the following.
  * <p>
  * {@code
  * LogbackRecorder recorder = LogbackRecorder.forClass(TestedClass.class)
@@ -28,7 +28,7 @@ import java.util.WeakHashMap;
  * // perform assertions on the events
  * }
  */
-@ConditionalOnClass({LoggerContext.class})
+@ConditionalOnClass({ LoggerContext.class })
 public class LogbackRecorder {
 
   /** Constant <code>DEFAULT_MUTE=true</code> */
@@ -49,35 +49,37 @@ public class LogbackRecorder {
   private static final Map<Logger, LogbackRecorder> instances = new WeakHashMap<>(32, 0.75F);
 
   /**
-   * Create a recorder for a logback logger identified by the class name. Instances of a recorder
-   * are cached per logger. Make sure to reset it before starting capture.
+   * Create a recorder for a logback logger identified by the class name.
+   * Instances of a recorder are cached per logger. Make sure to reset it before
+   * starting capture.
    *
    * @param clazz class whose logger as its name
    * @return the recorder for this class
    */
-  public static final LogbackRecorder forClass(Class<?> clazz) {
+  public static final LogbackRecorder forClass(final Class<?> clazz) {
     return forLogger(context.getLogger(clazz));
   }
 
   /**
-   * Create a recorder for a logback logger identified by its name. Instances of a recorder are
-   * cached per logger. Make sure to reset it before starting capture.
+   * Create a recorder for a logback logger identified by its name. Instances of a
+   * recorder are cached per logger. Make sure to reset it before starting
+   * capture.
    *
    * @param name the name of the logger
    * @return the recorder for this class
    */
-  public static final LogbackRecorder forName(String name) {
+  public static final LogbackRecorder forName(final String name) {
     return forLogger(context.getLogger(name));
   }
 
   /**
-   * Create a recorder for a logback logger. Instances of a recorder are cached per logger. Make
-   * sure to reset it before starting capture.
+   * Create a recorder for a logback logger. Instances of a recorder are cached
+   * per logger. Make sure to reset it before starting capture.
    *
    * @param logger the logger to record
    * @return the recorder for this logger
    */
-  public static final LogbackRecorder forLogger(org.slf4j.Logger logger) {
+  public static final LogbackRecorder forLogger(final org.slf4j.Logger logger) {
     synchronized (instances) {
       if (!(logger instanceof Logger)) {
         throw new IllegalArgumentException(LOGBACK_EXCEPTION_MESSAGE);
@@ -98,12 +100,12 @@ public class LogbackRecorder {
   private boolean additive;
   private Level level;
 
-  private LogbackRecorder(Logger logger) {
+  private LogbackRecorder(final Logger logger) {
     this.logger = logger;
     this.events = new ArrayList<>();
     this.appender = new AppenderBase<ILoggingEvent>() {
       @Override
-      protected synchronized void append(ILoggingEvent event) {
+      protected synchronized void append(final ILoggingEvent event) {
         events.add(new Event(event));
       }
     };
@@ -125,7 +127,7 @@ public class LogbackRecorder {
    * @param level the level at which to start capturing
    * @return this
    */
-  public LogbackRecorder capture(String level) {
+  public LogbackRecorder capture(final String level) {
     synchronized (lock) {
       if (this.active) {
         throw new IllegalStateException(CAPTURE_EXCEPTION_MESSAGE);
@@ -180,7 +182,7 @@ public class LogbackRecorder {
     private final Object[] arguments;
     private final String thrown;
 
-    Event(ILoggingEvent event) {
+    Event(final ILoggingEvent event) {
       this.marker = event.getMarker();
       this.level = event.getLevel().toString();
       this.message = event.getMessage();
@@ -217,8 +219,8 @@ public class LogbackRecorder {
     }
 
     /**
-     * The arguments passed to the logger to be used by a placeholder. Logged exceptions are not
-     * included.
+     * The arguments passed to the logger to be used by a placeholder. Logged
+     * exceptions are not included.
      *
      * @return the parameters passed to the logger
      */

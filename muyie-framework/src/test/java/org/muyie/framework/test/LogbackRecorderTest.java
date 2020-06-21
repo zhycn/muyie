@@ -17,15 +17,15 @@ import static org.mockito.Mockito.mock;
 
 public class LogbackRecorderTest {
 
-  private static final String[] TEST_MESSAGES = {"error", "warn", "info", "debug", "trace"};
-  private static final Object[] TEST_ARGUMENTS = {null, true, 1, 2D, 3F};
+  private static final String[] TEST_MESSAGES = { "error", "warn", "info", "debug", "trace" };
+  private static final Object[] TEST_ARGUMENTS = { null, true, 1, 2D, 3F };
 
   private final Logger log = LoggerFactory.getLogger(LogbackRecorderTest.class);
   private final Marker marker = MarkerFactory.getMarker(log.getName());
 
   private final Exception exception = new RuntimeException("Eek");
 
-  private LogbackRecorder recorder = LogbackRecorder.forLogger(log);
+  private final LogbackRecorder recorder = LogbackRecorder.forLogger(log);
 
   @BeforeEach
   public void setup() {
@@ -38,11 +38,11 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(5);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -59,11 +59,11 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(5);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -80,11 +80,11 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(4);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -101,11 +101,11 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(4);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -122,11 +122,11 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(3);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -143,11 +143,11 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(3);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -164,11 +164,11 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(2);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -185,11 +185,11 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(2);
 
     for (int i = 0; i < events.size(); i++) {
-      Event event = events.get(i);
+      final Event event = events.get(i);
       assertThat(event.getMarker()).isEqualTo(marker);
       assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
       assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
@@ -206,10 +206,10 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(1);
 
-    Event event = events.get(0);
+    final Event event = events.get(0);
     assertThat(event.getMarker()).isEqualTo(marker);
     assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[0].toUpperCase());
     assertThat(event.getMessage()).startsWith(TEST_MESSAGES[0]);
@@ -225,10 +225,10 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(1);
 
-    Event event = events.get(0);
+    final Event event = events.get(0);
     assertThat(event.getMarker()).isEqualTo(marker);
     assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[0].toUpperCase());
     assertThat(event.getMessage()).startsWith(TEST_MESSAGES[0]);
@@ -244,7 +244,7 @@ public class LogbackRecorderTest {
 
     write();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).isEmpty();
 
     recorder.release();
@@ -256,7 +256,7 @@ public class LogbackRecorderTest {
 
     writeWithException();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).isEmpty();
 
     recorder.release();
@@ -264,7 +264,7 @@ public class LogbackRecorderTest {
 
   @Test
   public void testLogbackException() {
-    Throwable caught = catchThrowable(() -> {
+    final Throwable caught = catchThrowable(() -> {
       LogbackRecorder.forLogger(mock(Logger.class));
     });
     assertThat(caught).isInstanceOf(IllegalArgumentException.class);
@@ -274,7 +274,7 @@ public class LogbackRecorderTest {
   @Test
   public void testCaptureException() {
     recorder.capture("ALL");
-    Throwable caught = catchThrowable(() -> recorder.capture("ALL"));
+    final Throwable caught = catchThrowable(() -> recorder.capture("ALL"));
     assertThat(caught).isInstanceOf(IllegalStateException.class);
     assertThat(caught).hasMessage(LogbackRecorder.CAPTURE_EXCEPTION_MESSAGE);
     recorder.release();
@@ -282,7 +282,7 @@ public class LogbackRecorderTest {
 
   @Test
   public void testReleaseException() {
-    Throwable caught = catchThrowable(() -> recorder.release());
+    final Throwable caught = catchThrowable(() -> recorder.release());
     assertThat(caught).isInstanceOf(IllegalStateException.class);
     assertThat(caught).hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
   }

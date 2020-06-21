@@ -5,9 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Simple time-limited cache for login tokens, necessary to avoid concurrent requests invalidating
- * one another. It uses a {@link java.util.LinkedHashMap} to keep the tokens in order of expiration.
- * During access any entries which have expired are automatically purged.
+ * Simple time-limited cache for login tokens, necessary to avoid concurrent
+ * requests invalidating one another. It uses a {@link java.util.LinkedHashMap}
+ * to keep the tokens in order of expiration. During access any entries which
+ * have expired are automatically purged.
  */
 public class PersistentTokenCache<T> {
 
@@ -22,7 +23,7 @@ public class PersistentTokenCache<T> {
    * @param expireMillis Delay until tokens expire, in millis.
    * @throws java.lang.IllegalArgumentException if expireMillis is non-positive.
    */
-  public PersistentTokenCache(long expireMillis) {
+  public PersistentTokenCache(final long expireMillis) {
     if (expireMillis <= 0l) {
       throw new IllegalArgumentException();
     }
@@ -38,7 +39,7 @@ public class PersistentTokenCache<T> {
    * @param key The key to look for.
    * @return The token, if present and not yet expired, or null otherwise.
    */
-  public T get(String key) {
+  public T get(final String key) {
     purge();
     final Value val = map.get(key);
     final long time = System.currentTimeMillis();
@@ -46,12 +47,13 @@ public class PersistentTokenCache<T> {
   }
 
   /**
-   * Put a token in the cache. If a token already exists for the given key, it is replaced.
+   * Put a token in the cache. If a token already exists for the given key, it is
+   * replaced.
    *
-   * @param key The key to insert for.
+   * @param key   The key to insert for.
    * @param token The token to insert.
    */
-  public void put(String key, T token) {
+  public void put(final String key, final T token) {
     purge();
     if (map.containsKey(key)) {
       map.remove(key);
@@ -62,8 +64,8 @@ public class PersistentTokenCache<T> {
   }
 
   /**
-   * Get the number of tokens in the cache. Note, this may include expired tokens, unless
-   * {@link #purge()} is invoked first.
+   * Get the number of tokens in the cache. Note, this may include expired tokens,
+   * unless {@link #purge()} is invoked first.
    *
    * @return The size of the cache.
    */
@@ -72,17 +74,17 @@ public class PersistentTokenCache<T> {
   }
 
   /**
-   * Remove expired entries from the map. This will be called automatically before read/write
-   * access, but could be manually invoked if desired.
+   * Remove expired entries from the map. This will be called automatically before
+   * read/write access, but could be manually invoked if desired.
    */
   public void purge() {
-    long time = System.currentTimeMillis();
+    final long time = System.currentTimeMillis();
     if (time - latestWriteTime > expireMillis) {
       // Everything in the map is expired, clear all at once
       map.clear();
     } else {
       // Iterate and remove until the first non-expired token
-      Iterator<Value> values = map.values().iterator();
+      final Iterator<Value> values = map.values().iterator();
       while (values.hasNext()) {
         if (time >= values.next().expire) {
           values.remove();
@@ -93,13 +95,12 @@ public class PersistentTokenCache<T> {
     }
   }
 
-
   private class Value {
 
     private final T token;
     private final long expire;
 
-    Value(T token, long expire) {
+    Value(final T token, final long expire) {
       this.token = token;
       this.expire = expire;
     }

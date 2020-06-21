@@ -13,33 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * Filters incoming requests and installs a Spring Security principal if a header corresponding to a
- * valid user is found.
+ * Filters incoming requests and installs a Spring Security principal if a
+ * header corresponding to a valid user is found.
  */
 public class JwtFilter extends GenericFilterBean {
 
   public static final String AUTHORIZATION_HEADER = "Authorization";
 
-  private JwtTokenProvider tokenProvider;
+  private final JwtTokenProvider tokenProvider;
 
-  public JwtFilter(JwtTokenProvider tokenProvider) {
+  public JwtFilter(final JwtTokenProvider tokenProvider) {
     this.tokenProvider = tokenProvider;
   }
 
   @Override
-  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-      FilterChain filterChain) throws IOException, ServletException {
-    HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-    String jwt = resolveToken(httpServletRequest);
+  public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
+      final FilterChain filterChain) throws IOException, ServletException {
+    final HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+    final String jwt = resolveToken(httpServletRequest);
     if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
-      Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+      final Authentication authentication = this.tokenProvider.getAuthentication(jwt);
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
     filterChain.doFilter(servletRequest, servletResponse);
   }
 
-  private String resolveToken(HttpServletRequest request) {
-    String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+  private String resolveToken(final HttpServletRequest request) {
+    final String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
       return bearerToken.substring(7);
     }

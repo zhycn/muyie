@@ -21,15 +21,14 @@ public class CookieCsrfFilterTest {
   private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
   private static final String TEST_URL = "http://domain1.com/test.html";
 
-  private CookieCsrfFilter filter = new CookieCsrfFilter();
+  private final CookieCsrfFilter filter = new CookieCsrfFilter();
 
   @Test
   public void cookieSetInResponse() {
     final String token = "test_token";
-    WebFilterChain filterChain = (filterExchange) -> {
+    final WebFilterChain filterChain = (filterExchange) -> {
       try {
-        ResponseCookie cookie =
-            filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME);
+        final ResponseCookie cookie = filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME);
         assertThat(cookie).isNotNull();
         assertThat(cookie.getName()).isEqualTo(CSRF_COOKIE_NAME);
         assertThat(cookie.getValue()).isEqualTo(token);
@@ -37,13 +36,12 @@ public class CookieCsrfFilterTest {
         assertThat(cookie.getMaxAge()).isEqualTo(Duration.ofSeconds(-1));
         assertThat(cookie.isHttpOnly()).isFalse();
         assertThat(cookie.isSecure()).isFalse();
-      } catch (AssertionError ex) {
+      } catch (final AssertionError ex) {
         return Mono.error(ex);
       }
       return Mono.empty();
     };
-    MockServerWebExchange exchange =
-        MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL));
+    final MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL));
     exchange.getAttributes().put(CsrfToken.class.getName(),
         Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", token)));
     this.filter.filter(exchange, filterChain).block();
@@ -51,16 +49,16 @@ public class CookieCsrfFilterTest {
 
   @Test
   public void cookieNotSetIfTokenInRequest() {
-    WebFilterChain filterChain = (filterExchange) -> {
+    final WebFilterChain filterChain = (filterExchange) -> {
       try {
         assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();
-      } catch (AssertionError ex) {
+      } catch (final AssertionError ex) {
         return Mono.error(ex);
       }
       return Mono.empty();
     };
-    MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL)
-        .cookie(new HttpCookie(CSRF_COOKIE_NAME, "csrf_token")));
+    final MockServerWebExchange exchange = MockServerWebExchange
+        .from(MockServerHttpRequest.post(TEST_URL).cookie(new HttpCookie(CSRF_COOKIE_NAME, "csrf_token")));
     exchange.getAttributes().put(CsrfToken.class.getName(),
         Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", "some token")));
     this.filter.filter(exchange, filterChain).block();
@@ -68,16 +66,16 @@ public class CookieCsrfFilterTest {
 
   @Test
   public void cookieNotSetIfNotInAttributes() {
-    WebFilterChain filterChain = (filterExchange) -> {
+    final WebFilterChain filterChain = (filterExchange) -> {
       try {
-        assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();;
-      } catch (AssertionError ex) {
+        assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();
+        ;
+      } catch (final AssertionError ex) {
         return Mono.error(ex);
       }
       return Mono.empty();
     };
-    MockServerWebExchange exchange =
-        MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL));
+    final MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL));
     this.filter.filter(exchange, filterChain).block();
   }
 }

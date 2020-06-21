@@ -15,12 +15,12 @@ public class BetweenSpecification<T> extends AbstractSpecification<T> {
   private final Comparable<Object> lower;
   private final Comparable<Object> upper;
 
-  public BetweenSpecification(String property, Object lower, Object upper) {
+  public BetweenSpecification(final String property, final Object lower, final Object upper) {
     this(property, lower, upper, JoinType.INNER);
   }
 
   @SuppressWarnings("unchecked")
-  public BetweenSpecification(String property, Object lower, Object upper, JoinType joinType) {
+  public BetweenSpecification(final String property, final Object lower, final Object upper, final JoinType joinType) {
     super(joinType);
     this.property = property;
     this.lower = (Comparable<Object>) lower;
@@ -28,10 +28,10 @@ public class BetweenSpecification<T> extends AbstractSpecification<T> {
   }
 
   @Override
-  public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
-      CriteriaBuilder criteriaBuilder) {
-    From<?, ?> from = getRoot(property, root);
-    String field = getProperty(property);
+  public Predicate toPredicate(final Root<T> root, final CriteriaQuery<?> query,
+      final CriteriaBuilder criteriaBuilder) {
+    final From<?, ?> from = getRoot(property, root);
+    final String field = getProperty(property);
     return criteriaBuilder.between(from.get(field), lower, upper);
   }
 

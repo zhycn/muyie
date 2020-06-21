@@ -24,55 +24,37 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @AutoConfigureAfter(MuyieProperties.class)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import({SecurityProblemSupport.class, JwtTokenProvider.class})
+@Import({ SecurityProblemSupport.class, JwtTokenProvider.class })
 public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final JwtTokenProvider tokenProvider;
 
   private final SecurityProblemSupport problemSupport;
-  
+
   private final CorsFilter corsFilter;
 
-  public JwtSecurityConfiguration(JwtTokenProvider tokenProvider,
-      SecurityProblemSupport problemSupport, CorsFilter corsFilter) {
+  public JwtSecurityConfiguration(final JwtTokenProvider tokenProvider, final SecurityProblemSupport problemSupport,
+      final CorsFilter corsFilter) {
     this.tokenProvider = tokenProvider;
     this.problemSupport = problemSupport;
     this.corsFilter = corsFilter;
   }
 
   @Override
-  public void configure(WebSecurity web) {
-    web.ignoring()
-    .antMatchers(HttpMethod.OPTIONS, "/**")
-    .antMatchers("/**/*.{js,html}")
-    .antMatchers("/i18n/**")
-    .antMatchers("/content/**")
-    .antMatchers("/h2-console/**")
-    .antMatchers("/swagger-ui/index.html")
-    .antMatchers("/test/**");
+  public void configure(final WebSecurity web) {
+    web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").antMatchers("/**/*.{js,html}").antMatchers("/i18n/**")
+        .antMatchers("/content/**").antMatchers("/h2-console/**").antMatchers("/swagger-ui/index.html")
+        .antMatchers("/test/**");
   }
 
   @Override
-  public void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable()
-    .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-    .exceptionHandling()
-      .authenticationEntryPoint(problemSupport)
-      .accessDeniedHandler(problemSupport)
-    .and()
-      .headers()
-      .frameOptions().disable()
-    .and()
-      .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-    .and()
-      .authorizeRequests()
-      .antMatchers("/api/**").authenticated()
-      .antMatchers("/management/health").permitAll()
-      .antMatchers("/management/info").permitAll()
-      .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-    .and()
-      .apply(securityConfigurerAdapter());
+  public void configure(final HttpSecurity http) throws Exception {
+    http.csrf().disable().addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling()
+        .authenticationEntryPoint(problemSupport).accessDeniedHandler(problemSupport).and().headers().frameOptions()
+        .disable().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .authorizeRequests().antMatchers("/api/**").authenticated().antMatchers("/management/health").permitAll()
+        .antMatchers("/management/info").permitAll().antMatchers("/management/**")
+        .hasAuthority(AuthoritiesConstants.ADMIN).and().apply(securityConfigurerAdapter());
   }
 
   private JwtConfigurer securityConfigurerAdapter() {

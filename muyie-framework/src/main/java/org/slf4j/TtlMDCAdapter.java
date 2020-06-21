@@ -15,8 +15,7 @@ import java.util.Set;
  * 重写{@link LogbackMDCAdapter}类，搭配TransmittableThreadLocal实现父子线程之间的数据传递
  */
 public class TtlMDCAdapter implements MDCAdapter {
-  private final ThreadLocal<Map<String, String>> copyOnInheritThreadLocal =
-      new TransmittableThreadLocal<>();
+  private final ThreadLocal<Map<String, String>> copyOnInheritThreadLocal = new TransmittableThreadLocal<>();
 
   private static final int WRITE_OPERATION = 1;
   private static final int MAP_COPY_OPERATION = 2;
@@ -37,18 +36,18 @@ public class TtlMDCAdapter implements MDCAdapter {
     return ttlMDCAdapter;
   }
 
-  private Integer getAndSetLastOperation(int op) {
-    Integer lastOp = lastOperation.get();
+  private Integer getAndSetLastOperation(final int op) {
+    final Integer lastOp = lastOperation.get();
     lastOperation.set(op);
     return lastOp;
   }
 
-  private static boolean wasLastOpReadOrNull(Integer lastOp) {
+  private static boolean wasLastOpReadOrNull(final Integer lastOp) {
     return lastOp == null || lastOp == MAP_COPY_OPERATION;
   }
 
-  private Map<String, String> duplicateAndInsertNewMap(Map<String, String> oldMap) {
-    Map<String, String> newMap = Collections.synchronizedMap(new HashMap<>());
+  private Map<String, String> duplicateAndInsertNewMap(final Map<String, String> oldMap) {
+    final Map<String, String> newMap = Collections.synchronizedMap(new HashMap<>());
     if (oldMap != null) {
       // we don't want the parent thread modifying oldMap while we are
       // iterating over it
@@ -62,25 +61,26 @@ public class TtlMDCAdapter implements MDCAdapter {
   }
 
   /**
-   * Put a context value (the <code>val</code> parameter) as identified with the <code>key</code>
-   * parameter into the current thread's context map. Note that contrary to log4j, the
-   * <code>val</code> parameter can be null.
+   * Put a context value (the <code>val</code> parameter) as identified with the
+   * <code>key</code> parameter into the current thread's context map. Note that
+   * contrary to log4j, the <code>val</code> parameter can be null.
    * 
-   * If the current thread does not have a context map it is created as a side effect of this call.
+   * If the current thread does not have a context map it is created as a side
+   * effect of this call.
    *
    * @throws IllegalArgumentException in case the "key" parameter is null
    */
   @Override
-  public void put(String key, String val) {
+  public void put(final String key, final String val) {
     if (key == null) {
       throw new IllegalArgumentException("key cannot be null");
     }
 
-    Map<String, String> oldMap = copyOnInheritThreadLocal.get();
-    Integer lastOp = getAndSetLastOperation(WRITE_OPERATION);
+    final Map<String, String> oldMap = copyOnInheritThreadLocal.get();
+    final Integer lastOp = getAndSetLastOperation(WRITE_OPERATION);
 
     if (wasLastOpReadOrNull(lastOp) || oldMap == null) {
-      Map<String, String> newMap = duplicateAndInsertNewMap(oldMap);
+      final Map<String, String> newMap = duplicateAndInsertNewMap(oldMap);
       newMap.put(key, val);
     } else {
       oldMap.put(key, val);
@@ -91,26 +91,25 @@ public class TtlMDCAdapter implements MDCAdapter {
    * Remove the the context identified by the <code>key</code> parameter.
    */
   @Override
-  public void remove(String key) {
+  public void remove(final String key) {
     if (key == null) {
       return;
     }
-    Map<String, String> oldMap = copyOnInheritThreadLocal.get();
+    final Map<String, String> oldMap = copyOnInheritThreadLocal.get();
     if (oldMap == null) {
       return;
     }
 
-    Integer lastOp = getAndSetLastOperation(WRITE_OPERATION);
+    final Integer lastOp = getAndSetLastOperation(WRITE_OPERATION);
 
     if (wasLastOpReadOrNull(lastOp)) {
-      Map<String, String> newMap = duplicateAndInsertNewMap(oldMap);
+      final Map<String, String> newMap = duplicateAndInsertNewMap(oldMap);
       newMap.remove(key);
     } else {
       oldMap.remove(key);
     }
 
   }
-
 
   /**
    * Clear all entries in the MDC.
@@ -127,7 +126,7 @@ public class TtlMDCAdapter implements MDCAdapter {
    * @return the context
    */
   @Override
-  public String get(String key) {
+  public String get(final String key) {
     final Map<String, String> map = copyOnInheritThreadLocal.get();
     if ((map != null) && (key != null)) {
       return map.get(key);
@@ -137,7 +136,8 @@ public class TtlMDCAdapter implements MDCAdapter {
   }
 
   /**
-   * Get the current thread's MDC as a map. This method is intended to be used internally.
+   * Get the current thread's MDC as a map. This method is intended to be used
+   * internally.
    * 
    * @return the current thread's MDC as a map
    */
@@ -152,7 +152,7 @@ public class TtlMDCAdapter implements MDCAdapter {
    * @return the keys
    */
   public Set<String> getKeys() {
-    Map<String, String> map = getPropertyMap();
+    final Map<String, String> map = getPropertyMap();
 
     if (map != null) {
       return map.keySet();
@@ -162,13 +162,14 @@ public class TtlMDCAdapter implements MDCAdapter {
   }
 
   /**
-   * Return a copy of the current thread's context map. Returned value may be null.
+   * Return a copy of the current thread's context map. Returned value may be
+   * null.
    * 
    * @return a copy of the current thread's context map.
    */
   @Override
   public Map<String, String> getCopyOfContextMap() {
-    Map<String, String> hashMap = copyOnInheritThreadLocal.get();
+    final Map<String, String> hashMap = copyOnInheritThreadLocal.get();
     if (hashMap == null) {
       return null;
     } else {
@@ -177,10 +178,10 @@ public class TtlMDCAdapter implements MDCAdapter {
   }
 
   @Override
-  public void setContextMap(Map<String, String> contextMap) {
+  public void setContextMap(final Map<String, String> contextMap) {
     lastOperation.set(WRITE_OPERATION);
 
-    Map<String, String> newMap = Collections.synchronizedMap(new HashMap<>());
+    final Map<String, String> newMap = Collections.synchronizedMap(new HashMap<>());
     newMap.putAll(contextMap);
 
     // the newMap replaces the old one for serialisation's sake

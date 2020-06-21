@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import com.alibaba.fastjson.serializer.ValueFilter;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
 public @interface Sensitive {
 
   SensitiveType value() default SensitiveType.CUSTOMIZE_HIDE;

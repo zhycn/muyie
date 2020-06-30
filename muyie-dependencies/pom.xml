@@ -20,14 +20,13 @@
         <!-- Dependency versions -->
         <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
         <alibaba-druid.version>1.1.22</alibaba-druid.version>
-        <alibaba-fastjson.version>1.2.71</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.72</alibaba-fastjson.version>
         <alibaba-ttl.version>2.11.5</alibaba-ttl.version>
         <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <apollo-client.version>1.6.0</apollo-client.version>
         <bucket4j.version>4.10.0</bucket4j.version>
         <commons-io.version>2.6</commons-io.version>
         <dozer-spring-boot.version>6.5.0</dozer-spring-boot.version>
-        <dubbo.version>2.7.4.1</dubbo.version>
         <guava.version>29.0-jre</guava.version>
         <hutool.version>5.3.8</hutool.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
@@ -42,14 +41,13 @@
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <redisson.version>3.13.1</redisson.version>
         <reflections.version>0.9.12</reflections.version>
-        <resteasy.version>4.5.1.Final</resteasy.version>
         <retrofit.version>2.9.0</retrofit.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
-        <springfox.version>2.9.2</springfox.version>
+        <springfox.version>2.10.5</springfox.version>
         <testcontainers.version>1.12.2</testcontainers.version>
         <zxing.version>3.4.0</zxing.version>
     </properties>
@@ -121,70 +119,6 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
                 <version>${zxing.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-zookeeper</artifactId>
-                <version>${dubbo.version}</version>
-                <type>pom</type>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-client</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-netty4</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jackson2-provider</artifactId>
-                <version>${resteasy.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.jboss.logging</groupId>
-                        <artifactId>jboss-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-annotations</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.jaxrs</groupId>
-                        <artifactId>jackson-jaxrs-json-provider</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>

@@ -698,16 +698,6 @@ public class MuyiePropertiesTest {
   }
 
   @Test
-  public void testSwaggerAuthorizationDefaultValue() {
-    final MuyieProperties.Swagger.Authorization obj = properties.getSwagger().getAuthorization();
-    String val = MuyieDefaults.Swagger.Authorization.defaultValue;
-    assertThat(obj.getDefaultValue()).isEqualTo(val);
-    val = "1" + val;
-    obj.setDefaultValue(val);
-    assertThat(obj.getDefaultValue()).isEqualTo(val);
-  }
-
-  @Test
   public void testSwaggerAuthorizationRequired() {
     final MuyieProperties.Swagger.Authorization obj = properties.getSwagger().getAuthorization();
     boolean val = MuyieDefaults.Swagger.Authorization.required;
@@ -715,26 +705,6 @@ public class MuyiePropertiesTest {
     val = !val;
     obj.setEnabled(val);
     assertThat(obj.isEnabled()).isEqualTo(val);
-  }
-
-  @Test
-  public void testSwaggerAuthorizationParamType() {
-    final MuyieProperties.Swagger.Authorization obj = properties.getSwagger().getAuthorization();
-    String val = MuyieDefaults.Swagger.Authorization.paramType;
-    assertThat(obj.getParamType()).isEqualTo(val);
-    val = "1" + val;
-    obj.setParamType(val);
-    assertThat(obj.getParamType()).isEqualTo(val);
-  }
-
-  @Test
-  public void testSwaggerAuthorizationPattern() {
-    final MuyieProperties.Swagger.Authorization obj = properties.getSwagger().getAuthorization();
-    String val = MuyieDefaults.Swagger.Authorization.pattern;
-    assertThat(obj.getPattern()).isEqualTo(val);
-    val = "1" + val;
-    obj.setPattern(val);
-    assertThat(obj.getPattern()).isEqualTo(val);
   }
 
   @Test

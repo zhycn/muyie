@@ -10,7 +10,7 @@ This project provides a pom file that you can either import into your Spring Boo
 - JDK 8+
 - Spring Boot 2.3.1.RELEASE
 - Spring Cloud Hoxton.SR5
-- Hutool 5.3.8
+- Hutool 5.3.9
 
 ## Quick Start
 
@@ -55,6 +55,6 @@ To override a property in Maven you can then declare the property in your pom’
 
 ```
 <properties>
-    <commons-lang3.version>3.9</commons-lang3.version>
+    <commons-lang3.version>3.11</commons-lang3.version>
 </properties>
 ```

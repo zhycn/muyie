@@ -7,9 +7,10 @@ import org.springframework.core.annotation.Order;
 
 import com.google.common.collect.Lists;
 
-import springfox.documentation.builders.ParameterBuilder;
-import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.builders.RequestParameterBuilder;
+import springfox.documentation.schema.ScalarType;
+import springfox.documentation.service.ParameterType;
+import springfox.documentation.service.RequestParameter;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
@@ -39,15 +40,14 @@ public class AuthorizationSwaggerCustomizer implements SwaggerCustomizer {
   @Override
   public void customize(final Docket docket) {
     if (properties.getAuthorization().isEnabled()) {
-      final Parameter parameter = new ParameterBuilder().name(properties.getAuthorization().getName())
+      final RequestParameter parameter = new RequestParameterBuilder().name(properties.getAuthorization().getName())
           .description(properties.getAuthorization().getDescription())
-          .defaultValue(properties.getAuthorization().getDefaultValue())
-          .required(properties.getAuthorization().isRequired()).modelRef(new ModelRef("string"))
-          .parameterType(properties.getAuthorization().getParamType())
-          .pattern(properties.getAuthorization().getPattern()).build();
-      final List<Parameter> parameters = Lists.newArrayList();
-      parameters.add(parameter);
-      docket.globalOperationParameters(parameters);
+          .required(properties.getAuthorization().isRequired()).in(ParameterType.HEADER)
+          .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING))).build();
+
+      final List<RequestParameter> globalRequestParameters = Lists.newArrayList();
+      globalRequestParameters.add(parameter);
+      docket.globalRequestParameters(globalRequestParameters);
     }
   }
 

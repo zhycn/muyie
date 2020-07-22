@@ -1002,13 +1002,7 @@ public class MuyieProperties {
 
       private String description = MuyieDefaults.Swagger.Authorization.description;
 
-      private String defaultValue = MuyieDefaults.Swagger.Authorization.defaultValue;
-
       private boolean required = MuyieDefaults.Swagger.Authorization.required;
-
-      private String paramType = MuyieDefaults.Swagger.Authorization.paramType;
-
-      private String pattern = MuyieDefaults.Swagger.Authorization.pattern;
 
       public boolean isEnabled() {
         return enabled;
@@ -1034,36 +1028,12 @@ public class MuyieProperties {
         this.description = description;
       }
 
-      public String getDefaultValue() {
-        return defaultValue;
-      }
-
-      public void setDefaultValue(final String defaultValue) {
-        this.defaultValue = defaultValue;
-      }
-
       public boolean isRequired() {
         return required;
       }
 
       public void setRequired(final boolean required) {
         this.required = required;
-      }
-
-      public String getParamType() {
-        return paramType;
-      }
-
-      public void setParamType(final String paramType) {
-        this.paramType = paramType;
-      }
-
-      public String getPattern() {
-        return pattern;
-      }
-
-      public void setPattern(final String pattern) {
-        this.pattern = pattern;
       }
 
     }

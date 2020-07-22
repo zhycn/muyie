@@ -11,10 +11,10 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import org.junit.jupiter.api.AfterEach;
@@ -117,8 +117,8 @@ public class SwaggerAutoConfigurationTest {
     verify(docket).select();
     verify(builder).paths(pathsCaptor.capture());
     final Predicate<String> paths = pathsCaptor.getValue();
-    assertThat(paths.apply("/api/foo")).isEqualTo(true);
-    assertThat(paths.apply("/foo/api")).isEqualTo(false);
+    assertThat(paths.test("/api/foo")).isEqualTo(true);
+    assertThat(paths.test("/foo/api")).isEqualTo(false);
 
     verify(builder).build();
 
@@ -166,8 +166,8 @@ public class SwaggerAutoConfigurationTest {
     verify(docket).select();
     verify(builder).paths(pathsCaptor.capture());
     final Predicate<String> paths = pathsCaptor.getValue();
-    assertThat(paths.apply("/api/foo")).isEqualTo(false);
-    assertThat(paths.apply("/foo/api")).isEqualTo(true);
+    assertThat(paths.test("/api/foo")).isEqualTo(false);
+    assertThat(paths.test("/foo/api")).isEqualTo(true);
 
     verify(builder).build();
   }

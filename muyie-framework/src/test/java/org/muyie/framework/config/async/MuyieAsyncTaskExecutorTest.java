@@ -14,7 +14,6 @@ import java.util.concurrent.Future;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.muyie.framework.config.async.MuyieAsyncTaskExecutor;
 import org.muyie.framework.test.LogbackRecorder;
 import org.muyie.framework.test.LogbackRecorder.Event;
 import org.springframework.beans.factory.DisposableBean;
@@ -49,17 +48,17 @@ public class MuyieAsyncTaskExecutorTest {
 
   @Test
   public void testExecuteWithoutException() {
-    Runnable runnable = spy(new MockRunnableWithoutException());
+    final Runnable runnable = spy(new MockRunnableWithoutException());
     Throwable caught = null;
     try {
       synchronized (executor) {
         executor.execute(runnable);
         executor.wait(100);
       }
-    } catch (InterruptedException x) {
+    } catch (final InterruptedException x) {
       // This should never happen
       throw new Error(x);
-    } catch (Exception x) {
+    } catch (final Exception x) {
       caught = x;
     }
     assertThat(done).isEqualTo(true);
@@ -67,23 +66,23 @@ public class MuyieAsyncTaskExecutorTest {
     assertThat(caught).isNull();
     assertThat(handled).isNull();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).isEmpty();
   }
 
   @Test
   public void testExecuteWithException() {
-    Runnable runnable = spy(new MockRunnableWithException());
+    final Runnable runnable = spy(new MockRunnableWithException());
     Throwable caught = null;
     try {
       synchronized (executor) {
         executor.execute(runnable, AsyncTaskExecutor.TIMEOUT_INDEFINITE);
         executor.wait(100);
       }
-    } catch (InterruptedException x) {
+    } catch (final InterruptedException x) {
       // This should never happen
       throw new Error(x);
-    } catch (Exception x) {
+    } catch (final Exception x) {
       caught = x;
     }
     assertThat(done).isEqualTo(true);
@@ -91,9 +90,9 @@ public class MuyieAsyncTaskExecutorTest {
     assertThat(caught).isNull();
     assertThat(handled).isEqualTo(exception);
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(1);
-    Event event = events.get(0);
+    final Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
     assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
@@ -101,31 +100,31 @@ public class MuyieAsyncTaskExecutorTest {
 
   @Test
   public void testSubmitRunnableWithoutException() {
-    Runnable runnable = spy(new MockRunnableWithoutException());
-    Future<?> future = executor.submit(runnable);
-    Throwable caught = catchThrowable(() -> future.get());
+    final Runnable runnable = spy(new MockRunnableWithoutException());
+    final Future<?> future = executor.submit(runnable);
+    final Throwable caught = catchThrowable(() -> future.get());
     assertThat(done).isEqualTo(true);
     verify(runnable).run();
     assertThat(caught).isNull();
     assertThat(handled).isNull();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).isEmpty();
   }
 
   @Test
   public void testSubmitRunnableWithException() {
-    Runnable runnable = spy(new MockRunnableWithException());
-    Future<?> future = executor.submit(runnable);
-    Throwable caught = catchThrowable(() -> future.get());
+    final Runnable runnable = spy(new MockRunnableWithException());
+    final Future<?> future = executor.submit(runnable);
+    final Throwable caught = catchThrowable(() -> future.get());
     assertThat(done).isEqualTo(true);
     verify(runnable).run();
     assertThat(caught).isNull();
     assertThat(handled).isEqualTo(exception);
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(1);
-    Event event = events.get(0);
+    final Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
     assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
@@ -133,30 +132,30 @@ public class MuyieAsyncTaskExecutorTest {
 
   @Test
   public void testSubmitCallableWithoutException() {
-    Callable<Integer> callable = spy(new MockCallableWithoutException());
-    Future<Integer> future = executor.submit(callable);
-    Throwable caught = catchThrowable(() -> assertThat(future.get()).isEqualTo(42));
+    final Callable<Integer> callable = spy(new MockCallableWithoutException());
+    final Future<Integer> future = executor.submit(callable);
+    final Throwable caught = catchThrowable(() -> assertThat(future.get()).isEqualTo(42));
     assertThat(done).isEqualTo(true);
     assertThat(caught).isNull();
     assertThat(handled).isNull();
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).isEmpty();
   }
 
   @Test
   public void testSubmitCallableWithException() {
-    Callable<Integer> callable = spy(new MockCallableWithException());
-    Future<Integer> future = executor.submit(callable);
-    Throwable caught = catchThrowable(() -> future.get());
+    final Callable<Integer> callable = spy(new MockCallableWithException());
+    final Future<Integer> future = executor.submit(callable);
+    final Throwable caught = catchThrowable(() -> future.get());
     assertThat(done).isEqualTo(true);
     assertThat(caught).isInstanceOf(ExecutionException.class);
     assertThat(caught.getCause()).isEqualTo(handled);
     assertThat(handled).isEqualTo(exception);
 
-    List<Event> events = recorder.play();
+    final List<Event> events = recorder.play();
     assertThat(events).hasSize(1);
-    Event event = events.get(0);
+    final Event event = events.get(0);
     assertThat(event.getLevel()).isEqualTo("ERROR");
     assertThat(event.getMessage()).isEqualTo(MuyieAsyncTaskExecutor.EXCEPTION_MESSAGE);
     assertThat(event.getThrown()).isEqualTo(exception.toString());
@@ -166,7 +165,7 @@ public class MuyieAsyncTaskExecutorTest {
   public void testInitializingExecutor() {
     task = spy(new MockAsyncInitializingTaskExecutor());
     executor = new TestMuyieAsyncTaskExecutor(task);
-    Throwable caught = catchThrowable(() -> {
+    final Throwable caught = catchThrowable(() -> {
       executor.afterPropertiesSet();
       verify(task).afterPropertiesSet();
     });
@@ -175,7 +174,7 @@ public class MuyieAsyncTaskExecutorTest {
 
   @Test
   public void testNonInitializingExecutor() {
-    Throwable caught = catchThrowable(() -> {
+    final Throwable caught = catchThrowable(() -> {
       executor.afterPropertiesSet();
       verify(task, never()).afterPropertiesSet();
     });
@@ -186,7 +185,7 @@ public class MuyieAsyncTaskExecutorTest {
   public void testDisposableExecutor() {
     task = spy(new MockAsyncDisposableTaskExecutor());
     executor = new TestMuyieAsyncTaskExecutor(task);
-    Throwable caught = catchThrowable(() -> {
+    final Throwable caught = catchThrowable(() -> {
       executor.destroy();
       verify(task).destroy();
     });
@@ -195,7 +194,7 @@ public class MuyieAsyncTaskExecutorTest {
 
   @Test
   public void testNonDisposableExecutor() {
-    Throwable caught = catchThrowable(() -> {
+    final Throwable caught = catchThrowable(() -> {
       executor.destroy();
       verify(task, never()).destroy();
     });
@@ -204,12 +203,12 @@ public class MuyieAsyncTaskExecutorTest {
 
   private class TestMuyieAsyncTaskExecutor extends MuyieAsyncTaskExecutor {
 
-    TestMuyieAsyncTaskExecutor(AsyncTaskExecutor executor) {
+    TestMuyieAsyncTaskExecutor(final AsyncTaskExecutor executor) {
       super(executor);
     }
 
     @Override
-    protected void handle(Exception exception) {
+    protected void handle(final Exception exception) {
       synchronized (executor) {
         handled = exception;
         super.handle(exception);
@@ -261,18 +260,18 @@ public class MuyieAsyncTaskExecutorTest {
   @SuppressWarnings("serial")
   private class MockAsyncTaskExecutor extends SimpleAsyncTaskExecutor {
 
-    public void afterPropertiesSet() {}
+    public void afterPropertiesSet() {
+    }
 
-    public void destroy() {}
+    public void destroy() {
+    }
   }
 
   @SuppressWarnings("serial")
-  private class MockAsyncInitializingTaskExecutor extends MockAsyncTaskExecutor
-      implements
-        InitializingBean {}
+  private class MockAsyncInitializingTaskExecutor extends MockAsyncTaskExecutor implements InitializingBean {
+  }
 
   @SuppressWarnings("serial")
-  private class MockAsyncDisposableTaskExecutor extends MockAsyncTaskExecutor
-      implements
-        DisposableBean {}
+  private class MockAsyncDisposableTaskExecutor extends MockAsyncTaskExecutor implements DisposableBean {
+  }
 }

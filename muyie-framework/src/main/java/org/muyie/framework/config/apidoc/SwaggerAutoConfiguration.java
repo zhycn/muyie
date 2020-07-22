@@ -37,13 +37,14 @@ import static springfox.documentation.builders.PathSelectors.regex;
 /**
  * Springfox Swagger configuration.
  * <p>
- * Warning! When having a lot of REST endpoints, Springfox can become a performance issue. In that
- * case, you can use the "no-swagger" Spring profile, so that this bean is ignored.
+ * Warning! When having a lot of REST endpoints, Springfox can become a
+ * performance issue. In that case, you can use the "no-swagger" Spring profile,
+ * so that this bean is ignored.
  */
 @Configuration
 @ConditionalOnWebApplication
-@ConditionalOnClass({ApiInfo.class, BeanValidatorPluginsConfiguration.class, Servlet.class,
-    DispatcherServlet.class, Docket.class})
+@ConditionalOnClass({ ApiInfo.class, BeanValidatorPluginsConfiguration.class, Servlet.class, DispatcherServlet.class,
+    Docket.class })
 @Profile(SPRING_PROFILE_SWAGGER)
 @AutoConfigureAfter(MuyieProperties.class)
 @EnableSwagger2
@@ -65,9 +66,10 @@ public class SwaggerAutoConfiguration {
    * Constructor for SwaggerAutoConfiguration.
    * </p>
    *
-   * @param muyieProperties a {@link org.muyie.framework.config.MuyieProperties} object.
+   * @param muyieProperties a {@link org.muyie.framework.config.MuyieProperties}
+   *                        object.
    */
-  public SwaggerAutoConfiguration(MuyieProperties muyieProperties) {
+  public SwaggerAutoConfiguration(final MuyieProperties muyieProperties) {
     this.properties = muyieProperties.getSwagger();
   }
 
@@ -80,13 +82,13 @@ public class SwaggerAutoConfiguration {
    */
   @Bean
   @ConditionalOnMissingBean(name = "swaggerSpringfoxApiDocket")
-  public Docket swaggerSpringfoxApiDocket(List<SwaggerCustomizer> swaggerCustomizers,
-      ObjectProvider<AlternateTypeRule[]> alternateTypeRules) {
+  public Docket swaggerSpringfoxApiDocket(final List<SwaggerCustomizer> swaggerCustomizers,
+      final ObjectProvider<AlternateTypeRule[]> alternateTypeRules) {
     log.debug(STARTING_MESSAGE);
-    StopWatch watch = new StopWatch();
+    final StopWatch watch = new StopWatch();
     watch.start();
 
-    Docket docket = createDocket();
+    final Docket docket = createDocket();
 
     // Apply all SwaggerCustomizers orderly.
     swaggerCustomizers.forEach(customizer -> customizer.customize(docket));
@@ -109,7 +111,7 @@ public class SwaggerAutoConfiguration {
   public GenericSwaggerCustomizer genericSwaggerCustomizer() {
     return new GenericSwaggerCustomizer(properties);
   }
-  
+
   /**
    * Authorization Swagger Customizer
    *
@@ -123,7 +125,7 @@ public class SwaggerAutoConfiguration {
   /**
    * Springfox configuration for the management endpoints (actuator) Swagger docs.
    *
-   * @param appName the application name
+   * @param appName               the application name
    * @param managementContextPath the path to access management endpoints
    * @return the Swagger Springfox configuration
    */
@@ -132,21 +134,17 @@ public class SwaggerAutoConfiguration {
   @ConditionalOnProperty("management.endpoints.web.base-path")
   @ConditionalOnExpression("'${management.endpoints.web.base-path}'.length() > 0")
   @ConditionalOnMissingBean(name = "swaggerSpringfoxManagementDocket")
-  public Docket swaggerSpringfoxManagementDocket(
-      @Value("${spring.application.name:application}") String appName,
-      @Value("${management.endpoints.web.base-path}") String managementContextPath) {
+  public Docket swaggerSpringfoxManagementDocket(@Value("${spring.application.name:application}") final String appName,
+      @Value("${management.endpoints.web.base-path}") final String managementContextPath) {
 
-    ApiInfo apiInfo = new ApiInfo(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX,
-        MANAGEMENT_DESCRIPTION, properties.getVersion(), "", ApiInfo.DEFAULT_CONTACT, "", "",
-        new ArrayList<>());
+    final ApiInfo apiInfo = new ApiInfo(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX,
+        MANAGEMENT_DESCRIPTION, properties.getVersion(), "", ApiInfo.DEFAULT_CONTACT, "", "", new ArrayList<>());
 
-    return createDocket().apiInfo(apiInfo)
-        .useDefaultResponseMessages(properties.isUseDefaultResponseMessages())
+    return createDocket().apiInfo(apiInfo).useDefaultResponseMessages(properties.isUseDefaultResponseMessages())
         .groupName(MANAGEMENT_GROUP_NAME).host(properties.getHost())
         .protocols(new HashSet<>(Arrays.asList(properties.getProtocols()))).forCodeGeneration(true)
-        .directModelSubstitute(ByteBuffer.class, String.class)
-        .genericModelSubstitutes(ResponseEntity.class).ignoredParameterTypes(Pageable.class)
-        .select().paths(regex(managementContextPath + ".*")).build();
+        .directModelSubstitute(ByteBuffer.class, String.class).genericModelSubstitutes(ResponseEntity.class)
+        .ignoredParameterTypes(Pageable.class).select().paths(regex(managementContextPath + ".*")).build();
   }
 
   /**

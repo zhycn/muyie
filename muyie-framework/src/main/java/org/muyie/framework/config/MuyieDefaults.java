@@ -158,10 +158,7 @@ public interface MuyieDefaults {
       boolean enabled = false;
       String name = "Authorization";
       String description = null;
-      String defaultValue = null;
       boolean required = false;
-      String paramType = "header";
-      String pattern = null;
     }
 
   }

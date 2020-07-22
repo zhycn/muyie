@@ -28,26 +28,26 @@ import org.zalando.problem.Problem;
 public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
 
   @Override
-  public boolean supports(MethodParameter returnType,
-      Class<? extends HttpMessageConverter<?>> converterType) {
+  public boolean supports(final MethodParameter returnType,
+      final Class<? extends HttpMessageConverter<?>> converterType) {
     return true;
   }
 
   @Override
-  public Object beforeBodyWrite(Object body, MethodParameter returnType,
-      MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
-      ServerHttpRequest request, ServerHttpResponse response) {
+  public Object beforeBodyWrite(final Object body, final MethodParameter returnType,
+      final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
+      final ServerHttpRequest request, final ServerHttpResponse response) {
 
     // Handle Problem Exception
     if (body instanceof Problem) {
-      Problem problem = (Problem) body;
-      String statusCode = String.valueOf(problem.getStatus().getStatusCode());
+      final Problem problem = (Problem) body;
+      final String statusCode = String.valueOf(problem.getStatus().getStatusCode());
       return Response.fail(convert(statusCode, problem.getTitle()));
     }
 
     // Handle REST Response headers
     if (body instanceof Response) {
-      Response resp = (Response) body;
+      final Response resp = (Response) body;
       response.getHeaders().addAll(resp.getHeaders());
       return resp;
     }
@@ -55,9 +55,9 @@ public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
     return body;
   }
 
-  private static ResponseCode convert(String code, String defaultMsg) {
-    List<ResponseCodeDefaults> list = Arrays.asList(ResponseCodeDefaults.values());
-    for (ResponseCodeDefaults defaults : list) {
+  private static ResponseCode convert(final String code, final String defaultMsg) {
+    final List<ResponseCodeDefaults> list = Arrays.asList(ResponseCodeDefaults.values());
+    for (final ResponseCodeDefaults defaults : list) {
       if (StringUtils.equals(defaults.getCode(), code)) {
         return defaults;
       }

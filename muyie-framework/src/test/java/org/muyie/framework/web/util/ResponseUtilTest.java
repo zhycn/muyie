@@ -1,15 +1,14 @@
 package org.muyie.framework.web.util;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.web.util.ResponseUtil;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 public class ResponseUtilTest {
 
@@ -30,7 +29,7 @@ public class ResponseUtilTest {
 
   @Test
   public void testYesWithoutHeaders() {
-    ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(yes);
+    final ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(yes);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(42);
     assertThat(response.getHeaders()).isEmpty();
@@ -38,7 +37,7 @@ public class ResponseUtilTest {
 
   @Test
   public void testNoWithoutHeaders() {
-    ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(no);
+    final ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(no);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     assertThat(response.getBody()).isNull();
     assertThat(response.getHeaders()).isEmpty();
@@ -46,7 +45,7 @@ public class ResponseUtilTest {
 
   @Test
   public void testYesWithHeaders() {
-    ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(yes, headers);
+    final ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(yes, headers);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(42);
     assertThat(response.getHeaders()).hasSize(1);
@@ -56,7 +55,7 @@ public class ResponseUtilTest {
 
   @Test
   public void testNoWithHeaders() {
-    ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(no, headers);
+    final ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(no, headers);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     assertThat(response.getBody()).isNull();
     assertThat(response.getHeaders()).isEmpty();

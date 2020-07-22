@@ -1,16 +1,15 @@
 package org.muyie.framework.web.util;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.muyie.framework.web.util.PageUtil;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public class PageUtilTest {
 
@@ -33,7 +32,7 @@ public class PageUtilTest {
     content.add(2);
     content.add(3);
 
-    Page<Integer> page = PageUtil.createPageFromList(content, PageRequest.of(0, PAGE_SIZE));
+    final Page<Integer> page = PageUtil.createPageFromList(content, PageRequest.of(0, PAGE_SIZE));
 
     assertThat(page).isNotNull();
     assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
@@ -47,7 +46,7 @@ public class PageUtilTest {
       content.add(i);
     }
 
-    Page<Integer> page = PageUtil.createPageFromList(content, PageRequest.of(0, PAGE_SIZE));
+    final Page<Integer> page = PageUtil.createPageFromList(content, PageRequest.of(0, PAGE_SIZE));
 
     assertThat(page).isNotNull();
     assertThat(page.getSize()).isEqualTo(PAGE_SIZE);

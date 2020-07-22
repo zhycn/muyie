@@ -33,7 +33,8 @@ import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 
 /**
- * Utility methods to add appenders to a {@link ch.qos.logback.classic.LoggerContext}.
+ * Utility methods to add appenders to a
+ * {@link ch.qos.logback.classic.LoggerContext}.
  */
 public final class LoggingUtils {
 
@@ -43,28 +44,29 @@ public final class LoggingUtils {
   private static final String LOGSTASH_APPENDER_NAME = "LOGSTASH";
   private static final String ASYNC_LOGSTASH_APPENDER_NAME = "ASYNC_LOGSTASH";
 
-  private LoggingUtils() {}
+  private LoggingUtils() {
+  }
 
   /**
    * <p>
    * addJsonConsoleAppender.
    * </p>
    *
-   * @param context a {@link ch.qos.logback.classic.LoggerContext} object.
+   * @param context      a {@link ch.qos.logback.classic.LoggerContext} object.
    * @param customFields a {@link java.lang.String} object.
    */
-  public static void addJsonConsoleAppender(LoggerContext context, String customFields) {
+  public static void addJsonConsoleAppender(final LoggerContext context, final String customFields) {
     log.info("Initializing Console loggingProperties");
 
-    // More documentation is available at: https://github.com/logstash/logstash-logback-encoder
-    ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
+    // More documentation is available at:
+    // https://github.com/logstash/logstash-logback-encoder
+    final ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
     consoleAppender.setContext(context);
     consoleAppender.setEncoder(compositeJsonEncoder(context, customFields));
     consoleAppender.setName(CONSOLE_APPENDER_NAME);
     consoleAppender.start();
 
-    context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME)
-        .detachAppender(CONSOLE_APPENDER_NAME);
+    context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).detachAppender(CONSOLE_APPENDER_NAME);
     context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).addAppender(consoleAppender);
   }
 
@@ -73,19 +75,21 @@ public final class LoggingUtils {
    * addLogstashTcpSocketAppender.
    * </p>
    *
-   * @param context a {@link ch.qos.logback.classic.LoggerContext} object.
-   * @param customFields a {@link java.lang.String} object.
-   * @param logstashProperties a {@link org.muyie.framework.config.MuyieProperties.Logging.Logstash}
-   *        object.
+   * @param context            a {@link ch.qos.logback.classic.LoggerContext}
+   *                           object.
+   * @param customFields       a {@link java.lang.String} object.
+   * @param logstashProperties a
+   *                           {@link org.muyie.framework.config.MuyieProperties.Logging.Logstash}
+   *                           object.
    */
-  public static void addLogstashTcpSocketAppender(LoggerContext context, String customFields,
-      MuyieProperties.Logging.Logstash logstashProperties) {
+  public static void addLogstashTcpSocketAppender(final LoggerContext context, final String customFields,
+      final MuyieProperties.Logging.Logstash logstashProperties) {
     log.info("Initializing Logstash loggingProperties");
 
-    // More documentation is available at: https://github.com/logstash/logstash-logback-encoder
-    LogstashTcpSocketAppender logstashAppender = new LogstashTcpSocketAppender();
-    logstashAppender.addDestinations(
-        new InetSocketAddress(logstashProperties.getHost(), logstashProperties.getPort()));
+    // More documentation is available at:
+    // https://github.com/logstash/logstash-logback-encoder
+    final LogstashTcpSocketAppender logstashAppender = new LogstashTcpSocketAppender();
+    logstashAppender.addDestinations(new InetSocketAddress(logstashProperties.getHost(), logstashProperties.getPort()));
     logstashAppender.setContext(context);
     logstashAppender.setEncoder(logstashEncoder(customFields));
     logstashAppender.setName(ASYNC_LOGSTASH_APPENDER_NAME);
@@ -100,69 +104,67 @@ public final class LoggingUtils {
    * addContextListener.
    * </p>
    *
-   * @param context a {@link ch.qos.logback.classic.LoggerContext} object.
+   * @param context      a {@link ch.qos.logback.classic.LoggerContext} object.
    * @param customFields a {@link java.lang.String} object.
-   * @param properties a {@link org.muyie.framework.config.MuyieProperties.Logging} object.
+   * @param properties   a
+   *                     {@link org.muyie.framework.config.MuyieProperties.Logging}
+   *                     object.
    */
-  public static void addContextListener(LoggerContext context, String customFields,
-      MuyieProperties.Logging properties) {
-    LogbackLoggerContextListener loggerContextListener =
-        new LogbackLoggerContextListener(properties, customFields);
+  public static void addContextListener(final LoggerContext context, final String customFields,
+      final MuyieProperties.Logging properties) {
+    final LogbackLoggerContextListener loggerContextListener = new LogbackLoggerContextListener(properties,
+        customFields);
     loggerContextListener.setContext(context);
     context.addListener(loggerContextListener);
   }
 
   /**
-   * Configure a log filter to remove "metrics" logs from all appenders except the "LOGSTASH"
-   * appender
+   * Configure a log filter to remove "metrics" logs from all appenders except the
+   * "LOGSTASH" appender
    *
-   * @param context the logger context
+   * @param context       the logger context
    * @param useJsonFormat whether to use JSON format
    */
-  public static void setMetricsMarkerLogbackFilter(LoggerContext context, boolean useJsonFormat) {
-    log.info("Filtering metrics logs from all appenders except the {} appender",
-        LOGSTASH_APPENDER_NAME);
-    OnMarkerEvaluator onMarkerMetricsEvaluator = new OnMarkerEvaluator();
+  public static void setMetricsMarkerLogbackFilter(final LoggerContext context, final boolean useJsonFormat) {
+    log.info("Filtering metrics logs from all appenders except the {} appender", LOGSTASH_APPENDER_NAME);
+    final OnMarkerEvaluator onMarkerMetricsEvaluator = new OnMarkerEvaluator();
     onMarkerMetricsEvaluator.setContext(context);
     onMarkerMetricsEvaluator.addMarker("metrics");
     onMarkerMetricsEvaluator.start();
-    EvaluatorFilter<ILoggingEvent> metricsFilter = new EvaluatorFilter<>();
+    final EvaluatorFilter<ILoggingEvent> metricsFilter = new EvaluatorFilter<>();
     metricsFilter.setContext(context);
     metricsFilter.setEvaluator(onMarkerMetricsEvaluator);
     metricsFilter.setOnMatch(FilterReply.DENY);
     metricsFilter.start();
 
-    context.getLoggerList()
-        .forEach(logger -> logger.iteratorForAppenders().forEachRemaining(appender -> {
-          if (!appender.getName().equals(ASYNC_LOGSTASH_APPENDER_NAME)
-              && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && useJsonFormat)) {
-            log.debug("Filter metrics logs from the {} appender", appender.getName());
-            appender.setContext(context);
-            appender.addFilter(metricsFilter);
-            appender.start();
-          }
-        }));
+    context.getLoggerList().forEach(logger -> logger.iteratorForAppenders().forEachRemaining(appender -> {
+      if (!appender.getName().equals(ASYNC_LOGSTASH_APPENDER_NAME)
+          && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && useJsonFormat)) {
+        log.debug("Filter metrics logs from the {} appender", appender.getName());
+        appender.setContext(context);
+        appender.addFilter(metricsFilter);
+        appender.start();
+      }
+    }));
   }
 
-  private static LoggingEventCompositeJsonEncoder compositeJsonEncoder(LoggerContext context,
-      String customFields) {
-    final LoggingEventCompositeJsonEncoder compositeJsonEncoder =
-        new LoggingEventCompositeJsonEncoder();
+  private static LoggingEventCompositeJsonEncoder compositeJsonEncoder(final LoggerContext context,
+      final String customFields) {
+    final LoggingEventCompositeJsonEncoder compositeJsonEncoder = new LoggingEventCompositeJsonEncoder();
     compositeJsonEncoder.setContext(context);
     compositeJsonEncoder.setProviders(jsonProviders(context, customFields));
     compositeJsonEncoder.start();
     return compositeJsonEncoder;
   }
 
-  private static LogstashEncoder logstashEncoder(String customFields) {
+  private static LogstashEncoder logstashEncoder(final String customFields) {
     final LogstashEncoder logstashEncoder = new LogstashEncoder();
     logstashEncoder.setThrowableConverter(throwableConverter());
     logstashEncoder.setCustomFields(customFields);
     return logstashEncoder;
   }
 
-  private static LoggingEventJsonProviders jsonProviders(LoggerContext context,
-      String customFields) {
+  private static LoggingEventJsonProviders jsonProviders(final LoggerContext context, final String customFields) {
     final LoggingEventJsonProviders jsonProviders = new LoggingEventJsonProviders();
     jsonProviders.addArguments(new ArgumentsJsonProvider());
     jsonProviders.addContext(new ContextJsonProvider<>());
@@ -179,10 +181,8 @@ public final class LoggingUtils {
     return jsonProviders;
   }
 
-  private static GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider(
-      String customFields) {
-    final GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider =
-        new GlobalCustomFieldsJsonProvider<>();
+  private static GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider(final String customFields) {
+    final GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider = new GlobalCustomFieldsJsonProvider<>();
     customFieldsJsonProvider.setCustomFields(customFields);
     return customFieldsJsonProvider;
   }
@@ -194,7 +194,7 @@ public final class LoggingUtils {
   }
 
   private static StackTraceJsonProvider stackTraceJsonProvider() {
-    StackTraceJsonProvider stackTraceJsonProvider = new StackTraceJsonProvider();
+    final StackTraceJsonProvider stackTraceJsonProvider = new StackTraceJsonProvider();
     stackTraceJsonProvider.setThrowableConverter(throwableConverter());
     return stackTraceJsonProvider;
   }
@@ -206,26 +206,23 @@ public final class LoggingUtils {
   }
 
   private static LoggingEventFormattedTimestampJsonProvider timestampJsonProvider() {
-    final LoggingEventFormattedTimestampJsonProvider timestampJsonProvider =
-        new LoggingEventFormattedTimestampJsonProvider();
+    final LoggingEventFormattedTimestampJsonProvider timestampJsonProvider = new LoggingEventFormattedTimestampJsonProvider();
     timestampJsonProvider.setTimeZone("UTC");
     timestampJsonProvider.setFieldName("timestamp");
     return timestampJsonProvider;
   }
 
   /**
-   * Logback configuration is achieved by configuration file and API. When configuration file change
-   * is detected, the configuration is reset. This listener ensures that the programmatic
-   * configuration is also re-applied after reset.
+   * Logback configuration is achieved by configuration file and API. When
+   * configuration file change is detected, the configuration is reset. This
+   * listener ensures that the programmatic configuration is also re-applied after
+   * reset.
    */
-  private static class LogbackLoggerContextListener extends ContextAwareBase
-      implements
-        LoggerContextListener {
+  private static class LogbackLoggerContextListener extends ContextAwareBase implements LoggerContextListener {
     private final MuyieProperties.Logging loggingProperties;
     private final String customFields;
 
-    private LogbackLoggerContextListener(MuyieProperties.Logging loggingProperties,
-        String customFields) {
+    private LogbackLoggerContextListener(final MuyieProperties.Logging loggingProperties, final String customFields) {
       this.loggingProperties = loggingProperties;
       this.customFields = customFields;
     }
@@ -236,7 +233,7 @@ public final class LoggingUtils {
     }
 
     @Override
-    public void onStart(LoggerContext context) {
+    public void onStart(final LoggerContext context) {
       if (this.loggingProperties.isUseJsonFormat()) {
         addJsonConsoleAppender(context, customFields);
       }
@@ -246,7 +243,7 @@ public final class LoggingUtils {
     }
 
     @Override
-    public void onReset(LoggerContext context) {
+    public void onReset(final LoggerContext context) {
       if (this.loggingProperties.isUseJsonFormat()) {
         addJsonConsoleAppender(context, customFields);
       }
@@ -256,12 +253,12 @@ public final class LoggingUtils {
     }
 
     @Override
-    public void onStop(LoggerContext context) {
+    public void onStop(final LoggerContext context) {
       // Nothing to do.
     }
 
     @Override
-    public void onLevelChange(ch.qos.logback.classic.Logger logger, Level level) {
+    public void onLevelChange(final ch.qos.logback.classic.Logger logger, final Level level) {
       // Nothing to do.
     }
   }

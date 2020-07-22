@@ -14,15 +14,14 @@ public class SnowflakeConfiguration {
 
   private final MuyieProperties.Snowflake properties;
 
-  public SnowflakeConfiguration(MuyieProperties muyieProperties) {
+  public SnowflakeConfiguration(final MuyieProperties muyieProperties) {
     this.properties = muyieProperties.getSnowflake();
   }
 
   @Bean
   @ConditionalOnMissingBean
   public Snowflake snowflake() {
-    return new Snowflake(properties.getWorkerId(), properties.getDatacenterId(),
-        properties.isUseSystemClock());
+    return new Snowflake(properties.getWorkerId(), properties.getDatacenterId(), properties.isUseSystemClock());
   }
 
 }

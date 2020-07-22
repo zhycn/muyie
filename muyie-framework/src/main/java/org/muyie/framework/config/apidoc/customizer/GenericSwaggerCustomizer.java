@@ -16,8 +16,9 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * A generic swagger customizer to setup {@link springfox.documentation.spring.web.plugins.Docket}
- * with MuYie settings.
+ * A generic swagger customizer to setup
+ * {@link springfox.documentation.spring.web.plugins.Docket} with MuYie
+ * settings.
  */
 @Order(0)
 public class GenericSwaggerCustomizer implements SwaggerCustomizer {
@@ -29,27 +30,27 @@ public class GenericSwaggerCustomizer implements SwaggerCustomizer {
    * Constructor for GenericSwaggerCustomizer.
    * </p>
    *
-   * @param properties a {@link org.muyie.framework.config.MuyieProperties.Swagger} object.
+   * @param properties a
+   *                   {@link org.muyie.framework.config.MuyieProperties.Swagger}
+   *                   object.
    */
-  public GenericSwaggerCustomizer(MuyieProperties.Swagger properties) {
+  public GenericSwaggerCustomizer(final MuyieProperties.Swagger properties) {
     this.properties = properties;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void customize(Docket docket) {
-    Contact contact = new Contact(properties.getContactName(), properties.getContactUrl(),
+  public void customize(final Docket docket) {
+    final Contact contact = new Contact(properties.getContactName(), properties.getContactUrl(),
         properties.getContactEmail());
 
-    ApiInfo apiInfo = new ApiInfo(properties.getTitle(), properties.getDescription(),
-        properties.getVersion(), properties.getTermsOfServiceUrl(), contact,
-        properties.getLicense(), properties.getLicenseUrl(), new ArrayList<>());
+    final ApiInfo apiInfo = new ApiInfo(properties.getTitle(), properties.getDescription(), properties.getVersion(),
+        properties.getTermsOfServiceUrl(), contact, properties.getLicense(), properties.getLicenseUrl(),
+        new ArrayList<>());
 
-    docket.host(properties.getHost())
-        .protocols(new HashSet<>(Arrays.asList(properties.getProtocols()))).apiInfo(apiInfo)
-        .useDefaultResponseMessages(properties.isUseDefaultResponseMessages())
-        .forCodeGeneration(true).directModelSubstitute(ByteBuffer.class, String.class)
-        .genericModelSubstitutes(ResponseEntity.class).select()
+    docket.host(properties.getHost()).protocols(new HashSet<>(Arrays.asList(properties.getProtocols())))
+        .apiInfo(apiInfo).useDefaultResponseMessages(properties.isUseDefaultResponseMessages()).forCodeGeneration(true)
+        .directModelSubstitute(ByteBuffer.class, String.class).genericModelSubstitutes(ResponseEntity.class).select()
         .paths(regex(properties.getDefaultIncludePattern())).build();
   }
 

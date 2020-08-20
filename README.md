@@ -8,9 +8,9 @@ This project is used by the Spring Boot. This is the Bill of Materials and serve
 This project provides a pom file that you can either import into your Spring Boot Application's bom, or use as your Spring Boot Application's parent pom. 
 
 - JDK 8+
-- Spring Boot 2.3.2.RELEASE
-- Spring Cloud Hoxton.SR5
-- Hutool 5.3.10
+- Spring Boot 2.3.3.RELEASE
+- Spring Cloud Hoxton.SR6
+- Hutool 5.4.0
 
 ## Quick Start
 
@@ -22,7 +22,7 @@ The MuYie BOM uses Maven's support for dependency management to provide dependen
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.1.4-SNAPSHOT</version>
+            <version>1.1.4</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -36,7 +36,7 @@ Alternatively, rather than importing the MuYie BOM, you may prefer to use it as 
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.1.4-SNAPSHOT</version>
+    <version>1.1.4</version>
     <relativePath/>
 </parent>
 ```
@@ -47,7 +47,7 @@ Importing the dependency into your Spring Boot Application's pom, it provides mo
 <dependency>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-framework</artifactId>
-    <version>1.1.4-SNAPSHOT</version>
+    <version>1.1.4</version>
 </dependency>
 ```
 

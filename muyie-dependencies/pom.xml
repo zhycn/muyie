@@ -12,7 +12,7 @@
     <parent>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-parent</artifactId>
-        <version>1.1.4</version>
+        <version>1.1.5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -26,6 +26,7 @@
         <apollo-client.version>1.7.0</apollo-client.version>
         <bucket4j.version>4.10.0</bucket4j.version>
         <commons-io.version>2.7</commons-io.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
         <dozer-spring-boot.version>6.5.0</dozer-spring-boot.version>
         <guava.version>29.0-jre</guava.version>
         <hutool.version>5.4.0</hutool.version>
@@ -43,7 +44,7 @@
         <reflections.version>0.9.12</reflections.version>
         <retrofit.version>2.9.0</retrofit.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
-        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>

@@ -27,13 +27,14 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
 
   @Override
   @Pointcut("@annotation(org.muyie.framework.config.aspectj.Extension)")
-  public void setPointcut() {
-  }
+  public void setPointcut() {}
 
   /**
    * Pointcut that matches all repositories, services and Web REST endpoints.
    */
   @Pointcut("within(@org.springframework.stereotype.Repository *)"
+      + " || within(@org.springframework.stereotype.Component *)"
+      + " || within(@org.springframework.stereotype.Controller *)"
       + " || within(@org.springframework.stereotype.Service *)"
       + " || within(@org.springframework.web.bind.annotation.RestController *)")
   public void springBeanPointcut() {
@@ -70,7 +71,8 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
 
     try {
       if (extension.logger()) {
-        log.info("Extension Enter: '{}' with arguments = {}", value, JSON.toJSONString(joinPoint.getArgs()));
+        log.info("Extension Enter: '{}' with arguments = {}", value,
+            JSON.toJSONString(joinPoint.getArgs()));
       }
 
       final Object result = joinPoint.proceed();
@@ -81,12 +83,14 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
 
       return result;
     } catch (final IllegalArgumentException e) {
-      log.error("Extension Illegal argument: '{}' with cause = {}", value, Throwables.getStackTraceAsString(e));
+      log.error("Extension Illegal argument: '{}' with cause = {}", value,
+          Throwables.getStackTraceAsString(e));
 
       throw e;
     } finally {
       stopWatch.stop();
-      log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
+      log.info("StopWatch '" + stopWatch.getId() + "': running time = "
+          + stopWatch.getTotalTimeMillis() + " ms");
     }
   }
 

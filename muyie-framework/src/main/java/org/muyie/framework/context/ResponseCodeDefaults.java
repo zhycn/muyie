@@ -25,7 +25,7 @@ public enum ResponseCodeDefaults implements ResponseCode {
 
   SC_415("415", "媒体类型不支持"),
 
-  SC_429("429", "请求频率超限"),
+  SC_429("429", "请求频次超限"),
 
   SC_500("500", "服务器内部错误"),
 

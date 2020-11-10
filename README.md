@@ -8,9 +8,9 @@ This project is used by the Spring Boot. This is the Bill of Materials and serve
 This project provides a pom file that you can either import into your Spring Boot Application's bom, or use as your Spring Boot Application's parent pom. 
 
 - JDK 8+
-- Spring Boot 2.3.4.RELEASE
+- Spring Boot 2.3.5.RELEASE
 - Spring Cloud Hoxton.SR8
-- Hutool 5.4.4
+- Hutool 5.4.7
 
 ## Quick Start
 

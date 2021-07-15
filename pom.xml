@@ -86,7 +86,6 @@
 
     <modules>
         <module>muyie-dependencies</module>
-        <module>muyie-framework</module>
     </modules>
 
     <build>

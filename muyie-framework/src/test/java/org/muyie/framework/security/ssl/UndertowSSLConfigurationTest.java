@@ -1,7 +1,5 @@
 package org.muyie.framework.security.ssl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -9,6 +7,8 @@ import org.xnio.OptionMap;
 
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UndertowSSLConfigurationTest {
 

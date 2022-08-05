@@ -1,10 +1,6 @@
 package org.muyie.framework.config;
 
-import java.nio.charset.StandardCharsets;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
+import org.muyie.framework.config.apollo.ApolloConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -24,6 +20,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.nio.charset.StandardCharsets;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 /**
  * Configuration of web application with Servlet 3.0 APIs.
  */
@@ -31,15 +32,16 @@ import org.springframework.web.filter.CorsFilter;
 @ConditionalOnWebApplication
 @AutoConfigureAfter(MuyieProperties.class)
 @Import({
-  DateTimeFormatConfiguration.class, 
-  JacksonConfiguration.class, 
+  DateTimeFormatConfiguration.class,
+  JacksonConfiguration.class,
   LocaleConfiguration.class,
-  LogbackConfiguration.class
+  SpringContextHolder.class,
+  ApolloConfiguration.class
 })
 public class MuyieWebConfigurer
-    implements
-      ServletContextInitializer,
-      WebServerFactoryCustomizer<WebServerFactory> {
+  implements
+  ServletContextInitializer,
+  WebServerFactoryCustomizer<WebServerFactory> {
 
   private static final Logger log = LoggerFactory.getLogger(MuyieWebConfigurer.class);
 
@@ -56,7 +58,7 @@ public class MuyieWebConfigurer
   public void onStartup(ServletContext servletContext) throws ServletException {
     if (env.getActiveProfiles().length != 0) {
       log.info("Web application configuration, using profiles: {}",
-          (Object[]) env.getActiveProfiles());
+        (Object[]) env.getActiveProfiles());
     }
   }
 
@@ -72,13 +74,13 @@ public class MuyieWebConfigurer
     if (server instanceof ConfigurableServletWebServerFactory) {
       MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
       String mimeType =
-          MediaType.TEXT_HTML_VALUE + ";charset=" + StandardCharsets.UTF_8.name().toLowerCase();
+        MediaType.TEXT_HTML_VALUE + ";charset=" + StandardCharsets.UTF_8.name().toLowerCase();
       // IE issue, see https://github.com/jhipster/generator-jhipster/pull/711
       mappings.add("html", mimeType);
       // CloudFoundry issue, see https://github.com/cloudfoundry/gorouter/issues/64
       mappings.add("json", mimeType);
       ConfigurableServletWebServerFactory servletWebServer =
-          (ConfigurableServletWebServerFactory) server;
+        (ConfigurableServletWebServerFactory) server;
       servletWebServer.setMimeMappings(mappings);
     }
   }
@@ -89,7 +91,7 @@ public class MuyieWebConfigurer
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = muyieProperties.getCors();
     if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
-      log.debug("Registering CORS filter");
+      log.info("Registering CORS filter");
       source.registerCorsConfiguration("/api/**", config);
       source.registerCorsConfiguration("/management/**", config);
       source.registerCorsConfiguration("/v2/api-docs", config);

@@ -17,12 +17,31 @@ import java.lang.annotation.Target;
 public @interface Extension {
 
   /**
-   * Description for interfaces
-   * 
-   * @return a description for interfaces
+   * 接口名称或描述信息
+   *
+   * @return 接口名称
    */
   String value() default "";
 
-  boolean logger() default true;
+  /**
+   * 是否打印请求与响应日志，默认值：true
+   *
+   * @return true 表示打印日志
+   */
+  boolean logWatch() default true;
+
+  /**
+   * 开启日志后，日志序列化的信息脱敏规则
+   *
+   * @return 默认或指定的配置对象
+   */
+  String configBeanName() default "";
+
+  /**
+   * 开启日志后，日志序列化时忽略的字段
+   *
+   * @return 数组
+   */
+  String[] ignoreFields() default {};
 
 }

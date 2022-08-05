@@ -12,7 +12,8 @@ import java.util.Optional;
  */
 public final class JwtSecurityUtils {
 
-  private JwtSecurityUtils() {}
+  private JwtSecurityUtils() {
+  }
 
   /**
    * Get the login of the current user.
@@ -40,8 +41,8 @@ public final class JwtSecurityUtils {
   public static Optional<String> getCurrentUserJWT() {
     SecurityContext securityContext = SecurityContextHolder.getContext();
     return Optional.ofNullable(securityContext.getAuthentication())
-        .filter(authentication -> authentication.getCredentials() instanceof String)
-        .map(authentication -> (String) authentication.getCredentials());
+      .filter(authentication -> authentication.getCredentials() instanceof String)
+      .map(authentication -> (String) authentication.getCredentials());
   }
 
   /**
@@ -52,10 +53,10 @@ public final class JwtSecurityUtils {
   public static boolean isAuthenticated() {
     SecurityContext securityContext = SecurityContextHolder.getContext();
     return Optional.ofNullable(securityContext.getAuthentication())
-        .map(authentication -> authentication.getAuthorities().stream()
-            .noneMatch(grantedAuthority -> grantedAuthority.getAuthority()
-                .equals(AuthoritiesConstants.ANONYMOUS)))
-        .orElse(false);
+      .map(authentication -> authentication.getAuthorities().stream()
+        .noneMatch(grantedAuthority -> grantedAuthority.getAuthority()
+          .equals(AuthoritiesConstants.ANONYMOUS)))
+      .orElse(false);
   }
 
   /**
@@ -69,9 +70,9 @@ public final class JwtSecurityUtils {
   public static boolean isCurrentUserInRole(String authority) {
     SecurityContext securityContext = SecurityContextHolder.getContext();
     return Optional.ofNullable(securityContext.getAuthentication())
-        .map(authentication -> authentication.getAuthorities().stream()
-            .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(authority)))
-        .orElse(false);
+      .map(authentication -> authentication.getAuthorities().stream()
+        .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(authority)))
+      .orElse(false);
   }
 
 }

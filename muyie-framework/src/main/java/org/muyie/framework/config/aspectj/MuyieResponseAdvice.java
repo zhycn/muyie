@@ -1,14 +1,11 @@
 package org.muyie.framework.config.aspectj;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.muyie.framework.config.MuyieProperties;
-import org.muyie.framework.context.Response;
-import org.muyie.framework.context.ResponseCode;
-import org.muyie.framework.context.ResponseCodeBuilder;
-import org.muyie.framework.context.ResponseCodeDefaults;
+import org.muyie.framework.context.CodeBuilder;
+import org.muyie.framework.context.CodeDefaults;
+import org.muyie.framework.context.ICode;
+import org.muyie.framework.context.IResult;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -27,42 +24,49 @@ import org.zalando.problem.Problem;
 @RestControllerAdvice
 public class MuyieResponseAdvice implements ResponseBodyAdvice<Object> {
 
+  /**
+   * HTTP错误码转换
+   *
+   * @param code       HTTP错误码
+   * @param defaultMsg 错误信息
+   * @return 构建新的错误码
+   */
+  private static ICode convert(final String code, final String defaultMsg) {
+    final CodeDefaults[] list = CodeDefaults.values();
+    for (final CodeDefaults defaults : list) {
+      if (StringUtils.contains(defaults.getCode(), code)) {
+        return defaults;
+      }
+    }
+    return CodeBuilder.of(StringUtils.leftPad(code, 5, "0"), defaultMsg);
+  }
+
   @Override
   public boolean supports(final MethodParameter returnType,
-      final Class<? extends HttpMessageConverter<?>> converterType) {
+                          final Class<? extends HttpMessageConverter<?>> converterType) {
     return true;
   }
 
   @Override
   public Object beforeBodyWrite(final Object body, final MethodParameter returnType,
-      final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
-      final ServerHttpRequest request, final ServerHttpResponse response) {
+                                final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                final ServerHttpRequest request, final ServerHttpResponse response) {
 
     // Handle Problem Exception
     if (body instanceof Problem) {
       final Problem problem = (Problem) body;
       final String statusCode = String.valueOf(problem.getStatus().getStatusCode());
-      return Response.fail(convert(statusCode, problem.getTitle()));
+      return IResult.fail(convert(statusCode, problem.getTitle()));
     }
 
     // Handle REST Response headers
-    if (body instanceof Response) {
-      final Response resp = (Response) body;
-      response.getHeaders().addAll(resp.getHeaders());
-      return resp;
+    if (body instanceof IResult) {
+      final IResult result = (IResult) body;
+      response.getHeaders().addAll(result.getHeaders());
+      return result;
     }
 
     return body;
-  }
-
-  private static ResponseCode convert(final String code, final String defaultMsg) {
-    final List<ResponseCodeDefaults> list = Arrays.asList(ResponseCodeDefaults.values());
-    for (final ResponseCodeDefaults defaults : list) {
-      if (StringUtils.equals(defaults.getCode(), code)) {
-        return defaults;
-      }
-    }
-    return ResponseCodeBuilder.of(code, defaultMsg);
   }
 
 }

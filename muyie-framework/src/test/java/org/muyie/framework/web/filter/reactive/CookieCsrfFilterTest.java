@@ -1,9 +1,5 @@
 package org.muyie.framework.web.filter.reactive;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.Duration;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.ResponseCookie;
@@ -13,7 +9,11 @@ import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.security.web.server.csrf.DefaultCsrfToken;
 import org.springframework.web.server.WebFilterChain;
 
+import java.time.Duration;
+
 import reactor.core.publisher.Mono;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CookieCsrfFilterTest {
 
@@ -42,7 +42,7 @@ public class CookieCsrfFilterTest {
     };
     final MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.post(TEST_URL));
     exchange.getAttributes().put(CsrfToken.class.getName(),
-        Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", token)));
+      Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", token)));
     this.filter.filter(exchange, filterChain).block();
   }
 
@@ -57,9 +57,9 @@ public class CookieCsrfFilterTest {
       return Mono.empty();
     };
     final MockServerWebExchange exchange = MockServerWebExchange
-        .from(MockServerHttpRequest.post(TEST_URL).cookie(new HttpCookie(CSRF_COOKIE_NAME, "csrf_token")));
+      .from(MockServerHttpRequest.post(TEST_URL).cookie(new HttpCookie(CSRF_COOKIE_NAME, "csrf_token")));
     exchange.getAttributes().put(CsrfToken.class.getName(),
-        Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", "some token")));
+      Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", "some token")));
     this.filter.filter(exchange, filterChain).block();
   }
 
@@ -68,7 +68,6 @@ public class CookieCsrfFilterTest {
     final WebFilterChain filterChain = (filterExchange) -> {
       try {
         assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();
-        ;
       } catch (final AssertionError ex) {
         return Mono.error(ex);
       }

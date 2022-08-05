@@ -1,5 +1,12 @@
 package org.muyie.framework.security;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -9,13 +16,6 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.muyie.framework.security.AjaxAuthenticationFailureHandler.UNAUTHORIZED_MESSAGE;
-
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 public class AjaxAuthenticationFailureHandlerTest {
 

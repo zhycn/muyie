@@ -1,12 +1,12 @@
 package org.muyie.framework.config;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.cors.CorsConfiguration;
+
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * Properties specific to MuYie.
@@ -48,12 +48,14 @@ public class MuyieProperties {
 
   private final AuditEvents auditEvents = new AuditEvents();
 
+  private final Retrofit retrofit = new Retrofit();
+
   /**
    * <p>
    * Getter for the field <code>async</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Async} object.
+   * @return a {@link Async} object.
    */
   public Async getAsync() {
     return async;
@@ -64,7 +66,7 @@ public class MuyieProperties {
    * Getter for the field <code>http</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Http} object.
+   * @return a {@link Http} object.
    */
   public Http getHttp() {
     return http;
@@ -75,7 +77,7 @@ public class MuyieProperties {
    * Getter for the field <code>cache</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Cache} object.
+   * @return a {@link Cache} object.
    */
   public Cache getCache() {
     return cache;
@@ -86,7 +88,7 @@ public class MuyieProperties {
    * Getter for the field <code>mail</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Mail} object.
+   * @return a {@link Mail} object.
    */
   public Mail getMail() {
     return mail;
@@ -97,7 +99,7 @@ public class MuyieProperties {
    * Getter for the field <code>registry</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Registry} object.
+   * @return a {@link Registry} object.
    */
   public Registry getRegistry() {
     return registry;
@@ -108,7 +110,7 @@ public class MuyieProperties {
    * Getter for the field <code>security</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Security} object.
+   * @return a {@link Security} object.
    */
   public Security getSecurity() {
     return security;
@@ -119,8 +121,7 @@ public class MuyieProperties {
    * Getter for the field <code>snowflake</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Snowflake}
-   *         object.
+   * @return a {@link Snowflake} object.
    */
   public Snowflake getSnowflake() {
     return snowflake;
@@ -131,7 +132,7 @@ public class MuyieProperties {
    * Getter for the field <code>swagger</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Swagger} object.
+   * @return a {@link Swagger} object.
    */
   public Swagger getSwagger() {
     return swagger;
@@ -142,7 +143,7 @@ public class MuyieProperties {
    * Getter for the field <code>metrics</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Metrics} object.
+   * @return a {@link Metrics} object.
    */
   public Metrics getMetrics() {
     return metrics;
@@ -153,7 +154,7 @@ public class MuyieProperties {
    * Getter for the field <code>logging</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Logging} object.
+   * @return a {@link Logging} object.
    */
   public Logging getLogging() {
     return logging;
@@ -164,7 +165,7 @@ public class MuyieProperties {
    * Getter for the field <code>cors</code>.
    * </p>
    *
-   * @return a {@link org.springframework.web.cors.CorsConfiguration} object.
+   * @return a {@link CorsConfiguration} object.
    */
   public CorsConfiguration getCors() {
     return cors;
@@ -175,7 +176,7 @@ public class MuyieProperties {
    * Getter for the field <code>social</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Social} object.
+   * @return a {@link Social} object.
    */
   public Social getSocial() {
     return social;
@@ -186,7 +187,7 @@ public class MuyieProperties {
    * Getter for the field <code>gateway</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.Gateway} object.
+   * @return a {@link Gateway} object.
    */
   public Gateway getGateway() {
     return gateway;
@@ -197,8 +198,7 @@ public class MuyieProperties {
    * Getter for the field <code>clientApp</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.ClientApp}
-   *         object.
+   * @return a {@link ClientApp} object.
    */
   public ClientApp getClientApp() {
     return clientApp;
@@ -209,11 +209,21 @@ public class MuyieProperties {
    * Getter for the field <code>auditEvents</code>.
    * </p>
    *
-   * @return a {@link org.muyie.framework.config.MuyieProperties.AuditEvents}
-   *         object.
+   * @return a {@link AuditEvents} object.
    */
   public AuditEvents getAuditEvents() {
     return auditEvents;
+  }
+
+  /**
+   * <p>
+   * Getter for the field <code>retrofit</code>.
+   * </p>
+   *
+   * @return a {@link Retrofit} object.
+   */
+  public Retrofit getRetrofit() {
+    return retrofit;
   }
 
   public static class Async {
@@ -238,60 +248,60 @@ public class MuyieProperties {
       return corePoolSize;
     }
 
-    public int getMaxPoolSize() {
-      return maxPoolSize;
-    }
-
-    public int getKeepAliveSeconds() {
-      return keepAliveSeconds;
-    }
-
-    public int getQueueCapacity() {
-      return queueCapacity;
-    }
-
-    public boolean isAllowCoreThreadTimeOut() {
-      return allowCoreThreadTimeOut;
-    }
-
-    public boolean isWaitForJobsToCompleteOnShutdown() {
-      return waitForJobsToCompleteOnShutdown;
-    }
-
-    public int getAwaitTerminationSeconds() {
-      return awaitTerminationSeconds;
-    }
-
-    public String getThreadNamePrefix() {
-      return threadNamePrefix;
-    }
-
     public void setCorePoolSize(final int corePoolSize) {
       this.corePoolSize = corePoolSize;
+    }
+
+    public int getMaxPoolSize() {
+      return maxPoolSize;
     }
 
     public void setMaxPoolSize(final int maxPoolSize) {
       this.maxPoolSize = maxPoolSize;
     }
 
+    public int getKeepAliveSeconds() {
+      return keepAliveSeconds;
+    }
+
     public void setKeepAliveSeconds(final int keepAliveSeconds) {
       this.keepAliveSeconds = keepAliveSeconds;
+    }
+
+    public int getQueueCapacity() {
+      return queueCapacity;
     }
 
     public void setQueueCapacity(final int queueCapacity) {
       this.queueCapacity = queueCapacity;
     }
 
+    public boolean isAllowCoreThreadTimeOut() {
+      return allowCoreThreadTimeOut;
+    }
+
     public void setAllowCoreThreadTimeOut(final boolean allowCoreThreadTimeOut) {
       this.allowCoreThreadTimeOut = allowCoreThreadTimeOut;
+    }
+
+    public boolean isWaitForJobsToCompleteOnShutdown() {
+      return waitForJobsToCompleteOnShutdown;
     }
 
     public void setWaitForJobsToCompleteOnShutdown(final boolean waitForJobsToCompleteOnShutdown) {
       this.waitForJobsToCompleteOnShutdown = waitForJobsToCompleteOnShutdown;
     }
 
+    public int getAwaitTerminationSeconds() {
+      return awaitTerminationSeconds;
+    }
+
     public void setAwaitTerminationSeconds(final int awaitTerminationSeconds) {
       this.awaitTerminationSeconds = awaitTerminationSeconds;
+    }
+
+    public String getThreadNamePrefix() {
+      return threadNamePrefix;
     }
 
     public void setThreadNamePrefix(final String threadNamePrefix) {
@@ -362,14 +372,28 @@ public class MuyieProperties {
 
     public static class Hazelcast {
 
-      private int timeToLiveSeconds = MuyieDefaults.Cache.Hazelcast.timeToLiveSeconds;
-
-      private int backupCount = MuyieDefaults.Cache.Hazelcast.backupCount;
-
       private final ManagementCenter managementCenter = new ManagementCenter();
+      private int timeToLiveSeconds = MuyieDefaults.Cache.Hazelcast.timeToLiveSeconds;
+      private int backupCount = MuyieDefaults.Cache.Hazelcast.backupCount;
 
       public ManagementCenter getManagementCenter() {
         return managementCenter;
+      }
+
+      public int getTimeToLiveSeconds() {
+        return timeToLiveSeconds;
+      }
+
+      public void setTimeToLiveSeconds(final int timeToLiveSeconds) {
+        this.timeToLiveSeconds = timeToLiveSeconds;
+      }
+
+      public int getBackupCount() {
+        return backupCount;
+      }
+
+      public void setBackupCount(final int backupCount) {
+        this.backupCount = backupCount;
       }
 
       public static class ManagementCenter {
@@ -404,22 +428,6 @@ public class MuyieProperties {
           this.url = url;
         }
 
-      }
-
-      public int getTimeToLiveSeconds() {
-        return timeToLiveSeconds;
-      }
-
-      public void setTimeToLiveSeconds(final int timeToLiveSeconds) {
-        this.timeToLiveSeconds = timeToLiveSeconds;
-      }
-
-      public int getBackupCount() {
-        return backupCount;
-      }
-
-      public void setBackupCount(final int backupCount) {
-        this.backupCount = backupCount;
       }
     }
 
@@ -471,15 +479,11 @@ public class MuyieProperties {
 
     public static class Infinispan {
 
-      private String configFile = MuyieDefaults.Cache.Infinispan.configFile;
-
-      private boolean statsEnabled = MuyieDefaults.Cache.Infinispan.statsEnabled;
-
       private final Local local = new Local();
-
       private final Distributed distributed = new Distributed();
-
       private final Replicated replicated = new Replicated();
+      private String configFile = MuyieDefaults.Cache.Infinispan.configFile;
+      private boolean statsEnabled = MuyieDefaults.Cache.Infinispan.statsEnabled;
 
       public String getConfigFile() {
         return configFile;
@@ -834,20 +838,20 @@ public class MuyieProperties {
       return workerId;
     }
 
-    public long getDatacenterId() {
-      return datacenterId;
-    }
-
-    public boolean isUseSystemClock() {
-      return useSystemClock;
-    }
-
     public void setWorkerId(final long workerId) {
       this.workerId = workerId;
     }
 
+    public long getDatacenterId() {
+      return datacenterId;
+    }
+
     public void setDatacenterId(final long datacenterId) {
       this.datacenterId = datacenterId;
+    }
+
+    public boolean isUseSystemClock() {
+      return useSystemClock;
     }
 
     public void setUseSystemClock(final boolean useSystemClock) {
@@ -858,33 +862,20 @@ public class MuyieProperties {
 
   public static class Swagger {
 
-    private String title = MuyieDefaults.Swagger.title;
-
-    private String description = MuyieDefaults.Swagger.description;
-
-    private String version = MuyieDefaults.Swagger.version;
-
-    private String termsOfServiceUrl = MuyieDefaults.Swagger.termsOfServiceUrl;
-
-    private String contactName = MuyieDefaults.Swagger.contactName;
-
-    private String contactUrl = MuyieDefaults.Swagger.contactUrl;
-
-    private String contactEmail = MuyieDefaults.Swagger.contactEmail;
-
-    private String license = MuyieDefaults.Swagger.license;
-
-    private String licenseUrl = MuyieDefaults.Swagger.licenseUrl;
-
-    private String defaultIncludePattern = MuyieDefaults.Swagger.defaultIncludePattern;
-
-    private String host = MuyieDefaults.Swagger.host;
-
-    private String[] protocols = MuyieDefaults.Swagger.protocols;
-
-    private boolean useDefaultResponseMessages = MuyieDefaults.Swagger.useDefaultResponseMessages;
-
     private final Authorization authorization = new Authorization();
+    private String title = MuyieDefaults.Swagger.title;
+    private String description = MuyieDefaults.Swagger.description;
+    private String version = MuyieDefaults.Swagger.version;
+    private String termsOfServiceUrl = MuyieDefaults.Swagger.termsOfServiceUrl;
+    private String contactName = MuyieDefaults.Swagger.contactName;
+    private String contactUrl = MuyieDefaults.Swagger.contactUrl;
+    private String contactEmail = MuyieDefaults.Swagger.contactEmail;
+    private String license = MuyieDefaults.Swagger.license;
+    private String licenseUrl = MuyieDefaults.Swagger.licenseUrl;
+    private String defaultIncludePattern = MuyieDefaults.Swagger.defaultIncludePattern;
+    private String host = MuyieDefaults.Swagger.host;
+    private String[] protocols = MuyieDefaults.Swagger.protocols;
+    private boolean useDefaultResponseMessages = MuyieDefaults.Swagger.useDefaultResponseMessages;
 
     public String getTitle() {
       return title;
@@ -1074,9 +1065,8 @@ public class MuyieProperties {
 
   public static class Logging {
 
-    private boolean useJsonFormat = MuyieDefaults.Logging.useJsonFormat;
-
     private final Logstash logstash = new Logstash();
+    private boolean useJsonFormat = MuyieDefaults.Logging.useJsonFormat;
 
     public boolean isUseJsonFormat() {
       return useJsonFormat;
@@ -1150,12 +1140,11 @@ public class MuyieProperties {
   public static class Gateway {
 
     private final RateLimiting rateLimiting = new RateLimiting();
+    private Map<String, List<String>> authorizedMicroservicesEndpoints = MuyieDefaults.Gateway.authorizedMicroservicesEndpoints;
 
     public RateLimiting getRateLimiting() {
       return rateLimiting;
     }
-
-    private Map<String, List<String>> authorizedMicroservicesEndpoints = MuyieDefaults.Gateway.authorizedMicroservicesEndpoints;
 
     public Map<String, List<String>> getAuthorizedMicroservicesEndpoints() {
       return authorizedMicroservicesEndpoints;
@@ -1236,4 +1225,62 @@ public class MuyieProperties {
       this.retentionPeriod = retentionPeriod;
     }
   }
+
+  public static class Retrofit {
+    private Long readTimeout = MuyieDefaults.Retrofit.readTimeout;
+    private Long writeTimeout = MuyieDefaults.Retrofit.writeTimeout;
+    private Long connectTimeout = MuyieDefaults.Retrofit.connectTimeout;
+    private Integer maxIdle = MuyieDefaults.Retrofit.maxIdle;
+    private Integer keepAlive = MuyieDefaults.Retrofit.keepAlive;
+    private Map<String, String> endpoints = MuyieDefaults.Retrofit.endpoints;
+
+    public Long getConnectTimeout() {
+      return connectTimeout;
+    }
+
+    public void setConnectTimeout(Long connectTimeout) {
+      this.connectTimeout = connectTimeout;
+    }
+
+    public Map<String, String> getEndpoints() {
+      return endpoints;
+    }
+
+    public void setEndpoints(Map<String, String> endpoints) {
+      this.endpoints = endpoints;
+    }
+
+    public Integer getKeepAlive() {
+      return keepAlive;
+    }
+
+    public void setKeepAlive(Integer keepAlive) {
+      this.keepAlive = keepAlive;
+    }
+
+    public Integer getMaxIdle() {
+      return maxIdle;
+    }
+
+    public void setMaxIdle(Integer maxIdle) {
+      this.maxIdle = maxIdle;
+    }
+
+    public Long getReadTimeout() {
+      return readTimeout;
+    }
+
+    public void setReadTimeout(Long readTimeout) {
+      this.readTimeout = readTimeout;
+    }
+
+    public Long getWriteTimeout() {
+      return writeTimeout;
+    }
+
+    public void setWriteTimeout(Long writeTimeout) {
+      this.writeTimeout = writeTimeout;
+    }
+  }
+
 }

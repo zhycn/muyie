@@ -15,7 +15,7 @@ public class MuyieTaskExecutor {
   private final ScheduledExecutorService scheduledExecutor;
 
   public MuyieTaskExecutor(final MuyieAsyncTaskExecutor taskExecutor,
-      final ScheduledExecutorService scheduledExecutor) {
+                           final ScheduledExecutorService scheduledExecutor) {
     this.taskExecutor = taskExecutor;
     this.scheduledExecutor = scheduledExecutor;
   }
@@ -45,12 +45,12 @@ public class MuyieTaskExecutor {
   }
 
   public ScheduledFuture<?> scheduleAtFixedRate(final Runnable task, final long initialDelay, final long period,
-      final TimeUnit unit) {
+                                                final TimeUnit unit) {
     return scheduledExecutor.scheduleAtFixedRate(task, initialDelay, period, unit);
   }
 
   public ScheduledFuture<?> scheduleWithFixedDelay(final Runnable task, final long initialDelay, final long delay,
-      final TimeUnit unit) {
+                                                   final TimeUnit unit) {
     return scheduledExecutor.scheduleWithFixedDelay(task, initialDelay, delay, unit);
   }
 

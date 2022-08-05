@@ -5,34 +5,35 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
+import java.io.IOException;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 /**
- * Filters incoming requests and installs a Spring Security principal if a
- * header corresponding to a valid user is found.
+ * Filters incoming requests and installs a Spring Security principal if a header corresponding to a
+ * valid user is found.
  */
 public class JwtFilter extends GenericFilterBean {
 
   public static final String AUTHORIZATION_HEADER = "Authorization";
 
-  private final JwtTokenProvider tokenProvider;
+  private final JwtTokenProvider jwtTokenProvider;
 
-  public JwtFilter(final JwtTokenProvider tokenProvider) {
-    this.tokenProvider = tokenProvider;
+  public JwtFilter(final JwtTokenProvider jwtTokenProvider) {
+    this.jwtTokenProvider = jwtTokenProvider;
   }
 
   @Override
   public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
-      final FilterChain filterChain) throws IOException, ServletException {
+                       final FilterChain filterChain) throws IOException, ServletException {
     final HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
     final String jwt = resolveToken(httpServletRequest);
-    if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
-      final Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+    if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+      final Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
     filterChain.doFilter(servletRequest, servletResponse);

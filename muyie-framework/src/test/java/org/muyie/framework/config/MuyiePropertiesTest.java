@@ -4,7 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -156,7 +160,7 @@ public class MuyiePropertiesTest {
   @Test
   public void testCacheHazelcastManagementCenterEnabled() {
     final MuyieProperties.Cache.Hazelcast.ManagementCenter obj = properties.getCache().getHazelcast()
-        .getManagementCenter();
+      .getManagementCenter();
 
     boolean val = MuyieDefaults.Cache.Hazelcast.ManagementCenter.enabled;
     assertThat(obj.isEnabled()).isEqualTo(val);
@@ -168,7 +172,7 @@ public class MuyiePropertiesTest {
   @Test
   public void testCacheHazelcastManagementCenterUpdateInterval() {
     final MuyieProperties.Cache.Hazelcast.ManagementCenter obj = properties.getCache().getHazelcast()
-        .getManagementCenter();
+      .getManagementCenter();
 
     int val = MuyieDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
     assertThat(obj.getUpdateInterval()).isEqualTo(val);
@@ -180,7 +184,7 @@ public class MuyiePropertiesTest {
   @Test
   public void testCacheHazelcastManagementCenterUrl() {
     final MuyieProperties.Cache.Hazelcast.ManagementCenter obj = properties.getCache().getHazelcast()
-        .getManagementCenter();
+      .getManagementCenter();
 
     String val = MuyieDefaults.Cache.Hazelcast.ManagementCenter.url;
     assertThat(obj.getUrl()).isEqualTo(val);
@@ -856,4 +860,65 @@ public class MuyiePropertiesTest {
     obj.setRetentionPeriod(val);
     assertThat(obj.getRetentionPeriod()).isEqualTo(val);
   }
+
+  @Test
+  public void testRetrofitReadTimeout() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    long val = MuyieDefaults.Retrofit.readTimeout;
+    assertThat(obj.getReadTimeout()).isEqualTo(val);
+    val++;
+    obj.setReadTimeout(val);
+    assertThat(obj.getReadTimeout()).isEqualTo(val);
+  }
+
+  @Test
+  public void testRetrofitWriteTimeout() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    long val = MuyieDefaults.Retrofit.writeTimeout;
+    assertThat(obj.getWriteTimeout()).isEqualTo(val);
+    val++;
+    obj.setWriteTimeout(val);
+    assertThat(obj.getWriteTimeout()).isEqualTo(val);
+  }
+
+  @Test
+  public void testRetrofitConnectTimeout() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    long val = MuyieDefaults.Retrofit.connectTimeout;
+    assertThat(obj.getConnectTimeout()).isEqualTo(val);
+    val++;
+    obj.setConnectTimeout(val);
+    assertThat(obj.getConnectTimeout()).isEqualTo(val);
+  }
+
+  @Test
+  public void testRetrofitMaxIdle() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    int val = MuyieDefaults.Retrofit.maxIdle;
+    assertThat(obj.getMaxIdle()).isEqualTo(val);
+    val++;
+    obj.setMaxIdle(val);
+    assertThat(obj.getMaxIdle()).isEqualTo(val);
+  }
+
+  @Test
+  public void testRetrofitKeepAlive() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    int val = MuyieDefaults.Retrofit.keepAlive;
+    assertThat(obj.getKeepAlive()).isEqualTo(val);
+    val++;
+    obj.setKeepAlive(val);
+    assertThat(obj.getKeepAlive()).isEqualTo(val);
+  }
+
+  @Test
+  public void testRetrofitEndpoints() {
+    final MuyieProperties.Retrofit obj = properties.getRetrofit();
+    Map<String, String> val = MuyieDefaults.Retrofit.endpoints;
+    assertThat(obj.getEndpoints()).isEqualTo(val);
+    val.put("1", "1");
+    obj.setEndpoints(val);
+    assertThat(obj.getEndpoints()).isEqualTo(val);
+  }
+
 }

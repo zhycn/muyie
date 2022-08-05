@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @ConditionalOnWebApplication
-@AutoConfigureAfter({ MuyieProperties.class, JacksonProperties.class })
+@AutoConfigureAfter({MuyieProperties.class, JacksonProperties.class})
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class DateTimeFormatConfiguration implements WebMvcConfigurer, InitializingBean {
 
@@ -37,7 +37,7 @@ public class DateTimeFormatConfiguration implements WebMvcConfigurer, Initializi
   @Override
   public void afterPropertiesSet() throws Exception {
     if (StringUtils.isBlank(jacksonProperties.getDateFormat())) {
-      jacksonProperties.setDateFormat(MuyieConstants.FORMAT_DATE_TIME);
+      jacksonProperties.setDateFormat("yyyy-MM-dd HH:mm:ss"); // 默认
     }
   }
 

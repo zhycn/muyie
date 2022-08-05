@@ -1,20 +1,5 @@
 package org.muyie.framework.config.apidoc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
 
 import org.junit.jupiter.api.AfterEach;
@@ -34,9 +19,24 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
+
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class SwaggerAutoConfigurationTest {
 
@@ -53,12 +53,12 @@ public class SwaggerAutoConfigurationTest {
 
   @BeforeEach
   public void setup() {
-    MockitoAnnotations.initMocks(this);
+    MockitoAnnotations.openMocks(this);
 
     final MuyieProperties muyieProperties = new MuyieProperties();
     properties = muyieProperties.getSwagger();
     properties.setHost("test.host.org");
-    properties.setProtocols(new String[] { "http", "https" });
+    properties.setProtocols(new String[]{"http", "https"});
     properties.setTitle("test title");
     properties.setDescription("test description");
     properties.setVersion("6.6.6");
@@ -147,7 +147,7 @@ public class SwaggerAutoConfigurationTest {
     verify(docket).apiInfo(infoCaptor.capture());
     final ApiInfo info = infoCaptor.getValue();
     assertThat(info.getTitle()).isEqualTo(
-        StringUtils.capitalize(properties.getTitle()) + " " + SwaggerAutoConfiguration.MANAGEMENT_TITLE_SUFFIX);
+      StringUtils.capitalize(properties.getTitle()) + " " + SwaggerAutoConfiguration.MANAGEMENT_TITLE_SUFFIX);
     assertThat(info.getDescription()).isEqualTo(SwaggerAutoConfiguration.MANAGEMENT_DESCRIPTION);
     assertThat(info.getVersion()).isEqualTo(properties.getVersion());
     assertThat(info.getTermsOfServiceUrl()).isEqualTo("");

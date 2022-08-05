@@ -5,23 +5,40 @@ package org.muyie.framework.config;
  */
 public interface MuyieConstants {
 
+  /**
+   * Constant <code>SPRING_PROFILE_CONSOLE="console"</code>
+   */
+  String SPRING_PROFILE_CONSOLE = "console";
+
   // Spring profiles for development, debug, test, sit, uat and production
-  /** Constant <code>SPRING_PROFILE_DEVELOPMENT="dev"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_DEVELOPMENT="dev"</code>
+   */
   String SPRING_PROFILE_DEVELOPMENT = "dev";
 
-  /** Constant <code>SPRING_PROFILE_DEBUG="debug"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_DEBUG="debug"</code>
+   */
   String SPRING_PROFILE_DEBUG = "debug";
 
-  /** Constant <code>SPRING_PROFILE_TEST="test"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_TEST="test"</code>
+   */
   String SPRING_PROFILE_TEST = "test";
 
-  /** Constant <code>SPRING_PROFILE_SIT="sit"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_SIT="sit"</code>
+   */
   String SPRING_PROFILE_SIT = "sit";
 
-  /** Constant <code>SPRING_PROFILE_UAT="uat"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_UAT="uat"</code>
+   */
   String SPRING_PROFILE_UAT = "uat";
 
-  /** Constant <code>SPRING_PROFILE_PRODUCTION="prod"</code> */
+  /**
+   * Constant <code>SPRING_PROFILE_PRODUCTION="prod"</code>
+   */
   String SPRING_PROFILE_PRODUCTION = "prod";
 
   /**
@@ -48,19 +65,8 @@ public interface MuyieConstants {
   String SPRING_PROFILE_K8S = "k8s";
 
   /**
-   * Date Format Constants
-   */
-  String FORMAT_DATE = "yyyy-MM-dd";
-  String FORMAT_TIME = "HH:mm:ss";
-  String FORMAT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
-  String FORMAT_DATE_2 = "yyyyMMdd";
-  String FORMAT_TIME_2 = "HHmmss";
-  String FORMAT_DATE_TIME_2 = "yyyyMMddHHmmss";
-
-  /**
-   * Trace logs
+   * TraceId for logs
    */
   String LOG_TRACE_ID = "traceId";
-  String TRACE_ID_HEADER = "X-TRACE-ID";
 
 }

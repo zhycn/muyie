@@ -1,6 +1,3 @@
-org.springframework.context.ApplicationContextInitializer=\
-  org.muyie.framework.config.TtlMDCAdapterInitializer
-
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.MuyieProperties,\
   org.muyie.framework.config.MuyieWebConfigurer,\
@@ -10,8 +7,9 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.async.MuyieAsyncConfiguration,\
   org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\
   org.muyie.framework.config.snowflake.SnowflakeConfiguration,\
-  org.muyie.framework.config.spring.SpringContextHolder,\
-  org.muyie.framework.domain.jpa.JpaAutoConfiguration,\
-  org.muyie.framework.exception.GlobalExceptionTranslator,\
-  org.muyie.framework.exception.GlobalExceptionHandler,\
+  org.muyie.framework.context.GlobalExceptionTranslator,\
+  org.muyie.framework.context.GlobalExceptionHandler,\
+  org.muyie.framework.data.jpa.JpaAutoConfiguration,\
+  org.muyie.framework.data.redis.RedisConfiguration,\
+  org.muyie.framework.retrofit.autoconfigure.RetrofitAutoConfiguration,\
   org.muyie.framework.security.ssl.UndertowSSLConfiguration

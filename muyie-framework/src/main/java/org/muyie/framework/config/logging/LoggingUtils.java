@@ -1,20 +1,5 @@
 package org.muyie.framework.config.logging;
 
-import java.net.InetSocketAddress;
-
-import org.muyie.framework.config.MuyieProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.boolex.OnMarkerEvaluator;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.classic.spi.LoggerContextListener;
-import ch.qos.logback.core.ConsoleAppender;
-import ch.qos.logback.core.filter.EvaluatorFilter;
-import ch.qos.logback.core.spi.ContextAwareBase;
-import ch.qos.logback.core.spi.FilterReply;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.composite.ContextJsonProvider;
 import net.logstash.logback.composite.GlobalCustomFieldsJsonProvider;
@@ -32,9 +17,24 @@ import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
 import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 
+import org.muyie.framework.config.MuyieProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetSocketAddress;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.boolex.OnMarkerEvaluator;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.classic.spi.LoggerContextListener;
+import ch.qos.logback.core.ConsoleAppender;
+import ch.qos.logback.core.filter.EvaluatorFilter;
+import ch.qos.logback.core.spi.ContextAwareBase;
+import ch.qos.logback.core.spi.FilterReply;
+
 /**
- * Utility methods to add appenders to a
- * {@link ch.qos.logback.classic.LoggerContext}.
+ * Utility methods to add appenders to a {@link LoggerContext}.
  */
 public final class LoggingUtils {
 
@@ -52,8 +52,8 @@ public final class LoggingUtils {
    * addJsonConsoleAppender.
    * </p>
    *
-   * @param context      a {@link ch.qos.logback.classic.LoggerContext} object.
-   * @param customFields a {@link java.lang.String} object.
+   * @param context      a {@link LoggerContext} object.
+   * @param customFields a {@link String} object.
    */
   public static void addJsonConsoleAppender(final LoggerContext context, final String customFields) {
     log.info("Initializing Console loggingProperties");
@@ -75,15 +75,12 @@ public final class LoggingUtils {
    * addLogstashTcpSocketAppender.
    * </p>
    *
-   * @param context            a {@link ch.qos.logback.classic.LoggerContext}
-   *                           object.
-   * @param customFields       a {@link java.lang.String} object.
-   * @param logstashProperties a
-   *                           {@link org.muyie.framework.config.MuyieProperties.Logging.Logstash}
-   *                           object.
+   * @param context            a {@link LoggerContext} object.
+   * @param customFields       a {@link String} object.
+   * @param logstashProperties a {@link MuyieProperties.Logging.Logstash} object.
    */
   public static void addLogstashTcpSocketAppender(final LoggerContext context, final String customFields,
-      final MuyieProperties.Logging.Logstash logstashProperties) {
+                                                  final MuyieProperties.Logging.Logstash logstashProperties) {
     log.info("Initializing Logstash loggingProperties");
 
     // More documentation is available at:
@@ -104,23 +101,21 @@ public final class LoggingUtils {
    * addContextListener.
    * </p>
    *
-   * @param context      a {@link ch.qos.logback.classic.LoggerContext} object.
-   * @param customFields a {@link java.lang.String} object.
-   * @param properties   a
-   *                     {@link org.muyie.framework.config.MuyieProperties.Logging}
-   *                     object.
+   * @param context      a {@link LoggerContext} object.
+   * @param customFields a {@link String} object.
+   * @param properties   a {@link MuyieProperties.Logging} object.
    */
   public static void addContextListener(final LoggerContext context, final String customFields,
-      final MuyieProperties.Logging properties) {
+                                        final MuyieProperties.Logging properties) {
     final LogbackLoggerContextListener loggerContextListener = new LogbackLoggerContextListener(properties,
-        customFields);
+      customFields);
     loggerContextListener.setContext(context);
     context.addListener(loggerContextListener);
   }
 
   /**
-   * Configure a log filter to remove "metrics" logs from all appenders except the
-   * "LOGSTASH" appender
+   * Configure a log filter to remove "metrics" logs from all appenders except the "LOGSTASH"
+   * appender
    *
    * @param context       the logger context
    * @param useJsonFormat whether to use JSON format
@@ -139,7 +134,7 @@ public final class LoggingUtils {
 
     context.getLoggerList().forEach(logger -> logger.iteratorForAppenders().forEachRemaining(appender -> {
       if (!appender.getName().equals(ASYNC_LOGSTASH_APPENDER_NAME)
-          && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && useJsonFormat)) {
+        && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && useJsonFormat)) {
         log.debug("Filter metrics logs from the {} appender", appender.getName());
         appender.setContext(context);
         appender.addFilter(metricsFilter);
@@ -149,7 +144,7 @@ public final class LoggingUtils {
   }
 
   private static LoggingEventCompositeJsonEncoder compositeJsonEncoder(final LoggerContext context,
-      final String customFields) {
+                                                                       final String customFields) {
     final LoggingEventCompositeJsonEncoder compositeJsonEncoder = new LoggingEventCompositeJsonEncoder();
     compositeJsonEncoder.setContext(context);
     compositeJsonEncoder.setProviders(jsonProviders(context, customFields));
@@ -213,10 +208,9 @@ public final class LoggingUtils {
   }
 
   /**
-   * Logback configuration is achieved by configuration file and API. When
-   * configuration file change is detected, the configuration is reset. This
-   * listener ensures that the programmatic configuration is also re-applied after
-   * reset.
+   * Logback configuration is achieved by configuration file and API. When configuration file change
+   * is detected, the configuration is reset. This listener ensures that the programmatic
+   * configuration is also re-applied after reset.
    */
   private static class LogbackLoggerContextListener extends ContextAwareBase implements LoggerContextListener {
     private final MuyieProperties.Logging loggingProperties;

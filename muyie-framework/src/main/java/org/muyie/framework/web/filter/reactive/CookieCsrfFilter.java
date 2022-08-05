@@ -7,9 +7,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
-import reactor.core.publisher.Mono;
 
 import java.util.Optional;
+
+import reactor.core.publisher.Mono;
 
 /**
  * <p>
@@ -20,7 +21,9 @@ public class CookieCsrfFilter implements WebFilter {
 
   private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
 
-  /** {@inheritDoc} */
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Mono<Void> filter(final ServerWebExchange exchange, final WebFilterChain chain) {
     if (exchange.getRequest().getCookies().get(CSRF_COOKIE_NAME) != null) {
@@ -33,8 +36,8 @@ public class CookieCsrfFilter implements WebFilter {
 
     return csrfToken.doOnSuccess(token -> {
       final ResponseCookie cookie = ResponseCookie.from(CSRF_COOKIE_NAME, token.getToken()).maxAge(-1).httpOnly(false)
-          .path(getRequestContext(exchange.getRequest()))
-          .secure(Optional.ofNullable(exchange.getRequest().getSslInfo()).isPresent()).build();
+        .path(getRequestContext(exchange.getRequest()))
+        .secure(Optional.ofNullable(exchange.getRequest().getSslInfo()).isPresent()).build();
       exchange.getResponse().getCookies().add(CSRF_COOKIE_NAME, cookie);
 
     }).then(Mono.defer(() -> chain.filter(exchange)));

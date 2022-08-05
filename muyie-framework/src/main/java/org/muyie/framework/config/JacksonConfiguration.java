@@ -1,16 +1,16 @@
 package org.muyie.framework.config;
 
+import com.fasterxml.jackson.datatype.hppc.HppcModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
+
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zalando.problem.ProblemModule;
 import org.zalando.problem.violations.ConstraintViolationProblemModule;
-
-import com.fasterxml.jackson.datatype.hppc.HppcModule;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
 @Configuration
 @ConditionalOnWebApplication
@@ -24,7 +24,7 @@ public class JacksonConfiguration {
 
   /**
    * Support for Java date and time API.
-   * 
+   *
    * @return the corresponding Jackson module.
    */
   @Bean
@@ -39,7 +39,7 @@ public class JacksonConfiguration {
 
   /**
    * Jackson Afterburner module to speed up serialization/deserialization.
-   * 
+   *
    * @return the Jackson Afterburner module
    */
   @Bean
@@ -49,7 +49,7 @@ public class JacksonConfiguration {
 
   /**
    * Module for serialization/deserialization of RFC7807 Problem.
-   * 
+   *
    * @return the Problem module
    */
   @Bean
@@ -59,7 +59,7 @@ public class JacksonConfiguration {
 
   /**
    * Module for serialization/deserialization of ConstraintViolationProblem.
-   * 
+   *
    * @return the ConstraintViolationProblem
    */
   @Bean

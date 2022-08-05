@@ -1,10 +1,10 @@
 package org.muyie.framework.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.Environment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Utility class to load a Spring profile to be used as default when there is no
@@ -31,7 +31,7 @@ public final class DefaultProfileUtil {
      * set in the <code>application.yml</code> file. See
      * https://github.com/spring-projects/spring-boot/issues/1219
      */
-    defProperties.put(SPRING_PROFILE_DEFAULT, MuyieConstants.SPRING_PROFILE_DEVELOPMENT);
+    defProperties.put(SPRING_PROFILE_DEFAULT, MuyieConstants.SPRING_PROFILE_CONSOLE);
     app.setDefaultProperties(defProperties);
   }
 

@@ -1,5 +1,7 @@
 package org.muyie.framework.config;
 
+import com.google.common.collect.Maps;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -233,5 +235,16 @@ public interface MuyieDefaults {
   interface AuditEvents {
 
     int retentionPeriod = 30;
+  }
+
+  interface Retrofit {
+
+    long readTimeout = 10000L; // ms
+    long writeTimeout = 10000L; // ms
+    long connectTimeout = 10000L; // ms
+    int maxIdle = 5;
+    int keepAlive = 5;
+    Map<String, String> endpoints = Maps.newConcurrentMap();
+
   }
 }

@@ -4,7 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.springframework.core.annotation.Order;
 
 /**
- * Before advice to be used in the Spring AOP framework.
+ * 后置通知，在目标方法之前调用。
  */
 @Order(1)
 public interface BeforeAdvice extends Advice {

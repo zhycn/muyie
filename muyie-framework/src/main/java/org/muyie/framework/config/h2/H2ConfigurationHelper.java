@@ -1,18 +1,18 @@
 package org.muyie.framework.config.h2;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
 /**
  * Utility class to configure H2 in development.
  * <p>
- * We don't want to include H2 when we are packaging for the "prod" profile and
- * won't actually need it, so we have to load / invoke things at runtime through
- * reflection.
+ * We don't want to include H2 when we are packaging for the "prod" profile and won't actually need
+ * it, so we have to load / invoke things at runtime through reflection.
  */
 public class H2ConfigurationHelper {
 
@@ -21,8 +21,8 @@ public class H2ConfigurationHelper {
    * createServer.
    * </p>
    *
-   * @return a {@link java.lang.Object} object.
-   * @throws java.sql.SQLException if any.
+   * @return a {@link Object} object.
+   * @throws SQLException if any.
    */
   public static Object createServer() throws SQLException {
     return createServer("9092");
@@ -33,16 +33,16 @@ public class H2ConfigurationHelper {
    * createServer.
    * </p>
    *
-   * @param port a {@link java.lang.String} object.
-   * @return a {@link java.lang.Object} object.
-   * @throws java.sql.SQLException if any.
+   * @param port a {@link String} object.
+   * @return a {@link Object} object.
+   * @throws SQLException if any.
    */
   public static Object createServer(final String port) throws SQLException {
     try {
       final ClassLoader loader = Thread.currentThread().getContextClassLoader();
       final Class<?> serverClass = Class.forName("org.h2.tools.Server", true, loader);
       final Method createServer = serverClass.getMethod("createTcpServer", String[].class);
-      return createServer.invoke(null, new Object[] { new String[] { "-tcp", "-tcpAllowOthers", "-tcpPort", port } });
+      return createServer.invoke(null, new Object[]{new String[]{"-tcp", "-tcpAllowOthers", "-tcpPort", port}});
 
     } catch (ClassNotFoundException | LinkageError e) {
       throw new RuntimeException("Failed to load and initialize org.h2.tools.Server", e);
@@ -67,7 +67,7 @@ public class H2ConfigurationHelper {
    * initH2Console.
    * </p>
    *
-   * @param servletContext a {@link javax.servlet.ServletContext} object.
+   * @param servletContext a {@link ServletContext} object.
    */
   public static void initH2Console(final ServletContext servletContext) {
     try {
@@ -84,7 +84,8 @@ public class H2ConfigurationHelper {
       h2ConsoleServlet.setInitParameter("-properties", "src/main/resources/");
       h2ConsoleServlet.setLoadOnStartup(1);
 
-    } catch (ClassNotFoundException | LinkageError | NoSuchMethodException | InvocationTargetException e) {
+    } catch (ClassNotFoundException | LinkageError | NoSuchMethodException |
+             InvocationTargetException e) {
       throw new RuntimeException("Failed to load and initialize org.h2.server.web.WebServlet", e);
 
     } catch (IllegalAccessException | InstantiationException e) {

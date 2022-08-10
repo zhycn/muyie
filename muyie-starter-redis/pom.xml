@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>muyie-starter-redis</artifactId>
+  <packaging>jar</packaging>
+  <name>muyie-starter-redis</name>
+  <description>Redis is an advanced key-value store</description>
+  <url>https://redis.io/</url>
+
+  <parent>
+    <groupId>com.github.zhycn</groupId>
+    <artifactId>muyie-dependencies</artifactId>
+    <version>1.2.4</version>
+    <relativePath>../muyie-dependencies/pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <!-- Starter for using Redis key-value data store with Spring Data Redis and the Lettuce client -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <!-- Lettuce 客户端需要添加 commons-pool2 依赖才能使用连接池 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+    </dependency>
+    <!-- Redis Java client with features of In-Memory Data Grid -->
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-spring-boot-starter</artifactId>
+    </dependency>
+  </dependencies>
+</project>

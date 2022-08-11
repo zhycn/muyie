@@ -3,9 +3,7 @@ package com.muyie.apollo;
 import com.ctrip.framework.apollo.ConfigChangeListener;
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;
-import com.ctrip.framework.apollo.spring.config.PropertySourcesProcessor;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
 import org.springframework.context.ApplicationContext;
@@ -19,12 +17,11 @@ import lombok.extern.slf4j.Slf4j;
  * 解决使用 `@ConfigurationProperties` 注解时，配置属性不更新的问题。
  *
  * @author larry.qi
- * @date 2022-07-13
+ * @since 2022-07-13
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty({"apollo.bootstrap.enabled"})
-@ConditionalOnMissingBean({PropertySourcesProcessor.class})
+@ConditionalOnProperty(value = "apollo.bootstrap.enabled", havingValue = "true")
 public class MuyieApolloAutoConfiguration implements ApplicationContextAware, ConfigChangeListener {
 
   private static ApplicationContext applicationContext = null;

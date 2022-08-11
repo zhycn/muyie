@@ -94,7 +94,17 @@
   <modules>
     <module>muyie-dependencies</module>
     <module>muyie-framework</module>
+    <module>muyie-starter-apollo</module>
+    <module>muyie-starter-redis</module>
   </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
   <dependencyManagement>
     <dependencies>

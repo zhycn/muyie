@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.tsollu.redis.TsolluRedisAutoConfiguration
+  com.muyie.redis.MuyieRedisAutoConfiguration

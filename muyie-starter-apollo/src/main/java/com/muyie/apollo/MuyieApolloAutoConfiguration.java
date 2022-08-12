@@ -1,45 +1,32 @@
 package com.muyie.apollo;
 
-import com.ctrip.framework.apollo.ConfigChangeListener;
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 解决使用 `@ConfigurationProperties` 注解时，配置属性不更新的问题。
  *
  * @author larry.qi
- * @since 2022-07-13
+ * @since 1.2.5
  */
-@Slf4j
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "apollo.bootstrap.enabled", havingValue = "true")
-public class MuyieApolloAutoConfiguration implements ApplicationContextAware, ConfigChangeListener {
+public class MuyieApolloAutoConfiguration extends BaseConfigChangeListener {
 
-  private static ApplicationContext applicationContext = null;
-
-  public static ApplicationContext getApplicationContext() {
-    return applicationContext;
-  }
-
+  /**
+   * 默认只能自动更新 `apollo.bootstrap.namespaces=application` 的配置属性，其他命名空间的配置属性更新可参考该方法实现。
+   *
+   * @param event 配置变更事件
+   * @since 1.2.5
+   */
   @Override
-  public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
-    MuyieApolloAutoConfiguration.applicationContext = applicationContext;
-  }
-
-  @Override
-  @ApolloConfigChangeListener
+  @ApolloConfigChangeListener("application")
   public void onChange(@NonNull ConfigChangeEvent event) {
-    event.changedKeys().forEach(key -> log.info("Apollo ConfigChangeEvent - {}", event.getChange(key)));
-    getApplicationContext().publishEvent(new EnvironmentChangeEvent(event.changedKeys()));
+    refreshConfigChange(event);
   }
 
 }

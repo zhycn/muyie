@@ -20,13 +20,13 @@ public class MuyieApolloAutoConfiguration extends BaseConfigChangeListener {
   /**
    * 默认只能自动更新 `apollo.bootstrap.namespaces=application` 的配置属性，其他命名空间的配置属性更新可参考该方法实现。
    *
-   * @param event 配置变更事件
+   * @param configChangeEvent 配置变更事件
    * @since 1.2.5
    */
   @Override
   @ApolloConfigChangeListener("application")
-  public void onChange(@NonNull ConfigChangeEvent event) {
-    refreshConfigChange(event);
+  public void onChange(@NonNull ConfigChangeEvent configChangeEvent) {
+    refreshConfigChange(configChangeEvent);
   }
 
 }

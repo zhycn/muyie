@@ -34,12 +34,14 @@ public abstract class BaseConfigChangeListener implements ApplicationContextAwar
   /**
    * 动态刷新配置的方法
    *
-   * @param event 配置变更事件
+   * @param configChangeEvent 配置变更事件
    * @since 1.2.5
    */
-  protected static void refreshConfigChange(@NonNull ConfigChangeEvent event) {
-    event.changedKeys().forEach(key -> log.info("Apollo ConfigChangeEvent - {}", event.getChange(key)));
-    getApplicationContext().publishEvent(new EnvironmentChangeEvent(event.changedKeys()));
+  protected static void refreshConfigChange(@NonNull ConfigChangeEvent configChangeEvent) {
+    configChangeEvent.changedKeys().forEach(key ->
+      log.info("Apollo ConfigChangeEvent - {}", configChangeEvent.getChange(key))
+    );
+    getApplicationContext().publishEvent(new EnvironmentChangeEvent(configChangeEvent.changedKeys()));
   }
 
 }

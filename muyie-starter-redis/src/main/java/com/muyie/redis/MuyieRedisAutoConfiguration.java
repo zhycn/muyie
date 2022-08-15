@@ -2,18 +2,22 @@ package com.muyie.redis;
 
 import com.muyie.redis.cache.RedisCache;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * @author larry.qi
+ * @since 1.2.5
  */
 @Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(RedisOperations.class)
 @Import({RedisCache.class})
 public class MuyieRedisAutoConfiguration {
 

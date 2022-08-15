@@ -18,6 +18,7 @@
 
   <dependencies>
     <!-- Starter for using Redis key-value data store with Spring Data Redis and the Lettuce client -->
+    <!-- Spring Data Redis is currently tested against the latest 4.0 release. -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>

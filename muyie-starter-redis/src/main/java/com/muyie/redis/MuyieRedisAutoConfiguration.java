@@ -1,6 +1,7 @@
 package com.muyie.redis;
 
 import com.muyie.redis.cache.RedisCache;
+import com.muyie.redis.cache.StringRedisCache;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,7 +19,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(RedisOperations.class)
-@Import({RedisCache.class})
+@Import({RedisCache.class, StringRedisCache.class})
 public class MuyieRedisAutoConfiguration {
 
   /**

@@ -13,10 +13,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author larry.qi
  * @since 1.2.5
  */
+@Slf4j
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(RedisOperations.class)
 public class MuyieRedisAutoConfiguration {
@@ -30,6 +33,7 @@ public class MuyieRedisAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean(name = "redisTemplate")
   public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    log.info("Using MuYie RedisTemplate<String, Object> config.");
     RedisTemplate<String, Object> template = new RedisTemplate<>();
     template.setConnectionFactory(redisConnectionFactory);
     template.setKeySerializer(RedisSerializer.string());
@@ -42,7 +46,7 @@ public class MuyieRedisAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean(name = "redisCache")
-  public RedisCache<Object> redisCache(RedisTemplate<String, Object> redisTemplate) {
+  public <V> RedisCache<V> redisCache(RedisTemplate<String, V> redisTemplate) {
     return new RedisCache<>(redisTemplate);
   }
 

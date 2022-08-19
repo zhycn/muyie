@@ -1,18 +1,16 @@
 package com.muyie.redis.cache;
 
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
- * Spring Data Redis 工具类
+ * StringRedisCache
  *
  * @author larry.qi
  * @since 1.2.5
  **/
-@Component
-public class StringRedisCache extends RedisCache2<String> {
+public class StringRedisCache extends RedisCache<String> {
 
-  public StringRedisCache(RedisTemplate<String, String> redisTemplate) {
+  public StringRedisCache(StringRedisTemplate redisTemplate) {
     super(redisTemplate);
   }
 }

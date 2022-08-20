@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.BoundStreamOperations;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.BoundZSetOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -624,7 +625,8 @@ public class RedisCache<V> {
    * @return 缓存的集合数据
    */
   public List<V> getListCache(String key, Supplier<List<V>> supplier) {
-    return Optional.ofNullable(getListCache(key)).orElseGet(supplier);
+    List<V> listCache = getListCache(key);
+    return CollectionUtils.isEmpty(listCache) ? supplier.get() : listCache;
   }
 
   /**
@@ -658,7 +660,8 @@ public class RedisCache<V> {
    * @return 缓存的集合数据
    */
   public Set<V> getSetCache(String key, Supplier<Set<V>> supplier) {
-    return Optional.ofNullable(getSetCache(key)).orElseGet(supplier);
+    Set<V> setCache = getSetCache(key);
+    return CollectionUtils.isEmpty(setCache) ? supplier.get() : setCache;
   }
 
   /**
@@ -707,7 +710,8 @@ public class RedisCache<V> {
    * @return 缓存的数据
    */
   public Map<String, V> getMapCache(String key, Supplier<Map<String, V>> supplier) {
-    return Optional.ofNullable(getMapCache(key)).orElseGet(supplier);
+    Map<String, V> mapCache = getMapCache(key);
+    return CollectionUtils.isEmpty(mapCache) ? supplier.get() : mapCache;
   }
 
   /**

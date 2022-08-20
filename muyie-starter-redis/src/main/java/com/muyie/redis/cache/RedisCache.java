@@ -563,7 +563,7 @@ public class RedisCache<V> {
    * @param dataList 缓存的集合数据
    * @return BoundListOperations
    */
-  public BoundListOperations<String, V> setListCache(String key, Collection<V> dataList) {
+  public BoundListOperations<String, V> setListCache(String key, List<V> dataList) {
     redisTemplate.opsForList().rightPushAll(key, dataList);
     return boundListOps(key);
   }
@@ -680,8 +680,8 @@ public class RedisCache<V> {
    * @return 缓存的数据
    */
   public V getMapCache(String key, String hKey) {
-    BoundHashOperations<String, String, V> operations = boundHashOps(key);
-    return operations.get(hKey);
+    BoundHashOperations<String, String, V> boundHashOperations = boundHashOps(key);
+    return boundHashOperations.get(hKey);
   }
 
   /**
@@ -704,8 +704,8 @@ public class RedisCache<V> {
    * @return 缓存的集合数据
    */
   public List<V> getMultiMapCache(String key, Collection<String> hKeys) {
-    BoundHashOperations<String, String, V> operations = boundHashOps(key);
-    return operations.multiGet(hKeys);
+    BoundHashOperations<String, String, V> boundHashOperations = boundHashOps(key);
+    return boundHashOperations.multiGet(hKeys);
   }
 
   /**

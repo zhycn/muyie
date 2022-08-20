@@ -24,7 +24,7 @@ public class MuyieApolloAutoConfiguration extends BaseConfigChangeListener {
    * @since 1.2.5
    */
   @Override
-  @ApolloConfigChangeListener("application")
+  @ApolloConfigChangeListener
   public void onChange(@NonNull ConfigChangeEvent configChangeEvent) {
     refreshConfigChange(configChangeEvent);
   }

@@ -148,7 +148,7 @@ public class RedisCache<V> {
   }
 
   /**
-   * 设置有效时间
+   * 设置缓存的有效时间
    *
    * @param key     键
    * @param timeout 超时时间（单位秒）
@@ -159,7 +159,7 @@ public class RedisCache<V> {
   }
 
   /**
-   * 设置有效时间
+   * 设置缓存的有效时间
    *
    * @param key      键
    * @param timeout  超时时间
@@ -171,7 +171,7 @@ public class RedisCache<V> {
   }
 
   /**
-   * 设置有效时间
+   * 设置缓存的有效时间
    *
    * @param key     键
    * @param timeout 超时时间
@@ -345,20 +345,26 @@ public class RedisCache<V> {
    *
    * @param key   键
    * @param value 值
+   * @return BoundValueOperations
    */
-  public void setValueCache(String key, V value) {
-    boundValueOps(key).set(value);
+  public BoundValueOperations<String, V> setValueCache(String key, V value) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.set(value);
+    return boundValueOperations;
   }
 
   /**
    * 缓存 Value 对象
    *
-   * @param key      键
-   * @param value    值
-   * @param duration 缓存有效期
+   * @param key     键
+   * @param value   值
+   * @param timeout 超时时间
+   * @return BoundValueOperations
    */
-  public void setValueCache(String key, V value, Duration duration) {
-    boundValueOps(key).set(value, duration);
+  public BoundValueOperations<String, V> setValueCache(String key, V value, Duration timeout) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.set(value, timeout);
+    return boundValueOperations;
   }
 
   /**
@@ -368,9 +374,12 @@ public class RedisCache<V> {
    * @param value    值
    * @param timeout  超时时间
    * @param timeUnit 时间单位
+   * @return BoundValueOperations
    */
-  public void setValueCache(String key, V value, long timeout, TimeUnit timeUnit) {
-    boundValueOps(key).set(value, timeout, timeUnit);
+  public BoundValueOperations<String, V> setValueCache(String key, V value, long timeout, TimeUnit timeUnit) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.set(value, timeout, timeUnit);
+    return boundValueOperations;
   }
 
   /**
@@ -379,9 +388,12 @@ public class RedisCache<V> {
    * @param key   键
    * @param value 值
    * @param date  有效期截止时间
+   * @return BoundValueOperations
    */
-  public void setValueCache(String key, V value, Date date) {
-    setValueCache(key, value, date.toInstant());
+  public BoundValueOperations<String, V> setValueCache(String key, V value, Date date) {
+    BoundValueOperations<String, V> boundValueOperations = setValueCache(key, value);
+    boundValueOperations.expireAt(date);
+    return boundValueOperations;
   }
 
   /**
@@ -390,10 +402,12 @@ public class RedisCache<V> {
    * @param key      键
    * @param value    值
    * @param expireAt 有效期截止时间
+   * @return BoundValueOperations
    */
-  public void setValueCache(String key, V value, Instant expireAt) {
-    boundValueOps(key).set(value);
-    expireAt(key, expireAt);
+  public BoundValueOperations<String, V> setValueCache(String key, V value, Instant expireAt) {
+    BoundValueOperations<String, V> boundValueOperations = setValueCache(key, value);
+    boundValueOperations.expireAt(expireAt);
+    return boundValueOperations;
   }
 
   /**
@@ -401,22 +415,26 @@ public class RedisCache<V> {
    *
    * @param key   键
    * @param value 值
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfAbsent(String key, V value) {
-    return boundValueOps(key).setIfAbsent(value);
+  public BoundValueOperations<String, V> setValueCacheIfAbsent(String key, V value) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfAbsent(value);
+    return boundValueOperations;
   }
 
   /**
    * 缓存 Value 对象（仅当 key 不存在时，set 才会生效）
    *
-   * @param key      键
-   * @param value    值
-   * @param duration 缓存有效期
-   * @return true 缓存成功
+   * @param key     键
+   * @param value   值
+   * @param timeout 超时时间
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfAbsent(String key, V value, Duration duration) {
-    return boundValueOps(key).setIfAbsent(value, duration);
+  public BoundValueOperations<String, V> setValueCacheIfAbsent(String key, V value, Duration timeout) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfAbsent(value, timeout);
+    return boundValueOperations;
   }
 
   /**
@@ -426,10 +444,12 @@ public class RedisCache<V> {
    * @param value    值
    * @param timeout  超时时间
    * @param timeUnit 时间单位
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfAbsent(String key, V value, long timeout, TimeUnit timeUnit) {
-    return boundValueOps(key).setIfAbsent(value, timeout, timeUnit);
+  public BoundValueOperations<String, V> setValueCacheIfAbsent(String key, V value, long timeout, TimeUnit timeUnit) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfAbsent(value, timeout, timeUnit);
+    return boundValueOperations;
   }
 
   /**
@@ -438,26 +458,32 @@ public class RedisCache<V> {
    * @param key   键
    * @param value 值
    * @param date  有效期截止时间
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfAbsent(String key, V value, Date date) {
-    return setValueCacheIfAbsent(key, value, date.toInstant());
-  }
-
-  /**
-   * 缓存 Value 对象（仅当 key 不存在时，set 才会生效）
-   *
-   * @param key      键
-   * @param value    值
-   * @param expireAt 有效期截止时间
-   * @return true 缓存成功
-   */
-  public Boolean setValueCacheIfAbsent(String key, V value, Instant expireAt) {
-    Boolean flag = boundValueOps(key).setIfAbsent(value);
+  public BoundValueOperations<String, V> setValueCacheIfAbsent(String key, V value, Date date) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    Boolean flag = boundValueOperations.setIfAbsent(value);
     if (Objects.nonNull(flag) && flag) {
-      expireAt(key, expireAt);
+      boundValueOperations.expireAt(date);
     }
-    return flag;
+    return boundValueOperations;
+  }
+
+  /**
+   * 缓存 Value 对象（仅当 key 不存在时，set 才会生效）
+   *
+   * @param key      键
+   * @param value    值
+   * @param expireAt 有效期截止时间
+   * @return BoundValueOperations
+   */
+  public BoundValueOperations<String, V> setValueCacheIfAbsent(String key, V value, Instant expireAt) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    Boolean flag = boundValueOperations.setIfAbsent(value);
+    if (Objects.nonNull(flag) && flag) {
+      boundValueOperations.expireAt(expireAt);
+    }
+    return boundValueOperations;
   }
 
   /**
@@ -465,22 +491,26 @@ public class RedisCache<V> {
    *
    * @param key   缓存的键
    * @param value 缓存的值
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfPresent(String key, V value) {
-    return boundValueOps(key).setIfPresent(value);
+  public BoundValueOperations<String, V> setValueCacheIfPresent(String key, V value) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfPresent(value);
+    return boundValueOperations;
   }
 
   /**
    * 缓存 Value 对象（仅当 key 存在时，set 才会生效）
    *
-   * @param key      键
-   * @param value    值
-   * @param duration 缓存有效期
-   * @return true 缓存成功
+   * @param key     键
+   * @param value   值
+   * @param timeout 超时时间
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfPresent(String key, V value, Duration duration) {
-    return boundValueOps(key).setIfPresent(value, duration);
+  public BoundValueOperations<String, V> setValueCacheIfPresent(String key, V value, Duration timeout) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfPresent(value, timeout);
+    return boundValueOperations;
   }
 
   /**
@@ -490,10 +520,12 @@ public class RedisCache<V> {
    * @param value    值
    * @param timeout  超时时间
    * @param timeUnit 时间单位
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfPresent(String key, V value, long timeout, TimeUnit timeUnit) {
-    return boundValueOps(key).setIfPresent(value, timeout, timeUnit);
+  public BoundValueOperations<String, V> setValueCacheIfPresent(String key, V value, long timeout, TimeUnit timeUnit) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    boundValueOperations.setIfPresent(value, timeout, timeUnit);
+    return boundValueOperations;
   }
 
   /**
@@ -502,10 +534,15 @@ public class RedisCache<V> {
    * @param key   键
    * @param value 值
    * @param date  有效期截止时间
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfPresent(String key, V value, Date date) {
-    return setValueCacheIfPresent(key, value, date.toInstant());
+  public BoundValueOperations<String, V> setValueCacheIfPresent(String key, V value, Date date) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    Boolean flag = boundValueOperations.setIfPresent(value);
+    if (Objects.nonNull(flag) && flag) {
+      boundValueOperations.expireAt(date);
+    }
+    return boundValueOperations;
   }
 
   /**
@@ -514,14 +551,15 @@ public class RedisCache<V> {
    * @param key      键
    * @param value    值
    * @param expireAt 有效期截止时间
-   * @return true 缓存成功
+   * @return BoundValueOperations
    */
-  public Boolean setValueCacheIfPresent(String key, V value, Instant expireAt) {
-    Boolean flag = boundValueOps(key).setIfPresent(value);
+  public BoundValueOperations<String, V> setValueCacheIfPresent(String key, V value, Instant expireAt) {
+    BoundValueOperations<String, V> boundValueOperations = boundValueOps(key);
+    Boolean flag = boundValueOperations.setIfPresent(value);
     if (Objects.nonNull(flag) && flag) {
-      expireAt(key, expireAt);
+      boundValueOperations.expireAt(expireAt);
     }
-    return flag;
+    return boundValueOperations;
   }
 
   /**

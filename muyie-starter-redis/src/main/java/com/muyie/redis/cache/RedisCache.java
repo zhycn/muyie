@@ -9,7 +9,6 @@ import org.springframework.data.redis.core.BoundStreamOperations;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.BoundZSetOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.util.Assert;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -18,6 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -347,7 +347,6 @@ public class RedisCache<V> {
    * @param value 值
    */
   public void setValueCache(String key, V value) {
-    Assert.notNull(value, "value must not be null");
     boundValueOps(key).set(value);
   }
 
@@ -359,7 +358,6 @@ public class RedisCache<V> {
    * @param duration 缓存有效期
    */
   public void setValueCache(String key, V value, Duration duration) {
-    Assert.notNull(value, "value must not be null");
     boundValueOps(key).set(value, duration);
   }
 
@@ -372,8 +370,30 @@ public class RedisCache<V> {
    * @param timeUnit 时间单位
    */
   public void setValueCache(String key, V value, long timeout, TimeUnit timeUnit) {
-    Assert.notNull(value, "value must not be null");
     boundValueOps(key).set(value, timeout, timeUnit);
+  }
+
+  /**
+   * 缓存 Value 对象
+   *
+   * @param key   键
+   * @param value 值
+   * @param date  有效期截止时间
+   */
+  public void setValueCache(String key, V value, Date date) {
+    setValueCache(key, value, date.toInstant());
+  }
+
+  /**
+   * 缓存 Value 对象
+   *
+   * @param key      键
+   * @param value    值
+   * @param expireAt 有效期截止时间
+   */
+  public void setValueCache(String key, V value, Instant expireAt) {
+    boundValueOps(key).set(value);
+    expireAt(key, expireAt);
   }
 
   /**
@@ -381,10 +401,10 @@ public class RedisCache<V> {
    *
    * @param key   键
    * @param value 值
+   * @return true 缓存成功
    */
-  public void setValueCacheIfAbsent(String key, V value) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfAbsent(value);
+  public Boolean setValueCacheIfAbsent(String key, V value) {
+    return boundValueOps(key).setIfAbsent(value);
   }
 
   /**
@@ -393,10 +413,10 @@ public class RedisCache<V> {
    * @param key      键
    * @param value    值
    * @param duration 缓存有效期
+   * @return true 缓存成功
    */
-  public void setValueCacheIfAbsent(String key, V value, Duration duration) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfAbsent(value, duration);
+  public Boolean setValueCacheIfAbsent(String key, V value, Duration duration) {
+    return boundValueOps(key).setIfAbsent(value, duration);
   }
 
   /**
@@ -406,10 +426,38 @@ public class RedisCache<V> {
    * @param value    值
    * @param timeout  超时时间
    * @param timeUnit 时间单位
+   * @return true 缓存成功
    */
-  public void setValueCacheIfAbsent(String key, V value, long timeout, TimeUnit timeUnit) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfAbsent(value, timeout, timeUnit);
+  public Boolean setValueCacheIfAbsent(String key, V value, long timeout, TimeUnit timeUnit) {
+    return boundValueOps(key).setIfAbsent(value, timeout, timeUnit);
+  }
+
+  /**
+   * 缓存 Value 对象（仅当 key 不存在时，set 才会生效）
+   *
+   * @param key   键
+   * @param value 值
+   * @param date  有效期截止时间
+   * @return true 缓存成功
+   */
+  public Boolean setValueCacheIfAbsent(String key, V value, Date date) {
+    return setValueCacheIfAbsent(key, value, date.toInstant());
+  }
+
+  /**
+   * 缓存 Value 对象（仅当 key 不存在时，set 才会生效）
+   *
+   * @param key      键
+   * @param value    值
+   * @param expireAt 有效期截止时间
+   * @return true 缓存成功
+   */
+  public Boolean setValueCacheIfAbsent(String key, V value, Instant expireAt) {
+    Boolean flag = boundValueOps(key).setIfAbsent(value);
+    if (Objects.nonNull(flag) && flag) {
+      expireAt(key, expireAt);
+    }
+    return flag;
   }
 
   /**
@@ -417,10 +465,10 @@ public class RedisCache<V> {
    *
    * @param key   缓存的键
    * @param value 缓存的值
+   * @return true 缓存成功
    */
-  public void setValueCacheIfPresent(String key, V value) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfPresent(value);
+  public Boolean setValueCacheIfPresent(String key, V value) {
+    return boundValueOps(key).setIfPresent(value);
   }
 
   /**
@@ -429,10 +477,10 @@ public class RedisCache<V> {
    * @param key      键
    * @param value    值
    * @param duration 缓存有效期
+   * @return true 缓存成功
    */
-  public void setValueCacheIfPresent(String key, V value, Duration duration) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfPresent(value, duration);
+  public Boolean setValueCacheIfPresent(String key, V value, Duration duration) {
+    return boundValueOps(key).setIfPresent(value, duration);
   }
 
   /**
@@ -442,10 +490,38 @@ public class RedisCache<V> {
    * @param value    值
    * @param timeout  超时时间
    * @param timeUnit 时间单位
+   * @return true 缓存成功
    */
-  public void setValueCacheIfPresent(String key, V value, long timeout, TimeUnit timeUnit) {
-    Assert.notNull(value, "value must not be null");
-    boundValueOps(key).setIfPresent(value, timeout, timeUnit);
+  public Boolean setValueCacheIfPresent(String key, V value, long timeout, TimeUnit timeUnit) {
+    return boundValueOps(key).setIfPresent(value, timeout, timeUnit);
+  }
+
+  /**
+   * 缓存 Value 对象（仅当 key 存在时，set 才会生效）
+   *
+   * @param key   键
+   * @param value 值
+   * @param date  有效期截止时间
+   * @return true 缓存成功
+   */
+  public Boolean setValueCacheIfPresent(String key, V value, Date date) {
+    return setValueCacheIfPresent(key, value, date.toInstant());
+  }
+
+  /**
+   * 缓存 Value 对象（仅当 key 存在时，set 才会生效）
+   *
+   * @param key      键
+   * @param value    值
+   * @param expireAt 有效期截止时间
+   * @return true 缓存成功
+   */
+  public Boolean setValueCacheIfPresent(String key, V value, Instant expireAt) {
+    Boolean flag = boundValueOps(key).setIfPresent(value);
+    if (Objects.nonNull(flag) && flag) {
+      expireAt(key, expireAt);
+    }
+    return flag;
   }
 
   /**
@@ -474,11 +550,10 @@ public class RedisCache<V> {
    *
    * @param key      键
    * @param dataList 缓存的集合数据
-   * @return 缓存成功计数
+   * @return BoundListOperations
    */
-  public Long setListCache(String key, V[] dataList) {
-    Assert.notEmpty(dataList, "dataList must not be empty");
-    return boundListOps(key).rightPushAll(dataList);
+  public BoundListOperations<String, V> setListCache(String key, V[] dataList) {
+    return setListCache(key, Arrays.asList(dataList));
   }
 
   /**
@@ -486,11 +561,11 @@ public class RedisCache<V> {
    *
    * @param key      键
    * @param dataList 缓存的集合数据
-   * @return 缓存成功计数
+   * @return BoundListOperations
    */
-  public Long setListCache(String key, List<V> dataList) {
-    Assert.notEmpty(dataList, "dataList must not be empty");
-    return redisTemplate.opsForList().rightPushAll(key, dataList);
+  public BoundListOperations<String, V> setListCache(String key, Collection<V> dataList) {
+    redisTemplate.opsForList().rightPushAll(key, dataList);
+    return boundListOps(key);
   }
 
   /**
@@ -519,24 +594,12 @@ public class RedisCache<V> {
    *
    * @param key     键
    * @param dataSet 缓存的集合数据
-   * @return 缓存成功计数
+   * @return BoundSetOperations
    */
-  public Long setSetCache(String key, V[] dataSet) {
-    Assert.notEmpty(dataSet, "dataSet must not be empty");
-    return boundSetOps(key).add(dataSet);
-  }
-
-  /**
-   * 缓存的 Set 对象
-   *
-   * @param key     键
-   * @param dataSet 缓存的集合数据
-   * @return 缓存成功计数
-   */
-  @SuppressWarnings("unchecked")
-  public Long setSetCache(String key, Set<V> dataSet) {
-    Assert.notEmpty(dataSet, "dataSet must not be empty");
-    return dataSet.stream().map(v -> boundSetOps(key).add(v)).count();
+  public BoundSetOperations<String, V> setSetCache(String key, V[] dataSet) {
+    BoundSetOperations<String, V> boundSetOperations = boundSetOps(key);
+    boundSetOperations.add(dataSet);
+    return boundSetOperations;
   }
 
   /**
@@ -565,10 +628,12 @@ public class RedisCache<V> {
    *
    * @param key     键
    * @param dataMap 缓存的集合数据
+   * @return BoundHashOperations
    */
-  public void setMapCache(String key, Map<String, V> dataMap) {
-    Assert.notEmpty(dataMap, "dataMap must not be empty");
-    boundHashOps(key).putAll(dataMap);
+  public BoundHashOperations<String, String, V> setMapCache(String key, Map<String, V> dataMap) {
+    BoundHashOperations<String, String, V> boundHashOperations = boundHashOps(key);
+    boundHashOperations.putAll(dataMap);
+    return boundHashOperations;
   }
 
   /**
@@ -577,11 +642,12 @@ public class RedisCache<V> {
    * @param key   键
    * @param hKey  Hash键
    * @param value 缓存的数据
+   * @return BoundHashOperations
    */
-  public void setMapCache(String key, String hKey, V value) {
-    Assert.notNull(value, "value must not be null");
-    BoundHashOperations<String, String, V> operations = boundHashOps(key);
-    operations.put(hKey, value);
+  public BoundHashOperations<String, String, V> setMapCache(String key, String hKey, V value) {
+    BoundHashOperations<String, String, V> boundHashOperations = boundHashOps(key);
+    boundHashOperations.put(hKey, value);
+    return boundHashOperations;
   }
 
   /**
@@ -593,6 +659,17 @@ public class RedisCache<V> {
   public Map<String, V> getMapCache(String key) {
     BoundHashOperations<String, String, V> operations = boundHashOps(key);
     return operations.entries();
+  }
+
+  /**
+   * 获取缓存的 Map 对象
+   *
+   * @param key      键
+   * @param supplier 数据提供者
+   * @return 缓存的数据
+   */
+  public Map<String, V> getMapCache(String key, Supplier<Map<String, V>> supplier) {
+    return Optional.ofNullable(getMapCache(key)).orElseGet(supplier);
   }
 
   /**
@@ -608,6 +685,18 @@ public class RedisCache<V> {
   }
 
   /**
+   * 获取缓存的 Map 对象，指定某个 hKey 的结果
+   *
+   * @param key      键
+   * @param hKey     Hash键
+   * @param supplier 数据提供者
+   * @return 缓存的数据
+   */
+  public V getMapCache(String key, String hKey, Supplier<V> supplier) {
+    return Optional.ofNullable(getMapCache(key, hKey)).orElseGet(supplier);
+  }
+
+  /**
    * 获取缓存的 Map 对象，指定多个 hKeys 的结果
    *
    * @param key   键
@@ -615,7 +704,6 @@ public class RedisCache<V> {
    * @return 缓存的集合数据
    */
   public List<V> getMultiMapCache(String key, Collection<String> hKeys) {
-    Assert.notEmpty(hKeys, "hKeys must not be empty");
     BoundHashOperations<String, String, V> operations = boundHashOps(key);
     return operations.multiGet(hKeys);
   }
@@ -639,7 +727,6 @@ public class RedisCache<V> {
    * @return 删除成功的计数
    */
   public Long deleteMapCache(String key, Collection<String> hKeys) {
-    Assert.notEmpty(hKeys, "hKeys must not be empty");
     return hKeys.stream().map(k -> boundHashOps(key).delete(k)).count();
   }
 

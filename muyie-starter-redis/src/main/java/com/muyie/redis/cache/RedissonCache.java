@@ -80,8 +80,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RedissonCache {
 
-  private final static String MSG_NOT_ACQUIRED = "The lock was not acquired.";
-  private final static String MSG_FAILED_ACQUIRED = "Failed to acquire lock.";
+  private final static String MSG_NOT_ACQUIRED = "The lock was not acquired, lockName=";
+  private final static String MSG_FAILED_ACQUIRED = "Failed to acquire lock, lockName=";
 
   private final RedissonClient redissonClient;
 
@@ -158,7 +158,7 @@ public class RedissonCache {
         }
       }
     } else {
-      log.warn(MSG_NOT_ACQUIRED + ", lockName=" + name);
+      log.warn(MSG_NOT_ACQUIRED + name);
     }
     return tryLock;
   }
@@ -186,11 +186,11 @@ public class RedissonCache {
           }
         }
       } else {
-        log.warn(MSG_NOT_ACQUIRED + ", lockName=" + name);
+        log.warn(MSG_NOT_ACQUIRED + name);
       }
       return tryLock;
     } catch (Exception e) {
-      log.error(MSG_FAILED_ACQUIRED + ", lockName=" + name, e);
+      log.error(MSG_FAILED_ACQUIRED + name, e);
     }
     return false;
   }
@@ -219,11 +219,11 @@ public class RedissonCache {
           }
         }
       } else {
-        log.warn(MSG_NOT_ACQUIRED + ", lockName=" + name);
+        log.warn(MSG_NOT_ACQUIRED + name);
       }
       return tryLock;
     } catch (Exception e) {
-      log.error(MSG_FAILED_ACQUIRED + ", lockName=" + name, e);
+      log.error(MSG_FAILED_ACQUIRED + name, e);
     }
     return false;
   }

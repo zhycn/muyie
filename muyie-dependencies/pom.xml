@@ -43,7 +43,6 @@
     <retrofit2.version>2.9.0</retrofit2.version>
     <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
     <spring-security-oauth.version>2.5.2.RELEASE</spring-security-oauth.version>
-    <spring-boot-admin.version>2.4.3</spring-boot-admin.version>
     <springfox.version>3.0.0</springfox.version>
     <testcontainers.version>1.17.3</testcontainers.version>
   </properties>
@@ -202,23 +201,6 @@
         <groupId>org.mapstruct</groupId>
         <artifactId>mapstruct-processor</artifactId>
         <version>${mapstruct.version}</version>
-      </dependency>
-
-      <!-- Spring Boot Admin -->
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-client</artifactId>
-        <version>${spring-boot-admin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-server</artifactId>
-        <version>${spring-boot-admin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-server-ui</artifactId>
-        <version>${spring-boot-admin.version}</version>
       </dependency>
 
       <!-- Swagger2 -->

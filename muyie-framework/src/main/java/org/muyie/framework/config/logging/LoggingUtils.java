@@ -9,10 +9,10 @@ import net.logstash.logback.composite.loggingevent.LoggerNameJsonProvider;
 import net.logstash.logback.composite.loggingevent.LoggingEventFormattedTimestampJsonProvider;
 import net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders;
 import net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvider;
+import net.logstash.logback.composite.loggingevent.LoggingEventThreadNameJsonProvider;
 import net.logstash.logback.composite.loggingevent.MdcJsonProvider;
 import net.logstash.logback.composite.loggingevent.MessageJsonProvider;
 import net.logstash.logback.composite.loggingevent.StackTraceJsonProvider;
-import net.logstash.logback.composite.loggingevent.ThreadNameJsonProvider;
 import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
 import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
@@ -35,6 +35,8 @@ import ch.qos.logback.core.spi.FilterReply;
 
 /**
  * Utility methods to add appenders to a {@link LoggerContext}.
+ *
+ * @author larry.qi
  */
 public final class LoggingUtils {
 
@@ -170,7 +172,7 @@ public final class LoggingUtils {
     jsonProviders.addMessage(new MessageJsonProvider());
     jsonProviders.addPattern(new LoggingEventPatternJsonProvider());
     jsonProviders.addStackTrace(stackTraceJsonProvider());
-    jsonProviders.addThreadName(new ThreadNameJsonProvider());
+    jsonProviders.addThreadName(new LoggingEventThreadNameJsonProvider());
     jsonProviders.addTimestamp(timestampJsonProvider());
     jsonProviders.setContext(context);
     return jsonProviders;

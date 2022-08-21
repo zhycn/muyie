@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -53,6 +53,16 @@
       <dependency>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-framework</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-apollo</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-redis</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
 

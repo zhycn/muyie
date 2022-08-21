@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>muyie-starter-apollo</artifactId>
+  <packaging>jar</packaging>
+  <name>muyie-starter-apollo</name>
+  <description>A reliable configuration management system</description>
+  <url>https://www.apolloconfig.com/</url>
+
+  <parent>
+    <groupId>com.github.zhycn</groupId>
+    <artifactId>muyie-dependencies</artifactId>
+    <version>1.2.5</version>
+    <relativePath>../muyie-dependencies/pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.ctrip.framework.apollo</groupId>
+      <artifactId>apollo-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-context</artifactId>
+    </dependency>
+  </dependencies>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

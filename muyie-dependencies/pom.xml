@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -20,7 +20,7 @@
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.9</alibaba-druid.version>
     <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
-    <alibaba-ttl.version>2.13.2</alibaba-ttl.version>
+    <alibaba-ttl.version>2.14.0</alibaba-ttl.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
@@ -375,6 +375,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

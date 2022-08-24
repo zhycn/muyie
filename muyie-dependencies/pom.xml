@@ -64,6 +64,11 @@
         <artifactId>muyie-starter-redis</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-web</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
 
       <!-- Alibaba druid & fastjson -->
       <dependency>

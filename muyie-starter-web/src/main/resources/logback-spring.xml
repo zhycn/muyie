@@ -1,0 +1,161 @@
+<configuration>
+  <!-- 日志配置参数 -->
+  <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="."/>
+  <springProperty scope="context" name="LOG_LEVEL" source="logging.level" defaultValue="INFO"/>
+  <springProperty scope="context" name="LOG_MAX_FILE_SIZE" source="logging.max-file-size"
+                  defaultValue="100MB"/>
+  <springProperty scope="context" name="LOG_MAX_HISTORY" source="logging.max-history"
+                  defaultValue="30"/>
+  <springProperty scope="context" name="LOG_TOTAL_SIZE_CAP" source="logging.total-size-cap"
+                  defaultValue="50GB"/>
+
+  <!-- 日志格式中增加了本地服务器的IP地址和请求追踪标识 -->
+  <conversionRule conversionWord="ip" converterClass="com.muyie.web.logging.LogHostConverter"/>
+  <conversionRule conversionWord="traceId"
+                  converterClass="com.muyie.web.logging.LogTraceIdConverter"/>
+  <property name="CONSOLE_LOG_PATTERN"
+            value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%ip]){yellow} %clr([%traceId]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+  <!-- CONSOLE 日志配置 -->
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+  </appender>
+
+  <!-- ERROR 日志配置 -->
+  <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/logs/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/logs/backup/error.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+      <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+      <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <!-- WARN 日志配置 -->
+  <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/logs/warn.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/logs/backup/warn.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+      <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+      <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <!-- DEBUG 日志配置 -->
+  <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/logs/debug.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/logs/backup/debug.%d{yyyyMMdd}.%i.log.gz
+      </fileNamePattern>
+      <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+      <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+      <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <!-- INFO 日志配置 -->
+  <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/logs/info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/logs/backup/info.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+      <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+      <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <!-- 指定包名的日志级别 -->
+  <logger name="javax.activation" level="WARN"/>
+  <logger name="javax.mail" level="WARN"/>
+  <logger name="javax.management.remote" level="WARN"/>
+  <logger name="javax.xml.bind" level="WARN"/>
+  <logger name="ch.qos.logback" level="WARN"/>
+  <logger name="com.codahale.metrics" level="WARN"/>
+  <logger name="com.ryantenney" level="WARN"/>
+  <logger name="com.sun" level="WARN"/>
+  <logger name="com.zaxxer" level="WARN"/>
+  <logger name="io.undertow" level="INFO"/>
+  <logger name="io.undertow.websockets.jsr" level="ERROR"/>
+  <logger name="org.apache" level="WARN"/>
+  <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+  <logger name="org.bson" level="WARN"/>
+  <logger name="org.hibernate.validator" level="WARN"/>
+  <logger name="org.hibernate" level="INFO"/>
+  <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
+  <logger name="org.springframework" level="WARN"/>
+  <logger name="org.springframework.cloud" level="INFO"/>
+  <logger name="org.springframework.boot" level="INFO"/>
+  <logger name="org.springframework.web" level="INFO"/>
+  <logger name="org.springframework.security" level="INFO"/>
+  <logger name="org.springframework.cache" level="INFO"/>
+  <logger name="org.thymeleaf" level="WARN"/>
+  <logger name="org.xnio" level="WARN"/>
+  <logger name="springfox" level="WARN"/>
+  <logger name="sun.rmi" level="WARN"/>
+  <logger name="liquibase" level="WARN"/>
+  <logger name="LiquibaseSchemaResolver" level="INFO"/>
+  <logger name="sun.rmi.transport" level="WARN"/>
+  <logger name="cn.hutool" level="WARN"/>
+
+  <!-- 根据启动环境打印日志 -->
+  <springProfile name="dev | console">
+    <root level="${LOG_LEVEL}">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+  <springProfile name="sit | uat | prod | task | cloud | k8s">
+    <root level="${LOG_LEVEL}">
+      <appender-ref ref="ERROR"/>
+      <appender-ref ref="WARN"/>
+      <appender-ref ref="INFO"/>
+    </root>
+  </springProfile>
+  <springProfile name="debug">
+    <root level="DEBUG">
+      <appender-ref ref="DEBUG"/>
+    </root>
+  </springProfile>
+
+</configuration>

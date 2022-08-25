@@ -1,9 +1,12 @@
 package com.muyie.logging;
 
+import com.google.common.base.Strings;
+
 import com.muyie.constants.MuyieConstants;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
+
+import java.util.Optional;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -23,7 +26,7 @@ public class LogTraceIdConverter extends ClassicConverter {
    * @return TraceId 请求追踪标识
    */
   public static String get() {
-    return StringUtils.defaultIfBlank(MDC.get(MuyieConstants.LOG_TRACE_ID), setAndGet(IdUtil.nanoId(12)));
+    return Optional.ofNullable(MDC.get(MuyieConstants.LOG_TRACE_ID)).orElseGet(() -> setAndGet(IdUtil.nanoId(12)));
   }
 
   /**
@@ -32,7 +35,7 @@ public class LogTraceIdConverter extends ClassicConverter {
    * @param traceId 请求追踪标识
    */
   public static void set(String traceId) {
-    setAndGet(StringUtils.defaultIfBlank(traceId, IdUtil.nanoId(12)));
+    setAndGet(Optional.ofNullable(Strings.emptyToNull(traceId)).orElseGet(() -> IdUtil.nanoId(12)));
   }
 
   /**
@@ -55,7 +58,6 @@ public class LogTraceIdConverter extends ClassicConverter {
 
   @Override
   public String convert(ILoggingEvent event) {
-    System.out.println(get());
     return get();
   }
 

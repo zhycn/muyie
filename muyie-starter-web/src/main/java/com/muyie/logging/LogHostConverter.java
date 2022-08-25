@@ -1,4 +1,4 @@
-package com.muyie.web.logging;
+package com.muyie.logging;
 
 import org.apache.commons.lang3.StringUtils;
 

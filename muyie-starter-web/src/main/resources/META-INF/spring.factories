@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.muyie.web.MuyieWebAutoConfiguration
+  com.muyie.MuyieWebAutoConfiguration

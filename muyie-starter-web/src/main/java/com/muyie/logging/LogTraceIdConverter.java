@@ -1,6 +1,6 @@
-package com.muyie.web.logging;
+package com.muyie.logging;
 
-import com.muyie.web.MuyieConstants;
+import com.muyie.MuyieConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;

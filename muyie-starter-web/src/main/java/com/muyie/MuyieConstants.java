@@ -1,4 +1,4 @@
-package com.muyie.web;
+package com.muyie;
 
 /**
  * MuYie constants.

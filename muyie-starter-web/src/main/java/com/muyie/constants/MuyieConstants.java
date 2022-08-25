@@ -1,4 +1,4 @@
-package com.muyie;
+package com.muyie.constants;
 
 /**
  * MuYie constants.

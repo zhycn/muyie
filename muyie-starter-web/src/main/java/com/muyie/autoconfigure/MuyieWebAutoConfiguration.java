@@ -1,4 +1,4 @@
-package com.muyie;
+package com.muyie.autoconfigure;
 
 import org.springframework.context.annotation.Configuration;
 

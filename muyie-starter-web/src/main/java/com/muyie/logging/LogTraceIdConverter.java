@@ -1,6 +1,6 @@
 package com.muyie.logging;
 
-import com.muyie.MuyieConstants;
+import com.muyie.constants.MuyieConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
@@ -16,11 +16,6 @@ import cn.hutool.core.util.IdUtil;
  * @since 1.2.6
  */
 public class LogTraceIdConverter extends ClassicConverter {
-
-  @Override
-  public String convert(ILoggingEvent event) {
-    return get();
-  }
 
   /**
    * 获取当前的请求追踪标识，没有则随机生成。
@@ -56,6 +51,12 @@ public class LogTraceIdConverter extends ClassicConverter {
    */
   public static void clear() {
     MDC.remove(MuyieConstants.LOG_TRACE_ID);
+  }
+
+  @Override
+  public String convert(ILoggingEvent event) {
+    System.out.println(get());
+    return get();
   }
 
 }

@@ -1,5 +1,7 @@
 package com.muyie.aop;
 
+import com.google.common.base.Strings;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -9,10 +11,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 抽象的 Advice 接口，提供使用 AOP 时的常用方法。
@@ -25,7 +30,7 @@ public interface Advice {
   /**
    * 获取方法对象
    *
-   * @param joinPoint 切入点对象
+   * @param joinPoint 连接点
    * @return Method
    */
   default Method getMethod(JoinPoint joinPoint) {
@@ -35,7 +40,7 @@ public interface Advice {
   /**
    * 获取方法对象
    *
-   * @param proceedingJoinPoint 切入点对象
+   * @param proceedingJoinPoint 连接点
    * @return Method
    */
   default Method getMethod(ProceedingJoinPoint proceedingJoinPoint) {
@@ -79,12 +84,24 @@ public interface Advice {
   }
 
   /**
-   * 获取应用程序上下文对象
+   * 获取应用上下文对象
    *
    * @return WebApplicationContext
    */
   default WebApplicationContext getApplicationContext() {
     return ContextLoader.getCurrentWebApplicationContext();
+  }
+
+  /**
+   * 如果注解中未指定方法别名，则获取方法名称
+   *
+   * @param joinPoint 连接点
+   * @param value     方法别名
+   * @return 方法别名
+   */
+  default String getMethodAlias(JoinPoint joinPoint, String value) {
+    return Optional.ofNullable(Strings.emptyToNull(value)).orElseGet(() ->
+      StrUtil.format("{}.{}()", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName()));
   }
 
   /**

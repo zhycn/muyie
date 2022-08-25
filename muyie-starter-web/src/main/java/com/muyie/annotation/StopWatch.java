@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * CatchAndLog Annotation
+ * 监听方法的执行时间
  *
  * @author larry.qi
  * @since 1.2.6
@@ -17,28 +17,14 @@ import java.lang.annotation.Target;
 @Documented
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CatchAndLog {
+public @interface StopWatch {
 
   /**
-   * 接口描述信息
+   * 方法别名
    *
-   * @return 接口描述信息
+   * @return 方法别名
    */
   String value() default "";
-
-  /**
-   * 是否打印请求和响应日志
-   *
-   * @return true 表示打印日志
-   */
-  boolean logWatch() default true;
-
-  /**
-   * 开启日志后，指定日志序列化时忽略的字段
-   *
-   * @return 忽略的字段
-   */
-  String[] ignoreFields() default {};
 
   /**
    * 慢方法阀值设置，超时就会打印运行记录日志。单位毫秒

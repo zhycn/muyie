@@ -3,7 +3,6 @@ package com.muyie.aspectj;
 import com.google.common.base.Throwables;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.muyie.annotation.CatchAndLog;
 import com.muyie.aop.AfterAdvice;
 import com.muyie.aop.AfterThrowingAdvice;

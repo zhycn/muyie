@@ -1,8 +1,11 @@
 package com.muyie.autoconfigure;
 
-import org.springframework.context.annotation.ComponentScan;
+import com.muyie.aspectj.CatchAndLogAspect;
+import com.muyie.aspectj.StopWatchAspect;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author larry.qi
@@ -10,6 +13,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableAspectJAutoProxy
-@ComponentScan("com.muyie.aspectj")
+@Import({CatchAndLogAspect.class, StopWatchAspect.class})
 public class MuyieAspectJAutoConfiguration {
 }

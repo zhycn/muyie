@@ -1,6 +1,7 @@
 package com.muyie.aspectj;
 
 import com.muyie.aop.AroundAdvice;
+import com.muyie.properties.MuyieProperties;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -20,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 public class StopWatchAspect implements AroundAdvice {
 
+  private final MuyieProperties muyieProperties;
+
+  public StopWatchAspect(MuyieProperties muyieProperties) {
+    this.muyieProperties = muyieProperties;
+  }
+
   @Override
   @Pointcut("@annotation(com.muyie.annotation.StopWatch)")
   public void setPointcut() {
@@ -31,6 +38,8 @@ public class StopWatchAspect implements AroundAdvice {
   public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
     final com.muyie.annotation.StopWatch sw = this.getMethod(joinPoint).getAnnotation(com.muyie.annotation.StopWatch.class);
     String value = this.getMethodAlias(joinPoint, sw.value());
+    int globalSlowMethodMillis = muyieProperties.getStopWatch().getSlowMethodMillis();
+    int slowMethodMillis = sw.slowMethodMillis() > 0 ? sw.slowMethodMillis() : globalSlowMethodMillis;
 
     // 启用监听
     final StopWatch stopWatch = new StopWatch(value);
@@ -40,7 +49,7 @@ public class StopWatchAspect implements AroundAdvice {
       return joinPoint.proceed();
     } finally {
       stopWatch.stop();
-      if (stopWatch.getTotalTimeMillis() >= sw.slowMethodMillis()) {
+      if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
         log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
       }
     }

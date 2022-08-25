@@ -8,6 +8,7 @@ import com.muyie.aop.AfterAdvice;
 import com.muyie.aop.AfterThrowingAdvice;
 import com.muyie.aop.AroundAdvice;
 import com.muyie.logging.LogTraceIdConverter;
+import com.muyie.properties.MuyieProperties;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -38,6 +39,12 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
 
+  private final MuyieProperties muyieProperties;
+
+  public CatchAndLogAspect(MuyieProperties muyieProperties) {
+    this.muyieProperties = muyieProperties;
+  }
+
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new HandlerInterceptor() {
@@ -60,6 +67,8 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
   public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {
     final CatchAndLog catchAndLog = this.getMethod(joinPoint).getAnnotation(CatchAndLog.class);
     String value = this.getMethodAlias(joinPoint, catchAndLog.value());
+    int globalSlowMethodMillis = muyieProperties.getStopWatch().getSlowMethodMillis();
+    int slowMethodMillis = catchAndLog.slowMethodMillis() > 0 ? catchAndLog.slowMethodMillis() : globalSlowMethodMillis;
     String[] ignoreFields = catchAndLog.ignoreFields();
 
     // 启用监听
@@ -85,7 +94,7 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
       throw e;
     } finally {
       stopWatch.stop();
-      if (stopWatch.getTotalTimeMillis() >= catchAndLog.slowMethodMillis()) {
+      if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
         log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
       }
     }

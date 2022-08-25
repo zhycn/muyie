@@ -31,6 +31,6 @@ public @interface StopWatch {
    *
    * @return 慢方法执行超时时间
    */
-  int slowMethodMillis() default 2000;
+  int slowMethodMillis() default 0;
 
 }

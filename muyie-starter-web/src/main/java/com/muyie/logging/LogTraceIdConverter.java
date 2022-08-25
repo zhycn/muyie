@@ -2,7 +2,7 @@ package com.muyie.logging;
 
 import com.google.common.base.Strings;
 
-import com.muyie.constants.MuyieConstants;
+import com.muyie.properties.MuyieConstants;
 
 import org.slf4j.MDC;
 

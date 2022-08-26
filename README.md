@@ -8,8 +8,8 @@ This project is used by the Spring Boot. This is the Bill of Materials and serve
 This project provides a pom file that you can either import into your Spring Boot Application's bom, or use as your Spring Boot Application's parent pom. 
 
 - JDK 8+
-- Spring Boot 2.4.13
-- Spring Cloud 2020.0.6
+- Spring Boot 2.7.3
+- Spring Cloud 2021.0.3
 
 ## Quick Start
 

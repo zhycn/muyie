@@ -28,7 +28,7 @@ public class StopWatchAspect implements AroundAdvice {
   }
 
   @Override
-  @Pointcut("@annotation(com.muyie.annotation.StopWatch)")
+  @Pointcut("@annotation(com.muyie.framework.annotation.StopWatch)")
   public void setPointcut() {
 
   }

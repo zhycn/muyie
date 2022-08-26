@@ -3,11 +3,11 @@ package com.muyie.framework.aspectj;
 import com.google.common.base.Throwables;
 
 import com.alibaba.fastjson.JSON;
-import com.muyie.framework.logging.LogTraceIdConverter;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AfterAdvice;
 import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;
+import com.muyie.framework.logging.LogTraceIdConverter;
 import com.muyie.framework.properties.MuyieProperties;
 
 import org.aspectj.lang.JoinPoint;
@@ -57,7 +57,7 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
   }
 
   @Override
-  @Pointcut("@annotation(com.muyie.annotation.CatchAndLog)")
+  @Pointcut("@annotation(com.muyie.framework.annotation.CatchAndLog)")
   public void setPointcut() {
 
   }

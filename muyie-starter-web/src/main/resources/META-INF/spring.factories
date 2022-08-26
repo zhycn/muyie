@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.muyie.autoconfigure.MuyieAspectJAutoConfiguration,\
-  com.muyie.autoconfigure.MuyieWebAutoConfiguration
+  com.muyie.framework.autoconfigure.MuyieAspectJAutoConfiguration,\
+  com.muyie.framework.autoconfigure.MuyieWebAutoConfiguration

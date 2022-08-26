@@ -1,0 +1,3 @@
+com.muyie.framework.config.apidoc.MuyieOpenApiAutoConfiguration
+com.muyie.framework.autoconfigure.MuyieAspectJAutoConfiguration
+com.muyie.framework.autoconfigure.MuyieWebAutoConfiguration

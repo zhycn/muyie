@@ -55,11 +55,6 @@
       </dependency>
       <dependency>
         <groupId>com.github.zhycn</groupId>
-        <artifactId>muyie-starter-apidoc</artifactId>
-        <version>${muyie-framework.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-apollo</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>

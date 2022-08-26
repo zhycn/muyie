@@ -94,7 +94,6 @@
   <modules>
     <module>muyie-dependencies</module>
     <module>muyie-framework</module>
-    <module>muyie-starter-apidoc</module>
     <module>muyie-starter-apollo</module>
     <module>muyie-starter-redis</module>
     <module>muyie-starter-web</module>

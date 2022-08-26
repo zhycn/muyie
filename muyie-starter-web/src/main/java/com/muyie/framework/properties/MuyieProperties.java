@@ -26,4 +26,38 @@ public class MuyieProperties {
 
   }
 
+  @Data
+  public static class ApiDocs {
+
+    private String title = MuyieDefaults.ApiDocs.TITLE;
+
+    private String description = MuyieDefaults.ApiDocs.DESCRIPTION;
+
+    private String version = MuyieDefaults.ApiDocs.VERSION;
+
+    private String termsOfServiceUrl = MuyieDefaults.ApiDocs.TERMS_OF_SERVICE_URL;
+
+    private String contactName = MuyieDefaults.ApiDocs.CONTACT_NAME;
+
+    private String contactUrl = MuyieDefaults.ApiDocs.CONTACT_URL;
+
+    private String contactEmail = MuyieDefaults.ApiDocs.CONTACT_EMAIL;
+
+    private String license = MuyieDefaults.ApiDocs.LICENSE;
+
+    private String licenseUrl = MuyieDefaults.ApiDocs.LICENSE_URL;
+
+    private Server[] servers = {};
+
+    @Data
+    public static class Server {
+
+      private String url;
+
+      private String description;
+
+    }
+
+  }
+
 }

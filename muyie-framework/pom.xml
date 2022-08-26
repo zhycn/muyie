@@ -163,12 +163,6 @@
       <artifactId>logstash-logback-encoder</artifactId>
     </dependency>
 
-    <!-- SpringDoc OpenAPI -->
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
-
     <!-- OPT & 二维码 -->
     <dependency>
       <groupId>org.jboss.aerogear</groupId>

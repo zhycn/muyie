@@ -1,4 +1,4 @@
-package com.muyie.properties;
+package com.muyie.framework.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

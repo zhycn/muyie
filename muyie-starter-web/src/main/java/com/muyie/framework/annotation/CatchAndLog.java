@@ -1,4 +1,4 @@
-package com.muyie.annotation;
+package com.muyie.framework.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,7 +1,7 @@
-package com.muyie.aspectj;
+package com.muyie.framework.aspectj;
 
-import com.muyie.aop.AroundAdvice;
-import com.muyie.properties.MuyieProperties;
+import com.muyie.framework.aop.AroundAdvice;
+import com.muyie.framework.properties.MuyieProperties;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -36,7 +36,7 @@ public class StopWatchAspect implements AroundAdvice {
   @Override
   @Around("setPointcut()")
   public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-    final com.muyie.annotation.StopWatch sw = this.getMethod(joinPoint).getAnnotation(com.muyie.annotation.StopWatch.class);
+    final com.muyie.framework.annotation.StopWatch sw = this.getMethod(joinPoint).getAnnotation(com.muyie.framework.annotation.StopWatch.class);
     String value = this.getMethodAlias(joinPoint, sw.value());
     int globalSlowMethodMillis = muyieProperties.getStopWatch().getSlowMethodMillis();
     int slowMethodMillis = sw.slowMethodMillis() > 0 ? sw.slowMethodMillis() : globalSlowMethodMillis;

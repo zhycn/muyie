@@ -1,4 +1,4 @@
-package com.muyie.aop;
+package com.muyie.framework.aop;
 
 import com.google.common.base.Strings;
 

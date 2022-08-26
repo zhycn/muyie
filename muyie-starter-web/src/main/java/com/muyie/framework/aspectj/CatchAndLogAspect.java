@@ -1,14 +1,14 @@
-package com.muyie.aspectj;
+package com.muyie.framework.aspectj;
 
 import com.google.common.base.Throwables;
 
 import com.alibaba.fastjson.JSON;
-import com.muyie.annotation.CatchAndLog;
-import com.muyie.aop.AfterAdvice;
-import com.muyie.aop.AfterThrowingAdvice;
-import com.muyie.aop.AroundAdvice;
-import com.muyie.logging.LogTraceIdConverter;
-import com.muyie.properties.MuyieProperties;
+import com.muyie.framework.logging.LogTraceIdConverter;
+import com.muyie.framework.annotation.CatchAndLog;
+import com.muyie.framework.aop.AfterAdvice;
+import com.muyie.framework.aop.AfterThrowingAdvice;
+import com.muyie.framework.aop.AroundAdvice;
+import com.muyie.framework.properties.MuyieProperties;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

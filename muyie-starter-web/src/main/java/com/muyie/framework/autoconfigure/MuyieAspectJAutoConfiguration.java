@@ -1,8 +1,8 @@
-package com.muyie.autoconfigure;
+package com.muyie.framework.autoconfigure;
 
-import com.muyie.aspectj.CatchAndLogAspect;
-import com.muyie.aspectj.StopWatchAspect;
-import com.muyie.properties.MuyieProperties;
+import com.muyie.framework.aspectj.CatchAndLogAspect;
+import com.muyie.framework.aspectj.StopWatchAspect;
+import com.muyie.framework.properties.MuyieProperties;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;

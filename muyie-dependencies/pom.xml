@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -20,7 +20,7 @@
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.9</alibaba-druid.version>
     <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
-    <alibaba-ttl.version>2.13.2</alibaba-ttl.version>
+    <alibaba-ttl.version>2.14.0</alibaba-ttl.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
@@ -38,13 +38,11 @@
     <problem-spring.version>0.26.2</problem-spring.version>
     <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
     <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
-    <redisson.version>3.15.6</redisson.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
     <spring-security-oauth.version>2.5.2.RELEASE</spring-security-oauth.version>
-    <spring-boot-admin.version>2.4.3</spring-boot-admin.version>
-    <springfox.version>3.0.0</springfox.version>
+    <springdoc.version>1.6.11</springdoc.version>
     <testcontainers.version>1.17.3</testcontainers.version>
   </properties>
 
@@ -63,6 +61,11 @@
       <dependency>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-redis</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-web</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
 
@@ -155,23 +158,6 @@
         <version>${google.zxing.version}</version>
       </dependency>
 
-      <!-- Redisson -->
-      <dependency>
-        <groupId>org.redisson</groupId>
-        <artifactId>redisson</artifactId>
-        <version>${redisson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.redisson</groupId>
-        <artifactId>redisson-spring-boot-starter</artifactId>
-        <version>${redisson.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
       <dependency>
         <groupId>org.reflections</groupId>
         <artifactId>reflections</artifactId>
@@ -204,28 +190,11 @@
         <version>${mapstruct.version}</version>
       </dependency>
 
-      <!-- Spring Boot Admin -->
+      <!-- SpringDoc OpenAPI -->
       <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-client</artifactId>
-        <version>${spring-boot-admin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-server</artifactId>
-        <version>${spring-boot-admin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-server-ui</artifactId>
-        <version>${spring-boot-admin.version}</version>
-      </dependency>
-
-      <!-- Swagger2 -->
-      <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-boot-starter</artifactId>
-        <version>${springfox.version}</version>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-ui</artifactId>
+        <version>${springdoc.version}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
@@ -375,6 +344,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

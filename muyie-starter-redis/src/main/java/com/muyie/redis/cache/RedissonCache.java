@@ -545,7 +545,8 @@ public class RedissonCache {
    * <p>
    * Lock doesn't use a pub/sub mechanism
    *
-   * @param name - name of object
+   * @param name    - name of object
+   * @param backOff LockOptions.BackOff
    * @return Lock object
    */
   public RLock getSpinLock(String name, LockOptions.BackOff backOff) {

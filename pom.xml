@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
-  <version>1.2.5</version>
+  <version>1.2.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MuYie server-side parent POM</name>
   <description>MuYie BOM and server-side library</description>
@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.13</version>
+    <version>2.7.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -43,11 +43,11 @@
 
   <properties>
     <!-- The muyie-framework version should be the same as the artifact version above -->
-    <muyie-framework.version>1.2.5</muyie-framework.version>
+    <muyie-framework.version>1.2.6-SNAPSHOT</muyie-framework.version>
     <!-- The spring-boot version should be the same as the parent version above -->
-    <spring-boot.version>2.4.13</spring-boot.version>
-    <spring-cloud.version>2020.0.6</spring-cloud.version>
-    <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+    <spring-boot.version>2.7.3</spring-boot.version>
+    <spring-cloud.version>2021.0.3</spring-cloud.version>
+    <redisson.version>3.17.6</redisson.version>
 
     <!-- Build properties -->
     <java.version>1.8</java.version>
@@ -63,15 +63,15 @@
 
     <!-- Plugin versions -->
     <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
-    <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
+    <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
+    <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-    <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+    <versions-maven-plugin.version>2.11.0</versions-maven-plugin.version>
   </properties>
 
   <scm>
@@ -96,6 +96,7 @@
     <module>muyie-framework</module>
     <module>muyie-starter-apollo</module>
     <module>muyie-starter-redis</module>
+    <module>muyie-starter-web</module>
   </modules>
 
   <dependencies>
@@ -115,12 +116,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- Redisson -->
       <dependency>
-        <groupId>com.alibaba.cloud</groupId>
-        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-        <version>${spring-cloud-alibaba.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-spring-boot-starter</artifactId>
+        <version>${redisson.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -130,6 +130,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

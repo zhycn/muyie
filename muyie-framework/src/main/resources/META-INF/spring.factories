@@ -1,8 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.muyie.framework.config.MuyieProperties,\
   org.muyie.framework.config.MuyieWebConfigurer,\
-  org.muyie.framework.config.apidoc.SwaggerAutoConfiguration,\
-  org.muyie.framework.config.apidoc.SwaggerPluginsAutoConfiguration,\
   org.muyie.framework.config.aspectj.AspectJAutoConfiguration,\
   org.muyie.framework.config.async.MuyieAsyncConfiguration,\
   org.muyie.framework.config.info.MuyieInfoContributorConfiguration,\

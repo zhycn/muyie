@@ -1,4 +1,5 @@
 <configuration>
+  <!-- 日志配置参数 -->
   <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="."/>
   <springProperty scope="context" name="LOG_LEVEL" source="logging.level" defaultValue="INFO"/>
   <springProperty scope="context" name="LOG_MAX_FILE_SIZE" source="logging.max-file-size"
@@ -8,12 +9,13 @@
   <springProperty scope="context" name="LOG_TOTAL_SIZE_CAP" source="logging.total-size-cap"
                   defaultValue="50GB"/>
 
-  <conversionRule conversionWord="ip" converterClass="org.muyie.framework.logback.IPConverter"/>
-  <conversionRule conversionWord="traceId"
-                  converterClass="org.muyie.framework.logback.TraceIdConverter"/>
+  <!-- 日志格式中增加了本地服务器的IP地址和请求追踪标识 -->
+  <conversionRule conversionWord="ip" converterClass="com.muyie.framework.logging.LogHostConverter"/>
+  <conversionRule conversionWord="traceId" converterClass="com.muyie.framework.logging.LogTraceIdConverter"/>
   <property name="CONSOLE_LOG_PATTERN"
             value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%ip]){yellow} %clr([%traceId]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
+  <!-- CONSOLE 日志配置 -->
   <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -22,6 +24,7 @@
     </encoder>
   </appender>
 
+  <!-- ERROR 日志配置 -->
   <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_PATH}/logs/error.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -41,6 +44,7 @@
     </filter>
   </appender>
 
+  <!-- WARN 日志配置 -->
   <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_PATH}/logs/warn.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -60,6 +64,7 @@
     </filter>
   </appender>
 
+  <!-- DEBUG 日志配置 -->
   <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_PATH}/logs/debug.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -80,6 +85,7 @@
     </filter>
   </appender>
 
+  <!-- INFO 日志配置 -->
   <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_PATH}/logs/info.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -99,6 +105,7 @@
     </filter>
   </appender>
 
+  <!-- 指定包名的日志级别 -->
   <logger name="javax.activation" level="WARN"/>
   <logger name="javax.mail" level="WARN"/>
   <logger name="javax.management.remote" level="WARN"/>
@@ -130,12 +137,13 @@
   <logger name="sun.rmi.transport" level="WARN"/>
   <logger name="cn.hutool" level="WARN"/>
 
-  <springProfile name="dev,console">
+  <!-- 根据启动环境打印日志 -->
+  <springProfile name="dev | console">
     <root level="${LOG_LEVEL}">
       <appender-ref ref="CONSOLE"/>
     </root>
   </springProfile>
-  <springProfile name="test,sit,uat,prod,task,cloud,k8s">
+  <springProfile name="sit | uat | prod | task | cloud | k8s">
     <root level="${LOG_LEVEL}">
       <appender-ref ref="ERROR"/>
       <appender-ref ref="WARN"/>

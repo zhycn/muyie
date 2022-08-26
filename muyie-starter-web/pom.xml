@@ -3,11 +3,9 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>muyie-starter-apollo</artifactId>
+  <artifactId>muyie-starter-web</artifactId>
   <packaging>jar</packaging>
-  <name>muyie-starter-apollo</name>
-  <description>A reliable configuration management system</description>
-  <url>https://www.apolloconfig.com/</url>
+  <name>muyie-starter-web</name>
 
   <parent>
     <groupId>com.github.zhycn</groupId>
@@ -17,18 +15,38 @@
   </parent>
 
   <dependencies>
+    <!-- Starter for building web, including RESTful, applications using Spring MVC.
+        Uses Tomcat as the default embedded container. -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <optional>true</optional>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- Starter for aspect-oriented programming with Spring AOP and AspectJ -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <!-- Starter for using Java Bean Validation with Hibernate Validator -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <!-- Tools Support -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.ctrip.framework.apollo</groupId>
-      <artifactId>apollo-client</artifactId>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-context</artifactId>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
     </dependency>
   </dependencies>
 

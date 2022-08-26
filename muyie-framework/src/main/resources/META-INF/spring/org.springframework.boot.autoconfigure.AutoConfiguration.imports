@@ -1,0 +1,12 @@
+org.muyie.framework.config.MuyieWebConfigurer
+org.muyie.framework.config.apidoc.MuyieOpenApiAutoConfiguration
+org.muyie.framework.config.aspectj.AspectJAutoConfiguration
+org.muyie.framework.config.async.MuyieAsyncConfiguration
+org.muyie.framework.config.info.MuyieInfoContributorConfiguration
+org.muyie.framework.config.snowflake.SnowflakeConfiguration
+org.muyie.framework.context.GlobalExceptionTranslator
+org.muyie.framework.context.GlobalExceptionHandler
+org.muyie.framework.data.jpa.JpaAutoConfiguration
+org.muyie.framework.data.redis.RedisConfiguration
+org.muyie.framework.retrofit.autoconfigure.RetrofitAutoConfiguration
+org.muyie.framework.security.ssl.UndertowSSLConfiguration

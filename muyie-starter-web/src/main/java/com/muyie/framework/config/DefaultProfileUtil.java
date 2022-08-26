@@ -1,8 +1,6 @@
-package com.muyie.framework.util;
+package com.muyie.framework.config;
 
 import com.google.common.collect.Maps;
-
-import com.muyie.framework.properties.MuyieProfileConstants;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.Environment;

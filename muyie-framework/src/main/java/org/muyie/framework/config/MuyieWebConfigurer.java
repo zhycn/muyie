@@ -3,9 +3,9 @@ package org.muyie.framework.config;
 import org.muyie.framework.config.apollo.ApolloConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.server.MimeMappings;
 import org.springframework.boot.web.server.WebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
@@ -30,7 +30,7 @@ import javax.servlet.ServletException;
  */
 @Configuration
 @ConditionalOnWebApplication
-@AutoConfigureAfter(MuyieProperties.class)
+@EnableConfigurationProperties(MuyieProperties.class)
 @Import({
   DateTimeFormatConfiguration.class,
   JacksonConfiguration.class,

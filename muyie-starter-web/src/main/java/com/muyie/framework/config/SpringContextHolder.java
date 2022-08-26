@@ -1,4 +1,4 @@
-package com.muyie.framework.configure;
+package com.muyie.framework.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

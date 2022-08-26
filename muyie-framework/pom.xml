@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.6-SNAPSHOT</version>
+    <version>1.2.6</version>
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 
@@ -161,6 +161,11 @@
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
 
     <!-- OPT & 二维码 -->

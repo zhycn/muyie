@@ -1,8 +1,4 @@
-package com.muyie.framework.autoconfigure;
-
-import com.muyie.framework.configure.SpringContextHolder;
-import com.muyie.framework.configure.SpringEventPublisher;
-import com.muyie.framework.properties.MuyieProperties;
+package com.muyie.framework.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

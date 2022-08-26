@@ -1,7 +1,7 @@
 package com.muyie.framework.config.apidoc;
 
+import com.muyie.framework.config.MuyieProperties;
 import com.muyie.framework.config.apidoc.customizer.MuyieOpenApiCustomizer;
-import com.muyie.framework.properties.MuyieProperties;
 
 import org.springdoc.core.SpringDocConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -21,8 +21,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
  * OpenAPI configuration.
  * <p>
  * Warning! When having a lot of REST endpoints, OpenApi can become a performance issue. In that
- * case, you can use the "springdoc.api-docs.enabled=false" Spring properties, so that this bean is
- * ignored.
+ * case, you can use the "springdoc.api-docs.enabled=false" in application.yaml, so that this bean
+ * is ignored.
  *
  * @author larry.qi
  * @since 1.2.6
@@ -41,8 +41,8 @@ public class MuyieOpenApiAutoConfiguration {
    *
    * @param properties a {@link MuyieProperties.ApiDocs} object.
    */
-  public MuyieOpenApiAutoConfiguration(MuyieProperties.ApiDocs properties) {
-    this.properties = properties;
+  public MuyieOpenApiAutoConfiguration(MuyieProperties properties) {
+    this.properties = properties.getApiDocs();
   }
 
   @Bean

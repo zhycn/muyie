@@ -1,6 +1,6 @@
 package com.muyie.framework.config.apidoc.customizer;
 
-import com.muyie.framework.properties.MuyieProperties;
+import com.muyie.framework.config.MuyieProperties;
 
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.core.Ordered;

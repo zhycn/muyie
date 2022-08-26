@@ -1,4 +1,4 @@
-package com.muyie.framework.properties;
+package com.muyie.framework.config;
 
 /**
  * MuYie Profile constants.

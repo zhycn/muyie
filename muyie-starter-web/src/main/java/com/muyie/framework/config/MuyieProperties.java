@@ -1,4 +1,4 @@
-package com.muyie.framework.properties;
+package com.muyie.framework.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -14,7 +14,9 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "muyie")
 public class MuyieProperties {
 
-  public final StopWatch stopWatch = new StopWatch();
+  private final ApiDocs apiDocs = new ApiDocs();
+
+  private final StopWatch stopWatch = new StopWatch();
 
   @Data
   public static class StopWatch {

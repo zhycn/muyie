@@ -1,4 +1,4 @@
-package com.muyie.framework.configure;
+package com.muyie.framework.config;
 
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;

@@ -7,8 +7,8 @@ import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AfterAdvice;
 import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;
+import com.muyie.framework.config.MuyieProperties;
 import com.muyie.framework.logging.LogTraceIdConverter;
-import com.muyie.framework.properties.MuyieProperties;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -39,10 +39,10 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
 
-  private final MuyieProperties muyieProperties;
+  private final MuyieProperties.StopWatch properties;
 
   public CatchAndLogAspect(MuyieProperties muyieProperties) {
-    this.muyieProperties = muyieProperties;
+    this.properties = muyieProperties.getStopWatch();
   }
 
   @Override
@@ -67,7 +67,7 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
   public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {
     final CatchAndLog catchAndLog = this.getMethod(joinPoint).getAnnotation(CatchAndLog.class);
     String value = this.getMethodAlias(joinPoint, catchAndLog.value());
-    int globalSlowMethodMillis = muyieProperties.getStopWatch().getSlowMethodMillis();
+    int globalSlowMethodMillis = properties.getSlowMethodMillis();
     int slowMethodMillis = catchAndLog.slowMethodMillis() > 0 ? catchAndLog.slowMethodMillis() : globalSlowMethodMillis;
     String[] ignoreFields = catchAndLog.ignoreFields();
 

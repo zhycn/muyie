@@ -38,12 +38,11 @@
     <problem-spring.version>0.26.2</problem-spring.version>
     <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
     <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
-    <redisson.version>3.15.6</redisson.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
     <spring-security-oauth.version>2.5.2.RELEASE</spring-security-oauth.version>
-    <springfox.version>3.0.0</springfox.version>
+    <springdoc.version>1.6.11</springdoc.version>
     <testcontainers.version>1.17.3</testcontainers.version>
   </properties>
 
@@ -159,23 +158,6 @@
         <version>${google.zxing.version}</version>
       </dependency>
 
-      <!-- Redisson -->
-      <dependency>
-        <groupId>org.redisson</groupId>
-        <artifactId>redisson</artifactId>
-        <version>${redisson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.redisson</groupId>
-        <artifactId>redisson-spring-boot-starter</artifactId>
-        <version>${redisson.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
       <dependency>
         <groupId>org.reflections</groupId>
         <artifactId>reflections</artifactId>
@@ -208,11 +190,11 @@
         <version>${mapstruct.version}</version>
       </dependency>
 
-      <!-- Swagger2 -->
+      <!-- SpringDoc OpenAPI -->
       <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-boot-starter</artifactId>
-        <version>${springfox.version}</version>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-ui</artifactId>
+        <version>${springdoc.version}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>

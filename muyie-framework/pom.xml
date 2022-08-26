@@ -163,10 +163,10 @@
       <artifactId>logstash-logback-encoder</artifactId>
     </dependency>
 
-    <!-- Swagger2 -->
+    <!-- SpringDoc OpenAPI -->
     <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
 
     <!-- OPT & 二维码 -->

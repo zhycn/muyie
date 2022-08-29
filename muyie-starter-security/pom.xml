@@ -3,9 +3,11 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>muyie-starter-web</artifactId>
+  <artifactId>muyie-starter-security</artifactId>
   <packaging>jar</packaging>
-  <name>muyie-starter-web</name>
+  <name>muyie-starter-security</name>
+  <description>Built with Spring Security</description>
+  <url>https://spring.io/projects/spring-security</url>
 
   <parent>
     <groupId>com.github.zhycn</groupId>
@@ -15,43 +17,14 @@
   </parent>
 
   <dependencies>
-    <!-- Starter for building web, including RESTful, applications using Spring MVC.
-        Uses Tomcat as the default embedded container. -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <optional>true</optional>
     </dependency>
-    <!-- Starter for aspect-oriented programming with Spring AOP and AspectJ -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-aop</artifactId>
-    </dependency>
-    <!-- Starter for using Java Bean Validation with Hibernate Validator -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <!-- The library for OpenAPI 3 with Spring Boot -->
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
-    <!-- Tools Support -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>cn.hutool</groupId>
-      <artifactId>hutool-all</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
   </dependencies>
 

@@ -60,6 +60,11 @@
       </dependency>
       <dependency>
         <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-html</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-redis</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>

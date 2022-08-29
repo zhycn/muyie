@@ -16,11 +16,28 @@
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <jsoup.version>1.15.3</jsoup.version>
+    <htmlunit.version>2.64.0</htmlunit.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <optional>true</optional>
+    </dependency>
+    <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
+    </dependency>
+    <!-- A java GUI-Less browser library @ https://htmlunit.sourceforge.io/ -->
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId>
+      <version>${htmlunit.version}</version>
     </dependency>
   </dependencies>
 

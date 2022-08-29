@@ -1,7 +1,5 @@
 package com.muyie.security.jwt;
 
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(JwtSecurityConfiguration.class)
+//@Import(JwtSecurityConfiguration.class)
 @Documented
 public @interface EnableJwtSecurity {
 

@@ -5,12 +5,10 @@ import com.google.common.base.Throwables;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.muyie.framework.aop.AfterAdvice;
 import org.muyie.framework.aop.AfterThrowingAdvice;
 import org.muyie.framework.aop.AroundAdvice;
 import org.muyie.framework.config.SpringContextHolder;
@@ -32,7 +30,7 @@ import cn.hutool.core.util.StrUtil;
 
 @Aspect
 @Component
-public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice, AfterAdvice, WebMvcConfigurer {
+public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
 
   private static final Logger log = LoggerFactory.getLogger(ExtensionAspect.class);
 
@@ -63,10 +61,18 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice, After
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new HandlerInterceptor() {
+
+      @Override
+      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        LogTraceIdConverter.set(request.getHeader("X-Request-Id"));
+        return HandlerInterceptor.super.preHandle(request, response, handler);
+      }
+
       @Override
       public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        // WEB请求执行完成后，清除当前线程的MDC数据
-        LogTraceIdConverter.clear();
+        // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
+        response.addHeader("X-Request-Id", LogTraceIdConverter.get());
+        LogTraceIdConverter.close();
       }
     }).addPathPatterns("/**");
   }
@@ -144,10 +150,4 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice, After
     }
   }
 
-  @Override
-  @After("setPointcut() && springBeanPointcut()")
-  public void after(JoinPoint joinPoint) {
-    // 方法执行完成后，清除当前线程的MDC数据
-    LogTraceIdConverter.clear();
-  }
 }

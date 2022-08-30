@@ -1,10 +1,9 @@
 package com.muyie.framework.config.async;
 
-import org.springframework.lang.Nullable;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.util.concurrent.ListenableFuture;
 
 import java.time.Duration;
@@ -17,21 +16,20 @@ import java.util.concurrent.ScheduledFuture;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Customize the MuyieAsyncTaskExecutor.
+ * Customize the MuyieExecutorService.
  *
  * @author larry.qi
  * @since 1.2.8
  */
 @Slf4j
-@Component
-public class MuyieAsyncTaskExecutor {
+public class MuyieExecutorService {
 
   static final String EXCEPTION_MESSAGE = "Caught async exception";
 
   private final ThreadPoolTaskExecutor taskExecutor;
   private final ThreadPoolTaskScheduler taskScheduler;
 
-  public MuyieAsyncTaskExecutor(final ThreadPoolTaskExecutor taskExecutor, final ThreadPoolTaskScheduler taskScheduler) {
+  public MuyieExecutorService(final ThreadPoolTaskExecutor taskExecutor, final ThreadPoolTaskScheduler taskScheduler) {
     this.taskExecutor = taskExecutor;
     this.taskScheduler = taskScheduler;
   }
@@ -43,7 +41,6 @@ public class MuyieAsyncTaskExecutor {
   public ThreadPoolTaskScheduler getTaskScheduler() {
     return taskScheduler;
   }
-
 
   private <T> Callable<T> createCallable(Callable<T> task) {
     return () -> {
@@ -95,8 +92,11 @@ public class MuyieAsyncTaskExecutor {
     return getTaskScheduler().submitListenable(createCallable(task));
   }
 
-  @Nullable
   public ScheduledFuture<?> schedule(Runnable task, Trigger trigger) {
+    return getTaskScheduler().schedule(createWrappedRunnable(task), trigger);
+  }
+
+  public ScheduledFuture<?> schedule(Runnable task, CronTrigger trigger) {
     return getTaskScheduler().schedule(createWrappedRunnable(task), trigger);
   }
 
@@ -104,16 +104,32 @@ public class MuyieAsyncTaskExecutor {
     return getTaskScheduler().schedule(createWrappedRunnable(task), startTime);
   }
 
+  public ScheduledFuture<?> schedule(Runnable task, Instant startTime) {
+    return schedule(task, Date.from(startTime));
+  }
+
   public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, Date startTime, long period) {
     return getTaskScheduler().scheduleAtFixedRate(createWrappedRunnable(task), startTime, period);
+  }
+
+  public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, Instant startTime, Duration period) {
+    return scheduleAtFixedRate(task, Date.from(startTime), period.toMillis());
   }
 
   public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, long period) {
     return getTaskScheduler().scheduleAtFixedRate(createWrappedRunnable(task), period);
   }
 
+  public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, Duration period) {
+    return scheduleAtFixedRate(task, period.toMillis());
+  }
+
   public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, Date startTime, long delay) {
     return getTaskScheduler().scheduleWithFixedDelay(createWrappedRunnable(task), startTime, delay);
+  }
+
+  public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, Instant startTime, Duration delay) {
+    return scheduleWithFixedDelay(task, Date.from(startTime), delay.toMillis());
   }
 
   public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, long delay) {
@@ -122,22 +138,6 @@ public class MuyieAsyncTaskExecutor {
 
   public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, Duration delay) {
     return scheduleWithFixedDelay(task, delay.toMillis());
-  }
-
-  public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, Instant startTime, Duration delay) {
-    return scheduleWithFixedDelay(task, Date.from(startTime), delay.toMillis());
-  }
-
-  public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, Duration period) {
-    return scheduleAtFixedRate(task, period.toMillis());
-  }
-
-  public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, Instant startTime, Duration period) {
-    return scheduleAtFixedRate(task, Date.from(startTime), period.toMillis());
-  }
-
-  public ScheduledFuture<?> schedule(Runnable task, Instant startTime) {
-    return schedule(task, Date.from(startTime));
   }
 
 }

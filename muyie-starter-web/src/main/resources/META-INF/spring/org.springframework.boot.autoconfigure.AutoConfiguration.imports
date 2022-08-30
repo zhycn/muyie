@@ -1,3 +1,4 @@
 com.muyie.framework.aspectj.MuyieAspectJAutoConfiguration
+com.muyie.framework.config.async.MuyieAsyncAutoConfiguration
 com.muyie.framework.config.apidoc.MuyieOpenApiAutoConfiguration
 com.muyie.framework.config.MuyieWebAutoConfiguration

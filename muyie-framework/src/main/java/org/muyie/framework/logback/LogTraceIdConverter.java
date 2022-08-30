@@ -1,9 +1,8 @@
-package com.muyie.framework.logging;
+package org.muyie.framework.logback;
 
 import com.google.common.base.Strings;
 
-import com.muyie.framework.config.MuyieConstants;
-
+import org.muyie.framework.config.MuyieConstants;
 import org.slf4j.MDC;
 
 import java.util.Map;

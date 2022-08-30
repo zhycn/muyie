@@ -14,16 +14,23 @@ import org.muyie.framework.aop.AroundAdvice;
 import org.muyie.framework.config.SpringContextHolder;
 import org.muyie.framework.desensitized.DesensitizedDataConfig;
 import org.muyie.framework.desensitized.DesensitizedDataUtil;
+import org.muyie.framework.logback.LogTraceIdConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import cn.hutool.core.util.StrUtil;
 
 @Aspect
 @Component
-public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
+public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
 
   private static final Logger log = LoggerFactory.getLogger(ExtensionAspect.class);
 
@@ -49,6 +56,25 @@ public class ExtensionAspect implements AroundAdvice, AfterThrowingAdvice {
       }
     }
     return config;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new HandlerInterceptor() {
+
+      @Override
+      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        LogTraceIdConverter.set(request.getHeader("X-Request-Id"));
+        return HandlerInterceptor.super.preHandle(request, response, handler);
+      }
+
+      @Override
+      public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
+        response.addHeader("X-Request-Id", LogTraceIdConverter.get());
+        LogTraceIdConverter.close();
+      }
+    }).addPathPatterns("/**");
   }
 
   @Override

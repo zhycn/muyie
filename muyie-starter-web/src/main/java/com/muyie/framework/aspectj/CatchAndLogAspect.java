@@ -4,7 +4,6 @@ import com.google.common.base.Throwables;
 
 import com.alibaba.fastjson.JSON;
 import com.muyie.framework.annotation.CatchAndLog;
-import com.muyie.framework.aop.AfterAdvice;
 import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieProperties;
@@ -12,7 +11,6 @@ import com.muyie.framework.logging.LogTraceIdConverter;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Aspect
 @Configuration
-public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
+public class CatchAndLogAspect implements AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
 
   private final MuyieProperties.StopWatch properties;
 
@@ -48,10 +46,18 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new HandlerInterceptor() {
+
+      @Override
+      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        LogTraceIdConverter.set(request.getHeader("X-Request-Id"));
+        return HandlerInterceptor.super.preHandle(request, response, handler);
+      }
+
       @Override
       public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        // WEB请求执行完成后，清除当前线程的MDC数据
-        LogTraceIdConverter.clear();
+        // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
+        response.addHeader("X-Request-Id", LogTraceIdConverter.get());
+        LogTraceIdConverter.close();
       }
     }).addPathPatterns("/**");
   }
@@ -97,14 +103,11 @@ public class CatchAndLogAspect implements AfterAdvice, AroundAdvice, AfterThrowi
       if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
         log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
       }
+      // 方法执行完成后，清除当前线程的MDC数据
+      if (catchAndLog.flush()) {
+        LogTraceIdConverter.close();
+      }
     }
-  }
-
-  @Override
-  @After("setPointcut()")
-  public void after(JoinPoint joinPoint) {
-    // 方法执行完成后，清除当前线程的MDC数据
-    LogTraceIdConverter.clear();
   }
 
   @Override

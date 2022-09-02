@@ -1,12 +1,11 @@
 # 依赖版本
 
-本文档提供了 Tsollu 管理的依赖版本的详细信息，完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。
-
-- [Dependency Versions by Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/dependency-versions.html)
+本文提供了 MuYie 管理的依赖版本的详细信息，完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。
 
 ## 坐标管理
 
-下表提供了 Tsollu 管理的依赖版本的详细信息，当你添加的依赖管理未指定版本时，将使用以下版本号。
+以下列出了 MuYie 管理的依赖版本的详细信息，当你添加的依赖管理未指定版本时，将使用以下版本号。Spring Boot
+的依赖版本清单请查看文档：https://docs.spring.io/spring-boot/docs/current/reference/html/dependency-versions.html
 
 | Group ID                    | Artifact ID                             | Version  | Version Property            | Documentation                                                                             |
 |-----------------------------|-----------------------------------------|----------|-----------------------------|-------------------------------------------------------------------------------------------|
@@ -34,8 +33,7 @@
 | com.squareup.retrofit2      | converter-jackson                       | 2.9.0    | retrofit.version            | [Retrofit](https://square.github.io/retrofit/)                                            |
 | org.springdoc               | springdoc-openapi-ui                    | 1.6.9    | springdoc.version           | [SpringDoc](https://springdoc.org/)                                                       |
 
-在集成 Tsollu 提供的依赖管理后（完全支持 Spring Boot 和 Spring Cloud 提供的依赖管理），
-你在项目中添加依赖管理时，不需要指定依赖包的版本号。如下所示：
+在集成 MuYie 提供的依赖管理后，你在项目中添加依赖管理时，不需要指定依赖包的版本号。如下所示：
 
 ```xml title="添加依赖管理"
 <dependency>
@@ -46,7 +44,7 @@
 
 ## 覆盖版本
 
-Tsollu / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都是使用 `<properties />` 来定义的，
+MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都是使用 `<properties />` 来定义的，
 这就使得你可以很容易的升级或降级某个依赖包的版本。在你的项目中指定依赖包的版本号就能覆盖之前的版本：
 
 ```xml title="覆盖版本属性"
@@ -57,7 +55,7 @@ Tsollu / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息�
 
 !!! tip "Tips"
 
-    在使用 Tsollu 项目的依赖管理时，应根据项目的实际运行环境来合理选择版本号，除非必须，否则不建议修改版本信息。
+    在使用 MuYie 项目的依赖管理时，应根据项目的实际运行环境来合理选择版本号，除非必须，否则不建议修改版本信息。
     在修改依赖包的版本信息时，可通过 IDE 点击坐标来查看依赖包对应的属性名。
 
 ## 已知问题

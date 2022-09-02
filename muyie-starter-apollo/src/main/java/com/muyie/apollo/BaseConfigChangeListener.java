@@ -11,10 +11,9 @@ import org.springframework.lang.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 动态刷新配置的抽象类
+ * 动态更新属性配置抽象类
  *
  * @author larry.qi
- * @see MuyieApolloAutoConfiguration
  * @since 1.2.5
  */
 @Slf4j
@@ -32,12 +31,12 @@ public abstract class BaseConfigChangeListener implements ApplicationContextAwar
   }
 
   /**
-   * 动态刷新配置的方法
+   * 动态更新配置的通用方法，变更信息将在日志文件中打印日志记录。
    *
    * @param configChangeEvent 配置变更事件
    * @since 1.2.5
    */
-  protected static void refreshConfigChange(@NonNull ConfigChangeEvent configChangeEvent) {
+  protected static void refreshConfigChange(ConfigChangeEvent configChangeEvent) {
     configChangeEvent.changedKeys().forEach(key ->
       log.info("Apollo ConfigChangeEvent - {}", configChangeEvent.getChange(key))
     );

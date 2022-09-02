@@ -1,8 +1,3 @@
----
-tags:
-- apollo
----
-
 # Apollo Client 使用指南
 
 Apollo（阿波罗）是一款可靠的分布式配置管理中心，诞生于携程框架研发部，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。
@@ -15,7 +10,7 @@ Java 客户端不依赖任何框架，能够运行于所有 Java 运行时环境
 
 !!! tip "组件特征"
 
-    **`tsollu-starter-apollo` 组件是基于 Spring Boot 和 Apollo Client 开发的快速集成方案，开箱即用。
+    **`muyie-starter-apollo` 组件是基于 Spring Boot 和 Apollo Client 开发的快速集成方案，开箱即用。
     重点解决了在 Spring Boot 中使用 `@ConfigurationProperties` 注解时配置参数不更新的问题。**
 
 ## 快速使用
@@ -25,9 +20,9 @@ Java 客户端不依赖任何框架，能够运行于所有 Java 运行时环境
 ```xml title="Maven Dependency"
 <!-- Apollo Client >=2.0.0 -->
 <dependency>
-  <groupId>com.tsollu</groupId>
-  <artifactId>tsollu-starter-apollo</artifactId>
-  <version>${tsollu.version}</version>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-apollo</artifactId>
+  <version>${muyie-framework.version}</version>
 </dependency>
 ```
 
@@ -48,6 +43,24 @@ apollo.cluster=default
 !!! success "Tips"
 
     简单两步，就可以快速地将 Spring Boot 项目的配置参数迁移到 Apollo 配置中心，代码不需要做任何改动。
+
+## 自定义设置
+
+`@ApolloConfigChangeListener` 注解默认只能自动更新 `application` 命名空间的配置属性，其他命名空间的配置属性更新可参考下列配置：
+
+```java
+
+@Configuration
+public class AppConfig extends BaseConfigChangeListener {
+
+  @Override
+  @ApolloConfigChangeListener({"someNamespace", "anotherNamespace"})
+  public void onChange(ConfigChangeEvent configChangeEvent) {
+    refreshConfigChange(configChangeEvent);
+  }
+}
+
+```
 
 ## 配置参数详解
 
@@ -197,7 +210,6 @@ public class TestJavaConfigBean {
 ```java
 
 @Configuration
-@EnableApolloConfig
 public class AppConfig {
 
   @Bean
@@ -212,7 +224,7 @@ public class AppConfig {
 
 !!! tip "Tips"
 
-    **Apollo Client 暂不支持配置属性更新，tsollu-starter-apollo 组件重点解决了该问题。**
+    **Apollo Client 暂不支持配置属性自动更新，muyie-starter-apollo 组件重点解决了该问题。**
 
 Apollo 也支持这种方式，下面的例子会把 redis.cache.expireSeconds 和 redis.cache.commandTimeout 分别注入到
 SampleRedisConfig 的 expireSeconds 和 commandTimeout 字段中。
@@ -241,7 +253,6 @@ redis.cache.commandTimeout 的配置项）：
 ```java
 
 @Configuration
-@EnableApolloConfig
 public class AppConfig {
 
   @Bean

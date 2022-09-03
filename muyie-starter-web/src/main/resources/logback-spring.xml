@@ -111,7 +111,7 @@
   <logger name="javax.activation" level="WARN"/>
 
   <!-- 根据启动环境打印日志 -->
-  <springProfile name="dev | console">
+  <springProfile name="dev | console | default">
     <root level="${LOG_LEVEL}">
       <appender-ref ref="CONSOLE"/>
     </root>

@@ -7,6 +7,8 @@ import org.springframework.core.env.Environment;
 
 import java.util.Map;
 
+import static org.springframework.core.env.AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME;
+
 /**
  * Utility class to load a Spring profile to be used as default when there is no
  * <code>spring.profiles.active</code> set in the environment or as command line
@@ -17,8 +19,6 @@ import java.util.Map;
  * @since 1.2.6
  */
 public final class DefaultProfileUtil {
-
-  private static final String SPRING_PROFILES_DEFAULT = "spring.profiles.default";
 
   private DefaultProfileUtil() {
   }
@@ -35,7 +35,7 @@ public final class DefaultProfileUtil {
      * set in the <code>application.yml</code> file. See
      * https://github.com/spring-projects/spring-boot/issues/1219
      */
-    defProperties.put(SPRING_PROFILES_DEFAULT, MuyieProfileConstants.SPRING_PROFILE_CONSOLE);
+    defProperties.put(DEFAULT_PROFILES_PROPERTY_NAME, MuyieProfileConstants.SPRING_PROFILE_DEVELOPMENT);
     app.setDefaultProperties(defProperties);
   }
 

@@ -143,7 +143,7 @@
       <appender-ref ref="CONSOLE"/>
     </root>
   </springProfile>
-  <springProfile name="sit | uat | prod | task | cloud | k8s">
+  <springProfile name="sit | uat | prod | cloud | heroku | k8s">
     <root level="${LOG_LEVEL}">
       <appender-ref ref="ERROR"/>
       <appender-ref ref="WARN"/>

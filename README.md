@@ -21,7 +21,7 @@ The MuYie BOM uses Maven's support for dependency management to provide dependen
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.2.8</version>
+            <version>1.2.9-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -35,7 +35,7 @@ Alternatively, rather than importing the MuYie BOM, you may prefer to use it as 
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.8</version>
+    <version>1.2.9-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```

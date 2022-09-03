@@ -1,17 +1,19 @@
 <configuration>
   <!-- 日志配置参数 -->
-  <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="."/>
-  <springProperty scope="context" name="LOG_LEVEL" source="logging.level" defaultValue="INFO"/>
-  <springProperty scope="context" name="LOG_MAX_FILE_SIZE" source="logging.max-file-size"
+  <springProperty scope="context" name="LOG_PATH" source="log.path" defaultValue="."/>
+  <springProperty scope="context" name="LOG_LEVEL" source="log.level" defaultValue="INFO"/>
+  <springProperty scope="context" name="LOG_MAX_FILE_SIZE" source="log.max-file-size"
                   defaultValue="100MB"/>
-  <springProperty scope="context" name="LOG_MAX_HISTORY" source="logging.max-history"
+  <springProperty scope="context" name="LOG_MAX_HISTORY" source="log.max-history"
                   defaultValue="30"/>
-  <springProperty scope="context" name="LOG_TOTAL_SIZE_CAP" source="logging.total-size-cap"
+  <springProperty scope="context" name="LOG_TOTAL_SIZE_CAP" source="log.total-size-cap"
                   defaultValue="50GB"/>
 
   <!-- 日志格式中增加了本地服务器的IP地址和请求追踪标识 -->
-  <conversionRule conversionWord="ip" converterClass="com.muyie.framework.logging.LogHostConverter"/>
-  <conversionRule conversionWord="traceId" converterClass="com.muyie.framework.logging.LogTraceIdConverter"/>
+  <conversionRule conversionWord="ip"
+                  converterClass="com.muyie.framework.logging.LogHostConverter"/>
+  <conversionRule conversionWord="traceId"
+                  converterClass="com.muyie.framework.logging.LogTraceIdConverter"/>
   <property name="CONSOLE_LOG_PATTERN"
             value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%ip]){yellow} %clr([%traceId]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
@@ -105,37 +107,8 @@
     </filter>
   </appender>
 
-  <!-- 指定包名的日志级别 -->
+  <!-- 指定包名的日志级别，也可以通过属性文件配置 -->
   <logger name="javax.activation" level="WARN"/>
-  <logger name="javax.mail" level="WARN"/>
-  <logger name="javax.management.remote" level="WARN"/>
-  <logger name="javax.xml.bind" level="WARN"/>
-  <logger name="ch.qos.logback" level="WARN"/>
-  <logger name="com.codahale.metrics" level="WARN"/>
-  <logger name="com.ryantenney" level="WARN"/>
-  <logger name="com.sun" level="WARN"/>
-  <logger name="com.zaxxer" level="WARN"/>
-  <logger name="io.undertow" level="INFO"/>
-  <logger name="io.undertow.websockets.jsr" level="ERROR"/>
-  <logger name="org.apache" level="WARN"/>
-  <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
-  <logger name="org.bson" level="WARN"/>
-  <logger name="org.hibernate.validator" level="WARN"/>
-  <logger name="org.hibernate" level="INFO"/>
-  <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-  <logger name="org.springframework" level="WARN"/>
-  <logger name="org.springframework.cloud" level="INFO"/>
-  <logger name="org.springframework.boot" level="INFO"/>
-  <logger name="org.springframework.web" level="INFO"/>
-  <logger name="org.springframework.security" level="INFO"/>
-  <logger name="org.springframework.cache" level="INFO"/>
-  <logger name="org.thymeleaf" level="WARN"/>
-  <logger name="org.xnio" level="WARN"/>
-  <logger name="sun.rmi" level="WARN"/>
-  <logger name="liquibase" level="WARN"/>
-  <logger name="LiquibaseSchemaResolver" level="INFO"/>
-  <logger name="sun.rmi.transport" level="WARN"/>
-  <logger name="cn.hutool" level="WARN"/>
 
   <!-- 根据启动环境打印日志 -->
   <springProfile name="dev | console">

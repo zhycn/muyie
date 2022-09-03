@@ -18,4 +18,9 @@ public interface MuyieConstants {
    */
   String SYSTEM_USER = "system";
 
+  /**
+   * Constant <code>REQUEST_ID = "Request-Id"</code>
+   */
+  String REQUEST_ID = "Request-Id";
+
 }

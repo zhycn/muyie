@@ -28,6 +28,57 @@ public class SensitiveUtil {
   }
 
   /**
+   * 根据支持的脱敏类型枚举隐藏数据
+   *
+   * @param sensitiveData 待部分隐藏处理的数据
+   * @param sensitiveType 脱敏类型枚举
+   * @return 隐藏后的数据
+   */
+  public static String hide(String sensitiveData, SensitiveType sensitiveType) {
+    if (StrUtil.isBlank(sensitiveData)) {
+      return sensitiveData;
+    }
+    if (!SensitiveDataUtil.needHide()) {
+      return sensitiveData;
+    }
+    String newStr = sensitiveData;
+    switch (sensitiveType) {
+      case CHINESE_NAME:
+        newStr = SensitiveUtil.chineseNameHide(sensitiveData);
+        break;
+      case ID_CARD:
+        newStr = SensitiveUtil.idCardHide(sensitiveData);
+        break;
+      case PHONE:
+        newStr = SensitiveUtil.phoneHide(sensitiveData);
+        break;
+      case EMAIL:
+        newStr = SensitiveUtil.emailHide(sensitiveData);
+        break;
+      case PASSWORD:
+        newStr = SensitiveUtil.passwordHide(sensitiveData);
+        break;
+      case CAR_LICENSE:
+        newStr = SensitiveUtil.carLicenseHide(sensitiveData);
+        break;
+      case BANK_CARD:
+        newStr = SensitiveUtil.bankCardHide(sensitiveData);
+        break;
+      case NICK:
+        newStr = SensitiveUtil.nickHide(sensitiveData);
+        break;
+      case LOGON:
+        newStr = SensitiveUtil.logonHide(sensitiveData);
+        break;
+      case DEFAULT:
+        newStr = SensitiveUtil.defaultHide(sensitiveData);
+        break;
+      default:
+    }
+    return newStr;
+  }
+
+  /**
    * 隐藏中文姓名
    *
    * <pre>
@@ -246,6 +297,5 @@ public class SensitiveUtil {
   public static boolean needHide() {
     return SensitiveDataUtil.needHide();
   }
-
 
 }

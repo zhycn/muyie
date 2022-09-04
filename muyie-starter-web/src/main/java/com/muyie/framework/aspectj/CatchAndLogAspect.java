@@ -2,7 +2,7 @@ package com.muyie.framework.aspectj;
 
 import com.google.common.base.Throwables;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;

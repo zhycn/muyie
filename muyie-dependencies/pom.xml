@@ -19,7 +19,7 @@
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.9</alibaba-druid.version>
-    <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
+    <alibaba-fastjson.version>2.0.12</alibaba-fastjson.version>
     <alibaba-ttl.version>2.14.0</alibaba-ttl.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
@@ -85,6 +85,16 @@
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
+        <version>${alibaba-fastjson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>${alibaba-fastjson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2-extension</artifactId>
         <version>${alibaba-fastjson.version}</version>
       </dependency>
       <!-- https://github.com/alibaba/transmittable-thread-local -->

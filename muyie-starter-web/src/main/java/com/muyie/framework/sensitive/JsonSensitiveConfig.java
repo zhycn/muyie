@@ -21,11 +21,6 @@ public class JsonSensitiveConfig {
    */
   private static final JSONWriter.Feature[] DEFAULT_FEATURE = new JSONWriter.Feature[]{IgnoreErrorGetter};
 
-
-  private static final SensitiveBeforeFilter BEFORE_FILTER = new SensitiveBeforeFilter();
-
-  private static final SensitiveAfterFilter AFTER_FILTER = new SensitiveAfterFilter();
-
   /**
    * 序列化的日期格式
    */
@@ -68,7 +63,7 @@ public class JsonSensitiveConfig {
   }
 
   public Filter[] getFilters() {
-    return new Filter[]{propertyFilter, valueFilter, BEFORE_FILTER, AFTER_FILTER};
+    return new Filter[]{propertyFilter, valueFilter};
   }
 
   public String getDateFormat() {

@@ -15,7 +15,7 @@ public class SensitivePropertyFilter implements PropertyFilter {
   /**
    * 序列化时忽略的字段列表
    */
-  private final String[] ignores;
+  private String[] ignores;
 
   public SensitivePropertyFilter(String... ignores) {
     this.ignores = ignores;
@@ -23,6 +23,10 @@ public class SensitivePropertyFilter implements PropertyFilter {
 
   @Override
   public boolean apply(Object object, String name, Object value) {
+    SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
+    if (sensitiveConfig != null) {
+      ignores = sensitiveConfig.ignores();
+    }
     return !ArrayUtil.contains(ignores, name);
   }
 

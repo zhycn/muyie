@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SensitiveValueFilter implements ValueFilter {
 
-  private final SensitiveStrategy sensitiveStrategy;
+  private SensitiveStrategy sensitiveStrategy;
 
   public SensitiveValueFilter(SensitiveStrategy sensitiveStrategy) {
     this.sensitiveStrategy = sensitiveStrategy;
@@ -26,6 +26,10 @@ public class SensitiveValueFilter implements ValueFilter {
   public Object apply(Object object, String name, Object value) {
     if (!(value instanceof String) || ((String) value).length() == 0) {
       return value;
+    }
+    SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
+    if (sensitiveConfig != null) {
+      sensitiveStrategy = SensitiveStrategy.of(sensitiveConfig);
     }
     if (Objects.isNull(sensitiveStrategy)) {
       return value;

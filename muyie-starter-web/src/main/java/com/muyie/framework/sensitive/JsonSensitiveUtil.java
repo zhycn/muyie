@@ -56,7 +56,7 @@ public class JsonSensitiveUtil extends SensitiveUtil {
   }
 
   private static Filter[] chooseFilter() {
-    return JsonSensitiveConfig.of(SensitiveStrategy.builder().phones("mobile").build()).getFilters();
+    return JsonSensitiveConfig.of(SensitiveStrategy.builder("createdTime").phones("mobile").build()).getFilters();
   }
 
 }

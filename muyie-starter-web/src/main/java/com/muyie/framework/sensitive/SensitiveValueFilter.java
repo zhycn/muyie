@@ -31,6 +31,7 @@ public class SensitiveValueFilter extends BeforeFilter implements ValueFilter {
     if (Objects.isNull(sensitiveStrategy)) {
       return value;
     }
+    System.out.println("Value " + name);
     if (ArrayUtil.contains(sensitiveStrategy.getChineseNames(), name)) {
       //中文姓名
       return SensitiveUtil.chineseNameHide((String) value);
@@ -74,6 +75,7 @@ public class SensitiveValueFilter extends BeforeFilter implements ValueFilter {
     SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
     if (sensitiveConfig != null) {
       this.sensitiveStrategy = SensitiveStrategy.of(sensitiveConfig);
+      SensitivePropertyFilter.of(sensitiveStrategy.getIgnores());
     }
   }
 

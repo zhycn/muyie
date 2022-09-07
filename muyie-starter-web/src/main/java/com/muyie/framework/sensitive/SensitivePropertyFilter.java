@@ -15,10 +15,10 @@ public class SensitivePropertyFilter implements PropertyFilter {
   /**
    * 序列化时忽略的字段列表
    */
-  private String[] ignores;
+  private static String[] ignores;
 
   public SensitivePropertyFilter(String... ignores) {
-    this.ignores = ignores;
+    SensitivePropertyFilter.ignores = ignores;
   }
 
   @Override

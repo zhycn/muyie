@@ -23,10 +23,6 @@ public class SensitivePropertyFilter implements PropertyFilter {
 
   @Override
   public boolean apply(Object object, String name, Object value) {
-    SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
-    if (sensitiveConfig != null) {
-      ignores = sensitiveConfig.ignores();
-    }
     return !ArrayUtil.contains(ignores, name);
   }
 

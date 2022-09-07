@@ -27,10 +27,6 @@ public class SensitiveValueFilter implements ValueFilter {
     if (!(value instanceof String) || ((String) value).length() == 0) {
       return value;
     }
-    SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
-    if (sensitiveConfig != null) {
-      sensitiveStrategy = SensitiveStrategy.of(sensitiveConfig);
-    }
     if (Objects.isNull(sensitiveStrategy)) {
       return value;
     }

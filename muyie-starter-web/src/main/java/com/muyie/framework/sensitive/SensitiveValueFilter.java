@@ -1,5 +1,6 @@
 package com.muyie.framework.sensitive;
 
+import com.alibaba.fastjson2.filter.BeforeFilter;
 import com.alibaba.fastjson2.filter.ValueFilter;
 
 import java.util.Objects;
@@ -14,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 1.2.9
  */
 @Slf4j
-public class SensitiveValueFilter implements ValueFilter {
+public class SensitiveValueFilter extends BeforeFilter implements ValueFilter {
 
   private SensitiveStrategy sensitiveStrategy;
 
@@ -66,6 +67,14 @@ public class SensitiveValueFilter implements ValueFilter {
 
   public static SensitiveValueFilter of(SensitiveStrategy sensitiveStrategy) {
     return new SensitiveValueFilter(sensitiveStrategy);
+  }
+
+  @Override
+  public void writeBefore(Object object) {
+    SensitiveConfig sensitiveConfig = object.getClass().getAnnotation(SensitiveConfig.class);
+    if (sensitiveConfig != null) {
+      this.sensitiveStrategy = SensitiveStrategy.of(sensitiveConfig);
+    }
   }
 
 }

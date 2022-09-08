@@ -32,7 +32,7 @@ public enum SensitiveType {
   //昵称（显示首/尾各1位，中间加**）
   NICK,
 
-  //登录账号
+  //登录帐号
   LOGON,
 
   //默认隐藏规则

@@ -36,6 +36,6 @@ public enum SensitiveType {
   LOGON,
 
   //默认隐藏规则
-  DEFAULT;
+  DEFAULT
 
 }

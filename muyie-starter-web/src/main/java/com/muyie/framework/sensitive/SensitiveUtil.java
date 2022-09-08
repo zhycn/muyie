@@ -12,22 +12,6 @@ import cn.hutool.core.util.StrUtil;
 public class SensitiveUtil {
 
   /**
-   * 构造函数
-   *
-   * @param hideFlag 是否需要进行屏蔽的开关；<code>ture</code>表示打开。
-   */
-  public SensitiveUtil(final boolean hideFlag) {
-    SensitiveDataUtil.setHideFlag(hideFlag);
-  }
-
-  /**
-   * 构造函数，默认开启屏蔽开关
-   */
-  public SensitiveUtil() {
-    SensitiveDataUtil.setHideFlag(true);
-  }
-
-  /**
    * 根据支持的脱敏类型枚举隐藏数据
    *
    * @param sensitiveData 待部分隐藏处理的数据
@@ -38,7 +22,7 @@ public class SensitiveUtil {
     if (StrUtil.isBlank(sensitiveData)) {
       return sensitiveData;
     }
-    if (!SensitiveDataUtil.needHide()) {
+    if (!needHide()) {
       return sensitiveData;
     }
     String newStr = sensitiveData;
@@ -163,7 +147,7 @@ public class SensitiveUtil {
     if (StrUtil.isBlank(password)) {
       return password;
     }
-    if (!SensitiveDataUtil.needHide()) {
+    if (!needHide()) {
       return password;
     }
     return StrUtil.repeat('*', 6);
@@ -187,7 +171,7 @@ public class SensitiveUtil {
     if (StrUtil.isBlank(carLicense)) {
       return carLicense;
     }
-    if (!SensitiveDataUtil.needHide()) {
+    if (!needHide()) {
       return carLicense;
     }
     return DesensitizedUtil.carLicense(carLicense);
@@ -279,14 +263,27 @@ public class SensitiveUtil {
     return SensitiveDataUtil.logonIdHide(logonId);
   }
 
-
   /**
-   * hideFlag setter
+   * 自定义屏蔽位数和屏蔽位置
    *
-   * @param hideFlag 是否需要进行屏蔽的开关；<code>ture</code>表示打开。
+   * <pre>
+   * SensitiveUtil.customizeHide("13568794561",3,4,4) = "135****4561"
+   * SensitiveUtil.customizeHide("13568794561",0,4,4) = "****4561"
+   * SensitiveUtil.customizeHide("13568794561",3,0,4) = "135****"
+   * SensitiveUtil.customizeHide("13568794561",3,0,8) = "135********"
+   * </pre>
+   *
+   * @param sensitiveData 待部分隐藏处理的敏感数据字符串
+   * @param frontCharNum  展示前几位
+   * @param tailCharNum   展示后几位
+   * @param hiddenCharNum 展示星号*的个数
+   * @return 部分隐藏的敏感数据字符串
    */
-  public static void setHideFlag(final boolean hideFlag) {
-    SensitiveDataUtil.setHideFlag(hideFlag);
+  public static String customizeHide(String sensitiveData, int frontCharNum, int tailCharNum, int hiddenCharNum) {
+    if (!needHide()) {
+      return sensitiveData;
+    }
+    return SensitiveDataUtil.customizeHide(sensitiveData, frontCharNum, tailCharNum, hiddenCharNum);
   }
 
   /**

@@ -68,7 +68,7 @@ import java.util.regex.Pattern;
  * @author larry.qi
  * @since 1.2.9
  */
-public final class SensitiveDataUtil {
+class SensitiveDataUtil {
 
   /**
    * 银行卡号数据类型标识，可用于SensitiveDataUtil.filterHide方法的sensitiveDataType参数。

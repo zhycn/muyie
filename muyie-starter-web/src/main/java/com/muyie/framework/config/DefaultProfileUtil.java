@@ -7,6 +7,8 @@ import org.springframework.core.env.Environment;
 
 import java.util.Map;
 
+import lombok.experimental.UtilityClass;
+
 import static org.springframework.core.env.AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME;
 
 /**
@@ -18,10 +20,8 @@ import static org.springframework.core.env.AbstractEnvironment.DEFAULT_PROFILES_
  * @author larry.qi
  * @since 1.2.6
  */
-public final class DefaultProfileUtil {
-
-  private DefaultProfileUtil() {
-  }
+@UtilityClass
+public class DefaultProfileUtil {
 
   /**
    * Set a default to use when no profile is configured.

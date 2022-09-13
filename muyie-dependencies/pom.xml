@@ -12,14 +12,14 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.9-SNAPSHOT</version>
+    <version>1.2.9</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.9</alibaba-druid.version>
-    <alibaba-fastjson.version>2.0.12</alibaba-fastjson.version>
+    <alibaba-fastjson.version>2.0.13</alibaba-fastjson.version>
     <alibaba-ttl.version>2.14.0</alibaba-ttl.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
@@ -27,7 +27,7 @@
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <google.zxing.version>3.5.0</google.zxing.version>
     <guava.version>31.1-jre</guava.version>
-    <hutool.version>5.8.5</hutool.version>
+    <hutool.version>5.8.6</hutool.version>
     <htmlunit.version>2.64.0</htmlunit.version>
     <jsoup.version>1.15.3</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>

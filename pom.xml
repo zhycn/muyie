@@ -97,7 +97,7 @@
     <module>muyie-starter-apollo</module>
     <module>muyie-starter-client</module>
     <module>muyie-starter-redis</module>
-    <module>muyie-starter-security</module>
+<!--    <module>muyie-starter-security</module>-->
     <module>muyie-starter-web</module>
   </modules>
 

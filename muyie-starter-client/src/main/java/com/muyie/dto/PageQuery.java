@@ -29,12 +29,11 @@ import static cn.hutool.core.date.DatePattern.UTC_SIMPLE_PATTERN;
  */
 public class PageQuery extends Query {
 
+  public static final String ASC = "ASC";
+  public static final String DESC = "DESC";
   private static final long serialVersionUID = 1L;
   private static final int DEFAULT_PAGE_NUM = 1;
   private static final int DEFAULT_PAGE_SIZE = 10;
-  public static final String ASC = "ASC";
-  public static final String DESC = "DESC";
-
   /**
    * 默认支持的日期格式：
    * <pre>
@@ -46,7 +45,7 @@ public class PageQuery extends Query {
    * yyyy-MM-dd'T'HH:mm:ss'Z'
    * </pre>
    */
-  private static final String[] PARSE_PATTERNS = new String[]{
+  private static final String[] DEFAULT_PATTERNS = new String[]{
     NORM_DATE_PATTERN, NORM_DATETIME_PATTERN, PURE_DATE_PATTERN, PURE_DATETIME_PATTERN, UTC_SIMPLE_PATTERN, UTC_PATTERN
   };
 
@@ -139,7 +138,7 @@ public class PageQuery extends Query {
    * @param pageSize 每页大小，最小值为1
    * @return this
    */
-  public PageQuery page(int pageNum, int pageSize) {
+  public PageQuery setPage(int pageNum, int pageSize) {
     this.setPageNum(pageNum);
     this.setPageSize(pageSize);
     return this;
@@ -209,15 +208,7 @@ public class PageQuery extends Query {
    * @throws ValidationException 日期格式解析错误则抛出异常
    */
   public Date getBeginTime() {
-    if (StrUtil.isNotBlank(beginTime)) {
-      try {
-        return DateUtils.parseDate(beginTime, PARSE_PATTERNS);
-      } catch (Exception e) {
-        String detail = StrUtil.format("日期格式解析错误：beginTime={}, error={}", beginTime, e.getMessage());
-        AssertUtil.validate(detail).doThrow();
-      }
-    }
-    return null;
+    return getBeginTime(DEFAULT_PATTERNS);
   }
 
   /**
@@ -240,13 +231,32 @@ public class PageQuery extends Query {
   }
 
   /**
+   * 根据指定日期格式，获取开始时间
+   *
+   * @param parsePatterns 日期格式
+   * @return 解析后的日期，开始时间未设置则返回null
+   * @throws ValidationException 日期格式解析错误则抛出异常
+   */
+  public Date getBeginTime(String... parsePatterns) {
+    if (StrUtil.isNotBlank(beginTime)) {
+      try {
+        return DateUtils.parseDate(beginTime, parsePatterns);
+      } catch (Exception e) {
+        String detail = StrUtil.format("Unable to parse the date, beginTime={}", beginTime);
+        AssertUtil.validate(detail, e).doThrow();
+      }
+    }
+    return null;
+  }
+
+  /**
    * 如果开始时间不为空，则返回当天的开始时间
    *
    * @return 当天的开始时间，参考格式：yyyy-MM-dd 00:00:00
    */
   public Date getBeginTimeOfDay() {
     Date time = this.getBeginTime();
-    return (Objects.nonNull(time)) ? DateUtil.beginOfDay(time) : null;
+    return Objects.nonNull(time) ? DateUtil.beginOfDay(time) : null;
   }
 
   /**
@@ -264,15 +274,7 @@ public class PageQuery extends Query {
    * @throws ValidationException 日期格式解析错误则抛出异常
    */
   public Date getEndTime() {
-    if (StrUtil.isNotBlank(endTime)) {
-      try {
-        return DateUtils.parseDate(endTime, PARSE_PATTERNS);
-      } catch (Exception e) {
-        String detail = StrUtil.format("日期格式解析错误：endTime={}, error={}", endTime, e.getMessage());
-        AssertUtil.validate(detail).doThrow();
-      }
-    }
-    return null;
+    return getEndTime(DEFAULT_PATTERNS);
   }
 
   /**
@@ -295,13 +297,32 @@ public class PageQuery extends Query {
   }
 
   /**
+   * 根据指定日期格式，获取结束时间
+   *
+   * @param parsePatterns 日期格式
+   * @return 解析后的日期，结束时间未设置则返回null
+   * @throws ValidationException 日期格式解析错误则抛出异常
+   */
+  public Date getEndTime(String... parsePatterns) {
+    if (StrUtil.isNotBlank(endTime)) {
+      try {
+        return DateUtils.parseDate(endTime, parsePatterns);
+      } catch (Exception e) {
+        String detail = StrUtil.format("Unable to parse the date, endTime={}", endTime);
+        AssertUtil.validate(detail, e).doThrow();
+      }
+    }
+    return null;
+  }
+
+  /**
    * 如果结束时间不为空，则返回当天的最后时间
    *
    * @return 当天的最后时间，参考格式：yyyy-MM-dd 23:59:59
    */
   public Date getEndTimeOfDay() {
     Date time = this.getEndTime();
-    return (Objects.nonNull(time)) ? DateUtil.endOfDay(time) : null;
+    return Objects.nonNull(time) ? DateUtil.endOfDay(time) : null;
   }
 
   /**
@@ -336,7 +357,7 @@ public class PageQuery extends Query {
   /**
    * 设置排序方式，支持ASC和DESC，默认值是DESC。
    *
-   * @param orderDirection 排序方式，忽略大小写
+   * @param orderDirection 排序方式，忽略大小写（ASC | DESC）
    * @return this
    */
   public PageQuery setOrderDirection(String orderDirection) {
@@ -350,10 +371,10 @@ public class PageQuery extends Query {
    * 设置排序
    *
    * @param orderBy        排序字段
-   * @param orderDirection 排序方式，忽略大小写
+   * @param orderDirection 排序方式，忽略大小写（ASC | DESC）
    * @return this
    */
-  public PageQuery sort(String orderBy, String orderDirection) {
+  public PageQuery setSort(String orderBy, String orderDirection) {
     this.setOrderBy(orderBy);
     this.setOrderDirection(orderDirection);
     return this;

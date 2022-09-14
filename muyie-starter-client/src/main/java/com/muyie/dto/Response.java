@@ -13,7 +13,7 @@ import java.util.Map;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * API Response to caller.
+ * Basic API Response to caller.
  *
  * @author larry.qi
  * @since 1.2.10
@@ -49,7 +49,7 @@ public class Response extends DTO {
   }
 
   /**
-   * 返回一个自定义错误码的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
    * @return 结果
@@ -102,14 +102,29 @@ public class Response extends DTO {
     return this;
   }
 
+  /**
+   * 获取响应错误码
+   *
+   * @return 响应错误码
+   */
   public String getCode() {
     return Strings.nullToEmpty(code);
   }
 
+  /**
+   * 获取响应错误信息
+   *
+   * @return 响应错误信息
+   */
   public String getMessage() {
     return Strings.nullToEmpty(message);
   }
 
+  /**
+   * 获取响应头信息
+   *
+   * @return 响应头信息
+   */
   public HttpHeaders getHeaders() {
     return headers;
   }
@@ -129,6 +144,11 @@ public class Response extends DTO {
     return this;
   }
 
+  /**
+   * 判断结果是否成功
+   *
+   * @return true 表示成功
+   */
   public boolean isSuccess() {
     return ErrorCodeDefaults.isSuccess(getCode());
   }

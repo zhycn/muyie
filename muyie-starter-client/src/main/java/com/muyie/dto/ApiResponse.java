@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * API Response to caller.
+ * Commons API Response to caller.
  *
  * @author larry.qi
  * @since 1.2.10
@@ -20,14 +20,13 @@ public class ApiResponse extends Response {
 
   private static final long serialVersionUID = 1L;
 
-
   /**
-   * 总记录数
+   * 总记录数（分页时可用）
    */
   private long total;
 
   /**
-   * 返回结果对象
+   * 返回结果数据
    */
   private final Object data;
 
@@ -37,13 +36,13 @@ public class ApiResponse extends Response {
    * @param errorCode 错误码
    * @param data      对象
    */
-  public ApiResponse(ErrorCode errorCode, Object data) {
+  private ApiResponse(ErrorCode errorCode, Object data) {
     super(errorCode);
     this.data = data;
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
    * @return 结果
@@ -53,10 +52,10 @@ public class ApiResponse extends Response {
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
-   * @param data      结果对象
+   * @param data      结果数据
    * @return 结果
    */
   public static ApiResponse of(ErrorCode errorCode, Object data) {
@@ -66,7 +65,7 @@ public class ApiResponse extends Response {
   /**
    * 返回一个成功的结果
    *
-   * @param data 结果对象
+   * @param data 结果数据
    * @return 结果
    */
   public static ApiResponse of(Object data) {
@@ -76,7 +75,7 @@ public class ApiResponse extends Response {
   /**
    * 返回一个成功的结果
    *
-   * @param data  结果对象
+   * @param data  结果数据
    * @param total 总记录数
    * @return 结果
    */
@@ -143,12 +142,17 @@ public class ApiResponse extends Response {
     return this;
   }
 
+  /**
+   * 获取总记录数（分页时可用）
+   *
+   * @return 总记录数
+   */
   public long getTotal() {
-    return (total >= 0) ? total : 0L;
+    return Math.max(total, 0L);
   }
 
   /**
-   * 设置总记录数（可选）
+   * 设置总记录数（分页时可用）
    *
    * @param total 总记录数
    * @return 结果
@@ -158,6 +162,11 @@ public class ApiResponse extends Response {
     return this;
   }
 
+  /**
+   * 获取结果数据
+   *
+   * @return 结果数据
+   */
   public Object getData() {
     return Objects.isNull(data) ? Maps.newConcurrentMap() : data;
   }

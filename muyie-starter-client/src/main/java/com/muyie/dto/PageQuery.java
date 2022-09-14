@@ -105,6 +105,7 @@ public class PageQuery extends Query {
    * 设置当前页，最小值为1
    *
    * @param pageNum 当前页，空值则默认为1
+   * @return this
    */
   public PageQuery setPageNum(Integer pageNum) {
     this.pageNum = Objects.isNull(pageNum) ? DEFAULT_PAGE_NUM : pageNum;
@@ -124,6 +125,7 @@ public class PageQuery extends Query {
    * 设置每页大小，最小值为10
    *
    * @param pageSize 每页大小，空值则默认为10
+   * @return this
    */
   public PageQuery setPageSize(Integer pageSize) {
     this.pageSize = Objects.isNull(pageSize) ? DEFAULT_PAGE_SIZE : pageSize;
@@ -135,6 +137,7 @@ public class PageQuery extends Query {
    *
    * @param pageNum  当前页，最小值为1
    * @param pageSize 每页大小，最小值为1
+   * @return this
    */
   public PageQuery page(int pageNum, int pageSize) {
     this.setPageNum(pageNum);
@@ -164,6 +167,7 @@ public class PageQuery extends Query {
    * 设置查询字符串
    *
    * @param q 查询字符串
+   * @return this
    */
   public PageQuery setQ(String q) {
     this.q = q;
@@ -183,6 +187,7 @@ public class PageQuery extends Query {
    * 设置状态查询字符串
    *
    * @param state 状态查询字符串
+   * @return this
    */
   public PageQuery setState(String state) {
     this.state = state;
@@ -227,6 +232,7 @@ public class PageQuery extends Query {
    * </pre>
    *
    * @param beginTime 开始时间
+   * @return this
    */
   public PageQuery setBeginTime(String beginTime) {
     this.beginTime = beginTime;
@@ -281,6 +287,7 @@ public class PageQuery extends Query {
    * </pre>
    *
    * @param endTime 结束时间
+   * @return this
    */
   public PageQuery setEndTime(String endTime) {
     this.endTime = endTime;
@@ -310,6 +317,7 @@ public class PageQuery extends Query {
    * 设置排序字段
    *
    * @param orderBy 排序字段
+   * @return this
    */
   public PageQuery setOrderBy(String orderBy) {
     this.orderBy = orderBy;
@@ -329,6 +337,7 @@ public class PageQuery extends Query {
    * 设置排序方式，支持ASC和DESC，默认值是DESC。
    *
    * @param orderDirection 排序方式，忽略大小写
+   * @return this
    */
   public PageQuery setOrderDirection(String orderDirection) {
     if (ASC.equalsIgnoreCase(orderDirection) || DESC.equalsIgnoreCase(orderDirection)) {
@@ -342,6 +351,7 @@ public class PageQuery extends Query {
    *
    * @param orderBy        排序字段
    * @param orderDirection 排序方式，忽略大小写
+   * @return this
    */
   public PageQuery sort(String orderBy, String orderDirection) {
     this.setOrderBy(orderBy);

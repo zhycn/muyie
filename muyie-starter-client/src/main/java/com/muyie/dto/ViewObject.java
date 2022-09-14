@@ -1,9 +1,8 @@
 package com.muyie.dto;
 
-import com.google.common.collect.Maps;
+import com.alibaba.fastjson2.JSONObject;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * VO (View Object) - 显示层对象，通常是 Web 向模板渲染引擎层传输的对象。
@@ -13,25 +12,14 @@ import java.util.Objects;
  */
 public class ViewObject extends DTO {
   private static final long serialVersionUID = 1L;
-  protected Map<String, Object> params = Maps.newConcurrentMap();
 
-  public Object getParams(String key) {
-    return getParams().get(key);
+  protected final JSONObject params = new JSONObject();
+
+  public JSONObject getParams() {
+    return params;
   }
 
-  public Object getParams(String key, Object defaultValue) {
-    return getParams().getOrDefault(key, defaultValue);
-  }
-
-  public void put(String key, Object value) {
-    getParams().put(key, value);
-  }
-
-  public Map<String, Object> getParams() {
-    return Objects.isNull(params) ? Maps.newConcurrentMap() : params;
-  }
-
-  public void putAll(Map<String, Object> params) {
+  public void setParams(Map<String, Object> params) {
     getParams().putAll(params);
   }
 

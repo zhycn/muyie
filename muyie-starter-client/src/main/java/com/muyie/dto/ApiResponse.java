@@ -11,7 +11,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Returns the Response
+ * API Response to caller.
+ *
+ * @author larry.qi
+ * @since 1.2.10
  */
 public class ApiResponse extends Response {
 

@@ -29,11 +29,11 @@ import static cn.hutool.core.date.DatePattern.UTC_SIMPLE_PATTERN;
  */
 public class PageQuery extends Query {
 
-  public static final String ASC = "ASC";
-  public static final String DESC = "DESC";
   private static final long serialVersionUID = 1L;
   private static final int DEFAULT_PAGE_NUM = 1;
   private static final int DEFAULT_PAGE_SIZE = 10;
+  public static final String ASC = "ASC";
+  public static final String DESC = "DESC";
 
   /**
    * 默认支持的日期格式：

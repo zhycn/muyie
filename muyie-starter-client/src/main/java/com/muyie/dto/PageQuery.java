@@ -208,7 +208,14 @@ public class PageQuery extends Query {
    * @throws ValidationException 日期格式解析错误则抛出异常
    */
   public Date getBeginTime() {
-    return getBeginTime(DEFAULT_PATTERNS);
+    if (StrUtil.isNotBlank(beginTime)) {
+      try {
+        return DateUtils.parseDate(beginTime, DEFAULT_PATTERNS);
+      } catch (Exception e) {
+        AssertUtil.validate(e).doThrow();
+      }
+    }
+    return null;
   }
 
   /**
@@ -228,25 +235,6 @@ public class PageQuery extends Query {
   public PageQuery setBeginTime(String beginTime) {
     this.beginTime = beginTime;
     return this;
-  }
-
-  /**
-   * 根据指定日期格式，获取开始时间
-   *
-   * @param parsePatterns 日期格式
-   * @return 解析后的日期，开始时间未设置则返回null
-   * @throws ValidationException 日期格式解析错误则抛出异常
-   */
-  public Date getBeginTime(String... parsePatterns) {
-    if (StrUtil.isNotBlank(beginTime)) {
-      try {
-        return DateUtils.parseDate(beginTime, parsePatterns);
-      } catch (Exception e) {
-        String detail = StrUtil.format("Unable to parse the date, beginTime={}", beginTime);
-        AssertUtil.validate(detail, e).doThrow();
-      }
-    }
-    return null;
   }
 
   /**
@@ -274,7 +262,14 @@ public class PageQuery extends Query {
    * @throws ValidationException 日期格式解析错误则抛出异常
    */
   public Date getEndTime() {
-    return getEndTime(DEFAULT_PATTERNS);
+    if (StrUtil.isNotBlank(endTime)) {
+      try {
+        return DateUtils.parseDate(endTime, DEFAULT_PATTERNS);
+      } catch (Exception e) {
+        AssertUtil.validate(e).doThrow();
+      }
+    }
+    return null;
   }
 
   /**
@@ -297,32 +292,16 @@ public class PageQuery extends Query {
   }
 
   /**
-   * 根据指定日期格式，获取结束时间
-   *
-   * @param parsePatterns 日期格式
-   * @return 解析后的日期，结束时间未设置则返回null
-   * @throws ValidationException 日期格式解析错误则抛出异常
-   */
-  public Date getEndTime(String... parsePatterns) {
-    if (StrUtil.isNotBlank(endTime)) {
-      try {
-        return DateUtils.parseDate(endTime, parsePatterns);
-      } catch (Exception e) {
-        String detail = StrUtil.format("Unable to parse the date, endTime={}", endTime);
-        AssertUtil.validate(detail, e).doThrow();
-      }
-    }
-    return null;
-  }
-
-  /**
    * 如果结束时间不为空，则返回当天的最后时间
    *
    * @return 当天的最后时间，参考格式：yyyy-MM-dd 23:59:59
    */
   public Date getEndTimeOfDay() {
     Date time = this.getEndTime();
-    return Objects.nonNull(time) ? DateUtil.endOfDay(time) : null;
+    if (Objects.nonNull(time)) {
+      return DateUtil.parseDateTime(DateUtil.formatDateTime(DateUtil.endOfDay(time)));
+    }
+    return null;
   }
 
   /**

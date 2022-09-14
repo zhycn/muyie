@@ -80,7 +80,7 @@ public class PageResponse<T> extends Response {
    * @param total 总记录数
    * @return 结果
    */
-  public static <T> PageResponse<?> of(Collection<T> data, long total) {
+  public static <T> PageResponse<T> of(Collection<T> data, long total) {
     return of(ErrorCodeDefaults.SUCCESS, data).setTotal(total);
   }
 
@@ -153,7 +153,7 @@ public class PageResponse<T> extends Response {
    * @param total 总记录数
    * @return 结果
    */
-  public PageResponse setTotal(long total) {
+  public PageResponse<T> setTotal(long total) {
     this.total = total;
     return this;
   }

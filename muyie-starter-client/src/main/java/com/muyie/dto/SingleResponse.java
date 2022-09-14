@@ -39,7 +39,7 @@ public class SingleResponse<T> extends Response {
    * @param errorCode 错误码
    * @return 结果
    */
-  public static SingleResponse of(ErrorCode errorCode) {
+  public static SingleResponse<?> of(ErrorCode errorCode) {
     return of(errorCode, null);
   }
 
@@ -48,6 +48,7 @@ public class SingleResponse<T> extends Response {
    *
    * @param errorCode 错误码
    * @param data      泛型对象
+   * @param <T>       对象类型
    * @return 结果
    */
   public static <T> SingleResponse<T> of(ErrorCode errorCode, T data) {
@@ -58,6 +59,7 @@ public class SingleResponse<T> extends Response {
    * 返回一个成功的结果
    *
    * @param data 泛型对象
+   * @param <T>  对象类型
    * @return 结果
    */
   public static <T> SingleResponse<T> of(T data) {
@@ -69,7 +71,7 @@ public class SingleResponse<T> extends Response {
    *
    * @return 结果
    */
-  public static SingleResponse of() {
+  public static SingleResponse<?> of() {
     return of(ErrorCodeDefaults.SUCCESS, null);
   }
 
@@ -80,7 +82,7 @@ public class SingleResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public SingleResponse rewrite(String message) {
+  public SingleResponse<T> rewrite(String message) {
     super.rewrite(message);
     return this;
   }
@@ -93,7 +95,7 @@ public class SingleResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public SingleResponse rewrite(String message, Object... params) {
+  public SingleResponse<T> rewrite(String message, Object... params) {
     super.rewrite(message, params);
     return this;
   }
@@ -106,7 +108,7 @@ public class SingleResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public SingleResponse rewrite(String message, Map<?, ?> map) {
+  public SingleResponse<T> rewrite(String message, Map<?, ?> map) {
     super.rewrite(message, map);
     return this;
   }
@@ -118,7 +120,7 @@ public class SingleResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public SingleResponse setHeaders(HttpHeaders headers) {
+  public SingleResponse<T> setHeaders(HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }

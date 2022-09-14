@@ -43,7 +43,7 @@ public class MultiResponse<T> extends Response {
    * @param errorCode 错误码
    * @return 结果
    */
-  public static MultiResponse of(ErrorCode errorCode) {
+  public static MultiResponse<?> of(ErrorCode errorCode) {
     return of(errorCode, null);
   }
 
@@ -52,6 +52,7 @@ public class MultiResponse<T> extends Response {
    *
    * @param errorCode 错误码
    * @param data      泛型集合
+   * @param <T>       对象类型
    * @return 结果
    */
   public static <T> MultiResponse<T> of(ErrorCode errorCode, Collection<T> data) {
@@ -62,6 +63,7 @@ public class MultiResponse<T> extends Response {
    * 返回一个成功的结果
    *
    * @param data 泛型集合
+   * @param <T>  对象类型
    * @return 结果
    */
   public static <T> MultiResponse<T> of(Collection<T> data) {
@@ -73,7 +75,7 @@ public class MultiResponse<T> extends Response {
    *
    * @return 结果
    */
-  public static MultiResponse of() {
+  public static MultiResponse<?> of() {
     return of(ErrorCodeDefaults.SUCCESS, null);
   }
 
@@ -84,7 +86,7 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public MultiResponse rewrite(String message) {
+  public MultiResponse<T> rewrite(String message) {
     super.rewrite(message);
     return this;
   }
@@ -97,7 +99,7 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public MultiResponse rewrite(String message, Object... params) {
+  public MultiResponse<T> rewrite(String message, Object... params) {
     super.rewrite(message, params);
     return this;
   }
@@ -110,7 +112,7 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public MultiResponse rewrite(String message, Map<?, ?> map) {
+  public MultiResponse<T> rewrite(String message, Map<?, ?> map) {
     super.rewrite(message, map);
     return this;
   }
@@ -122,7 +124,7 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public MultiResponse setHeaders(HttpHeaders headers) {
+  public MultiResponse<T> setHeaders(HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }

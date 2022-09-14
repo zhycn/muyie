@@ -4,6 +4,8 @@ import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Map;
 
@@ -18,7 +20,7 @@ public class SingleResponse<T> extends Response {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 返回结果对象（泛型对象）
+   * 返回结果数据（泛型对象）
    */
   private final T data;
 
@@ -26,43 +28,43 @@ public class SingleResponse<T> extends Response {
    * 构造函数
    *
    * @param errorCode 错误码
-   * @param data      泛型对象
+   * @param data      结果数据
    */
-  public SingleResponse(ErrorCode errorCode, T data) {
+  private SingleResponse(@NonNull ErrorCode errorCode, @Nullable T data) {
     super(errorCode);
     this.data = data;
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
    * @return 结果
    */
-  public static SingleResponse<?> of(ErrorCode errorCode) {
+  public static SingleResponse<?> of(@NonNull ErrorCode errorCode) {
     return of(errorCode, null);
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
-   * @param data      泛型对象
-   * @param <T>       对象类型
+   * @param data      结果数据
+   * @param <T>       泛型对象
    * @return 结果
    */
-  public static <T> SingleResponse<T> of(ErrorCode errorCode, T data) {
+  public static <T> SingleResponse<T> of(@NonNull ErrorCode errorCode, @Nullable T data) {
     return new SingleResponse<>(errorCode, data);
   }
 
   /**
    * 返回一个成功的结果
    *
-   * @param data 泛型对象
-   * @param <T>  对象类型
+   * @param data 结果数据
+   * @param <T>  泛型对象
    * @return 结果
    */
-  public static <T> SingleResponse<T> of(T data) {
+  public static <T> SingleResponse<T> of(@Nullable T data) {
     return of(ErrorCodeDefaults.SUCCESS, data);
   }
 
@@ -120,11 +122,16 @@ public class SingleResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public SingleResponse<T> setHeaders(HttpHeaders headers) {
+  public SingleResponse<T> setHeaders(@Nullable HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }
 
+  /**
+   * 获取结果数据
+   *
+   * @return 结果数据
+   */
   public T getData() {
     return data;
   }

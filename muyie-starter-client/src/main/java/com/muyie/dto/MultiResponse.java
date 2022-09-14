@@ -1,9 +1,13 @@
 package com.muyie.dto;
 
+import com.google.common.collect.Lists;
+
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +26,7 @@ public class MultiResponse<T> extends Response {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 返回结果集
+   * 返回结果数据
    */
   private final Collection<T> data;
 
@@ -30,43 +34,43 @@ public class MultiResponse<T> extends Response {
    * 构造函数
    *
    * @param errorCode 错误码
-   * @param data      泛型集合
+   * @param data      结果数据
    */
-  public MultiResponse(ErrorCode errorCode, Collection<T> data) {
+  private MultiResponse(@NonNull ErrorCode errorCode, @Nullable Collection<T> data) {
     super(errorCode);
     this.data = data;
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
    * @return 结果
    */
-  public static MultiResponse<?> of(ErrorCode errorCode) {
-    return of(errorCode, null);
+  public static MultiResponse<?> of(@NonNull ErrorCode errorCode) {
+    return of(errorCode, Lists.newArrayList());
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
-   * @param data      泛型集合
-   * @param <T>       对象类型
+   * @param data      结果数据
+   * @param <T>       泛型对象
    * @return 结果
    */
-  public static <T> MultiResponse<T> of(ErrorCode errorCode, Collection<T> data) {
+  public static <T> MultiResponse<T> of(@NonNull ErrorCode errorCode, @Nullable Collection<T> data) {
     return new MultiResponse<>(errorCode, data);
   }
 
   /**
    * 返回一个成功的结果
    *
-   * @param data 泛型集合
-   * @param <T>  对象类型
+   * @param data 结果数据
+   * @param <T>  泛型对象
    * @return 结果
    */
-  public static <T> MultiResponse<T> of(Collection<T> data) {
+  public static <T> MultiResponse<T> of(@Nullable Collection<T> data) {
     return of(ErrorCodeDefaults.SUCCESS, data);
   }
 
@@ -76,7 +80,7 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   public static MultiResponse<?> of() {
-    return of(ErrorCodeDefaults.SUCCESS, null);
+    return of(ErrorCodeDefaults.SUCCESS, Lists.newArrayList());
   }
 
   /**
@@ -124,11 +128,16 @@ public class MultiResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public MultiResponse<T> setHeaders(HttpHeaders headers) {
+  public MultiResponse<T> setHeaders(@Nullable HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }
 
+  /**
+   * 获取结果数据
+   *
+   * @return 结果数据
+   */
   public List<T> getData() {
     if (null == data) {
       return Collections.emptyList();

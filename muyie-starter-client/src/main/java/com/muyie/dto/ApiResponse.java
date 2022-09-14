@@ -6,6 +6,8 @@ import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Map;
 import java.util.Objects;
@@ -36,7 +38,7 @@ public class ApiResponse extends Response {
    * @param errorCode 错误码
    * @param data      对象
    */
-  private ApiResponse(ErrorCode errorCode, Object data) {
+  private ApiResponse(@NonNull ErrorCode errorCode, @Nullable Object data) {
     super(errorCode);
     this.data = data;
   }
@@ -47,7 +49,7 @@ public class ApiResponse extends Response {
    * @param errorCode 错误码
    * @return 结果
    */
-  public static ApiResponse of(ErrorCode errorCode) {
+  public static ApiResponse of(@NonNull ErrorCode errorCode) {
     return of(errorCode, null);
   }
 
@@ -58,7 +60,7 @@ public class ApiResponse extends Response {
    * @param data      结果数据
    * @return 结果
    */
-  public static ApiResponse of(ErrorCode errorCode, Object data) {
+  public static ApiResponse of(@NonNull ErrorCode errorCode, @Nullable Object data) {
     return new ApiResponse(errorCode, data);
   }
 
@@ -68,7 +70,7 @@ public class ApiResponse extends Response {
    * @param data 结果数据
    * @return 结果
    */
-  public static ApiResponse of(Object data) {
+  public static ApiResponse of(@Nullable Object data) {
     return of(ErrorCodeDefaults.SUCCESS, data);
   }
 
@@ -79,7 +81,7 @@ public class ApiResponse extends Response {
    * @param total 总记录数
    * @return 结果
    */
-  public static ApiResponse of(Object data, long total) {
+  public static ApiResponse of(@Nullable Object data, long total) {
     return of(ErrorCodeDefaults.SUCCESS, data).setTotal(total);
   }
 
@@ -137,7 +139,7 @@ public class ApiResponse extends Response {
    * @return 结果
    */
   @Override
-  public ApiResponse setHeaders(HttpHeaders headers) {
+  public ApiResponse setHeaders(@Nullable HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }

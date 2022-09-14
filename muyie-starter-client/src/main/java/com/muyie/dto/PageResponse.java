@@ -1,9 +1,13 @@
 package com.muyie.dto;
 
+import com.google.common.collect.Lists;
+
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,12 +26,12 @@ public class PageResponse<T> extends Response {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 总记录数
+   * 总记录数（分页时可用）
    */
   private long total;
 
   /**
-   * 返回结果集
+   * 返回结果数据
    */
   private final Collection<T> data;
 
@@ -35,41 +39,43 @@ public class PageResponse<T> extends Response {
    * 构造函数
    *
    * @param errorCode 错误码
-   * @param data      泛型集合
+   * @param data      结果数据
    */
-  public PageResponse(ErrorCode errorCode, Collection<T> data) {
+  private PageResponse(@NonNull ErrorCode errorCode, @Nullable Collection<T> data) {
     super(errorCode);
     this.data = data;
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
    * @return 结果
    */
-  public static PageResponse<?> of(ErrorCode errorCode) {
-    return of(errorCode, null);
+  public static PageResponse<?> of(@NonNull ErrorCode errorCode) {
+    return of(errorCode, Lists.newArrayList());
   }
 
   /**
-   * 返回一个失败的结果
+   * 返回一个指定错误码的结果
    *
    * @param errorCode 错误码
-   * @param data      泛型集合
+   * @param data      结果数据
+   * @param <T>       泛型对象
    * @return 结果
    */
-  public static <T> PageResponse<T> of(ErrorCode errorCode, Collection<T> data) {
+  public static <T> PageResponse<T> of(@NonNull ErrorCode errorCode, @Nullable Collection<T> data) {
     return new PageResponse<>(errorCode, data);
   }
 
   /**
    * 返回一个成功的结果
    *
-   * @param data 泛型集合
+   * @param data 结果数据
+   * @param <T>  泛型对象
    * @return 结果
    */
-  public static <T> PageResponse<T> of(Collection<T> data) {
+  public static <T> PageResponse<T> of(@Nullable Collection<T> data) {
     return of(ErrorCodeDefaults.SUCCESS, data);
   }
 
@@ -78,9 +84,10 @@ public class PageResponse<T> extends Response {
    *
    * @param data  泛型集合
    * @param total 总记录数
+   * @param <T>   泛型对象
    * @return 结果
    */
-  public static <T> PageResponse<T> of(Collection<T> data, long total) {
+  public static <T> PageResponse<T> of(@Nullable Collection<T> data, long total) {
     return of(ErrorCodeDefaults.SUCCESS, data).setTotal(total);
   }
 
@@ -90,7 +97,7 @@ public class PageResponse<T> extends Response {
    * @return 结果
    */
   public static PageResponse<?> of() {
-    return of(ErrorCodeDefaults.SUCCESS, null);
+    return of(ErrorCodeDefaults.SUCCESS, Lists.newArrayList());
   }
 
   /**
@@ -138,17 +145,22 @@ public class PageResponse<T> extends Response {
    * @return 结果
    */
   @Override
-  public PageResponse<T> setHeaders(HttpHeaders headers) {
+  public PageResponse<T> setHeaders(@Nullable HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
   }
 
+  /**
+   * 获取总记录数（分页时可用）
+   *
+   * @return 总记录数
+   */
   public long getTotal() {
-    return (total >= 0) ? total : 0L;
+    return Math.max(total, 0L);
   }
 
   /**
-   * 设置总记录数（可选）
+   * 设置总记录数（分页时可用）
    *
    * @param total 总记录数
    * @return 结果
@@ -158,6 +170,11 @@ public class PageResponse<T> extends Response {
     return this;
   }
 
+  /**
+   * 获取结果数据
+   *
+   * @return 结果数据
+   */
   public List<T> getData() {
     if (null == data) {
       return Collections.emptyList();

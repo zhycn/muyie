@@ -7,6 +7,8 @@ import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Map;
 
@@ -43,7 +45,7 @@ public class Response extends DTO {
    *
    * @param errorCode 错误码
    */
-  public Response(ErrorCode errorCode) {
+  public Response(@NonNull ErrorCode errorCode) {
     this.code = errorCode.getCode();
     this.message = errorCode.getMessage();
   }
@@ -54,7 +56,7 @@ public class Response extends DTO {
    * @param errorCode 错误码
    * @return 结果
    */
-  public static Response of(ErrorCode errorCode) {
+  public static Response of(@NonNull ErrorCode errorCode) {
     return new Response(errorCode);
   }
 
@@ -135,7 +137,7 @@ public class Response extends DTO {
    * @param headers 响应头信息
    * @return 结果
    */
-  public Response setHeaders(HttpHeaders headers) {
+  public Response setHeaders(@Nullable HttpHeaders headers) {
     HttpHeaders tempHeaders = new HttpHeaders();
     if (headers != null) {
       tempHeaders.putAll(headers);

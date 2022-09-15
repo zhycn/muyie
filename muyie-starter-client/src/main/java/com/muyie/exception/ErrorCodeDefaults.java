@@ -205,7 +205,14 @@ public enum ErrorCodeDefaults implements ErrorCode {
 
   ;
 
+  /**
+   * 错误码
+   */
   private final String code;
+
+  /**
+   * 错误信息
+   */
   private final String message;
 
   ErrorCodeDefaults(String code, String message) {
@@ -223,6 +230,12 @@ public enum ErrorCodeDefaults implements ErrorCode {
     return message;
   }
 
+  /**
+   * 判断错误码状态是否成功
+   *
+   * @param code 错误码
+   * @return true 表示成功
+   */
   public static boolean isSuccess(String code) {
     return SUCCESS.getCode().equals(code);
   }

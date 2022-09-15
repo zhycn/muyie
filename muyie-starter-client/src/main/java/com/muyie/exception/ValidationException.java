@@ -1,5 +1,7 @@
 package com.muyie.exception;
 
+import static com.muyie.exception.ErrorCodeDefaults.S0400;
+
 /**
  * 请求参数校验异常，有明确的错误语义，不需要记录错误（Error）日志，不需要重试（Retry）。
  *
@@ -12,8 +14,8 @@ public class ValidationException extends BusinessException {
   /**
    * 请求参数校验异常
    */
-  public ValidationException() {
-    super(ErrorCodeDefaults.S0400);
+  protected ValidationException() {
+    super(S0400);
   }
 
   /**
@@ -21,8 +23,8 @@ public class ValidationException extends BusinessException {
    *
    * @param detail 错误详情
    */
-  public ValidationException(String detail) {
-    super(ErrorCodeDefaults.S0400, detail);
+  protected ValidationException(String detail) {
+    super(S0400, detail);
   }
 
   /**
@@ -30,8 +32,8 @@ public class ValidationException extends BusinessException {
    *
    * @param cause 异常
    */
-  public ValidationException(Throwable cause) {
-    super(ErrorCodeDefaults.S0400, cause);
+  protected ValidationException(Throwable cause) {
+    super(S0400, cause);
   }
 
   /**
@@ -40,8 +42,42 @@ public class ValidationException extends BusinessException {
    * @param detail 错误详情
    * @param cause  异常
    */
-  public ValidationException(String detail, Throwable cause) {
-    super(ErrorCodeDefaults.S0400, detail, cause);
+  protected ValidationException(String detail, Throwable cause) {
+    super(S0400, detail, cause);
   }
 
+  /**
+   * 请求参数校验异常
+   */
+  public static ValidationException of() {
+    return new ValidationException();
+  }
+
+  /**
+   * 请求参数校验异常
+   *
+   * @param detail 错误详情
+   */
+  public static ValidationException of(String detail) {
+    return new ValidationException(detail);
+  }
+
+  /**
+   * 请求参数校验异常
+   *
+   * @param cause 异常
+   */
+  public static ValidationException of(Throwable cause) {
+    return new ValidationException(cause);
+  }
+
+  /**
+   * 请求参数校验异常
+   *
+   * @param detail 错误详情
+   * @param cause  异常
+   */
+  public static ValidationException of(String detail, Throwable cause) {
+    return new ValidationException(detail, cause);
+  }
 }

@@ -1,5 +1,7 @@
 package com.muyie.exception;
 
+import org.springframework.lang.NonNull;
+
 import java.util.Map;
 
 import cn.hutool.core.util.StrUtil;
@@ -12,7 +14,14 @@ import cn.hutool.core.util.StrUtil;
  */
 public class ErrorCodeBuilder implements ErrorCode {
 
+  /**
+   * 错误码
+   */
   private final String code;
+
+  /**
+   * 错误信息
+   */
   private final String message;
 
   private ErrorCodeBuilder(String code, String message) {
@@ -27,7 +36,7 @@ public class ErrorCodeBuilder implements ErrorCode {
    * @param map       对象集合
    * @return 错误码
    */
-  public static ErrorCode of(ErrorCode errorCode, Map<?, ?> map) {
+  public static ErrorCode of(@NonNull ErrorCode errorCode, Map<?, ?> map) {
     return of(errorCode.getCode(), StrUtil.format(errorCode.getMessage(), map));
   }
 
@@ -38,7 +47,7 @@ public class ErrorCodeBuilder implements ErrorCode {
    * @param params    可变数组
    * @return 错误码
    */
-  public static ErrorCode of(ErrorCode errorCode, Object... params) {
+  public static ErrorCode of(@NonNull ErrorCode errorCode, Object... params) {
     return of(errorCode.getCode(), StrUtil.format(errorCode.getMessage(), params));
   }
 
@@ -49,7 +58,7 @@ public class ErrorCodeBuilder implements ErrorCode {
    * @param message   错误信息
    * @return 错误码
    */
-  public static ErrorCode of(ErrorCode errorCode, String message) {
+  public static ErrorCode of(@NonNull ErrorCode errorCode, String message) {
     return of(errorCode.getCode(), message);
   }
 
@@ -61,7 +70,7 @@ public class ErrorCodeBuilder implements ErrorCode {
    * @param map       对象集合
    * @return 错误码
    */
-  public static ErrorCode of(ErrorCode errorCode, String message, Map<?, ?> map) {
+  public static ErrorCode of(@NonNull ErrorCode errorCode, String message, Map<?, ?> map) {
     return of(errorCode.getCode(), StrUtil.format(message, map));
   }
 
@@ -73,7 +82,7 @@ public class ErrorCodeBuilder implements ErrorCode {
    * @param params    可变数组
    * @return 错误码
    */
-  public static ErrorCode of(ErrorCode errorCode, String message, Object... params) {
+  public static ErrorCode of(@NonNull ErrorCode errorCode, String message, Object... params) {
     return of(errorCode.getCode(), StrUtil.format(message, params));
   }
 

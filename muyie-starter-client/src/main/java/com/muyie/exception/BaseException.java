@@ -1,6 +1,8 @@
 package com.muyie.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
@@ -35,7 +37,7 @@ public abstract class BaseException extends RuntimeException {
    *
    * @param errorCode 错误码
    */
-  public BaseException(ErrorCode errorCode) {
+  protected BaseException(@NonNull ErrorCode errorCode) {
     this(errorCode, null, null);
   }
 
@@ -45,7 +47,7 @@ public abstract class BaseException extends RuntimeException {
    * @param errorCode 错误码
    * @param detail    错误详情
    */
-  public BaseException(ErrorCode errorCode, String detail) {
+  protected BaseException(@NonNull ErrorCode errorCode, String detail) {
     this(errorCode, detail, null);
   }
 
@@ -55,7 +57,7 @@ public abstract class BaseException extends RuntimeException {
    * @param errorCode 错误码
    * @param cause     异常信息
    */
-  public BaseException(ErrorCode errorCode, Throwable cause) {
+  protected BaseException(@NonNull ErrorCode errorCode, Throwable cause) {
     this(errorCode, null, cause);
   }
 
@@ -66,7 +68,7 @@ public abstract class BaseException extends RuntimeException {
    * @param detail    错误详情
    * @param cause     异常信息
    */
-  public BaseException(ErrorCode errorCode, String detail, Throwable cause) {
+  protected BaseException(@NonNull ErrorCode errorCode, String detail, Throwable cause) {
     super(detail, cause);
     this.errorCode = errorCode;
     this.detail = detail;
@@ -139,7 +141,7 @@ public abstract class BaseException extends RuntimeException {
    * @param httpStatus 响应状态码
    * @return BaseException 异常基类
    */
-  public BaseException setHttpStatus(HttpStatus httpStatus) {
+  public BaseException setHttpStatus(@Nullable HttpStatus httpStatus) {
     Optional.ofNullable(httpStatus).ifPresent(s -> setHttpStatus(s.value()));
     return this;
   }
@@ -165,10 +167,10 @@ public abstract class BaseException extends RuntimeException {
   /**
    * 断言一个函数返回结果，true 则抛出异常
    *
-   * @param booleanSupplier 函数返回结果
+   * @param supplier 函数返回结果
    */
-  public void doThrow(BooleanSupplier booleanSupplier) {
-    doThrow(booleanSupplier.getAsBoolean());
+  public void doThrow(@NonNull BooleanSupplier supplier) {
+    this.doThrow(supplier.getAsBoolean());
   }
 
 }

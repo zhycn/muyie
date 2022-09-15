@@ -1,6 +1,7 @@
 package com.muyie.exception;
 
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.BindingResult;
 
 import java.util.Objects;
@@ -29,8 +30,8 @@ public class AssertUtil {
    * @param errorCode 错误码
    * @return BusinessException 业务异常
    */
-  public static BusinessException business(ErrorCode errorCode) {
-    return new BusinessException(errorCode);
+  public static BusinessException business(@NonNull ErrorCode errorCode) {
+    return BusinessException.of(errorCode);
   }
 
   /**
@@ -40,8 +41,8 @@ public class AssertUtil {
    * @param detail    错误详情
    * @return BusinessException 业务异常
    */
-  public static BusinessException business(ErrorCode errorCode, String detail) {
-    return new BusinessException(errorCode, detail);
+  public static BusinessException business(@NonNull ErrorCode errorCode, String detail) {
+    return BusinessException.of(errorCode, detail);
   }
 
   /**
@@ -51,8 +52,8 @@ public class AssertUtil {
    * @param cause     异常信息
    * @return BusinessException 业务异常
    */
-  public static BusinessException business(ErrorCode errorCode, Throwable cause) {
-    return new BusinessException(errorCode, cause);
+  public static BusinessException business(@NonNull ErrorCode errorCode, Throwable cause) {
+    return BusinessException.of(errorCode, cause);
   }
 
   /**
@@ -63,8 +64,8 @@ public class AssertUtil {
    * @param cause     异常信息
    * @return BusinessException 业务异常
    */
-  public static BusinessException business(ErrorCode errorCode, String detail, Throwable cause) {
-    return new BusinessException(errorCode, detail, cause);
+  public static BusinessException business(@NonNull ErrorCode errorCode, String detail, Throwable cause) {
+    return BusinessException.of(errorCode, detail, cause);
   }
 
   /**
@@ -73,8 +74,8 @@ public class AssertUtil {
    * @param errorCode 错误码
    * @return SystemException 已知的系统异常
    */
-  public static SystemException system(ErrorCode errorCode) {
-    return new SystemException(errorCode);
+  public static SystemException system(@NonNull ErrorCode errorCode) {
+    return SystemException.of(errorCode);
   }
 
   /**
@@ -84,8 +85,8 @@ public class AssertUtil {
    * @param detail    错误详情
    * @return SystemException 已知的系统异常
    */
-  public static SystemException system(ErrorCode errorCode, String detail) {
-    return new SystemException(errorCode, detail);
+  public static SystemException system(@NonNull ErrorCode errorCode, String detail) {
+    return SystemException.of(errorCode, detail);
   }
 
   /**
@@ -95,8 +96,8 @@ public class AssertUtil {
    * @param cause     异常信息
    * @return SystemException 已知的系统异常
    */
-  public static SystemException system(ErrorCode errorCode, Throwable cause) {
-    return new SystemException(errorCode, cause);
+  public static SystemException system(@NonNull ErrorCode errorCode, Throwable cause) {
+    return SystemException.of(errorCode, cause);
   }
 
   /**
@@ -107,8 +108,8 @@ public class AssertUtil {
    * @param cause     异常信息
    * @return SystemException 已知的系统异常
    */
-  public static SystemException system(ErrorCode errorCode, String detail, Throwable cause) {
-    return new SystemException(errorCode, detail, cause);
+  public static SystemException system(@NonNull ErrorCode errorCode, String detail, Throwable cause) {
+    return SystemException.of(errorCode, detail, cause);
   }
 
   /**
@@ -117,7 +118,7 @@ public class AssertUtil {
    * @return ValidationException 请求参数校验异常
    */
   public static ValidationException validate() {
-    return new ValidationException();
+    return ValidationException.of();
   }
 
   /**
@@ -127,7 +128,7 @@ public class AssertUtil {
    * @return ValidationException 请求参数校验异常
    */
   public static ValidationException validate(String detail) {
-    return new ValidationException(detail);
+    return ValidationException.of(detail);
   }
 
   /**
@@ -137,7 +138,7 @@ public class AssertUtil {
    * @return ValidationException 请求参数校验异常
    */
   public static ValidationException validate(Throwable cause) {
-    return new ValidationException(cause);
+    return ValidationException.of(cause);
   }
 
   /**
@@ -148,7 +149,7 @@ public class AssertUtil {
    * @return ValidationException 请求参数校验异常
    */
   public static ValidationException validate(String detail, Throwable cause) {
-    return new ValidationException(detail, cause);
+    return ValidationException.of(detail, cause);
   }
 
   /**
@@ -159,9 +160,8 @@ public class AssertUtil {
    * @param groups    分组校验
    * @throws BusinessException 业务异常
    */
-  public static void validateObject(ErrorCode errorCode, Object object, Class<?>... groups) {
-    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure()
-      .failFast(true).buildValidatorFactory();
+  public static void validateObject(@NonNull ErrorCode errorCode, Object object, Class<?>... groups) {
+    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
     for (ConstraintViolation<Object> o : sets) {
@@ -176,9 +176,8 @@ public class AssertUtil {
    * @param object    校验对象
    * @throws BusinessException 业务异常
    */
-  public static void validateObject(ErrorCode errorCode, Object object) {
-    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure()
-      .failFast(true).buildValidatorFactory();
+  public static void validateObject(@NonNull ErrorCode errorCode, Object object) {
+    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
     for (ConstraintViolation<Object> o : sets) {
@@ -194,8 +193,7 @@ public class AssertUtil {
    * @throws ValidationException 请求参数校验异常
    */
   public static void validateObject(Object object, Class<?>... groups) {
-    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure()
-      .failFast(true).buildValidatorFactory();
+    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
     for (ConstraintViolation<Object> o : sets) {
@@ -210,8 +208,7 @@ public class AssertUtil {
    * @throws ValidationException 请求参数校验异常
    */
   public static void validateObject(Object object) {
-    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure()
-      .failFast(true).buildValidatorFactory();
+    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
     for (ConstraintViolation<Object> o : sets) {
@@ -226,7 +223,7 @@ public class AssertUtil {
    * @param bindingResult 前端请求参数校验
    * @throws ValidationException 请求参数校验异常
    */
-  public static void validateBindingResult(ErrorCode errorCode, BindingResult bindingResult) {
+  public static void validateObject(@NonNull ErrorCode errorCode, @NonNull BindingResult bindingResult) {
     AssertUtil.business(errorCode, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
   }
 
@@ -236,7 +233,7 @@ public class AssertUtil {
    * @param bindingResult 前端请求参数校验
    * @throws ValidationException 请求参数校验异常
    */
-  public static void validateBindingResult(BindingResult bindingResult) {
+  public static void validateObject(@NonNull BindingResult bindingResult) {
     AssertUtil.validate(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
   }
 

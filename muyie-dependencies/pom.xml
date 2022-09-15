@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.10-SNAPSHOT</version>
+    <version>1.2.10</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -37,9 +37,7 @@
     <lz4-java.version>1.8.0</lz4-java.version>
     <mapstruct.version>1.5.2.Final</mapstruct.version>
     <mybatis-plus.version>3.5.2</mybatis-plus.version>
-    <problem-spring.version>0.26.2</problem-spring.version>
-    <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
-    <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
+    <problem-spring.version>0.28.0-RC.0</problem-spring.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -222,18 +220,12 @@
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>problem-spring-web</artifactId>
-        <version>${problem-spring-web.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-          </exclusion>
-        </exclusions>
+        <version>${problem-spring.version}</version>
       </dependency>
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>problem-spring-webflux</artifactId>
-        <version>${problem-spring-webflux.version}</version>
+        <version>${problem-spring.version}</version>
       </dependency>
 
       <!-- Retrofit client -->

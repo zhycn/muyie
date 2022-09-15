@@ -17,9 +17,21 @@
   </parent>
 
   <dependencies>
+    <!-- MyBatis-Plus is an enhanced toolkit of MyBatis for simplify development. -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+    </dependency>
+    <!-- Starter for using JDBC with the HikariCP connection pool -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!-- Druid Spring Boot Starter -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid-spring-boot-starter</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>

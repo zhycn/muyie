@@ -33,7 +33,6 @@ import javax.servlet.ServletException;
 @EnableConfigurationProperties(MuyieProperties.class)
 @Import({
   DateTimeFormatConfiguration.class,
-  JacksonConfiguration.class,
   LocaleConfiguration.class,
   SpringContextHolder.class,
   ApolloConfiguration.class

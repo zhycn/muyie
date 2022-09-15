@@ -133,24 +133,6 @@
       <artifactId>transmittable-thread-local</artifactId>
     </dependency>
 
-    <!-- https://github.com/FasterXML/jackson-modules-java8 -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-hppc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jdk8</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-afterburner</artifactId>
-    </dependency>
-
     <!-- Exception Support -->
     <dependency>
       <groupId>org.zalando</groupId>

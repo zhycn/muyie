@@ -21,16 +21,14 @@ import java.util.Objects;
 public class ApiResponse extends Response {
 
   private static final long serialVersionUID = 1L;
-
-  /**
-   * 总记录数（分页时可用）
-   */
-  private long total;
-
   /**
    * 返回结果数据
    */
   private final Object data;
+  /**
+   * 总记录数（分页时可用）
+   */
+  private long total;
 
   /**
    * 构造函数

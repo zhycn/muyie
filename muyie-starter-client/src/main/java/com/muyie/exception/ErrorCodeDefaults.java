@@ -220,16 +220,6 @@ public enum ErrorCodeDefaults implements ErrorCode {
     this.message = message;
   }
 
-  @Override
-  public String getCode() {
-    return code;
-  }
-
-  @Override
-  public String getMessage() {
-    return message;
-  }
-
   /**
    * 判断错误码状态是否成功
    *
@@ -238,6 +228,16 @@ public enum ErrorCodeDefaults implements ErrorCode {
    */
   public static boolean isSuccess(String code) {
     return SUCCESS.getCode().equals(code);
+  }
+
+  @Override
+  public String getCode() {
+    return code;
+  }
+
+  @Override
+  public String getMessage() {
+    return message;
   }
 
 }

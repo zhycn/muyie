@@ -29,12 +29,21 @@ import java.util.Optional;
 @RestControllerAdvice
 public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
+  private static final String CODE_HEADER = "S0";
+
+  /**
+   * 错误码转换，拼接前缀自动匹配错误码。
+   *
+   * @param statusCode 状态码
+   * @param defaultMsg 错误信息
+   * @return 错误码
+   */
   private static ErrorCode convert(final String statusCode, final String defaultMsg) {
-    String code = "S0" + statusCode;
+    String code = CODE_HEADER + statusCode;
     final ErrorCodeDefaults[] list = ErrorCodeDefaults.values();
-    for (final ErrorCodeDefaults errorCodeDefault : list) {
-      if (StringUtils.equals(errorCodeDefault.getCode(), code)) {
-        return errorCodeDefault;
+    for (final ErrorCodeDefaults defaults : list) {
+      if (StringUtils.equals(defaults.getCode(), code)) {
+        return defaults;
       }
     }
     return ErrorCodeBuilder.of(code, defaultMsg);
@@ -60,9 +69,9 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     // Handle Response headers
     if (body instanceof Response) {
-      final Response result = (Response) body;
-      Optional.ofNullable(result.getHeaders()).ifPresent(headers -> response.getHeaders().addAll(headers));
-      return result;
+      final Response res = (Response) body;
+      Optional.ofNullable(res.getHeaders()).ifPresent(headers -> response.getHeaders().addAll(headers));
+      return res;
     }
 
     return body;

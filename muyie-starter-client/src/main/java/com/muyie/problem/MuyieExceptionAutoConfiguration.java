@@ -10,7 +10,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.Servlet;
 
 /**
- * MuyieExceptionAutoConfiguration
+ * 统一异常处理配置类
  *
  * @author larry.qi
  * @since 1.2.10

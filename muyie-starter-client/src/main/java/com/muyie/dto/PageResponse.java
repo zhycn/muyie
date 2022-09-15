@@ -24,16 +24,14 @@ import java.util.Map;
 public class PageResponse<T> extends Response {
 
   private static final long serialVersionUID = 1L;
-
-  /**
-   * 总记录数（分页时可用）
-   */
-  private long total;
-
   /**
    * 返回结果数据
    */
   private final Collection<T> data;
+  /**
+   * 总记录数（分页时可用）
+   */
+  private long total;
 
   /**
    * 构造函数

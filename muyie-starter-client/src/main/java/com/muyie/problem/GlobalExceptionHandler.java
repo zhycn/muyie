@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 全局异常处理
+ * 全局统一异常处理
  *
  * @author larry.qi
  * @since 1.2.10

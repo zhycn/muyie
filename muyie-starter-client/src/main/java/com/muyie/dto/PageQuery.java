@@ -22,7 +22,7 @@ import static cn.hutool.core.date.DatePattern.UTC_PATTERN;
 import static cn.hutool.core.date.DatePattern.UTC_SIMPLE_PATTERN;
 
 /**
- * PageQuery - 分页查询对象
+ * PageQuery：分页查询对象，内置了几个常用参数。
  *
  * @author larry.qi
  * @since 1.2.10

@@ -2,10 +2,11 @@ package com.muyie.framework.aspectj;
 
 import com.google.common.base.Throwables;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;
+import com.muyie.framework.config.MuyieConstants;
 import com.muyie.framework.config.MuyieProperties;
 import com.muyie.framework.logging.LogTraceIdConverter;
 
@@ -49,14 +50,14 @@ public class CatchAndLogAspect implements AroundAdvice, AfterThrowingAdvice, Web
 
       @Override
       public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        LogTraceIdConverter.set(request.getHeader("X-Request-Id"));
+        LogTraceIdConverter.set(request.getHeader(MuyieConstants.REQUEST_ID));
         return HandlerInterceptor.super.preHandle(request, response, handler);
       }
 
       @Override
       public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
-        response.addHeader("X-Request-Id", LogTraceIdConverter.get());
+        response.addHeader(MuyieConstants.REQUEST_ID, LogTraceIdConverter.get());
         LogTraceIdConverter.close();
       }
     }).addPathPatterns("/**");

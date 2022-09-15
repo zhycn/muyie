@@ -1,14 +1,11 @@
 package org.muyie.framework.desensitized;
 
-import com.alibaba.fastjson.serializer.PropertyFilter;
 import com.alibaba.fastjson.serializer.ValueFilter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
-
-import java.util.Arrays;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
@@ -17,7 +14,7 @@ import cn.hutool.core.util.DesensitizedUtil;
 /**
  * 基于FastJSON的过滤器
  */
-public class DesensitizedDataFilter implements ValueFilter, PropertyFilter {
+public class DesensitizedDataFilter implements ValueFilter {
 
   private static final Logger log = LoggerFactory.getLogger(DesensitizedDataFilter.class);
 
@@ -32,10 +29,10 @@ public class DesensitizedDataFilter implements ValueFilter, PropertyFilter {
     this.config = config;
   }
 
-  @Override
-  public boolean apply(Object o, String name, Object value) {
-    return !Arrays.asList(ignoreFields).contains(name);
-  }
+//  @Override
+//  public boolean apply(Object o, String name, Object value) {
+//    return !Arrays.asList(ignoreFields).contains(name);
+//  }
 
   @Override
   public Object process(Object o, String name, Object value) {

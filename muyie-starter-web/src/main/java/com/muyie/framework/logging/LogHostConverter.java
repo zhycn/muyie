@@ -7,7 +7,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import cn.hutool.core.net.NetUtil;
 
 /**
- * 在日志文件中打印服务器 HOST 地址或名称，便于在集群环境中定位到日志所在机器。
+ * 在日志文件中打印服务器主机地址或名称，便于在集群环境中定位到日志所在机器。
  *
  * @author larry.qi
  * @since 1.2.6

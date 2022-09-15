@@ -2,7 +2,8 @@ package com.muyie.framework.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+
+import cn.hutool.extra.spring.EnableSpringUtil;
 
 /**
  * @author larry.qi
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MuyieProperties.class)
-@Import({SpringContextHolder.class, SpringEventPublisher.class})
+@EnableSpringUtil
 public class MuyieWebAutoConfiguration {
 
 }

@@ -1,6 +1,6 @@
 package com.muyie.framework.logging;
 
-import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 import com.muyie.framework.config.MuyieConstants;
 
@@ -11,10 +11,12 @@ import java.util.Optional;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
- * 在日志文件中打印请求追踪日志，自动生成一个随机字符串。
+ * 在日志文件中打印请求追踪日志
  *
  * @author larry.qi
  * @since 1.2.6
@@ -22,7 +24,7 @@ import cn.hutool.core.util.IdUtil;
 public class LogTraceIdConverter extends ClassicConverter {
 
   /**
-   * 获取当前的请求追踪标识，没有则随机生成。
+   * 获取当前的请求追踪标识，没有则随机生成
    *
    * @return TraceId 请求追踪标识
    */
@@ -31,12 +33,12 @@ public class LogTraceIdConverter extends ClassicConverter {
   }
 
   /**
-   * 设置并获取一个请求追踪标识
+   * 设置请求追踪标识
    *
    * @param traceId 请求追踪标识
    */
   public static void set(String traceId) {
-    setAndGet(Optional.ofNullable(Strings.emptyToNull(traceId)).orElseGet(() -> IdUtil.nanoId(12)));
+    setAndGet(Optional.ofNullable(StrUtil.emptyToNull(traceId)).orElseGet(() -> IdUtil.nanoId(12)));
   }
 
   /**
@@ -58,21 +60,23 @@ public class LogTraceIdConverter extends ClassicConverter {
   }
 
   /**
-   * 拷贝线程上下文内容（适用于异步线程）
+   * 拷贝线程上下文对象（可用于异步线程）
    *
-   * @return 上下文内容
+   * @return 上下文对象
    */
   public static Map<String, String> getCopyOfContextMap() {
-    return MDC.getCopyOfContextMap();
+    return Optional.ofNullable(MDC.getCopyOfContextMap()).orElseGet(Maps::newConcurrentMap);
   }
 
   /**
-   * 设置线程上下文内容（适用于异步线程）
+   * 设置线程上下文对象（可用于异步线程）
    *
-   * @param contextMap 上下文内容
+   * @param contextMap 上下文对象
    */
   public static void setContextMap(Map<String, String> contextMap) {
-    MDC.setContextMap(contextMap);
+    if (CollectionUtil.isNotEmpty(contextMap)) {
+      MDC.setContextMap(contextMap);
+    }
   }
 
   @Override

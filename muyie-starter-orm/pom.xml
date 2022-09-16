@@ -40,6 +40,10 @@
       <artifactId>druid-spring-boot-starter</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+    </dependency>
   </dependencies>
 
   <distributionManagement>

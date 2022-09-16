@@ -1,4 +1,4 @@
-package com.muyie.orm.mybatis;
+package com.muyie.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

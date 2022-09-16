@@ -96,7 +96,7 @@
     <module>muyie-framework</module>
     <module>muyie-starter-apollo</module>
     <module>muyie-starter-client</module>
-    <module>muyie-starter-orm</module>
+    <module>muyie-starter-mybatis</module>
     <module>muyie-starter-redis</module>
     <module>muyie-starter-web</module>
   </modules>
@@ -143,7 +143,7 @@
       </dependency>
       <dependency>
         <groupId>com.github.zhycn</groupId>
-        <artifactId>muyie-starter-orm</artifactId>
+        <artifactId>muyie-starter-mybatis</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
       <dependency>

@@ -1,4 +1,4 @@
-package com.muyie.orm.dataobject;
+package com.muyie.mybatis.dataobject;
 
 import com.alibaba.fastjson2.JSONObject;
 

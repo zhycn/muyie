@@ -1,4 +1,4 @@
-package com.muyie.orm.datasource;
+package com.muyie.mybatis.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
@@ -9,14 +9,17 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * @author larry.qi
  * @since 1.2.11
  */
+@UtilityClass
 public class MuyieDataSourceBuilder {
 
   @SuppressWarnings("unchecked")
-  protected static <T> T createHikariDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
+  private static <T> T createHikariDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
     return (T) properties.initializeDataSourceBuilder().type(type).build();
   }
 

@@ -1,3 +1,0 @@
-com.muyie.orm.MuyieOrmAutoConfiguration
-com.muyie.orm.datasource.MuyieDataSourceAutoConfiguration
-com.muyie.orm.mybatis.MuyieMybatisPlusAutoConfiguration

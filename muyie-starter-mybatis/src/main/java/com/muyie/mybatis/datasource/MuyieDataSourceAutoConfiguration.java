@@ -1,4 +1,4 @@
-package com.muyie.orm.datasource;
+package com.muyie.mybatis.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 

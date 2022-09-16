@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.11-SNAPSHOT</version>
+    <version>1.2.11</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -27,7 +27,7 @@
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <google.zxing.version>3.5.0</google.zxing.version>
     <guava.version>31.1-jre</guava.version>
-    <hutool.version>5.8.6</hutool.version>
+    <hutool.version>5.8.7</hutool.version>
     <htmlunit.version>2.64.0</htmlunit.version>
     <jsoup.version>1.15.3</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>

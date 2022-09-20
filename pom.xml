@@ -98,7 +98,6 @@
     <module>muyie-starter-client</module>
     <module>muyie-starter-mybatis</module>
     <module>muyie-starter-redis</module>
-    <module>muyie-starter-security</module>
     <module>muyie-starter-web</module>
   </modules>
 
@@ -150,11 +149,6 @@
       <dependency>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-redis</artifactId>
-        <version>${muyie-framework.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.zhycn</groupId>
-        <artifactId>muyie-starter-security</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
       <dependency>

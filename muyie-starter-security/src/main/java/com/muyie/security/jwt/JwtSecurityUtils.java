@@ -8,15 +8,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Utility class for Spring Security.
  *
  * @author larry.qi
+ * @since 1.2.12
  */
-public final class JwtSecurityUtils {
-
-  private JwtSecurityUtils() {
-  }
+@UtilityClass
+public class JwtSecurityUtils {
 
   /**
    * Get the login of the current user.
@@ -58,7 +59,7 @@ public final class JwtSecurityUtils {
     return Optional.ofNullable(securityContext.getAuthentication())
       .map(authentication -> authentication.getAuthorities().stream()
         .noneMatch(grantedAuthority -> grantedAuthority.getAuthority()
-          .equals(AuthoritiesConstants.ANONYMOUS)))
+          .equals(AuthoritiesConstants.ROLE_ANONYMOUS)))
       .orElse(false);
   }
 

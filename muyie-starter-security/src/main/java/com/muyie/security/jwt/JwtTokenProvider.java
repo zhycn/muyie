@@ -36,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
  * JWT token provider
  *
  * @author larry.qi
+ * @since 1.2.12
  */
 @Slf4j
 @Component

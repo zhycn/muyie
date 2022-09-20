@@ -12,14 +12,14 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.12-SNAPSHOT</version>
+    <version>1.2.12</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
-    <alibaba-druid.version>1.2.9</alibaba-druid.version>
-    <alibaba-fastjson.version>2.0.13</alibaba-fastjson.version>
+    <alibaba-druid.version>1.2.12</alibaba-druid.version>
+    <alibaba-fastjson.version>2.0.14</alibaba-fastjson.version>
     <alibaba-ttl.version>2.14.0</alibaba-ttl.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
@@ -31,9 +31,6 @@
     <htmlunit.version>2.64.0</htmlunit.version>
     <jsoup.version>1.15.3</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
-    <jaxb-api.version>2.3.1</jaxb-api.version>
-    <jaxb-impl.version>2.3.2</jaxb-impl.version>
-    <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
     <lz4-java.version>1.8.0</lz4-java.version>
     <mapstruct.version>1.5.2.Final</mapstruct.version>
     <mybatis-plus.version>3.5.2</mybatis-plus.version>
@@ -45,7 +42,7 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Alibaba druid & fastjson -->
+      <!-- Alibaba druid @https://github.com/alibaba/druid -->
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
@@ -56,11 +53,8 @@
         <artifactId>druid-spring-boot-starter</artifactId>
         <version>${alibaba-druid.version}</version>
       </dependency>
-      <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>${alibaba-fastjson.version}</version>
-      </dependency>
+
+      <!-- FastJSON2 @https://github.com/alibaba/fastjson2 -->
       <dependency>
         <groupId>com.alibaba.fastjson2</groupId>
         <artifactId>fastjson2</artifactId>
@@ -72,7 +66,7 @@
         <version>${alibaba-fastjson.version}</version>
       </dependency>
 
-      <!-- Apollo client -->
+      <!-- Apollo client @https://www.apolloconfig.com/ -->
       <dependency>
         <groupId>com.ctrip.framework.apollo</groupId>
         <artifactId>apollo-client</artifactId>
@@ -86,7 +80,7 @@
         <version>${commons-io.version}</version>
       </dependency>
 
-      <!-- Hutool -->
+      <!-- Hutool @http://hutool.cn/ -->
       <dependency>
         <groupId>cn.hutool</groupId>
         <artifactId>hutool-all</artifactId>
@@ -119,31 +113,35 @@
         <version>${guava.version}</version>
       </dependency>
 
-      <!-- Mybatis-Plus -->
+      <!-- Mybatis-Plus @https://baomidou.com/ -->
       <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-boot-starter</artifactId>
         <version>${mybatis-plus.version}</version>
       </dependency>
 
-      <!-- QrCode & OTP -->
+      <!-- Java One Time Password API @https://github.com/aerogear-attic/aerogear-otp-java -->
       <dependency>
         <groupId>org.jboss.aerogear</groupId>
         <artifactId>aerogear-otp-java</artifactId>
         <version>${aerogear-otp-java.version}</version>
       </dependency>
+
+      <!-- barcode scanning library for Java, Android @https://github.com/zxing/zxing -->
       <dependency>
         <groupId>com.google.zxing</groupId>
         <artifactId>core</artifactId>
         <version>${google.zxing.version}</version>
       </dependency>
 
+      <!-- Java runtime metadata analysis @https://github.com/ronmamo/reflections -->
       <dependency>
         <groupId>org.reflections</groupId>
         <artifactId>reflections</artifactId>
         <version>${reflections.version}</version>
       </dependency>
 
+      <!-- Java rate-limiting library based on token-bucket algorithm @https://github.com/bucket4j/bucket4j -->
       <dependency>
         <groupId>com.github.vladimir-bukhtoyarov</groupId>
         <artifactId>bucket4j-core</artifactId>
@@ -154,11 +152,15 @@
         <artifactId>bucket4j-jcache</artifactId>
         <version>${bucket4j.version}</version>
       </dependency>
+
+      <!-- LZ4 compression for Java @https://github.com/lz4/lz4-java/ -->
       <dependency>
         <groupId>org.lz4</groupId>
         <artifactId>lz4-java</artifactId>
         <version>${lz4-java.version}</version>
       </dependency>
+
+      <!-- MapStruct @https://mapstruct.org/ -->
       <dependency>
         <groupId>org.mapstruct</groupId>
         <artifactId>mapstruct</artifactId>
@@ -170,44 +172,14 @@
         <version>${mapstruct.version}</version>
       </dependency>
 
-      <!-- SpringDoc OpenAPI -->
+      <!-- SpringDoc OpenAPI @https://springdoc.org/ -->
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-ui</artifactId>
         <version>${springdoc.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>database-commons</artifactId>
-        <version>${testcontainers.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>couchbase</artifactId>
-        <version>${testcontainers.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>net.logstash.logback</groupId>
-        <artifactId>logstash-logback-encoder</artifactId>
-        <version>${logstash-logback-encoder.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
 
-      <!-- Problem -->
+      <!-- Problem @https://github.com/zalando/problem -->
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>problem-spring-web</artifactId>
@@ -219,7 +191,7 @@
         <version>${problem-spring.version}</version>
       </dependency>
 
-      <!-- Retrofit client -->
+      <!-- Retrofit client @https://square.github.io/retrofit/ -->
       <dependency>
         <groupId>com.squareup.retrofit2</groupId>
         <artifactId>retrofit</artifactId>
@@ -231,13 +203,14 @@
         <version>${retrofit2.version}</version>
       </dependency>
 
-      <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+      <!-- jsoup HTML parser library @https://jsoup.org/ -->
       <dependency>
         <groupId>org.jsoup</groupId>
         <artifactId>jsoup</artifactId>
         <version>${jsoup.version}</version>
       </dependency>
-      <!-- A java GUI-Less browser library @ https://htmlunit.sourceforge.io/ -->
+
+      <!-- A java GUI-Less browser library @https://htmlunit.sourceforge.io/ -->
       <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>

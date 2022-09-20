@@ -295,6 +295,7 @@ public class RedisCache<V> {
    * @param key 键
    * @return 操作对象
    */
+  @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
   public BoundZSetOperations<String, V> boundZSetOps(String key) {
     return redisTemplate.boundZSetOps(key);
   }

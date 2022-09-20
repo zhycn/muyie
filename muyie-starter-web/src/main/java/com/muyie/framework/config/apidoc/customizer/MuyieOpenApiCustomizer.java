@@ -23,10 +23,8 @@ public class MuyieOpenApiCustomizer implements OpenApiCustomiser, Ordered {
    * The default order for the customizer.
    */
   public static final int DEFAULT_ORDER = 0;
-
-  private int order = DEFAULT_ORDER;
-
   private final MuyieProperties.ApiDocs properties;
+  private int order = DEFAULT_ORDER;
 
   /**
    * <p>Constructor for MuyieOpenApiCustomizer.</p>
@@ -62,19 +60,19 @@ public class MuyieOpenApiCustomizer implements OpenApiCustomiser, Ordered {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getOrder() {
+    return order;
+  }
+
+  /**
    * <p>Setter for the field <code>order</code>.</p>
    *
    * @param order an int.
    */
   public void setOrder(int order) {
     this.order = order;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getOrder() {
-    return order;
   }
 }

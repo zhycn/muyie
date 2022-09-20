@@ -1,8 +1,17 @@
 package com.muyie.security;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import lombok.Data;
 
+/**
+ * MuyieSecurityProperties
+ *
+ * @author larry.qi
+ * @since 1.2.12
+ */
 @Data
+@ConfigurationProperties(prefix = "muyie.security")
 public class MuyieSecurityProperties {
 
   private final ClientAuthorization clientAuthorization = new ClientAuthorization();

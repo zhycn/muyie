@@ -13,17 +13,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_BEARER;
+import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_HEADER;
+
 /**
  * Filters incoming requests and installs a Spring Security principal if a header corresponding to a
  * valid user is found.
  *
  * @author larry.qi
+ * @since 1.2.12
  */
 public class JwtFilter extends GenericFilterBean {
-
-  public static final String AUTHORIZATION_HEADER = "Authorization";
-
-  public static final String AUTHORIZATION_BEARER = "Bearer ";
 
   private final JwtTokenProvider jwtTokenProvider;
 

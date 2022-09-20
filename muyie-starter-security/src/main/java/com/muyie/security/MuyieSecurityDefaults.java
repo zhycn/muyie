@@ -1,5 +1,11 @@
 package com.muyie.security;
 
+/**
+ * MuyieSecurityDefaults
+ *
+ * @author larry.qi
+ * @since 1.2.12
+ */
 public interface MuyieSecurityDefaults {
 
   interface ClientAuthorization {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * Spring Security success handler, specialized for Ajax requests.
  *
  * @author larry.qi
+ * @since 1.2.12
  */
 public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

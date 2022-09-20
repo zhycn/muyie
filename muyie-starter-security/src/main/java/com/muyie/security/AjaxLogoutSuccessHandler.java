@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Spring Security logout handler, specialized for Ajax requests.
  *
  * @author larry.qi
+ * @since 1.2.12
  */
 public class AjaxLogoutSuccessHandler extends AbstractAuthenticationTargetUrlRequestHandler implements LogoutSuccessHandler {
 

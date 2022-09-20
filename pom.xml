@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
-  <version>1.2.11</version>
+  <version>1.2.12-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MuYie server-side parent POM</name>
   <description>MuYie BOM and server-side library</description>
@@ -43,7 +43,7 @@
 
   <properties>
     <!-- The muyie-framework version should be the same as the artifact version above -->
-    <muyie-framework.version>1.2.11</muyie-framework.version>
+    <muyie-framework.version>1.2.12-SNAPSHOT</muyie-framework.version>
     <!-- The spring-boot version should be the same as the parent version above -->
     <spring-boot.version>2.7.3</spring-boot.version>
     <spring-cloud.version>2021.0.4</spring-cloud.version>

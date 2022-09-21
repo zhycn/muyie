@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Import;
  * @author larry.qi
  * @since 1.2.6
  */
+@SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(MuyieProperties.class)
 @EnableAspectJAutoProxy

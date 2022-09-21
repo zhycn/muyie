@@ -3,7 +3,6 @@
 This project is used by the Spring Boot. This is the Bill of Materials and server-side library:
 
 - muyie-dependencies
-- muyie-framework
 
 This project provides a pom file that you can either import into your Spring Boot Application's bom, or use as your Spring Boot Application's parent pom. 
 
@@ -21,7 +20,7 @@ The MuYie BOM uses Maven's support for dependency management to provide dependen
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.2.12-SNAPSHOT</version>
+            <version>1.2.12</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -35,7 +34,7 @@ Alternatively, rather than importing the MuYie BOM, you may prefer to use it as 
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.12-SNAPSHOT</version>
+    <version>1.2.12</version>
     <relativePath/>
 </parent>
 ```

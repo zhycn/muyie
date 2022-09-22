@@ -137,12 +137,3 @@ markdown_extensions:
 nav:
   - 首页:
       - index.md
-      - 依赖版本管理: dependency-versions.md
-      - Lombok 使用指南: components/lombok.md
-  - 指南:
-      - guides.md
-  - 组件:
-      - 配置中心:
-          - Apollo Client 使用指南: components/apollo-client-usage.md
-  - 帮助:
-      - help/reference-documents.md

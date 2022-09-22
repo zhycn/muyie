@@ -13,7 +13,7 @@ Java 客户端不依赖任何框架，能够运行于所有 Java 运行时环境
     **`muyie-starter-apollo` 组件是基于 Spring Boot 和 Apollo Client 开发的快速集成方案，开箱即用。
     重点解决了在 Spring Boot 中使用 `@ConfigurationProperties` 注解时配置参数不更新的问题。**
 
-## 快速使用
+## 快速集成
 
 1）在你的 Spring Boot 项目中添加依赖配置：
 
@@ -46,7 +46,7 @@ apollo.cluster=default
 
 ## 自定义设置
 
-`@ApolloConfigChangeListener` 注解默认只能自动更新 `application` 命名空间的配置属性，其他命名空间的配置属性更新可参考下列配置：
+**`@ApolloConfigChangeListener` 注解默认只能自动更新 `application` 命名空间的配置属性，其他命名空间的配置属性更新可参考下列配置：**
 
 ```java
 

@@ -14,16 +14,6 @@ Lombok 是一个 Java 库，能自动插入编辑器和构建工具中，简化 
     但是，IDEA 2020 最后一个发布版本已经内置了 Lombok 插件，并且 SpringBoot 2.1.x 之后的版本也在 Starter 中内置了 Lombok 依赖。
     为什么他们都要支持 Lombok 呢？本文就来聊聊 Lombok 的使用，看看它有何神奇之处！
 
-主要特征：
-
-- [@Getter and @Setter](https://projectlombok.org/features/GetterSetter)
-- [@NonNull](https://projectlombok.org/features/NonNull)
-- [@ToString](https://projectlombok.org/features/ToString)
-- [@EqualsAndHashCode](https://projectlombok.org/features/EqualsAndHashCode)
-- [@NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor](https://projectlombok.org/features/constructor)
-- [@Data](https://projectlombok.org/features/Data)
-- [@SneakyThrows](https://projectlombok.org/features/SneakyThrows)
-
 ## 快速使用
 
 1）在你的 Spring Boot 项目的中添加依赖配置：
@@ -52,6 +42,10 @@ Lombok 是一个 Java 库，能自动插入编辑器和构建工具中，简化 
 | @Data                    | 注解在类，等价于`@Getter` `@Setter` `@RequiredArgsConstructor` `@ToString` `@EqualsAndHashCode`。                      |
 | @SneakyThrows            | 注解在方法，抛出异常（慎用）。                                                                                               |
 | @Slf4j                   | 注解在类，生成log变量，严格意义来说是常量。等价于：<br>private static final Logger log=LoggerFactory.getLogger(UserController.class); |
+| @UtilityClass            | 注解在类，声明为工具类。                                                                                                  |
+| @Builder                 | 注解在类，No-hassle fancy-pants APIs for object creation!                                                          |
+| @Synchronized            | 注解在方法，声明同步方法。                                                                                                 |
+| @With                    | 注解在类或字段，声明作用域。                                                                                                |
 
 ## 安装插件
 

@@ -137,3 +137,10 @@ markdown_extensions:
 nav:
   - 首页:
       - index.md
+  - 参考文档:
+      - reference/index.md
+      - 开发工具:
+          - Lombok: reference/lombok.md
+  - 组件:
+      - 配置中心:
+          - components/apollo-client-usage.md

@@ -19,11 +19,10 @@
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.12</alibaba-druid.version>
-    <alibaba-fastjson.version>2.0.14</alibaba-fastjson.version>
+    <alibaba-fastjson2.version>2.0.14</alibaba-fastjson2.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
-    <google.zxing.version>3.5.0</google.zxing.version>
     <guava.version>31.1-jre</guava.version>
     <hutool.version>5.8.7</hutool.version>
     <htmlunit.version>2.64.0</htmlunit.version>
@@ -36,6 +35,7 @@
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <springdoc.version>1.6.11</springdoc.version>
+    <zxing.version>3.5.0</zxing.version>
   </properties>
 
   <dependencyManagement>
@@ -56,7 +56,7 @@
       <dependency>
         <groupId>com.alibaba.fastjson2</groupId>
         <artifactId>fastjson2</artifactId>
-        <version>${alibaba-fastjson.version}</version>
+        <version>${alibaba-fastjson2.version}</version>
       </dependency>
       <dependency>
         <groupId>com.alibaba.fastjson2</groupId>

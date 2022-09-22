@@ -104,7 +104,7 @@
         <scope>runtime</scope>
       </dependency>
 
-      <!-- Guava -->
+      <!-- Guava @https://github.com/google/guava -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>

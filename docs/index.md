@@ -16,6 +16,12 @@ MuYie 的目标就是解决这些问题。
 
 MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本上简化开发体检。
 
+## 环境要求
+
+- JDK 8+
+- Spring Boot 2.7.3
+- Spring Cloud 2021.0.4
+
 ## 快速集成
 
 1）在你的 Spring Boot 项目中将其作为父模块引入（**推荐**）：
@@ -24,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>${muyie-framework.version}</version>
+    <version>1.2.12</version>
     <relativePath/>
 </parent>
 ```
@@ -37,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>${muyie-framework.version}</version>
+            <version>1.2.12</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -71,7 +77,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | org.redisson                    | redisson-spring-boot-starter | 3.17.6      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.12      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
 | com.alibaba.fastjson2           | fastjson2                    | 2.0.14      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
-| commons-io                      | commons-io                   | 2.11.0      | commons-io.version        |                                                                          |
+| commons-io                      | commons-io                   | 2.11.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.0.1       | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
 | com.google.guava                | guava                        | 31.1-jre    | guava.version             | [Guava](https://github.com/google/guava)                                 |
 | com.google.zxing                | core                         | 3.5.0       | zxing.version             | [ZXing](https://github.com/zxing/zxing)                                  |

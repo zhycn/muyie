@@ -1,6 +1,6 @@
 package com.muyie.dto;
 
-import com.muyie.exception.AssertUtil;
+import com.muyie.exception.ExceptionUtil;
 import com.muyie.exception.ValidationException;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -212,7 +212,7 @@ public class PageQuery extends Query {
       try {
         return DateUtils.parseDate(beginTime, DEFAULT_PATTERNS);
       } catch (Exception e) {
-        AssertUtil.validate(e).doThrow();
+        ExceptionUtil.validate(e).doThrow();
       }
     }
     return null;
@@ -266,7 +266,7 @@ public class PageQuery extends Query {
       try {
         return DateUtils.parseDate(endTime, DEFAULT_PATTERNS);
       } catch (Exception e) {
-        AssertUtil.validate(e).doThrow();
+        ExceptionUtil.validate(e).doThrow();
       }
     }
     return null;

@@ -139,6 +139,7 @@ nav:
       - index.md
       - 异常:
           - 错误码: error-code.md
+          - 异常类: exception-class.md
   - 参考文档:
       - reference/index.md
       - 开发工具:

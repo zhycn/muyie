@@ -1,6 +1,7 @@
 package com.muyie.framework.aspectj;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieConstants;
@@ -79,14 +80,14 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
 
     try {
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(joinPoint.getArgs());
+        String json = JSON.toJSONString(joinPoint.getArgs(), JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Enter: '{}' with arguments = {}", value, json);
       }
 
       final Object result = joinPoint.proceed();
 
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(result);
+        String json = JSON.toJSONString(result, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Exit: '{}' with result = {}", value, json);
       }
 

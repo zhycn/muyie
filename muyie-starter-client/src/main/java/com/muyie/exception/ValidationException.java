@@ -48,6 +48,8 @@ public class ValidationException extends BusinessException {
 
   /**
    * 请求参数校验异常
+   *
+   * @return ValidationException
    */
   public static ValidationException of() {
     return new ValidationException();
@@ -57,6 +59,7 @@ public class ValidationException extends BusinessException {
    * 请求参数校验异常
    *
    * @param detail 错误详情
+   * @return ValidationException
    */
   public static ValidationException of(String detail) {
     return new ValidationException(detail);
@@ -66,6 +69,7 @@ public class ValidationException extends BusinessException {
    * 请求参数校验异常
    *
    * @param cause 异常
+   * @return ValidationException
    */
   public static ValidationException of(Throwable cause) {
     return new ValidationException(cause);
@@ -76,6 +80,7 @@ public class ValidationException extends BusinessException {
    *
    * @param detail 错误详情
    * @param cause  异常
+   * @return ValidationException
    */
   public static ValidationException of(String detail, Throwable cause) {
     return new ValidationException(detail, cause);

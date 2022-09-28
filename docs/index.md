@@ -121,13 +121,3 @@ MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都
   <guava.version>31.1-jre</guava.version>
 </properties>
 ```
-
-## 资源大全
-
-- [**Spring.io**](https://spring.io/) - Spring makes Java simple.
-
-- [**LibHunt**](https://www.libhunt.com/) - Discover trending open-source projects and their
-  alternatives.
-
-- [**Awesome Java**](https://java.libhunt.com/) - A curated list of awesome Java frameworks,
-  libraries and software.

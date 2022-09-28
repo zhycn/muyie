@@ -24,10 +24,10 @@ class ErrorCodeBuilder {
 
 ## 错误码接口
 
-Tsollu 框架提供了一个标准的错误码接口，所有自定义错误码均需实现该接口，以便统一异常处理。
+MuYie 框架提供了一个标准的错误码接口，所有自定义错误码均需实现该接口，以便统一异常处理。
 
 ```java title="错误码接口"
-package com.tsollu.exception;
+package com.muyie.exception;
 
 public interface ErrorCode {
 
@@ -46,10 +46,10 @@ public interface ErrorCode {
 
 ## 公共错误码
 
-公共错误码是基于阿里巴巴 Java 开发手册(黄山版)实现的，在此基础上增加了部分常见的 HTTP 状态码的错误描述信息。
+公共错误码是基于阿里巴巴 Java 开发手册（黄山版）实现的，在此基础上增加了部分常见的 HTTP 状态码的错误描述信息。
 
 ```java title="公共错误码"
-package com.tsollu.exception;
+package com.muyie.exception;
 
 public enum ErrorCodeDefault implements ErrorCode {
 
@@ -72,7 +72,7 @@ public enum ErrorCodeDefault implements ErrorCode {
     S0503("S0503", "服务不可用"),
     S0504("S0504", "请求网关超时"),
 
-    // 错误码列表 - 阿里巴巴 Java 开发手册(黄山版)
+    // 错误码列表 - 阿里巴巴 Java 开发手册（黄山版）
     A0001("A0001", "用户端错误"),
     A0100("A0100", "用户注册错误"),
     A0101("A0101", "用户未同意隐私协议"),
@@ -309,10 +309,7 @@ public enum ErrorCodeBusiness implements ErrorCode {
 如果你不想自定义错误码枚举类，也可以使用错误码构建类来创建错误码。
 
 ```java title="错误码构建类"
-package com.tsollu.exception;
-
-import java.util.Map;
-import cn.hutool.core.util.StrUtil;
+package com.muyie.exception;
 
 public class ErrorCodeBuilder implements ErrorCode {
 

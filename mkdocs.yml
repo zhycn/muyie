@@ -137,6 +137,8 @@ markdown_extensions:
 nav:
   - 首页:
       - index.md
+      - 异常:
+          - 错误码: error-code.md
   - 参考文档:
       - reference/index.md
       - 开发工具:

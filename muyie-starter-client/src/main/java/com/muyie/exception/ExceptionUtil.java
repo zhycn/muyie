@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -164,9 +165,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    for (ConstraintViolation<Object> o : sets) {
-      ExceptionUtil.business(errorCode, o.getMessage()).doThrow();
-    }
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
   }
 
   /**
@@ -180,9 +179,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    for (ConstraintViolation<Object> o : sets) {
-      ExceptionUtil.business(errorCode, o.getMessage()).doThrow();
-    }
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
   }
 
   /**
@@ -196,9 +193,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    for (ConstraintViolation<Object> o : sets) {
-      ExceptionUtil.validate(o.getMessage()).doThrow();
-    }
+    ExceptionUtil.validate(toString(sets)).doThrow();
   }
 
   /**
@@ -211,9 +206,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    for (ConstraintViolation<Object> o : sets) {
-      ExceptionUtil.validate(o.getMessage()).doThrow();
-    }
+    ExceptionUtil.validate(toString(sets)).doThrow();
   }
 
   /**
@@ -235,6 +228,12 @@ public class ExceptionUtil {
    */
   public static void validateObject(@NonNull BindingResult bindingResult) {
     ExceptionUtil.validate(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
+  }
+
+  private static String toString(Set<? extends ConstraintViolation<?>> constraintViolations) {
+    return constraintViolations.stream()
+      .map(cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
+      .collect(Collectors.joining(", "));
   }
 
 }

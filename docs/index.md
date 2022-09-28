@@ -19,7 +19,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 ## 环境要求
 
 - JDK 8+
-- Spring Boot 2.7.3
+- Spring Boot 2.7.4
 - Spring Cloud 2021.0.4
 
 ## 快速集成
@@ -30,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.12</version>
+    <version>1.2.13-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -43,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.2.12</version>
+            <version>1.2.13-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -72,7 +72,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 
 | Group ID                        | Artifact ID                  | Version     | Version Property          | Documentation                                                            |
 |---------------------------------|------------------------------|-------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.3       | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.4       | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.4    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.17.6      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.12      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
@@ -86,7 +86,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | com.baomidou                    | mybatis-plus-boot-starter    | 3.5.2       | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
 | com.squareup.retrofit2          | retrofit                     | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
 | com.squareup.retrofit2          | converter-jackson            | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| cn.hutool                       | hutool-all                   | 5.8.7       | hutool.version            | [Hutool](https://hutool.cn/)                                             |
+| cn.hutool                       | hutool-all                   | 5.8.8       | hutool.version            | [Hutool](https://hutool.cn/)                                             |
 | org.mapstruct                   | mapstruct                    | 1.5.2.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.mapstruct                   | mapstruct-processor          | 1.5.2.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.jboss.aerogear              | aerogear-otp-java            | 1.0.0       | aerogear-otp-java         | [Java OTP](https://github.com/aerogear-attic/aerogear-otp-java)          |

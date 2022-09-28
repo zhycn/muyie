@@ -12,7 +12,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>1.2.12</version>
+    <version>1.2.13-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -24,7 +24,7 @@
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
     <guava.version>31.1-jre</guava.version>
-    <hutool.version>5.8.7</hutool.version>
+    <hutool.version>5.8.8</hutool.version>
     <htmlunit.version>2.64.0</htmlunit.version>
     <jsoup.version>1.15.3</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>

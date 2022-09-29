@@ -169,7 +169,7 @@
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>v@{project.version}</tagNameFormat>
           <generateReleasePoms>false</generateReleasePoms>
-          <arguments>-DskipTests</arguments>
+          <arguments>-DskipTests -Dgpg.skip</arguments>
         </configuration>
       </plugin>
     </plugins>

@@ -92,7 +92,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | org.jboss.aerogear              | aerogear-otp-java            | 1.0.0       | aerogear-otp-java         | [Java OTP](https://github.com/aerogear-attic/aerogear-otp-java)          |
 | org.zalando                     | problem-spring-web           | 0.28.0-RC.0 | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
 | org.reflections                 | reflections                  | 0.10.2      | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
-| org.springdoc                   | springdoc-openapi-ui         | 1.6.11      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
+| org.springdoc                   | springdoc-openapi-ui         | 1.6.12      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
 | org.lz4                         | lz4-java                     | 1.8.0       | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
 | org.jsoup                       | jsoup                        | 1.15.3      | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
 | net.sourceforge.htmlunit        | htmlunit                     | 2.65.1      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |

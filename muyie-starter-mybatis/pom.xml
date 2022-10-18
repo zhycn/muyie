@@ -10,7 +10,7 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.14-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 

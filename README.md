@@ -30,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.2.13-SNAPSHOT</version>
+    <version>1.3.0</version>
     <relativePath/>
 </parent>
 ```
@@ -43,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.2.13-SNAPSHOT</version>
+            <version>1.3.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

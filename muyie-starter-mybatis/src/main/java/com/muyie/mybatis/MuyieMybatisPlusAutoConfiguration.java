@@ -25,6 +25,8 @@ public class MuyieMybatisPlusAutoConfiguration {
 
   /**
    * 默认的 MyBatis-Plus 插件配置，不满足需求可以在项目中重新配置，查看 MyBatis-Plus 官方文档了解更多详情。
+   *
+   * @return MybatisPlusInterceptor
    */
   @Bean
   @ConditionalOnMissingBean(MybatisPlusInterceptor.class)

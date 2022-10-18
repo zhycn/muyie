@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -15,14 +16,14 @@ import javax.validation.ValidatorFactory;
 import lombok.experimental.UtilityClass;
 
 /**
- * 异常工具类（AssertUtil）的提供了一些静态方法，支持参数校验异常（validate）、业务处理异常（business）、已知的系统异常（system）、对象校验（validateObject）、Spring
+ * 异常工具类（ExceptionUtil）的提供了一些静态方法，支持参数校验异常（validate）、业务处理异常（business）、已知的系统异常（system）、对象校验（validateObject）、Spring
  * Web 参数校验（BindingResult）。
  *
  * @author larry.qi
  * @since 1.2.10
  */
 @UtilityClass
-public class AssertUtil {
+public class ExceptionUtil {
 
   /**
    * 业务异常
@@ -164,9 +165,7 @@ public class AssertUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    for (ConstraintViolation<Object> o : sets) {
-      AssertUtil.business(errorCode, o.getMessage()).doThrow();
-    }
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
   }
 
   /**
@@ -180,9 +179,7 @@ public class AssertUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    for (ConstraintViolation<Object> o : sets) {
-      AssertUtil.business(errorCode, o.getMessage()).doThrow();
-    }
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
   }
 
   /**
@@ -196,9 +193,7 @@ public class AssertUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    for (ConstraintViolation<Object> o : sets) {
-      AssertUtil.validate(o.getMessage()).doThrow();
-    }
+    ExceptionUtil.validate(toString(sets)).doThrow();
   }
 
   /**
@@ -211,9 +206,7 @@ public class AssertUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    for (ConstraintViolation<Object> o : sets) {
-      AssertUtil.validate(o.getMessage()).doThrow();
-    }
+    ExceptionUtil.validate(toString(sets)).doThrow();
   }
 
   /**
@@ -224,7 +217,7 @@ public class AssertUtil {
    * @throws ValidationException 请求参数校验异常
    */
   public static void validateObject(@NonNull ErrorCode errorCode, @NonNull BindingResult bindingResult) {
-    AssertUtil.business(errorCode, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
+    ExceptionUtil.business(errorCode, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
   }
 
   /**
@@ -234,7 +227,13 @@ public class AssertUtil {
    * @throws ValidationException 请求参数校验异常
    */
   public static void validateObject(@NonNull BindingResult bindingResult) {
-    AssertUtil.validate(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
+    ExceptionUtil.validate(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()).doThrow(bindingResult.hasErrors());
+  }
+
+  private static String toString(Set<? extends ConstraintViolation<?>> constraintViolations) {
+    return constraintViolations.stream()
+      .map(cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
+      .collect(Collectors.joining(", "));
   }
 
 }

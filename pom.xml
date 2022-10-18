@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
-  <version>1.2.12</version>
+  <version>1.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MuYie server-side parent POM</name>
   <description>MuYie BOM and server-side library</description>
@@ -14,8 +12,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.3</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>2.7.4</version>
+    <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
   <licenses>
@@ -43,26 +41,18 @@
 
   <properties>
     <!-- The muyie-framework version should be the same as the artifact version above -->
-    <muyie-framework.version>1.2.12</muyie-framework.version>
+    <muyie-framework.version>1.3.0-SNAPSHOT</muyie-framework.version>
     <!-- The spring-boot version should be the same as the parent version above -->
-    <spring-boot.version>2.7.3</spring-boot.version>
+    <spring-boot.version>2.7.4</spring-boot.version>
     <spring-cloud.version>2021.0.4</spring-cloud.version>
-    <redisson.version>3.17.6</redisson.version>
+    <redisson.version>3.17.7</redisson.version>
 
     <!-- Build properties -->
     <java.version>1.8</java.version>
     <maven.version>3.3.9</maven.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <project.testresult.directory>
-      ${project.build.directory}/test-results
-    </project.testresult.directory>
-    <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
 
     <!-- Plugin versions -->
-    <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
     <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
@@ -78,6 +68,7 @@
     <connection>scm:git:https://github.com/zhycn/muyie.git</connection>
     <developerConnection>scm:git:https://github.com/zhycn/muyie.git</developerConnection>
     <url>https://github.com/zhycn/muyie/</url>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
@@ -171,6 +162,16 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <generateReleasePoms>false</generateReleasePoms>
+          <arguments>-DskipTests -Dgpg.skip</arguments>
+        </configuration>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -195,6 +196,46 @@
           </configuration>
         </plugin>
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>default-prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>default-report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>default-check</id>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <rule>
+                    <element>BUNDLE</element>
+                    <limits>
+                      <limit>
+                        <counter>COMPLEXITY</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.62</minimum>
+                      </limit>
+                    </limits>
+                  </rule>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>${maven-enforcer-plugin.version}</version>
@@ -209,7 +250,7 @@
               <id>enforce-dependencyConvergence</id>
               <configuration>
                 <rules>
-                  <DependencyConvergence/>
+                  <DependencyConvergence />
                 </rules>
                 <fail>false</fail>
               </configuration>
@@ -272,6 +313,7 @@
           <executions>
             <execution>
               <id>attach-sources</id>
+              <phase>verify</phase>
               <goals>
                 <goal>jar-no-fork</goal>
               </goals>

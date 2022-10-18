@@ -55,6 +55,7 @@ public class SystemException extends BaseException {
    * 已知的系统异常
    *
    * @param errorCode 错误码
+   * @return SystemException
    */
   public static SystemException of(@NonNull ErrorCode errorCode) {
     return new SystemException(errorCode);
@@ -65,6 +66,7 @@ public class SystemException extends BaseException {
    *
    * @param errorCode 错误码
    * @param detail    错误详情
+   * @return SystemException
    */
   public static SystemException of(@NonNull ErrorCode errorCode, String detail) {
     return new SystemException(errorCode, detail);
@@ -75,6 +77,7 @@ public class SystemException extends BaseException {
    *
    * @param errorCode 错误码
    * @param cause     异常
+   * @return SystemException
    */
   public static SystemException of(@NonNull ErrorCode errorCode, Throwable cause) {
     return new SystemException(errorCode, cause);
@@ -86,6 +89,7 @@ public class SystemException extends BaseException {
    * @param errorCode 错误码
    * @param detail    错误详情
    * @param cause     异常
+   * @return SystemException
    */
   public static SystemException of(@NonNull ErrorCode errorCode, String detail, Throwable cause) {
     return new SystemException(errorCode, detail, cause);

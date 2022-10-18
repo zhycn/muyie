@@ -2,6 +2,7 @@ package com.muyie.redis;
 
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -33,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableCaching
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(CacheProperties.class)
 public class MuyieRedisCacheManager extends CachingConfigurerSupport {
 
   private final static String DEFAULT_KEY_PREFIX = "myCaches:";

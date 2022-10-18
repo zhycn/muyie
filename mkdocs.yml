@@ -137,11 +137,13 @@ markdown_extensions:
 nav:
   - 首页:
       - index.md
-      - 指南: summary.md
-      - 依赖版本管理: dependency-versions.md
-      - Lombok 使用指南: devtools/lombok.md
+      - 异常:
+          - 错误码: error-code.md
+          - 异常处理: exception-class.md
+  - 参考文档:
+      - reference/index.md
+      - 开发工具:
+          - Lombok: reference/lombok.md
   - 组件:
       - 配置中心:
-          - Apollo Client 使用指南: components/apollo-client-usage.md
-  - 帮助:
-      - help/reference-documents.md
+          - components/apollo-client-usage.md

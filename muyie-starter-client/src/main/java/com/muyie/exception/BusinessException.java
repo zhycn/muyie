@@ -55,6 +55,7 @@ public class BusinessException extends BaseException {
    * 业务异常
    *
    * @param errorCode 错误码
+   * @return BusinessException
    */
   public static BusinessException of(@NonNull ErrorCode errorCode) {
     return new BusinessException(errorCode);
@@ -65,6 +66,7 @@ public class BusinessException extends BaseException {
    *
    * @param errorCode 错误码
    * @param detail    错误详情
+   * @return BusinessException
    */
   public static BusinessException of(@NonNull ErrorCode errorCode, String detail) {
     return new BusinessException(errorCode, detail);
@@ -75,6 +77,7 @@ public class BusinessException extends BaseException {
    *
    * @param errorCode 错误码
    * @param cause     异常
+   * @return BusinessException
    */
   public static BusinessException of(@NonNull ErrorCode errorCode, Throwable cause) {
     return new BusinessException(errorCode, cause);
@@ -86,6 +89,7 @@ public class BusinessException extends BaseException {
    * @param errorCode 错误码
    * @param detail    错误详情
    * @param cause     异常
+   * @return BusinessException
    */
   public static BusinessException of(@NonNull ErrorCode errorCode, String detail, Throwable cause) {
     return new BusinessException(errorCode, detail, cause);

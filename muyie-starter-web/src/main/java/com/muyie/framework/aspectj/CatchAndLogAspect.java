@@ -1,18 +1,14 @@
 package com.muyie.framework.aspectj;
 
-import com.google.common.base.Throwables;
-
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.muyie.framework.annotation.CatchAndLog;
-import com.muyie.framework.aop.AfterThrowingAdvice;
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieConstants;
 import com.muyie.framework.config.MuyieProperties;
 import com.muyie.framework.logging.LogTraceIdConverter;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -36,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Aspect
 @Configuration
-public class CatchAndLogAspect implements AroundAdvice, AfterThrowingAdvice, WebMvcConfigurer {
+public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
 
   private final MuyieProperties.StopWatch properties;
 
@@ -84,21 +80,18 @@ public class CatchAndLogAspect implements AroundAdvice, AfterThrowingAdvice, Web
 
     try {
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(joinPoint.getArgs());
+        String json = JSON.toJSONString(joinPoint.getArgs(), JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Enter: '{}' with arguments = {}", value, json);
       }
 
       final Object result = joinPoint.proceed();
 
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(result);
+        String json = JSON.toJSONString(result, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Exit: '{}' with result = {}", value, json);
       }
 
       return result;
-    } catch (final IllegalArgumentException e) {
-      log.error("CatchAndLog Illegal argument: '{}' with cause = {}", value, Throwables.getStackTraceAsString(e));
-      throw e;
     } finally {
       stopWatch.stop();
       if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
@@ -111,11 +104,4 @@ public class CatchAndLogAspect implements AroundAdvice, AfterThrowingAdvice, Web
     }
   }
 
-  @Override
-  @AfterThrowing(pointcut = "setPointcut()", throwing = "e")
-  public void afterThrowing(final JoinPoint joinPoint, final Throwable e) {
-    final CatchAndLog catchAndLog = this.getMethod(joinPoint).getAnnotation(CatchAndLog.class);
-    String value = this.getMethodAlias(joinPoint, catchAndLog.value());
-    log.error("CatchAndLog Exception: '{}' with cause = {}", value, Throwables.getStackTraceAsString(e));
-  }
 }

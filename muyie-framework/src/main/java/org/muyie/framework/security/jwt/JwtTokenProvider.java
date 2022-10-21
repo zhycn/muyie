@@ -30,6 +30,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.jackson.io.JacksonDeserializer;
+import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.jsonwebtoken.security.Keys;
 
 /**
@@ -39,6 +41,9 @@ import io.jsonwebtoken.security.Keys;
 public class JwtTokenProvider {
 
   private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
+
+  private static final JacksonDeserializer JACKSON_DESERIALIZER = new JacksonDeserializer();
+  private static final JacksonSerializer JACKSON_SERIALIZER = new JacksonSerializer();
 
   private static final String AUTHORITIES_KEY = "auth";
   private final MuyieProperties muyieProperties;
@@ -88,12 +93,12 @@ public class JwtTokenProvider {
       validity = new Date(now + this.tokenValidityInMilliseconds);
     }
 
-    return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
+    return Jwts.builder().serializeToJsonWith(JACKSON_SERIALIZER).setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
       .signWith(key, SignatureAlgorithm.HS512).setExpiration(validity).compact();
   }
 
   public Authentication getAuthentication(final String token) {
-    final Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+    final Claims claims = Jwts.parserBuilder().deserializeJsonWith(JACKSON_DESERIALIZER).setSigningKey(key).build().parseClaimsJws(token).getBody();
 
     final Collection<? extends GrantedAuthority> authorities = Arrays
       .stream(claims.get(AUTHORITIES_KEY).toString().split(",")).map(SimpleGrantedAuthority::new)
@@ -105,20 +110,20 @@ public class JwtTokenProvider {
 
   public boolean validateToken(final String token) {
     try {
-      Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+      Jwts.parserBuilder().deserializeJsonWith(JACKSON_DESERIALIZER).setSigningKey(key).build().parseClaimsJws(token);
       return true;
     } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
       log.info("Invalid JWT signature.");
-      log.trace("Invalid JWT signature trace: {}", e);
+      log.trace("Invalid JWT signature trace", e);
     } catch (final ExpiredJwtException e) {
       log.info("Expired JWT token.");
-      log.trace("Expired JWT token trace: {}", e);
+      log.trace("Expired JWT token trace", e);
     } catch (final UnsupportedJwtException e) {
       log.info("Unsupported JWT token.");
-      log.trace("Unsupported JWT token trace: {}", e);
+      log.trace("Unsupported JWT token trace", e);
     } catch (final IllegalArgumentException e) {
       log.info("JWT token compact of handler are invalid.");
-      log.trace("JWT token compact of handler are invalid trace: {}", e);
+      log.trace("JWT token compact of handler are invalid trace", e);
     }
     return false;
   }

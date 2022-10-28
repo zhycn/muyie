@@ -5,7 +5,6 @@ import com.google.common.base.Throwables;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.muyie.dto.Response;
 import com.muyie.exception.BusinessException;
-import com.muyie.exception.ErrorCodeDefaults;
 import com.muyie.exception.ExceptionUtil;
 import com.muyie.exception.SystemException;
 import com.muyie.exception.ValidationException;
@@ -15,7 +14,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -49,6 +47,7 @@ public class GlobalExceptionHandler {
   public Response handleException(ConstraintViolationException e, HttpServletResponse response) {
     ValidationException ve = ExceptionUtil.validate(e.getMessage(), e);
     log.info(ve.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(HttpStatus.BAD_REQUEST.value());
     return Response.of(ve.getErrorCode());
   }
@@ -65,6 +64,7 @@ public class GlobalExceptionHandler {
     String detail = Objects.requireNonNull(e.getFieldError()).getDefaultMessage();
     ValidationException ve = ExceptionUtil.validate(detail, e);
     log.info(ve.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(HttpStatus.BAD_REQUEST.value());
     return Response.of(ve.getErrorCode());
   }
@@ -80,22 +80,8 @@ public class GlobalExceptionHandler {
   public Response handleException(InvalidFormatException e, HttpServletResponse response) {
     ValidationException ve = ExceptionUtil.validate(e.getMessage(), e);
     log.info(ve.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(HttpStatus.BAD_REQUEST.value());
-    return Response.of(ve.getErrorCode());
-  }
-
-  /**
-   * Spring MVC 请求方法不支持
-   *
-   * @param e        HttpRequestMethodNotSupportedException 请求方法不支持
-   * @param response HttpServletResponse
-   * @return 响应报文
-   */
-  @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-  public Response handleException(HttpRequestMethodNotSupportedException e, HttpServletResponse response) {
-    ValidationException ve = ExceptionUtil.validate(e.getMessage(), e);
-    log.info(ve.getMessage());
-    response.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
     return Response.of(ve.getErrorCode());
   }
 
@@ -109,6 +95,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(ValidationException.class)
   public Response handleException(ValidationException e, HttpServletResponse response) {
     log.info(e.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(e.getHttpStatus());
     return Response.of(e.getErrorCode());
   }
@@ -123,6 +110,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(BusinessException.class)
   public Response handleException(BusinessException e, HttpServletResponse response) {
     log.info(e.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(e.getHttpStatus());
     return Response.of(e.getErrorCode());
   }
@@ -137,22 +125,9 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(SystemException.class)
   public Response handleException(SystemException e, HttpServletResponse response) {
     log.error(e.getMessage());
+    log.debug(Throwables.getStackTraceAsString(e));
     response.setStatus(e.getHttpStatus());
     return Response.of(e.getErrorCode());
-  }
-
-  /**
-   * 未知的系统异常
-   *
-   * @param e        Throwable 未知的系统异常
-   * @param response HttpServletResponse
-   * @return 响应报文
-   */
-  @ExceptionHandler(Throwable.class)
-  public Response handleException(Throwable e, HttpServletResponse response) {
-    log.error(Throwables.getStackTraceAsString(e));
-    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    return Response.of(ErrorCodeDefaults.S0500);
   }
 
 }

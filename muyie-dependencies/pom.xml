@@ -16,14 +16,14 @@
 
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
-    <alibaba-druid.version>1.2.12</alibaba-druid.version>
-    <alibaba-fastjson2.version>2.0.15</alibaba-fastjson2.version>
+    <alibaba-druid.version>1.2.14</alibaba-druid.version>
+    <alibaba-fastjson2.version>2.0.16</alibaba-fastjson2.version>
     <apollo-client.version>2.0.1</apollo-client.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
     <guava.version>31.1-jre</guava.version>
-    <hutool.version>5.8.8</hutool.version>
-    <htmlunit.version>2.65.1</htmlunit.version>
+    <hutool.version>5.8.9</hutool.version>
+    <htmlunit.version>2.66.0</htmlunit.version>
     <jsoup.version>1.15.3</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
     <lz4-java.version>1.8.0</lz4-java.version>

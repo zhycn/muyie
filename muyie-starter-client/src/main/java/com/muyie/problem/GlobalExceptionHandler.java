@@ -2,6 +2,7 @@ package com.muyie.problem;
 
 import com.google.common.base.Throwables;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.muyie.dto.Response;
 import com.muyie.exception.BusinessException;
 import com.muyie.exception.ErrorCodeDefaults;
@@ -14,6 +15,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -64,6 +66,36 @@ public class GlobalExceptionHandler {
     ValidationException ve = ExceptionUtil.validate(detail, e);
     log.info(ve.getMessage());
     response.setStatus(HttpStatus.BAD_REQUEST.value());
+    return Response.of(ve.getErrorCode());
+  }
+
+  /**
+   * Spring MVC 请求参数格式错误处理
+   *
+   * @param e        InvalidFormatException 请求参数格式错误异常
+   * @param response HttpServletResponse
+   * @return 响应报文
+   */
+  @ExceptionHandler(InvalidFormatException.class)
+  public Response handleException(InvalidFormatException e, HttpServletResponse response) {
+    ValidationException ve = ExceptionUtil.validate(e.getMessage(), e);
+    log.info(ve.getMessage());
+    response.setStatus(HttpStatus.BAD_REQUEST.value());
+    return Response.of(ve.getErrorCode());
+  }
+
+  /**
+   * Spring MVC 请求方法不支持
+   *
+   * @param e        HttpRequestMethodNotSupportedException 请求方法不支持
+   * @param response HttpServletResponse
+   * @return 响应报文
+   */
+  @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+  public Response handleException(HttpRequestMethodNotSupportedException e, HttpServletResponse response) {
+    ValidationException ve = ExceptionUtil.validate(e.getMessage(), e);
+    log.info(ve.getMessage());
+    response.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
     return Response.of(ve.getErrorCode());
   }
 

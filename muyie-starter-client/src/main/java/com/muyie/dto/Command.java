@@ -14,7 +14,7 @@ public class Command extends DTO {
 
   private static final long serialVersionUID = 1L;
 
-  protected final JSONObject params = new JSONObject();
+  protected final JSONObject params = JSONObject.of();
 
   public JSONObject getParams() {
     return params;

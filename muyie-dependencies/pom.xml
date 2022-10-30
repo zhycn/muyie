@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>muyie-dependencies</artifactId>
   <packaging>pom</packaging>
@@ -19,6 +21,7 @@
     <alibaba-druid.version>1.2.14</alibaba-druid.version>
     <alibaba-fastjson2.version>2.0.16</alibaba-fastjson2.version>
     <apollo-client.version>2.0.1</apollo-client.version>
+    <bcprov-jdk15to18.version>1.69</bcprov-jdk15to18.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
     <guava.version>31.1-jre</guava.version>
@@ -67,6 +70,13 @@
         <groupId>com.ctrip.framework.apollo</groupId>
         <artifactId>apollo-client</artifactId>
         <version>${apollo-client.version}</version>
+      </dependency>
+
+      <!-- Bouncy Castle @https://www.bouncycastle.org/ -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15to18</artifactId>
+        <version>${bcprov-jdk15to18.version}</version>
       </dependency>
 
       <!-- commons-io -->

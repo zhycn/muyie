@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
@@ -13,7 +15,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.7.5</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <licenses>
@@ -88,6 +90,7 @@
     <module>muyie-starter-client</module>
     <module>muyie-starter-mybatis</module>
     <module>muyie-starter-redis</module>
+    <module>muyie-starter-thymeleaf</module>
     <module>muyie-starter-web</module>
   </modules>
 
@@ -134,6 +137,11 @@
       <dependency>
         <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-redis</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-thymeleaf</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
       <dependency>
@@ -250,7 +258,7 @@
               <id>enforce-dependencyConvergence</id>
               <configuration>
                 <rules>
-                  <DependencyConvergence />
+                  <DependencyConvergence/>
                 </rules>
                 <fail>false</fail>
               </configuration>

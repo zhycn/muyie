@@ -76,7 +76,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.4    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.17.7      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.14      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.16      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.17      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.11.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.0.1       | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
 | com.google.guava                | guava                        | 31.1-jre    | guava.version             | [Guava](https://github.com/google/guava)                                 |

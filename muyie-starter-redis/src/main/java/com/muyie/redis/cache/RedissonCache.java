@@ -256,10 +256,11 @@ public class RedissonCache {
    * Returns time-series instance by <code>name</code>
    *
    * @param <V>  type of value
+   * @param <L>  type of value
    * @param name - name of instance
    * @return RTimeSeries object
    */
-  public <V> RTimeSeries<V> getTimeSeries(String name) {
+  public <V, L> RTimeSeries<V, L> getTimeSeries(String name) {
     return redissonClient.getTimeSeries(name);
   }
 

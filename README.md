@@ -19,7 +19,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 ## 环境要求
 
 - JDK 8+
-- Spring Boot 2.7.6
+- Spring Boot 2.7.8
 - Spring Cloud 2021.0.5
 
 ## 快速集成
@@ -72,30 +72,30 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 
 | Group ID                        | Artifact ID                  | Version     | Version Property          | Documentation                                                            |
 |---------------------------------|------------------------------|-------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.6       | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.8       | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.5    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.18.1      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.15      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.20      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.23      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.11.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.0.1       | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
 | com.google.guava                | guava                        | 31.1-jre    | guava.version             | [Guava](https://github.com/google/guava)                                 |
 | com.google.zxing                | core                         | 3.5.0       | zxing.version             | [ZXing](https://github.com/zxing/zxing)                                  |
 | com.github.vladimir-bukhtoyarov | bucket4j-core                | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
 | com.github.vladimir-bukhtoyarov | bucket4j-jcache              | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
-| com.baomidou                    | mybatis-plus-boot-starter    | 3.5.2       | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
+| com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.1     | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
 | com.squareup.retrofit2          | retrofit                     | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
 | com.squareup.retrofit2          | converter-jackson            | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| cn.hutool                       | hutool-all                   | 5.8.10      | hutool.version            | [Hutool](https://hutool.cn/)                                             |
+| cn.hutool                       | hutool-all                   | 5.8.11      | hutool.version            | [Hutool](https://hutool.cn/)                                             |
 | org.mapstruct                   | mapstruct                    | 1.5.2.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.mapstruct                   | mapstruct-processor          | 1.5.2.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.jboss.aerogear              | aerogear-otp-java            | 1.0.0       | aerogear-otp-java         | [Java OTP](https://github.com/aerogear-attic/aerogear-otp-java)          |
 | org.zalando                     | problem-spring-web           | 0.28.0-RC.0 | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
 | org.reflections                 | reflections                  | 0.10.2      | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
-| org.springdoc                   | springdoc-openapi-ui         | 1.6.13      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
+| org.springdoc                   | springdoc-openapi-ui         | 1.6.14      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
 | org.lz4                         | lz4-java                     | 1.8.0       | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
 | org.jsoup                       | jsoup                        | 1.15.3      | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
-| net.sourceforge.htmlunit        | htmlunit                     | 2.67.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
+| net.sourceforge.htmlunit        | htmlunit                     | 2.70.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
 | io.jsonwebtoken                 | jjwt-api                     | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
 | io.jsonwebtoken                 | jjwt-impl                    | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
 | io.jsonwebtoken                 | jjwt-jackson                 | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |

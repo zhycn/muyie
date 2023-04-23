@@ -18,24 +18,24 @@
 
   <properties>
     <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
-    <alibaba-druid.version>1.2.15</alibaba-druid.version>
-    <alibaba-fastjson2.version>2.0.23</alibaba-fastjson2.version>
+    <alibaba-druid.version>1.2.17</alibaba-druid.version>
+    <alibaba-fastjson2.version>2.0.29</alibaba-fastjson2.version>
     <apollo-client.version>2.1.0</apollo-client.version>
-    <bcprov-jdk15to18.version>1.72</bcprov-jdk15to18.version>
+    <bcprov-jdk15to18.version>1.73</bcprov-jdk15to18.version>
     <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.11.0</commons-io.version>
     <guava.version>31.1-jre</guava.version>
-    <hutool.version>5.8.11</hutool.version>
+    <hutool.version>5.8.18</hutool.version>
     <htmlunit.version>2.70.0</htmlunit.version>
-    <jsoup.version>1.15.3</jsoup.version>
+    <jsoup.version>1.15.4</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
     <lz4-java.version>1.8.0</lz4-java.version>
-    <mapstruct.version>1.5.3.Final</mapstruct.version>
+    <mapstruct.version>1.5.4.Final</mapstruct.version>
     <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
-    <problem-spring.version>0.28.0-RC.0</problem-spring.version>
+    <problem-spring.version>0.29.1</problem-spring.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
-    <springdoc.version>1.6.14</springdoc.version>
+    <springdoc.version>1.7.0</springdoc.version>
     <zxing.version>3.5.0</zxing.version>
   </properties>
 

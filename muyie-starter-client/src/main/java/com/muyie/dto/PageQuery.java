@@ -1,7 +1,6 @@
 package com.muyie.dto;
 
 import com.muyie.exception.ExceptionUtil;
-import com.muyie.exception.ValidationException;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.validator.constraints.Range;
@@ -11,7 +10,6 @@ import java.util.Objects;
 
 import javax.validation.constraints.Min;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 
 import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
@@ -29,8 +27,6 @@ import static cn.hutool.core.date.DatePattern.UTC_SIMPLE_PATTERN;
  */
 public class PageQuery extends Query {
 
-  public static final String ASC = "ASC";
-  public static final String DESC = "DESC";
   private static final long serialVersionUID = 1L;
   private static final int DEFAULT_PAGE_NUM = 1;
   private static final int DEFAULT_PAGE_SIZE = 10;
@@ -45,7 +41,7 @@ public class PageQuery extends Query {
    * yyyy-MM-dd'T'HH:mm:ss'Z'
    * </pre>
    */
-  private static final String[] DEFAULT_PATTERNS = new String[]{
+  private static final String[] DEFAULT_DATE_PATTERNS = new String[]{
     NORM_DATE_PATTERN, NORM_DATETIME_PATTERN, PURE_DATE_PATTERN, PURE_DATETIME_PATTERN, UTC_SIMPLE_PATTERN, UTC_PATTERN
   };
 
@@ -82,14 +78,9 @@ public class PageQuery extends Query {
   private String endTime;
 
   /**
-   * 排序字段
-   */
-  private String orderBy;
-
-  /**
    * 排序方式
    */
-  private String orderDirection = DESC;
+  private String sortBy;
 
   /**
    * 获取当前页，最小值为1
@@ -129,28 +120,6 @@ public class PageQuery extends Query {
   public PageQuery setPageSize(Integer pageSize) {
     this.pageSize = Objects.isNull(pageSize) ? DEFAULT_PAGE_SIZE : pageSize;
     return this;
-  }
-
-  /**
-   * 设置分页参数
-   *
-   * @param pageNum  当前页，最小值为1
-   * @param pageSize 每页大小，最小值为1
-   * @return this
-   */
-  public PageQuery setPage(int pageNum, int pageSize) {
-    this.setPageNum(pageNum);
-    this.setPageSize(pageSize);
-    return this;
-  }
-
-  /**
-   * 获取查询的起点位置
-   *
-   * @return 起点位置
-   */
-  public int getOffset() {
-    return (getPageNum() - 1) * getPageSize();
   }
 
   /**
@@ -205,12 +174,12 @@ public class PageQuery extends Query {
    * </pre>
    *
    * @return 解析后的日期，开始时间未设置则返回null
-   * @throws ValidationException 日期格式解析错误则抛出异常
+   * @throws RuntimeException 日期格式解析错误则抛出异常
    */
   public Date getBeginTime() {
     if (StrUtil.isNotBlank(beginTime)) {
       try {
-        return DateUtils.parseDate(beginTime, DEFAULT_PATTERNS);
+        return DateUtils.parseDate(beginTime, DEFAULT_DATE_PATTERNS);
       } catch (Exception e) {
         ExceptionUtil.validate(e).doThrow();
       }
@@ -238,16 +207,6 @@ public class PageQuery extends Query {
   }
 
   /**
-   * 如果开始时间不为空，则返回当天的开始时间
-   *
-   * @return 当天的开始时间，参考格式：yyyy-MM-dd 00:00:00
-   */
-  public Date getBeginTimeOfDay() {
-    Date time = this.getBeginTime();
-    return Objects.nonNull(time) ? DateUtil.beginOfDay(time) : null;
-  }
-
-  /**
    * 获取结束时间，支持的格式：
    * <pre>
    * yyyy-MM-dd
@@ -259,12 +218,12 @@ public class PageQuery extends Query {
    * </pre>
    *
    * @return 解析后的日期，结束时间未设置则返回null
-   * @throws ValidationException 日期格式解析错误则抛出异常
+   * @throws RuntimeException 日期格式解析错误则抛出异常
    */
   public Date getEndTime() {
     if (StrUtil.isNotBlank(endTime)) {
       try {
-        return DateUtils.parseDate(endTime, DEFAULT_PATTERNS);
+        return DateUtils.parseDate(endTime, DEFAULT_DATE_PATTERNS);
       } catch (Exception e) {
         ExceptionUtil.validate(e).doThrow();
       }
@@ -292,71 +251,44 @@ public class PageQuery extends Query {
   }
 
   /**
-   * 如果结束时间不为空，则返回当天的最后时间
-   *
-   * @return 当天的最后时间，参考格式：yyyy-MM-dd 23:59:59
-   */
-  public Date getEndTimeOfDay() {
-    Date time = this.getEndTime();
-    if (Objects.nonNull(time)) {
-      return DateUtil.parseDateTime(DateUtil.formatDateTime(DateUtil.endOfDay(time)));
-    }
-    return null;
-  }
-
-  /**
-   * 获取排序字段，使用时要判断字段是否正确
-   *
-   * @return 排序字段
-   */
-  public String getOrderBy() {
-    return orderBy;
-  }
-
-  /**
-   * 设置排序字段
-   *
-   * @param orderBy 排序字段
-   * @return this
-   */
-  public PageQuery setOrderBy(String orderBy) {
-    this.orderBy = orderBy;
-    return this;
-  }
-
-  /**
-   * 获取排序方式，支持ASC和DESC，默认值是DESC。
+   * 获取排序方式，使用时要判断值是否合法
    *
    * @return 排序方式
    */
-  public String getOrderDirection() {
-    return orderDirection;
+  public String getSortBy() {
+    return sortBy;
   }
 
   /**
-   * 设置排序方式，支持ASC和DESC，默认值是DESC。
+   * 设置排序方式
    *
-   * @param orderDirection 排序方式，忽略大小写（ASC | DESC）
+   * @param sortBy 排序方式
    * @return this
    */
-  public PageQuery setOrderDirection(String orderDirection) {
-    if (ASC.equalsIgnoreCase(orderDirection) || DESC.equalsIgnoreCase(orderDirection)) {
-      this.orderDirection = orderDirection.toUpperCase();
-    }
+  public PageQuery setSortBy(String sortBy) {
+    this.sortBy = sortBy;
     return this;
   }
 
   /**
-   * 设置排序
+   * 设置分页参数
    *
-   * @param orderBy        排序字段
-   * @param orderDirection 排序方式，忽略大小写（ASC | DESC）
+   * @param pageNum  当前页，最小值为1
+   * @param pageSize 每页大小，最小值为1
    * @return this
    */
-  public PageQuery setSort(String orderBy, String orderDirection) {
-    this.setOrderBy(orderBy);
-    this.setOrderDirection(orderDirection);
+  public PageQuery page(int pageNum, int pageSize) {
+    this.setPageNum(pageNum);
+    this.setPageSize(pageSize);
     return this;
+  }
+
+  public static PageQuery of() {
+    return new PageQuery();
+  }
+
+  public static PageQuery of(int pageNum, int pageSize) {
+    return of().page(pageNum, pageSize);
   }
 
 }

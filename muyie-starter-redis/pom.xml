@@ -27,9 +27,21 @@
       <artifactId>commons-pool2</artifactId>
     </dependency>
     <!-- Redis Java client with features of In-Memory Data Grid -->
+    <!-- !!! redisson-spring-data 的版本需要和 Spring Boot 的版本保持一致 -->
     <dependency>
       <groupId>org.redisson</groupId>
       <artifactId>redisson-spring-boot-starter</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.redisson</groupId>
+          <artifactId>redisson-spring-data-30</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-spring-data-27</artifactId>
+      <version>${redisson.version}</version>
     </dependency>
     <!-- Starter for using Spring Framework’s caching support -->
     <dependency>

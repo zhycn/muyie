@@ -19,8 +19,8 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 ## 环境要求
 
 - JDK 8+
-- Spring Boot 2.7.12
-- Spring Cloud 2021.0.7
+- Spring Boot 2.7.13
+- Spring Cloud 2021.0.8
 
 ## 快速集成
 
@@ -30,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.3.2-SNAPSHOT</version>
+    <version>2.7.13-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -43,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.3.2-SNAPSHOT</version>
+            <version>2.7.13-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -72,21 +72,21 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 
 | Group ID                        | Artifact ID                  | Version     | Version Property          | Documentation                                                            |
 |---------------------------------|------------------------------|-------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.12      | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
-| org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.7    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.13      | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.22.0      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.18      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.33      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.35      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.13.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.1.0       | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
-| com.google.guava                | guava                        | 32.0.1-jre  | guava.version             | [Guava](https://github.com/google/guava)                                 |
+| com.google.guava                | guava                        | 32.1.1-jre  | guava.version             | [Guava](https://github.com/google/guava)                                 |
 | com.google.zxing                | core                         | 3.5.0       | zxing.version             | [ZXing](https://github.com/zxing/zxing)                                  |
 | com.github.vladimir-bukhtoyarov | bucket4j-core                | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
 | com.github.vladimir-bukhtoyarov | bucket4j-jcache              | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
 | com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.1     | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
 | com.squareup.retrofit2          | retrofit                     | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
 | com.squareup.retrofit2          | converter-jackson            | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| cn.hutool                       | hutool-all                   | 5.8.19      | hutool.version            | [Hutool](https://hutool.cn/)                                             |
+| cn.hutool                       | hutool-all                   | 5.8.20      | hutool.version            | [Hutool](https://hutool.cn/)                                             |
 | org.mapstruct                   | mapstruct                    | 1.5.5.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.mapstruct                   | mapstruct-processor          | 1.5.5.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
 | org.jboss.aerogear              | aerogear-otp-java            | 1.0.0       | aerogear-otp-java         | [Java OTP](https://github.com/aerogear-attic/aerogear-otp-java)          |
@@ -118,6 +118,6 @@ MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都
 <!-- 应根据项目的实际运行环境来合理选择版本号，除非必须，否则不建议修改版本信息。 -->
 <!-- 在修改依赖包的版本信息时，可通过 IDE 点击坐标来查看依赖包对应的属性名。 -->
 <properties>
-  <guava.version>32.0.1-jre</guava.version>
+  <guava.version>32.1.1-jre</guava.version>
 </properties>
 ```

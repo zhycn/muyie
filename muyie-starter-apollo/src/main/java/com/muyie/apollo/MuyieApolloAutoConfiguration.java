@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 解决使用 `@ConfigurationProperties` 注解时，配置属性不自动更新的问题。
+ * 解决使用 `@ConfigurationProperties` 注解时，配置属性不自动更新的问题。（应用重启也能解决这个问题）
  *
  * @author larry.qi
  * @since 1.2.5

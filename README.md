@@ -51,20 +51,18 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 </dependencyManagement>
 ```
 
-!!! tip "Tips"
+Spring Boot 项目想要生成可执行 JAR 文件，需要在启动程序的 pom.xml 中要添加 Spring Boot Maven 插件：
 
-    Spring Boot 项目想要生成可执行 JAR 文件，需要在启动程序的 pom.xml 中要添加 Spring Boot Maven 插件：
-
-    ```
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-    ```
+```
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+```
 
 ## 依赖管理
 
@@ -121,3 +119,13 @@ MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都
   <guava.version>32.1.1-jre</guava.version>
 </properties>
 ```
+
+## 组件
+
+### muyie-starter-apollo
+
+Spring Boot 与 Apollo Client 集成。 该组件解决的问题是：当你在 Spring Boot 中使用 `@ConfigurationProperties`
+注解配置参数时，Apollo Client 无法自动更新。
+
+- [ApolloConfig](https://www.apolloconfig.com/)
+- [Spring Boot 与 Apollo Client 集成详解](https://blog.csdn.net/weixin_50549211/article/details/129375048)

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
-  <version>1.3.1-SNAPSHOT</version>
+  <version>1.3.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MuYie server-side parent POM</name>
   <description>MuYie BOM and server-side library</description>
@@ -12,8 +14,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.4</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <version>2.7.12</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <licenses>
@@ -41,11 +43,11 @@
 
   <properties>
     <!-- The muyie-framework version should be the same as the artifact version above -->
-    <muyie-framework.version>1.3.1-SNAPSHOT</muyie-framework.version>
+    <muyie-framework.version>1.3.2-SNAPSHOT</muyie-framework.version>
     <!-- The spring-boot version should be the same as the parent version above -->
-    <spring-boot.version>2.7.4</spring-boot.version>
-    <spring-cloud.version>2021.0.4</spring-cloud.version>
-    <redisson.version>3.17.7</redisson.version>
+    <spring-boot.version>2.7.12</spring-boot.version>
+    <spring-cloud.version>2021.0.7</spring-cloud.version>
+    <redisson.version>3.22.0</redisson.version>
 
     <!-- Build properties -->
     <java.version>1.8</java.version>
@@ -87,7 +89,9 @@
     <module>muyie-starter-apollo</module>
     <module>muyie-starter-client</module>
     <module>muyie-starter-mybatis</module>
+    <module>muyie-starter-oss</module>
     <module>muyie-starter-redis</module>
+    <module>muyie-starter-thymeleaf</module>
     <module>muyie-starter-web</module>
   </modules>
 
@@ -133,7 +137,17 @@
       </dependency>
       <dependency>
         <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-oss</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
         <artifactId>muyie-starter-redis</artifactId>
+        <version>${muyie-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.zhycn</groupId>
+        <artifactId>muyie-starter-thymeleaf</artifactId>
         <version>${muyie-framework.version}</version>
       </dependency>
       <dependency>
@@ -250,7 +264,7 @@
               <id>enforce-dependencyConvergence</id>
               <configuration>
                 <rules>
-                  <DependencyConvergence />
+                  <DependencyConvergence/>
                 </rules>
                 <fail>false</fail>
               </configuration>

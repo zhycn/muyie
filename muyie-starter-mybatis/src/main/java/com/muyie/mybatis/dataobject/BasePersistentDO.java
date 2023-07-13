@@ -15,7 +15,7 @@ public abstract class BasePersistentDO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  protected final JSONObject params = new JSONObject();
+  protected final JSONObject params = JSONObject.of();
 
   public JSONObject getParams() {
     return params;

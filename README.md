@@ -68,35 +68,28 @@ Spring Boot 项目想要生成可执行 JAR 文件，需要在启动程序的 po
 
 MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以下列出了 MuYie 管理的依赖版本的详细信息：
 
-| Group ID                        | Artifact ID                  | Version     | Version Property          | Documentation                                                            |
-|---------------------------------|------------------------------|-------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.13      | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
-| org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
-| org.redisson                    | redisson-spring-boot-starter | 3.22.0      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
-| com.alibaba                     | druid-spring-boot-starter    | 1.2.18      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.35      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
-| commons-io                      | commons-io                   | 2.13.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
-| com.ctrip.framework.apollo      | apollo-client                | 2.1.0       | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
-| com.google.guava                | guava                        | 32.1.1-jre  | guava.version             | [Guava](https://github.com/google/guava)                                 |
-| com.google.zxing                | core                         | 3.5.0       | zxing.version             | [ZXing](https://github.com/zxing/zxing)                                  |
-| com.github.vladimir-bukhtoyarov | bucket4j-core                | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
-| com.github.vladimir-bukhtoyarov | bucket4j-jcache              | 7.6.0       | bucket4j.version          | [Bucket4j](https://github.com/bucket4j/bucket4j)                         |
-| com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.1     | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
-| com.squareup.retrofit2          | retrofit                     | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| com.squareup.retrofit2          | converter-jackson            | 2.9.0       | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| cn.hutool                       | hutool-all                   | 5.8.20      | hutool.version            | [Hutool](https://hutool.cn/)                                             |
-| org.mapstruct                   | mapstruct                    | 1.5.5.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
-| org.mapstruct                   | mapstruct-processor          | 1.5.5.Final | mapstruct.version         | [MapStruct](https://mapstruct.org/)                                      |
-| org.jboss.aerogear              | aerogear-otp-java            | 1.0.0       | aerogear-otp-java         | [Java OTP](https://github.com/aerogear-attic/aerogear-otp-java)          |
-| org.zalando                     | problem-spring-web           | 0.28.0-RC.0 | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
-| org.reflections                 | reflections                  | 0.10.2      | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
-| org.springdoc                   | springdoc-openapi-ui         | 1.7.0       | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
-| org.lz4                         | lz4-java                     | 1.8.0       | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
-| org.jsoup                       | jsoup                        | 1.16.1      | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
-| net.sourceforge.htmlunit        | htmlunit                     | 2.70.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
-| io.jsonwebtoken                 | jjwt-api                     | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
-| io.jsonwebtoken                 | jjwt-impl                    | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
-| io.jsonwebtoken                 | jjwt-jackson                 | 0.11.5      | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| Group ID                        | Artifact ID                  | Version    | Version Property          | Documentation                                                            |
+|---------------------------------|------------------------------|------------|---------------------------|--------------------------------------------------------------------------|
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.13     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8   | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
+| org.redisson                    | redisson-spring-boot-starter | 3.22.0     | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
+| com.alibaba                     | druid-spring-boot-starter    | 1.2.18     | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.35     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| commons-io                      | commons-io                   | 2.13.0     | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
+| com.ctrip.framework.apollo      | apollo-client                | 2.1.0      | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
+| com.google.guava                | guava                        | 32.1.1-jre | guava.version             | [Guava](https://github.com/google/guava)                                 |
+| com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.1    | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
+| com.squareup.retrofit2          | retrofit                     | 2.9.0      | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
+| cn.hutool                       | hutool-all                   | 5.8.20     | hutool.version            | [Hutool](https://hutool.cn/)                                             |
+| org.zalando                     | problem-spring-web           | 0.27.0     | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
+| org.reflections                 | reflections                  | 0.10.2     | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
+| org.springdoc                   | springdoc-openapi-ui         | 1.7.0      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
+| org.lz4                         | lz4-java                     | 1.8.0      | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
+| org.jsoup                       | jsoup                        | 1.16.1     | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
+| org.htmlunit                    | htmlunit                     | 3.3.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
+| io.jsonwebtoken                 | jjwt-api                     | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| io.jsonwebtoken                 | jjwt-impl                    | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| io.jsonwebtoken                 | jjwt-jackson                 | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
 
 在集成 MuYie 提供的依赖管理后，你在项目中添加依赖管理时，不需要指定依赖包的版本号。如下所示：
 

@@ -18,30 +18,28 @@
 
   <properties>
     <apiguardian-api.version>1.1.2</apiguardian-api.version>
-    <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
     <alibaba-druid.version>1.2.18</alibaba-druid.version>
     <alibaba-fastjson2.version>2.0.35</alibaba-fastjson2.version>
     <apollo-client.version>2.1.0</apollo-client.version>
     <bcprov-jdk15to18.version>1.75</bcprov-jdk15to18.version>
-    <bucket4j.version>7.6.0</bucket4j.version>
     <commons-io.version>2.13.0</commons-io.version>
     <guava.version>32.1.1-jre</guava.version>
     <hutool.version>5.8.20</hutool.version>
-    <htmlunit.version>2.70.0</htmlunit.version>
+    <htmlunit.version>3.3.0</htmlunit.version>
     <jsoup.version>1.16.1</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
     <lz4-java.version>1.8.0</lz4-java.version>
-    <mapstruct.version>1.5.5.Final</mapstruct.version>
     <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
-    <problem-spring.version>0.28.0-RC.0</problem-spring.version>
+    <!-- Spring 5 (or Spring Boot 2) users may use version 0.27.0 -->
+    <problem-spring.version>0.27.0</problem-spring.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <springdoc.version>1.7.0</springdoc.version>
-    <zxing.version>3.5.0</zxing.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- API Guardian @https://github.com/apiguardian-team/apiguardian -->
       <dependency>
         <groupId>org.apiguardian</groupId>
         <artifactId>apiguardian-api</artifactId>
@@ -49,11 +47,6 @@
       </dependency>
 
       <!-- Alibaba druid @https://github.com/alibaba/druid -->
-      <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid</artifactId>
-        <version>${alibaba-druid.version}</version>
-      </dependency>
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid-spring-boot-starter</artifactId>
@@ -65,11 +58,6 @@
         <groupId>com.alibaba.fastjson2</groupId>
         <artifactId>fastjson2</artifactId>
         <version>${alibaba-fastjson2.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.alibaba.fastjson2</groupId>
-        <artifactId>fastjson2-extension</artifactId>
-        <version>${alibaba-fastjson.version}</version>
       </dependency>
 
       <!-- Apollo client @https://www.apolloconfig.com/ -->
@@ -133,20 +121,6 @@
         <version>${mybatis-plus.version}</version>
       </dependency>
 
-      <!-- Java One Time Password API @https://github.com/aerogear-attic/aerogear-otp-java -->
-      <dependency>
-        <groupId>org.jboss.aerogear</groupId>
-        <artifactId>aerogear-otp-java</artifactId>
-        <version>${aerogear-otp-java.version}</version>
-      </dependency>
-
-      <!-- barcode scanning library for Java, Android @https://github.com/zxing/zxing -->
-      <dependency>
-        <groupId>com.google.zxing</groupId>
-        <artifactId>core</artifactId>
-        <version>${google.zxing.version}</version>
-      </dependency>
-
       <!-- Java runtime metadata analysis @https://github.com/ronmamo/reflections -->
       <dependency>
         <groupId>org.reflections</groupId>
@@ -154,35 +128,11 @@
         <version>${reflections.version}</version>
       </dependency>
 
-      <!-- Java rate-limiting library based on token-bucket algorithm @https://github.com/bucket4j/bucket4j -->
-      <dependency>
-        <groupId>com.github.vladimir-bukhtoyarov</groupId>
-        <artifactId>bucket4j-core</artifactId>
-        <version>${bucket4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.vladimir-bukhtoyarov</groupId>
-        <artifactId>bucket4j-jcache</artifactId>
-        <version>${bucket4j.version}</version>
-      </dependency>
-
       <!-- LZ4 compression for Java @https://github.com/lz4/lz4-java/ -->
       <dependency>
         <groupId>org.lz4</groupId>
         <artifactId>lz4-java</artifactId>
         <version>${lz4-java.version}</version>
-      </dependency>
-
-      <!-- MapStruct @https://mapstruct.org/ -->
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct</artifactId>
-        <version>${mapstruct.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct-processor</artifactId>
-        <version>${mapstruct.version}</version>
       </dependency>
 
       <!-- SpringDoc OpenAPI @https://springdoc.org/ -->
@@ -196,11 +146,6 @@
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>problem-spring-web</artifactId>
-        <version>${problem-spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.zalando</groupId>
-        <artifactId>problem-spring-webflux</artifactId>
         <version>${problem-spring.version}</version>
       </dependency>
 
@@ -225,7 +170,7 @@
 
       <!-- A java GUI-Less browser library @https://htmlunit.sourceforge.io/ -->
       <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
+        <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
         <version>${htmlunit.version}</version>
       </dependency>

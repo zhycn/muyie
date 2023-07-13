@@ -27,21 +27,29 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface EnumValue {
   /**
    * 提示信息
+   *
+   * @return message
    */
   String message() default "枚举值不匹配";
 
   /**
    * 分组
+   *
+   * @return groups
    */
   Class<?>[] groups() default {};
 
   /**
    * 负载
+   *
+   * @return payload
    */
   Class<? extends Payload>[] payload() default {};
 
   /**
    * 枚举类，通过接口替代反射方式
+   *
+   * @return enumClass
    */
   Class<? extends Enum<? extends EnumCheck>> enumClass();
 

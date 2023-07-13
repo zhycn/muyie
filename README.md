@@ -30,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>1.3.2-SNAPSHOT</version>
+    <version>2.7.13-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -43,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>1.3.2-SNAPSHOT</version>
+            <version>2.7.13-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -74,7 +74,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 |---------------------------------|------------------------------|-------------|---------------------------|--------------------------------------------------------------------------|
 | org.springframework.boot        | spring-boot-starter-parent   | 2.7.13      | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8    | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
-| org.redisson                    | redisson-spring-boot-starter | 3.23.0      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
+| org.redisson                    | redisson-spring-boot-starter | 3.22.0      | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.18      | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
 | com.alibaba.fastjson2           | fastjson2                    | 2.0.35      | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.13.0      | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |

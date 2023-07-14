@@ -39,12 +39,12 @@ public class RedisCache<V> {
   }
 
   /**
-   * 获取 RedisTemplate 对象
+   * 获取 RedisTemplate 对象，使用原生接口能力
    *
    * @return RedisTemplate 对象
    */
-  public RedisTemplate<String, V> getRedisTemplate() {
-    return redisTemplate;
+  public RedisTemplate<String, V> getTemplate() {
+    return Objects.requireNonNull(redisTemplate);
   }
 
   /**
@@ -54,7 +54,7 @@ public class RedisCache<V> {
    * @return true 表示删除成功
    */
   public Boolean delete(String key) {
-    return redisTemplate.delete(key);
+    return getTemplate().delete(key);
   }
 
   /**
@@ -64,7 +64,7 @@ public class RedisCache<V> {
    * @return 删除成功的数量
    */
   public Long delete(Collection<String> keys) {
-    return redisTemplate.delete(keys);
+    return getTemplate().delete(keys);
   }
 
   /**
@@ -74,7 +74,7 @@ public class RedisCache<V> {
    * @return true 表示删除成功
    */
   public Boolean unlink(String key) {
-    return redisTemplate.unlink(key);
+    return getTemplate().unlink(key);
   }
 
   /**
@@ -84,7 +84,7 @@ public class RedisCache<V> {
    * @return 删除成功的数量
    */
   public Long unlink(Collection<String> keys) {
-    return redisTemplate.unlink(keys);
+    return getTemplate().unlink(keys);
   }
 
   /**
@@ -94,7 +94,7 @@ public class RedisCache<V> {
    * @param newKey 新键
    */
   public void rename(String oldKey, String newKey) {
-    redisTemplate.rename(oldKey, newKey);
+    getTemplate().rename(oldKey, newKey);
   }
 
   /**
@@ -105,7 +105,7 @@ public class RedisCache<V> {
    * @return true 表示重命名成功
    */
   public Boolean renameIfAbsent(String oldKey, String newKey) {
-    return redisTemplate.renameIfAbsent(oldKey, newKey);
+    return getTemplate().renameIfAbsent(oldKey, newKey);
   }
 
   /**
@@ -115,7 +115,7 @@ public class RedisCache<V> {
    * @return Redis数据类型
    */
   public DataType type(String key) {
-    return redisTemplate.type(key);
+    return getTemplate().type(key);
   }
 
   /**
@@ -125,7 +125,7 @@ public class RedisCache<V> {
    * @return true 表示存在
    */
   public Boolean hasKey(String key) {
-    return redisTemplate.hasKey(key);
+    return getTemplate().hasKey(key);
   }
 
   /**
@@ -135,7 +135,7 @@ public class RedisCache<V> {
    * @return 已存在的数量
    */
   public Long countExistingKeys(Collection<String> keys) {
-    return redisTemplate.countExistingKeys(keys);
+    return getTemplate().countExistingKeys(keys);
   }
 
   /**
@@ -145,7 +145,7 @@ public class RedisCache<V> {
    * @return 键的列表
    */
   public Set<String> keys(String pattern) {
-    return redisTemplate.keys(pattern);
+    return getTemplate().keys(pattern);
   }
 
   /**
@@ -168,7 +168,7 @@ public class RedisCache<V> {
    * @return true=设置成功；false=设置失败
    */
   public Boolean expire(String key, long timeout, TimeUnit timeUnit) {
-    return redisTemplate.expire(key, timeout, timeUnit);
+    return getTemplate().expire(key, timeout, timeUnit);
   }
 
   /**
@@ -179,7 +179,7 @@ public class RedisCache<V> {
    * @return true=设置成功；false=设置失败
    */
   public Boolean expire(String key, Duration timeout) {
-    return redisTemplate.expire(key, timeout);
+    return getTemplate().expire(key, timeout);
   }
 
   /**
@@ -190,7 +190,7 @@ public class RedisCache<V> {
    * @return true=设置成功；false=设置失败
    */
   public Boolean expireAt(String key, Date date) {
-    return redisTemplate.expireAt(key, date);
+    return getTemplate().expireAt(key, date);
   }
 
   /**
@@ -201,7 +201,7 @@ public class RedisCache<V> {
    * @return true=设置成功；false=设置失败
    */
   public Boolean expireAt(String key, Instant expireAt) {
-    return redisTemplate.expireAt(key, expireAt);
+    return getTemplate().expireAt(key, expireAt);
   }
 
   /**
@@ -211,7 +211,7 @@ public class RedisCache<V> {
    * @return 时间戳
    */
   public Long getExpire(String key) {
-    return redisTemplate.getExpire(key);
+    return getTemplate().getExpire(key);
   }
 
   /**
@@ -222,7 +222,7 @@ public class RedisCache<V> {
    * @return 时间戳
    */
   public Long getExpire(String key, TimeUnit timeUnit) {
-    return redisTemplate.getExpire(key, timeUnit);
+    return getTemplate().getExpire(key, timeUnit);
   }
 
   /**
@@ -232,7 +232,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public BoundGeoOperations<String, V> boundGeoOps(String key) {
-    return redisTemplate.boundGeoOps(key);
+    return getTemplate().boundGeoOps(key);
   }
 
   /**
@@ -244,7 +244,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public <HK, HV> BoundHashOperations<String, HK, HV> boundHashOps(String key) {
-    return redisTemplate.boundHashOps(key);
+    return getTemplate().boundHashOps(key);
   }
 
   /**
@@ -254,7 +254,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public BoundListOperations<String, V> boundListOps(String key) {
-    return redisTemplate.boundListOps(key);
+    return getTemplate().boundListOps(key);
   }
 
   /**
@@ -264,7 +264,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public BoundSetOperations<String, V> boundSetOps(String key) {
-    return redisTemplate.boundSetOps(key);
+    return getTemplate().boundSetOps(key);
   }
 
   /**
@@ -276,7 +276,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public <HK, HV> BoundStreamOperations<String, HK, HV> boundStreamOps(String key) {
-    return redisTemplate.boundStreamOps(key);
+    return getTemplate().boundStreamOps(key);
   }
 
   /**
@@ -286,7 +286,7 @@ public class RedisCache<V> {
    * @return 操作对象
    */
   public BoundValueOperations<String, V> boundValueOps(String key) {
-    return redisTemplate.boundValueOps(key);
+    return getTemplate().boundValueOps(key);
   }
 
   /**
@@ -297,7 +297,7 @@ public class RedisCache<V> {
    */
   @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
   public BoundZSetOperations<String, V> boundZSetOps(String key) {
-    return redisTemplate.boundZSetOps(key);
+    return getTemplate().boundZSetOps(key);
   }
 
   /**
@@ -604,7 +604,7 @@ public class RedisCache<V> {
    * @return BoundListOperations
    */
   public BoundListOperations<String, V> setListCache(String key, List<V> dataList) {
-    redisTemplate.opsForList().rightPushAll(key, dataList);
+    getTemplate().opsForList().rightPushAll(key, dataList);
     return boundListOps(key);
   }
 

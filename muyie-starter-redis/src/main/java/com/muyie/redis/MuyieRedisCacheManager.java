@@ -23,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableCaching
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CacheProperties.class)
+@RequiredArgsConstructor
 public class MuyieRedisCacheManager extends CachingConfigurerSupport {
 
   private final static String DEFAULT_KEY_PREFIX = "myCaches:";
@@ -45,16 +47,11 @@ public class MuyieRedisCacheManager extends CachingConfigurerSupport {
 
   private final RedisConnectionFactory redisConnectionFactory;
 
-  public MuyieRedisCacheManager(CacheProperties cacheProperties, RedisConnectionFactory redisConnectionFactory) {
-    this.cacheProperties = cacheProperties;
-    this.redisConnectionFactory = redisConnectionFactory;
-  }
-
   @Override
   @Bean
   @ConditionalOnMissingBean(name = "cacheManager")
   public CacheManager cacheManager() {
-    log.debug("Using MuYie CacheManager.");
+    log.info("Using MuYie RedisCacheManager.");
     String keyPrefix = cacheProperties.getRedis().getKeyPrefix();
     Duration timeToLive = cacheProperties.getRedis().getTimeToLive();
     RedisCacheConfiguration defaultCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
@@ -93,7 +90,7 @@ public class MuyieRedisCacheManager extends CachingConfigurerSupport {
       sb.append(target.getClass().getName()).append(".");
       sb.append(method.getName()).append(".");
       sb.append(SimpleKeyGenerator.generateKey(params));
-      log.debug("KeyGenerator={}", sb);
+      log.info("KeyGenerator={}", sb);
       return sb;
     };
   }

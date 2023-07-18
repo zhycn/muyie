@@ -11,6 +11,7 @@ import java.util.Date;
  * BaseAuditingDO 字段 createdDate 和 lastModifiedDate 自动填充策略
  *
  * @author larry
+ * @since 2.7.13
  */
 @Configuration
 public class AuditingDateMetaObjectHandler implements MetaObjectHandler {

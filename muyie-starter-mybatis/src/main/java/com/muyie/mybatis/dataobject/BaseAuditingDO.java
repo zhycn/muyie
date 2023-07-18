@@ -1,6 +1,8 @@
 package com.muyie.mybatis.dataobject;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.Version;
 
 import org.hibernate.validator.constraints.Length;
@@ -21,31 +23,41 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public abstract class BaseAuditingDO extends BasePersistentDO {
 
-  private static final long serialVersionUID = 1L;
-
-  /**
-   * 模糊查询参数
-   */
-  private String searchValue;
-
   /**
    * 修订版本号
    */
   @Version
   private Integer revision;
 
+  /**
+   * 创建人
+   */
   @Length(max = 32)
+  @TableField(updateStrategy = FieldStrategy.NEVER)
   private String createdBy;
 
+  /**
+   * 创建时间
+   */
   @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  @TableField(updateStrategy = FieldStrategy.NEVER)
   private Date createdDate;
 
+  /**
+   * 更新人
+   */
   @Length(max = 32)
   private String lastModifiedBy;
 
+  /**
+   * 更新时间
+   */
   @JSONField(format = "yyyy-MM-dd HH:mm:ss")
   private Date lastModifiedDate;
 
+  /**
+   * 备注信息
+   */
   @Length(max = 512)
   private String remark;
 

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 /**
  * @author larry.qi
- * @since 1.2.11
+ * @since 2.7.13
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)

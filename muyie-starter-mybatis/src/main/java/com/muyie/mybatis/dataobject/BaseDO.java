@@ -9,10 +9,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Base abstract class for persistent entities
+ * 通用实体基类
  *
  * @author larry.qi
- * @since 1.2.11
+ * @since 2.7.13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

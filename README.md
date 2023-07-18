@@ -131,3 +131,18 @@ Spring Boot 与 Apollo Client 集成。 该组件解决的问题是：当你在 
 - [ApolloConfig - 官方文档](https://www.apolloconfig.com/)
 - [Spring Boot 与 Apollo Client 集成详解](https://blog.csdn.net/weixin_50549211/article/details/129375048)
 
+### muyie-starter-mybatis
+
+Spring Boot 与 MyBatis-Plus 集成，让数据层代码编写更简单方便。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-mybatis</artifactId>
+</dependency>
+```
+
+- [MyBatis-Plus - 官方文档](https://www.baomidou.com/)
+- [dynamic-datasource - 动态数据源（未集成）](https://github.com/baomidou/dynamic-datasource-spring-boot-starter)
+

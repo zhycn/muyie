@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author larry.qi
- * @since 1.2.5
+ * @since 2.7.13
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)

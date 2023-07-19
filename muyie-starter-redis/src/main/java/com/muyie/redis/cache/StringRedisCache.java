@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * StringRedisCache
  *
  * @author larry.qi
- * @since 1.2.5
+ * @since 2.7.13
  **/
 public class StringRedisCache extends RedisCache<String> {
 

@@ -117,7 +117,7 @@ MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都
 
 ### muyie-starter-apollo
 
-Spring Boot 与 Apollo Client 集成。 该组件解决的问题是：当你在 Spring Boot 中使用 `@ConfigurationProperties`
+Spring Boot 与 Apollo Client 集成，开箱即用。 该组件解决的问题是：当你在 Spring Boot 中使用 `@ConfigurationProperties`
 注解配置参数时，Apollo Client 无法自动更新。
 
 ```xml
@@ -132,7 +132,7 @@ Spring Boot 与 Apollo Client 集成。 该组件解决的问题是：当你在 
 
 ### muyie-starter-mybatis
 
-Spring Boot 与 MyBatis-Plus 集成，让数据层代码编写更简单方便。
+Spring Boot 与 MyBatis-Plus 集成，开箱即用，让数据层代码编写更简单方便。
 
 ```xml
 
@@ -160,3 +160,16 @@ Spring Boot 与 Redis/Redisson 集成，开箱即用。提供了 Redis 对象序
 - [Redisson - 官方文档](https://github.com/redisson/redisson)
 - [Redis.cn - 中文网](http://www.redis.cn/)
 
+### muyie-starter-thymeleaf
+
+Spring Boot 与 Thymeleaf 集成，开箱即用。保持默认配置即可，开发时可关闭缓存。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-thymeleaf</artifactId>
+</dependency>
+```
+
+- [Thymeleaf - 官方文档](https://www.thymeleaf.org/)

@@ -1,10 +1,11 @@
-package com.muyie.mybatis.dataobject;
+package com.muyie.mybatis.activerecord;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -14,14 +15,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 通用审计字段
+ * 通用审计字段（ActiveRecord模式）
  *
  * @author larry.qi
  * @since 2.7.13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public abstract class BaseAuditingDO extends BaseDO {
+public abstract class BaseAuditingModel<T extends Model<?>> extends BaseModel<T> {
 
   /**
    * 修订版本号

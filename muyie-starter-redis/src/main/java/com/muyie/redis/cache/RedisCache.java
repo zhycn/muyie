@@ -28,7 +28,7 @@ import java.util.function.Supplier;
  * RedisCache
  *
  * @author larry.qi
- * @since 1.2.5
+ * @since 2.7.13
  **/
 public class RedisCache<V> {
 

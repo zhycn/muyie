@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Import;
  * MyBatis-Plus 插件配置
  *
  * @author larry.qi
- * @since 1.2.11
+ * @since 2.7.13
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class, MybatisPlusAutoConfiguration.class})

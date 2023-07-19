@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  * Spring Boot Cache Configuration
  *
  * @author larry.qi
- * @since 1.2.5
+ * @since 2.7.13
  */
 @Slf4j
 @EnableCaching

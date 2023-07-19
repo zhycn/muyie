@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  * 动态更新属性配置抽象类
  *
  * @author larry.qi
- * @since 1.2.5
+ * @since 2.7.13
  */
 @Slf4j
 public abstract class BaseConfigChangeListener implements ApplicationContextAware, ConfigChangeListener {
@@ -34,7 +34,7 @@ public abstract class BaseConfigChangeListener implements ApplicationContextAwar
    * 动态更新配置的通用方法，变更信息将在日志文件中打印日志记录。
    *
    * @param configChangeEvent 配置变更事件
-   * @since 1.2.5
+   * @since 2.7.13
    */
   protected static void refreshConfigChange(ConfigChangeEvent configChangeEvent) {
     configChangeEvent.changedKeys().forEach(key ->

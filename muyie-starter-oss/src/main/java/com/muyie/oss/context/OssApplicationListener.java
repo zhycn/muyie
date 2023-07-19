@@ -3,6 +3,7 @@ package com.muyie.oss.context;
 import com.aliyun.oss.OSS;
 
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextClosedEvent;
 
 import java.util.Map;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2.7.13
  */
 @Slf4j
+@Configuration(proxyBeanMethods = false)
 public class OssApplicationListener implements ApplicationListener<ContextClosedEvent> {
 
   @Override

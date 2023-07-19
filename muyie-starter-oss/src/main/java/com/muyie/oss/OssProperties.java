@@ -1,4 +1,4 @@
-package com.muyie.oss.env;
+package com.muyie.oss;
 
 
 import com.aliyun.oss.ClientBuilderConfiguration;

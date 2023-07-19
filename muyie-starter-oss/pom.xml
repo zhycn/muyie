@@ -6,7 +6,7 @@
   <artifactId>muyie-starter-oss</artifactId>
   <packaging>jar</packaging>
   <name>muyie-starter-oss</name>
-  <description>阿里云对象存储OSS客户端</description>
+  <description>MuYie starter for Aliyun OSS</description>
   <url>https://oss.aliyun.com/</url>
 
   <parent>
@@ -16,11 +16,25 @@
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <aliyun-sdk-oss.version>3.16.1</aliyun-sdk-oss.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun.oss</groupId>
+      <artifactId>aliyun-sdk-oss</artifactId>
+      <version>${aliyun-sdk-oss.version}</version>
     </dependency>
   </dependencies>
 

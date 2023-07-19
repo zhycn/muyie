@@ -121,7 +121,6 @@ Spring Boot 与 Apollo Client 集成。 该组件解决的问题是：当你在 
 注解配置参数时，Apollo Client 无法自动更新。
 
 ```xml
-
 <dependency>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-starter-apollo</artifactId>
@@ -145,4 +144,19 @@ Spring Boot 与 MyBatis-Plus 集成，让数据层代码编写更简单方便。
 
 - [MyBatis-Plus - 官方文档](https://www.baomidou.com/)
 - [dynamic-datasource - 动态数据源（未集成）](https://github.com/baomidou/dynamic-datasource-spring-boot-starter)
+
+### muyie-starter-redis
+
+Spring Boot 与 Redis/Redisson 集成，开箱即用。提供了 Redis 对象序列化配置和基于 Redis 的 CacheManager 配置。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-redis</artifactId>
+</dependency>
+```
+
+- [Redisson - 官方文档](https://github.com/redisson/redisson)
+- [Redis.cn - 中文网](http://www.redis.cn/)
 

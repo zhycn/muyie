@@ -1,4 +1,4 @@
-package com.muyie.oss;
+package com.muyie.oss.autoconfigure;
 
 import com.aliyun.oss.ClientBuilderConfiguration;
 import com.muyie.oss.model.BucketProfile;

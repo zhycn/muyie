@@ -16,6 +16,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
@@ -33,7 +37,7 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @AutoConfigureAfter(MuyieSecurityProperties.class)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import({SecurityProblemSupport.class, JwtTokenProvider.class})
+@Import({SecurityProblemSupport.class, JwtTokenProvider.class, CorsFilter.class})
 public class JwtSecurityConfiguration {
 
   private final JwtTokenProvider jwtTokenProvider;
@@ -78,6 +82,22 @@ public class JwtSecurityConfiguration {
       .hasAuthority(AuthoritiesConstants.ROLE_ADMIN)
       .and().apply(securityConfigurerAdapter());
     return http.build();
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public UserDetailsService userDetailsService() {
+    UserDetails user = User.builder()
+      .username("user")
+      .password("password")
+      .roles("USER")
+      .build();
+    UserDetails admin = User.builder()
+      .username("admin")
+      .password("password")
+      .roles("ADMIN", "USER")
+      .build();
+    return new InMemoryUserDetailsManager(user, admin);
   }
 
   private JwtConfigurer securityConfigurerAdapter() {

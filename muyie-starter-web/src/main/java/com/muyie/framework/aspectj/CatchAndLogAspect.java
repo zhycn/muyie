@@ -13,6 +13,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -45,13 +46,13 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
     registry.addInterceptor(new HandlerInterceptor() {
 
       @Override
-      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+      public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         LogTraceIdConverter.set(request.getHeader(MuyieConstants.REQUEST_ID));
         return HandlerInterceptor.super.preHandle(request, response, handler);
       }
 
       @Override
-      public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+      public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) {
         // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
         response.addHeader(MuyieConstants.REQUEST_ID, LogTraceIdConverter.get());
         LogTraceIdConverter.close();
@@ -94,8 +95,9 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
       return result;
     } finally {
       stopWatch.stop();
+      // 打印方法执行时长
       if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
-        log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
+        log.info("StopWatch '{}': running time = {} ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
       }
       // 方法执行完成后，清除当前线程的MDC数据
       if (catchAndLog.flush()) {

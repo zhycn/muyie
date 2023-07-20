@@ -7,7 +7,7 @@ import org.aspectj.lang.JoinPoint;
  * proceeding to the join point (unless it throws an exception).
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 public interface BeforeAdvice extends Advice {
 

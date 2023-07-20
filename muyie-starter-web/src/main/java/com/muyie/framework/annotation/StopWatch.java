@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * 监听方法的执行时间
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 @Inherited
 @Documented

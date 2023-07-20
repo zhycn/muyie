@@ -6,7 +6,7 @@ import org.aspectj.lang.JoinPoint;
  * Advice to be run if a method exits by throwing an exception.
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 public interface AfterThrowingAdvice extends Advice {
 

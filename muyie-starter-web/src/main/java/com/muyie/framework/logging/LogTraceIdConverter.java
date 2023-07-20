@@ -29,7 +29,7 @@ public class LogTraceIdConverter extends ClassicConverter {
    * @return TraceId 请求追踪标识
    */
   public static String get() {
-    return Optional.ofNullable(MDC.get(MuyieConstants.LOG_TRACE_ID)).orElseGet(() -> setAndGet(IdUtil.nanoId(12)));
+    return Optional.ofNullable(MDC.get(MuyieConstants.LOG_TRACE_ID)).orElseGet(() -> setAndGet(IdUtil.nanoId()));
   }
 
   /**
@@ -38,7 +38,7 @@ public class LogTraceIdConverter extends ClassicConverter {
    * @param traceId 请求追踪标识
    */
   public static void set(String traceId) {
-    setAndGet(Optional.ofNullable(StrUtil.emptyToNull(traceId)).orElseGet(() -> IdUtil.nanoId(12)));
+    setAndGet(Optional.ofNullable(StrUtil.emptyToNull(traceId)).orElseGet(IdUtil::nanoId));
   }
 
   /**

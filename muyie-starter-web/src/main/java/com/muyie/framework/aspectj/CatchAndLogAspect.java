@@ -2,6 +2,8 @@ package com.muyie.framework.aspectj;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
+import com.alibaba.fastjson2.filter.Filter;
+import com.alibaba.fastjson2.filter.PropertyFilter;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieConstants;
@@ -13,10 +15,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,13 +50,13 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
     registry.addInterceptor(new HandlerInterceptor() {
 
       @Override
-      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+      public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         LogTraceIdConverter.set(request.getHeader(MuyieConstants.REQUEST_ID));
         return HandlerInterceptor.super.preHandle(request, response, handler);
       }
 
       @Override
-      public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+      public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) {
         // WEB请求执行完成后，添加响应头信息，并清除当前线程的MDC数据
         response.addHeader(MuyieConstants.REQUEST_ID, LogTraceIdConverter.get());
         LogTraceIdConverter.close();
@@ -79,23 +84,23 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
     stopWatch.start();
 
     try {
+      // 日志中忽略属性过滤器
+      Filter filter = (PropertyFilter) (o, k, v) -> !Arrays.asList(ignoreFields).contains(k);
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(joinPoint.getArgs(), JSONWriter.Feature.IgnoreErrorGetter);
+        String json = JSON.toJSONString(joinPoint.getArgs(), filter, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Enter: '{}' with arguments = {}", value, json);
       }
-
       final Object result = joinPoint.proceed();
-
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(result, JSONWriter.Feature.IgnoreErrorGetter);
+        String json = JSON.toJSONString(result, filter, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Exit: '{}' with result = {}", value, json);
       }
-
       return result;
     } finally {
       stopWatch.stop();
+      // 打印方法执行时长
       if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
-        log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
+        log.info("StopWatch '{}': running time = {} ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
       }
       // 方法执行完成后，清除当前线程的MDC数据
       if (catchAndLog.flush()) {

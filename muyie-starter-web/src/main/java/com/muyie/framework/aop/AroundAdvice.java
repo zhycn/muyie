@@ -9,7 +9,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * method execution by returning its own return value or throwing an exception.
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 public interface AroundAdvice extends Advice {
 

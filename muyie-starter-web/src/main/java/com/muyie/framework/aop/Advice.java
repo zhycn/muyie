@@ -23,7 +23,7 @@ import cn.hutool.core.util.StrUtil;
  * 抽象的 Advice 接口，提供使用 AOP 时的常用方法。
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 public interface Advice {
 

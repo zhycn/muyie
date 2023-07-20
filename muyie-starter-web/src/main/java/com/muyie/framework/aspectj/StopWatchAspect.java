@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * 监听方法的执行时间
  *
  * @author larry.qi
- * @since 1.2.6
+ * @since 2.7.13
  */
 @Slf4j
 @Aspect
@@ -49,8 +49,9 @@ public class StopWatchAspect implements AroundAdvice {
       return joinPoint.proceed();
     } finally {
       stopWatch.stop();
+      // 打印方法执行时长
       if (stopWatch.getTotalTimeMillis() >= slowMethodMillis) {
-        log.info("StopWatch '" + stopWatch.getId() + "': running time = " + stopWatch.getTotalTimeMillis() + " ms");
+        log.info("StopWatch '{}': running time = {} ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
       }
     }
   }

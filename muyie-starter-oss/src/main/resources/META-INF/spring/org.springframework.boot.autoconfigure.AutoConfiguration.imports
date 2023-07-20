@@ -1,1 +1,4 @@
 com.muyie.oss.MuyieOssAutoConfiguration
+com.muyie.oss.autoconfigure.OssAutoConfiguration
+com.muyie.oss.autoconfigure.OssContextAutoConfiguration
+com.muyie.oss.context.OssApplicationListener

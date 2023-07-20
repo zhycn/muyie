@@ -8,7 +8,7 @@ import lombok.Data;
  * MuyieSecurityProperties
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 @Data
 @ConfigurationProperties(prefix = "muyie.security")
@@ -17,8 +17,6 @@ public class MuyieSecurityProperties {
   private final ClientAuthorization clientAuthorization = new ClientAuthorization();
 
   private final Authentication authentication = new Authentication();
-
-  private final RememberMe rememberMe = new RememberMe();
 
   @Data
   public static class ClientAuthorization {
@@ -50,13 +48,6 @@ public class MuyieSecurityProperties {
       private long tokenValidityInSecondsForRememberMe = MuyieSecurityDefaults.Authentication.Jwt.TOKEN_VALIDITY_IN_SECONDS_FOR_REMEMBER_ME;
 
     }
-  }
-
-  @Data
-  public static class RememberMe {
-
-    private String key = MuyieSecurityDefaults.RememberMe.KEY;
-
   }
 
 }

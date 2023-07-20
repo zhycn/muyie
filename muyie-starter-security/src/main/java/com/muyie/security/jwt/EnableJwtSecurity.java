@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Enable JWT for Spring security and dependency on spring-boot-starter-security.
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

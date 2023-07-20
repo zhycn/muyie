@@ -14,7 +14,7 @@ import lombok.experimental.UtilityClass;
  * Utility class for Spring Security.
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 @UtilityClass
 public class JwtSecurityUtils {
@@ -42,7 +42,7 @@ public class JwtSecurityUtils {
    *
    * @return the JWT of the current user
    */
-  public static Optional<String> getCurrentUserJWT() {
+  public static Optional<String> getCurrentUserJwt() {
     SecurityContext securityContext = SecurityContextHolder.getContext();
     return Optional.ofNullable(securityContext.getAuthentication())
       .filter(authentication -> authentication.getCredentials() instanceof String)

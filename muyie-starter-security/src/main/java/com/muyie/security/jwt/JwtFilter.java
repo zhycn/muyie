@@ -21,32 +21,32 @@ import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_HEADER;
  * valid user is found.
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 public class JwtFilter extends GenericFilterBean {
 
   private final JwtTokenProvider jwtTokenProvider;
 
-  public JwtFilter(final JwtTokenProvider jwtTokenProvider) {
+  public JwtFilter(JwtTokenProvider jwtTokenProvider) {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
   @Override
-  public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
-                       final FilterChain filterChain) throws IOException, ServletException {
-    final HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-    final String jwt = resolveToken(httpServletRequest);
+  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                       FilterChain filterChain) throws IOException, ServletException {
+    HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+    String jwt = resolveToken(httpServletRequest);
     if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
-      final Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
+      Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
     filterChain.doFilter(servletRequest, servletResponse);
   }
 
-  private String resolveToken(final HttpServletRequest request) {
-    final String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+  private String resolveToken(HttpServletRequest request) {
+    String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(AUTHORIZATION_BEARER)) {
-      return bearerToken.substring(7);
+      return bearerToken.substring(AUTHORIZATION_BEARER.length());
     }
     return null;
   }

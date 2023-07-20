@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.HMac;
 import cn.hutool.crypto.digest.HmacAlgorithm;
 import io.jsonwebtoken.Claims;
@@ -28,7 +29,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
  * JWT token provider
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 @Slf4j
 @Component
@@ -48,12 +48,22 @@ public class JwtTokenProvider {
   private long tokenValidityInMilliseconds;
   private long tokenValidityInMillisecondsForRememberMe;
 
-  public JwtTokenProvider(final MuyieSecurityProperties properties) {
+  public JwtTokenProvider(MuyieSecurityProperties properties) {
     this.properties = properties;
   }
 
-  public static void getJwtSecretKey(final String data) {
-    final String secretKey = new HMac(HmacAlgorithm.HmacSHA512).digestHex(data);
+  /**
+   * 随机生成一个 JWT key
+   */
+  public static void getJwtSecretKey() {
+    getJwtSecretKey(IdUtil.fastSimpleUUID());
+  }
+
+  /**
+   * 指定参数生成一个 JWT key
+   */
+  public static void getJwtSecretKey(String data) {
+    String secretKey = new HMac(HmacAlgorithm.HmacSHA512).digestHex(data);
     System.out.println("Using a JWT secret key: " + secretKey);
     String base64Secret = Base64Utils.encodeToUrlSafeString(secretKey.getBytes());
     System.out.println("Using a Base64-encoded JWT secret key: " + base64Secret);
@@ -62,14 +72,14 @@ public class JwtTokenProvider {
   @PostConstruct
   public void init() {
     byte[] keyBytes;
-    final String secret = properties.getAuthentication().getJwt().getSecret();
+    String secret = properties.getAuthentication().getJwt().getSecret();
     if (!StringUtils.isEmpty(secret)) {
       log.warn("Warning: the JWT key used is not Base64-encoded. "
         + "We recommend using the `muyie.security.authentication.jwt.base64-secret` key for optimum security.");
       keyBytes = secret.getBytes(StandardCharsets.UTF_8);
     } else {
-      log.debug("Using a Base64-encoded JWT secret key");
-      keyBytes = Decoders.BASE64.decode(properties.getAuthentication().getJwt().getBase64Secret());
+      log.info("Using a Base64-encoded JWT secret key");
+      keyBytes = Base64Utils.decodeFromUrlSafeString(properties.getAuthentication().getJwt().getBase64Secret());
     }
     this.key = Keys.hmacShaKeyFor(keyBytes);
     this.tokenValidityInMilliseconds = 1000
@@ -78,11 +88,11 @@ public class JwtTokenProvider {
       * properties.getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe();
   }
 
-  public String createToken(final Authentication authentication, final boolean rememberMe) {
-    final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+  public String createToken(Authentication authentication, boolean rememberMe) {
+    String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
       .collect(Collectors.joining(","));
 
-    final long now = (new Date()).getTime();
+    long now = (new Date()).getTime();
     Date validity;
     if (rememberMe) {
       validity = new Date(now + this.tokenValidityInMillisecondsForRememberMe);
@@ -94,28 +104,28 @@ public class JwtTokenProvider {
       .signWith(key, SignatureAlgorithm.HS512).setExpiration(validity).compact();
   }
 
-  public Authentication getAuthentication(final String token) {
-    final Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+  public Authentication getAuthentication(String token) {
+    Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 
-    final Collection<? extends GrantedAuthority> authorities = Arrays
+    Collection<? extends GrantedAuthority> authorities = Arrays
       .stream(claims.get(AUTHORITIES_KEY).toString().split(",")).map(SimpleGrantedAuthority::new)
       .collect(Collectors.toList());
 
-    final User principal = new User(claims.getSubject(), "", authorities);
+    User principal = new User(claims.getSubject(), "", authorities);
     return new UsernamePasswordAuthenticationToken(principal, token, authorities);
   }
 
-  public boolean validateToken(final String token) {
+  public boolean validateToken(String token) {
     try {
       Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
       return true;
     } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
       log.info("Invalid JWT signature.");
-    } catch (final ExpiredJwtException e) {
+    } catch (ExpiredJwtException e) {
       log.info("Expired JWT token.");
-    } catch (final UnsupportedJwtException e) {
+    } catch (UnsupportedJwtException e) {
       log.info("Unsupported JWT token.");
-    } catch (final IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       log.info("JWT token compact of handler are invalid.");
     }
     return false;

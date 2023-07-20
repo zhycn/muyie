@@ -4,7 +4,7 @@ package com.muyie.security;
  * Constants for Spring Security authorities.
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 public interface AuthoritiesConstants {
 

@@ -4,7 +4,7 @@ package com.muyie.security;
  * MuyieSecurityDefaults
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 public interface MuyieSecurityDefaults {
 
@@ -25,11 +25,6 @@ public interface MuyieSecurityDefaults {
       long TOKEN_VALIDITY_IN_SECONDS = 1800; // 30 minutes
       long TOKEN_VALIDITY_IN_SECONDS_FOR_REMEMBER_ME = 2592000; // 30 days
     }
-  }
-
-  interface RememberMe {
-
-    String KEY = null;
   }
 
 }

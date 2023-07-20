@@ -2,6 +2,8 @@ package com.muyie.framework.aspectj;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
+import com.alibaba.fastjson2.filter.Filter;
+import com.alibaba.fastjson2.filter.PropertyFilter;
 import com.muyie.framework.annotation.CatchAndLog;
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieConstants;
@@ -18,6 +20,8 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,18 +84,17 @@ public class CatchAndLogAspect implements AroundAdvice, WebMvcConfigurer {
     stopWatch.start();
 
     try {
+      // 日志中忽略属性过滤器
+      Filter filter = (PropertyFilter) (o, k, v) -> !Arrays.asList(ignoreFields).contains(k);
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(joinPoint.getArgs(), JSONWriter.Feature.IgnoreErrorGetter);
+        String json = JSON.toJSONString(joinPoint.getArgs(), filter, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Enter: '{}' with arguments = {}", value, json);
       }
-
       final Object result = joinPoint.proceed();
-
       if (catchAndLog.logWatch()) {
-        String json = JSON.toJSONString(result, JSONWriter.Feature.IgnoreErrorGetter);
+        String json = JSON.toJSONString(result, filter, JSONWriter.Feature.IgnoreErrorGetter);
         log.info("CatchAndLog Exit: '{}' with result = {}", value, json);
       }
-
       return result;
     } finally {
       stopWatch.stop();

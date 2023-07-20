@@ -200,3 +200,24 @@ Spring Boot 与 Thymeleaf 集成，开箱即用。保持默认配置即可，开
 ```
 
 - [Thymeleaf - 官方文档](https://www.thymeleaf.org/)
+
+### muyie-starter-web
+
+Spring Boot 项目的核心模块，开箱即用，集成大量基础实用功能。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-web</artifactId>
+</dependency>
+```
+
+- [Spring Boot - 官方文档](https://spring.io/)
+- [X] Spring AOP and AspectJ
+- [X] Java Bean Validation with Hibernate Validator
+- [X] 自定义注解：@CatchAndLog and @StopWatch
+- [X] 自定义日志规范：logback-spring.xml
+- [X] Task Execution and Scheduling Configuration
+- [X] 集成 OpenAPI 文档
+- [X] 集成 Hutool 的 SpringUtil 工具类

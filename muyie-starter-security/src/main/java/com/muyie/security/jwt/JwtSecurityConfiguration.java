@@ -77,7 +77,8 @@ public class JwtSecurityConfiguration {
       .antMatchers("/management/health").permitAll()
       .antMatchers("/management/info").permitAll()
       .antMatchers("/management/**")
-      .hasAuthority(AuthoritiesConstants.ROLE_ADMIN).and().apply(securityConfigurerAdapter());
+      .hasAuthority(AuthoritiesConstants.ROLE_ADMIN)
+      .and().apply(securityConfigurerAdapter());
     return http.build();
   }
 

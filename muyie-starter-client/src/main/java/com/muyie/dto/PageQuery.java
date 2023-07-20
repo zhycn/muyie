@@ -82,6 +82,14 @@ public class PageQuery extends Query {
    */
   private String sortBy;
 
+  public static PageQuery of() {
+    return new PageQuery();
+  }
+
+  public static PageQuery of(int pageNum, int pageSize) {
+    return of().page(pageNum, pageSize);
+  }
+
   /**
    * 获取当前页，最小值为1
    *
@@ -281,14 +289,6 @@ public class PageQuery extends Query {
     this.setPageNum(pageNum);
     this.setPageSize(pageSize);
     return this;
-  }
-
-  public static PageQuery of() {
-    return new PageQuery();
-  }
-
-  public static PageQuery of(int pageNum, int pageSize) {
-    return of().page(pageNum, pageSize);
   }
 
 }

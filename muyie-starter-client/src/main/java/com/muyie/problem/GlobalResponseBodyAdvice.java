@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.zalando.problem.Problem;
@@ -38,7 +39,7 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
    * @param defaultMsg 错误信息
    * @return 错误码
    */
-  private static ErrorCode convert(final String statusCode, final String defaultMsg) {
+  private static ErrorCode convert(String statusCode, String defaultMsg) {
     String code = CODE_HEADER + statusCode;
     final ErrorCodeDefaults[] list = ErrorCodeDefaults.values();
     for (final ErrorCodeDefaults defaults : list) {
@@ -50,26 +51,26 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
   }
 
   @Override
-  public boolean supports(final MethodParameter returnType,
-                          final Class<? extends HttpMessageConverter<?>> converterType) {
+  public boolean supports(@NonNull MethodParameter returnType,
+                          @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
     return true;
   }
 
   @Override
-  public Object beforeBodyWrite(final Object body, final MethodParameter returnType,
-                                final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                final ServerHttpRequest request, final ServerHttpResponse response) {
+  public Object beforeBodyWrite(Object body, @NonNull MethodParameter returnType,
+                                @NonNull MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
 
     // Handle Problem Exception
     if (body instanceof Problem) {
-      final Problem problem = (Problem) body;
-      final String statusCode = String.valueOf(Objects.requireNonNull(problem.getStatus()).getStatusCode());
+      Problem problem = (Problem) body;
+      String statusCode = String.valueOf(Objects.requireNonNull(problem.getStatus()).getStatusCode());
       return Response.of(convert(statusCode, problem.getTitle()));
     }
 
     // Handle Response headers
     if (body instanceof Response) {
-      final Response res = (Response) body;
+      Response res = (Response) body;
       Optional.ofNullable(res.getHeaders()).ifPresent(headers -> response.getHeaders().addAll(headers));
       return res;
     }

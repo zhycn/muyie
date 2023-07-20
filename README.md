@@ -121,6 +121,7 @@ Spring Boot 与 Apollo Client 集成，开箱即用。 该组件解决的问题�
 注解配置参数时，Apollo Client 无法自动更新。
 
 ```xml
+
 <dependency>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-starter-apollo</artifactId>
@@ -129,6 +130,18 @@ Spring Boot 与 Apollo Client 集成，开箱即用。 该组件解决的问题�
 
 - [ApolloConfig - 官方文档](https://www.apolloconfig.com/)
 - [Spring Boot 与 Apollo Client 集成详解](https://blog.csdn.net/weixin_50549211/article/details/129375048)
+
+### muyie-starter-client
+
+提供 DTO、统一结果响应、 统一异常处理、自定义枚举值校验、分页查询的公共参数等，开箱即用。规范项目中的结果响应和异常处理。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-client</artifactId>
+</dependency>
+```
 
 ### muyie-starter-mybatis
 
@@ -144,6 +157,20 @@ Spring Boot 与 MyBatis-Plus 集成，开箱即用，让数据层代码编写更
 
 - [MyBatis-Plus - 官方文档](https://www.baomidou.com/)
 - [dynamic-datasource - 动态数据源（未集成）](https://github.com/baomidou/dynamic-datasource-spring-boot-starter)
+
+### muyie-starter-oss
+
+Spring Boot 与 Aliyun OSS 集成，开箱即用。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-oss</artifactId>
+</dependency>
+```
+
+- [Aliyun OSS - 官方文档](https://oss.aliyun.com/)
 
 ### muyie-starter-redis
 

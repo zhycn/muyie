@@ -72,9 +72,9 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 |---------------------------------|------------------------------|------------|---------------------------|--------------------------------------------------------------------------|
 | org.springframework.boot        | spring-boot-starter-parent   | 2.7.13     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8   | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
-| org.redisson                    | redisson-spring-boot-starter | 3.22.0     | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
+| org.redisson                    | redisson-spring-boot-starter | 3.23.1     | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.18     | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.35     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.36     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.13.0     | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.1.0      | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
 | com.google.guava                | guava                        | 32.1.1-jre | guava.version             | [Guava](https://github.com/google/guava)                                 |
@@ -187,7 +187,7 @@ Spring Boot 与 Redis/Redisson 集成，开箱即用。提供了 Redis 对象序
 - [Redisson - 官方文档](https://github.com/redisson/redisson)
 - [Redis.cn - 中文网](http://www.redis.cn/)
 
-### muyie-starter-thymeleaf
+### muyie-starter-security
 
 Spring Boot Security 基于 JWT 的登录认证集成，开箱即用。
 

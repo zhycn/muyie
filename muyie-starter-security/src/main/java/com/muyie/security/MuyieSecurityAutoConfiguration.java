@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MuyieSecurityProperties.class)

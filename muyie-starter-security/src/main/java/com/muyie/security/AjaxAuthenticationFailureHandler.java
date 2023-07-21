@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Returns a 401 error code (Unauthorized) to the client, when Ajax authentication fails.
  *
  * @author larry.qi
- * @since 1.2.12
+ * @since 2.7.13
  */
 public class AjaxAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
@@ -22,7 +22,7 @@ public class AjaxAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
   public static final String UNAUTHORIZED_MESSAGE = "Authentication failed";
 
   /**
-   * {@inheritDoc}
+   * 登录失败
    */
   @Override
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {

@@ -28,9 +28,4 @@ public class UploadResult {
    */
   private String storeUrl;
 
-  /**
-   * ETag
-   */
-  private String etag;
-
 }

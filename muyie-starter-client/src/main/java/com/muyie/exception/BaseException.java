@@ -1,5 +1,6 @@
 package com.muyie.exception;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -83,7 +84,9 @@ public abstract class BaseException extends RuntimeException {
   public String getMessage() {
     StringBuffer sb = new StringBuffer();
     sb.append(errorCode.getMessage()).append("(").append(errorCode.getCode()).append(")");
-    Optional.ofNullable(super.getMessage()).ifPresent(s -> sb.append(" - ").append(s));
+    if (StringUtils.isNotBlank(super.getMessage())) {
+      sb.append(" - ").append(super.getMessage());
+    }
     return sb.toString();
   }
 

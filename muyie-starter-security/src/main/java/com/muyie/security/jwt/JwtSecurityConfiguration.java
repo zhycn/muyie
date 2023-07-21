@@ -2,6 +2,7 @@ package com.muyie.security.jwt;
 
 import com.muyie.security.AuthoritiesConstants;
 import com.muyie.security.MuyieSecurityProperties;
+import com.muyie.security.jwt.service.JwtService;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -39,7 +40,7 @@ import lombok.RequiredArgsConstructor;
 @AutoConfigureAfter(MuyieSecurityProperties.class)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import({SecurityProblemSupport.class, JwtTokenProvider.class, CorsFilter.class})
+@Import({SecurityProblemSupport.class, JwtTokenProvider.class, CorsFilter.class, JwtService.class})
 @RequiredArgsConstructor
 public class JwtSecurityConfiguration {
 

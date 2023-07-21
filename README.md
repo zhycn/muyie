@@ -19,7 +19,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 ## 环境要求
 
 - JDK 8+
-- Spring Boot 2.7.13
+- Spring Boot 2.7.14
 - Spring Cloud 2021.0.8
 
 ## 快速集成
@@ -30,7 +30,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>2.7.13-SNAPSHOT</version>
+    <version>2.7.14-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -43,7 +43,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>2.7.13-SNAPSHOT</version>
+            <version>2.7.14-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -70,7 +70,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 
 | Group ID                        | Artifact ID                  | Version    | Version Property          | Documentation                                                            |
 |---------------------------------|------------------------------|------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.13     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.14     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8   | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.23.1     | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
 | com.alibaba                     | druid-spring-boot-starter    | 1.2.18     | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |

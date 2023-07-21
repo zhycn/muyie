@@ -19,6 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 自定义枚举类型校验 @EnumValue
  *
  * @author larry
+ * @since 2.7.13
  */
 @Documented
 @Constraint(validatedBy = {EnumValidator.class})
@@ -26,7 +27,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface EnumValue {
   /**
-   * 提示信息
+   * 错误信息
    *
    * @return message
    */

@@ -11,6 +11,7 @@ import javax.validation.ConstraintValidatorContext;
  * 自定义枚举校验器
  *
  * @author larry
+ * @since 2.7.13
  */
 public class EnumValidator implements ConstraintValidator<EnumValue, String> {
 

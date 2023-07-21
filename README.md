@@ -20,6 +20,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 
 - JDK 8+
 - Spring Boot 2.7.14
+  - [System Requirements](https://docs.spring.io/spring-boot/docs/2.7.14/reference/htmlsingle/#getting-started)
 - Spring Cloud 2021.0.8
 
 ## 快速集成

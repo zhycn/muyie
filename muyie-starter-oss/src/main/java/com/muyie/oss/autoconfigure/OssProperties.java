@@ -21,15 +21,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @ConfigurationProperties("muyie.oss")
 public class OssProperties {
+  private final Map<String, BucketProfile> buckets = Maps.newConcurrentMap();
   private String endpoint;
   private String accessKeyId;
   private String secretAccessKey;
   private String securityToken;
   private ClientBuilderConfiguration config;
-  private final Map<String, BucketProfile> buckets = Maps.newConcurrentMap();
 
-  public BucketProfile getBucketProfile(String key) {
-    return Objects.requireNonNull(buckets.get(key), "BucketProfile key '" + key + "' not found");
+  public BucketProfile getBucketProfile(String bucketKey) {
+    return Objects.requireNonNull(buckets.get(bucketKey), "BucketProfile key '" + bucketKey + "' not found");
   }
 
 }

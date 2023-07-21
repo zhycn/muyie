@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class JwtServiceImpl implements JwtService {
 
   private final AuthenticationManager authenticationManager;
   private final JwtTokenProvider jwtTokenProvider;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public String login(String username, String password, boolean rememberMe, String... authorities) {
@@ -37,6 +39,21 @@ public class JwtServiceImpl implements JwtService {
       AuthorityUtils.createAuthorityList(authorities));
     SecurityContextHolder.getContext().setAuthentication(authentication);
     return jwtTokenProvider.createToken(authentication, rememberMe);
+  }
+
+  @Override
+  public String getPasswordHash(String rawPassword) {
+    return passwordEncoder.encode(rawPassword);
+  }
+
+  @Override
+  public String getPasswordHashWithSalt(String rawPassword, String salt) {
+    return getPasswordHash(rawPassword + "-" + salt);
+  }
+
+  @Override
+  public String getPasswordWithSalt(String rawPassword, String salt) {
+    return rawPassword + "-" + salt;
   }
 
 }

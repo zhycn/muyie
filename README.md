@@ -189,6 +189,51 @@ Spring Boot 与 Redis/Redisson 集成，开箱即用。提供了 Redis 对象序
 
 ### muyie-starter-thymeleaf
 
+Spring Boot Security 基于 JWT 的登录认证集成，开箱即用。
+
+```xml
+
+<dependency>
+  <groupId>com.github.zhycn</groupId>
+  <artifactId>muyie-starter-security</artifactId>
+</dependency>
+```
+
+第一步，生成JWT令牌，并在项目中配置添加 @EnableJwtSecurity，一个最基本的配置就完成了。
+
+```properties
+## JWT Security Configuration
+muyie.security.authentication.jwt.secret=
+muyie.security.authentication.jwt.base64Secret=
+muyie.security.authentication.jwt.tokenValidityInSeconds=1800
+muyie.security.authentication.jwt.tokenValidityInSecondsForRememberMe=2592000
+```
+
+第二步，通过 JwtService 完成登录并获取 token 令牌。如果需要通过密码登录，则要配置 UserDetailsService 接口：
+
+```
+@Bean
+public UserDetailsService jwtUserDetailsService() {
+  return username -> {
+  // 查询数据库并返回一个 UserDetails
+  // return UserDetails
+  return null;
+  };
+}
+```
+
+第三步，通过 JwtSecurityUtils 获取登录用户名、JWT、权限等信息。
+
+第四步，接口请求时上送头信息：
+
+```
+Authorization: Bearer {TOKEN}
+```
+
+**API拦截规则，可以查看 JwtSecurityConfiguration 中的定义，也可以轻松自定义一个新的规则。**
+
+### muyie-starter-thymeleaf
+
 Spring Boot 与 Thymeleaf 集成，开箱即用。保持默认配置即可，开发时可关闭缓存。
 
 ```xml

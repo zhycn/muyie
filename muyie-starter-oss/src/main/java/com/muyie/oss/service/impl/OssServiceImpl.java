@@ -7,7 +7,6 @@ import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
-import com.aliyun.oss.model.VoidResult;
 import com.muyie.exception.ErrorCodeDefaults;
 import com.muyie.exception.ExceptionUtil;
 import com.muyie.oss.autoconfigure.OssProperties;
@@ -55,16 +54,16 @@ public class OssServiceImpl implements OssService {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
       Assert.notNull(inputStream, "inputStream must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
-      PutObjectResult result = ossClient.putObject(bucketProfile.getBucket(), objectKey, inputStream);
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("putObject objectKey={}", objectKey);
+      PutObjectResult result = ossClient.putObject(bp.getBucket(), objectKey, inputStream);
       Assert.notNull(result, "PutObjectResult must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
-      storeResult.setBucket(bucketProfile.getBucket());
+      storeResult.setBucket(bp.getBucket());
       storeResult.setStorePath(objectKey);
-      storeResult.setStoreUrl(bucketProfile.getBaseUrl() + objectKey);
+      storeResult.setStoreUrl(bp.getBaseUrl() + objectKey);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -78,16 +77,16 @@ public class OssServiceImpl implements OssService {
       Assert.notNull(objectKey, "objectKey must be not null");
       Assert.notNull(inputStream, "inputStream must be not null");
       Assert.notNull(metadata, "metadata must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
-      PutObjectResult result = ossClient.putObject(bucketProfile.getBucket(), objectKey, inputStream, metadata);
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("putObject objectKey={}", objectKey);
+      PutObjectResult result = ossClient.putObject(bp.getBucket(), objectKey, inputStream, metadata);
       Assert.notNull(result, "PutObjectResult must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
-      storeResult.setBucket(bucketProfile.getBucket());
+      storeResult.setBucket(bp.getBucket());
       storeResult.setStorePath(objectKey);
-      storeResult.setStoreUrl(bucketProfile.getBaseUrl() + objectKey);
+      storeResult.setStoreUrl(bp.getBaseUrl() + objectKey);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -153,17 +152,17 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(putObjectRequest, "putObjectRequest must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      putObjectRequest.setBucketName(bucketProfile.getBucket());
-      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      putObjectRequest.setBucketName(bp.getBucket());
+      log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("putObject objectKey={}", putObjectRequest.getKey());
       PutObjectResult result = ossClient.putObject(putObjectRequest);
       Assert.notNull(result, "PutObjectResult must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
-      storeResult.setBucket(bucketProfile.getBucket());
+      storeResult.setBucket(bp.getBucket());
       storeResult.setStorePath(putObjectRequest.getKey());
-      storeResult.setStoreUrl(bucketProfile.getBaseUrl() + putObjectRequest.getKey());
+      storeResult.setStoreUrl(bp.getBaseUrl() + putObjectRequest.getKey());
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -181,7 +180,6 @@ public class OssServiceImpl implements OssService {
       ExceptionUtil.business(ErrorCodeDefaults.S0400, "源文件不存在：fromObjectKey=" + fromObjectKey).doThrow(!doesObjectExist);
       CopyObjectResult result = ossClient.copyObject(fromBucketProfile.getBucket(), fromObjectKey, toBucketProfile.getBucket(), toObjectKey);
       Assert.notNull(result, "CopyObjectResult must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
       log.info("CopyObjectResult {}", JSON.toJSONString(result));
       // 复制成功，删除源文件
       if (isDelete) {
@@ -202,12 +200,11 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      log.info("OSSObject bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
-      OSSObject result = ossClient.getObject(bucketProfile.getBucket(), objectKey);
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      log.info("OSSObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("OSSObject objectKey={}", objectKey);
+      OSSObject result = ossClient.getObject(bp.getBucket(), objectKey);
       Assert.notNull(result, "OSSObject must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
-      log.info("OSSObject result.key={}", result.getKey());
       return result;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, e.getMessage()).rewrite("获取文件失败");
@@ -219,11 +216,10 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      log.info("deleteObject bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
-      VoidResult result = ossClient.deleteObject(bucketProfile.getBucket(), objectKey);
-      Assert.notNull(result, "deleteObject must be not null");
-      Assert.isTrue(result.getResponse().isSuccessful(), "OSS Response Failed");
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      log.info("deleteObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("deleteObject objectKey={}", objectKey);
+      ossClient.deleteObject(bp.getBucket(), objectKey);
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, e.getMessage()).rewrite("删除文件失败");
     }
@@ -234,11 +230,11 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      log.info("ObjectMetadata bucketKey={}, bucketName={}", bucketKey, bucketProfile.getBucket());
-      ObjectMetadata result = ossClient.getObjectMetadata(bucketProfile.getBucket(), objectKey);
+      BucketProfile bp = ossProperties.getBucketProfile(bucketKey);
+      log.info("ObjectMetadata bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
+      log.info("ObjectMetadata objectKey={}", objectKey);
+      ObjectMetadata result = ossClient.getObjectMetadata(bp.getBucket(), objectKey);
       Assert.notNull(result, "ObjectMetadata must be not null");
-      log.info("ObjectMetadata.ETag={}", result.getETag());
       return result;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, e.getMessage()).rewrite("获取对象元信息失败");

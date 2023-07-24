@@ -156,7 +156,7 @@ public interface OssService {
   void deleteObject(String bucketKey, String objectKey);
 
   /**
-   * 获取对象信息
+   * 获取对象元信息
    *
    * @param bucketKey 配置BucketProfile的key
    * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png

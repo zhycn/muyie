@@ -184,10 +184,10 @@ public class OssUploadController {
    * 校验用户上传的文件数量是否超限
    *
    * @param bucketProfile Bucket配置信息
-   * @param files         上传的文件数量
+   * @param size          上传的文件数量
    */
-  private void assertMaxFiles(BucketProfile bucketProfile, int files) {
-    ExceptionUtil.business(ErrorCodeDefaults.A0425, "文件上传数量超限：count=" + files).doThrow(files > bucketProfile.getMaxFiles());
+  private void assertMaxFiles(BucketProfile bucketProfile, int size) {
+    ExceptionUtil.business(ErrorCodeDefaults.A0425, "文件上传数量超限：size=" + size).doThrow(size > bucketProfile.getMaxFiles());
   }
 
   /**

@@ -32,24 +32,24 @@ public class BucketProfile {
   private String cdn;
 
   /**
-   * 默认上传文件的目录（可在上传请求中指定）
-   */
-  private String prefixName = "temp";
-
-  /**
    * 是否允许上传到指定目录
    */
   private boolean allowPrefix;
 
   /**
-   * 支持的文件后缀名称
+   * 默认上传文件的目录（可在上传请求中指定）
    */
-  private String[] suffixNames = new String[]{"bmp", "jpg", "jpeg", "gif", "png", "svg", "webp"};
+  private String defaultPrefix = "tmp";
 
   /**
-   * 是否允许指定后缀名
+   * 支持上传的目录列表
    */
-  private boolean allowSuffix;
+  private String[] prefixSupports = new String[]{defaultPrefix};
+
+  /**
+   * 支持的文件后缀名称列表
+   */
+  private String[] suffixSupports = new String[]{"bmp", "jpg", "jpeg", "gif", "png", "svg", "webp"};
 
   /**
    * 多文件上传允许的最大数量

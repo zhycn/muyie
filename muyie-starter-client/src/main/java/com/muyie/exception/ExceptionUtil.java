@@ -13,6 +13,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import cn.hutool.core.collection.CollectionUtil;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -165,7 +166,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow(CollectionUtil.isNotEmpty(sets));
   }
 
   /**
@@ -179,7 +180,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    ExceptionUtil.business(errorCode, toString(sets)).doThrow();
+    ExceptionUtil.business(errorCode, toString(sets)).doThrow(CollectionUtil.isNotEmpty(sets));
   }
 
   /**
@@ -193,7 +194,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object, groups);
-    ExceptionUtil.validate(toString(sets)).doThrow();
+    ExceptionUtil.validate(toString(sets)).doThrow(CollectionUtil.isNotEmpty(sets));
   }
 
   /**
@@ -206,7 +207,7 @@ public class ExceptionUtil {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<Object>> sets = validator.validate(object);
-    ExceptionUtil.validate(toString(sets)).doThrow();
+    ExceptionUtil.validate(toString(sets)).doThrow(CollectionUtil.isNotEmpty(sets));
   }
 
   /**

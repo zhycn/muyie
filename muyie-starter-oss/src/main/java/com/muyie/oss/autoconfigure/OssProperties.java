@@ -1,11 +1,12 @@
 package com.muyie.oss.autoconfigure;
 
+import com.google.common.collect.Maps;
+
 import com.aliyun.oss.ClientBuilderConfiguration;
 import com.muyie.oss.model.BucketProfile;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,19 +21,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @ConfigurationProperties("muyie.oss")
 public class OssProperties {
+  private final Map<String, BucketProfile> buckets = Maps.newConcurrentMap();
   private String endpoint;
   private String accessKeyId;
   private String secretAccessKey;
   private String securityToken;
   private ClientBuilderConfiguration config;
 
-  /**
-   * 设置 Bucket 配置信息
-   */
-  private final Map<String, BucketProfile> buckets = new HashMap<>();
-
-  public BucketProfile getBucketProfile(String key) {
-    return Objects.requireNonNull(buckets.get(key), "BucketProfile key '" + key + "' not found");
+  public BucketProfile getBucketProfile(String bucketKey) {
+    return Objects.requireNonNull(buckets.get(bucketKey), "BucketProfile key '" + bucketKey + "' not found");
   }
 
 }

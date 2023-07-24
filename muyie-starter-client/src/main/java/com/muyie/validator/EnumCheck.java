@@ -4,6 +4,7 @@ package com.muyie.validator;
  * 使用自定义枚举校验需实现该接口
  *
  * @author larry
+ * @since 2.7.13
  */
 public interface EnumCheck {
 

@@ -16,22 +16,22 @@ import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 自定义枚举类型校验 @EnumValue
+ * 自定义校验 @MyCheck
  *
  * @author larry
- * @since 2.7.13
+ * @since 2.7.14
  */
 @Documented
-@Constraint(validatedBy = {EnumValidator.class})
+@Constraint(validatedBy = {MyValidator.class})
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
-public @interface EnumValue {
+public @interface MyCheck {
   /**
    * 错误信息
    *
    * @return message
    */
-  String message() default "枚举值不匹配";
+  String message() default "";
 
   /**
    * 分组
@@ -48,10 +48,10 @@ public @interface EnumValue {
   Class<? extends Payload>[] payload() default {};
 
   /**
-   * 枚举类，通过接口替代反射方式
+   * 对象校验处理器
    *
-   * @return enumClass
+   * @return handler
    */
-  Class<? extends Enum<? extends EnumCheck>> enumClass();
+  Class<? extends MyHandler> handler();
 
 }

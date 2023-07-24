@@ -32,12 +32,12 @@ public class BucketProfile {
   private String cdn;
 
   /**
-   * 默认上传文件的前缀名称（可在上传请求中指定）
+   * 默认上传文件的目录（可在上传请求中指定）
    */
   private String prefixName = "temp";
 
   /**
-   * 是否允许上传到指定前缀
+   * 是否允许上传到指定目录
    */
   private boolean allowPrefix;
 

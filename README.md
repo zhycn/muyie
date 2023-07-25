@@ -171,6 +171,7 @@ Spring Boot 与 Aliyun OSS 集成，开箱即用。
 </dependency>
 ```
 
+- [OSS 简单文件上传接口文档](./muyie-starter-oss/README.md)
 - [Aliyun OSS - 官方文档](https://oss.aliyun.com/)
 
 ### muyie-starter-redis

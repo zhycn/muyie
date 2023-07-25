@@ -19,13 +19,18 @@ public class StoreResult {
   private String bucket;
 
   /**
-   * 文件存储路径
+   * 对象名称
    */
-  private String storePath;
+  private String objectKey;
 
   /**
-   * 文件存储链接
+   * 对象链接
    */
-  private String storeUrl;
+  private String objectUrl;
+
+  /**
+   * ETag
+   */
+  private String etag;
 
 }

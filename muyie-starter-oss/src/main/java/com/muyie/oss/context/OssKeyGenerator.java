@@ -23,7 +23,7 @@ public interface OssKeyGenerator {
    * 生成文件对象名称
    *
    * @param prefix 指定存储目录 (eg: temp | user/temp)
-   * @param file   上传的目标文件（从文件名称中获取后缀名）
+   * @param file   上传的文件（从文件名称中获取后缀名）
    * @return 对象名称
    */
   String getObjectKey(String prefix, MultipartFile file);

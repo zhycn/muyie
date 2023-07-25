@@ -3,6 +3,8 @@ package com.muyie.security.jwt;
 import com.muyie.security.AuthoritiesConstants;
 import com.muyie.security.MuyieSecurityProperties;
 import com.muyie.security.jwt.service.JwtService;
+import com.muyie.security.jwt.service.PasswordService;
+import com.muyie.security.jwt.service.TokenCacheManager;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -40,11 +42,12 @@ import lombok.RequiredArgsConstructor;
 @AutoConfigureAfter(MuyieSecurityProperties.class)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import({SecurityProblemSupport.class, JwtTokenProvider.class, CorsFilter.class, JwtService.class})
+@Import({SecurityProblemSupport.class, JwtTokenProvider.class, CorsFilter.class, JwtService.class, PasswordService.class})
 @RequiredArgsConstructor
 public class JwtSecurityConfiguration {
 
   private final JwtTokenProvider jwtTokenProvider;
+  private final TokenCacheManager tokenCacheManager;
   private final SecurityProblemSupport problemSupport;
   private final CorsFilter corsFilter;
 
@@ -89,6 +92,13 @@ public class JwtSecurityConfiguration {
     return new BCryptPasswordEncoder();
   }
 
+  @Bean
+  @ConditionalOnMissingBean
+  public TokenCacheManager tokenCacheManager() {
+    return new TokenCacheManager() {
+    };
+  }
+
   /**
    * 获取 AuthenticationManager（认证管理器），登录时认证使用
    *
@@ -102,7 +112,7 @@ public class JwtSecurityConfiguration {
   }
 
   private JwtConfigurer securityConfigurerAdapter() {
-    return new JwtConfigurer(jwtTokenProvider);
+    return new JwtConfigurer(jwtTokenProvider, tokenCacheManager);
   }
 
 }

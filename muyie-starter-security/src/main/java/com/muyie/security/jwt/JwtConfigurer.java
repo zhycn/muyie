@@ -1,25 +1,27 @@
 package com.muyie.security.jwt;
 
+import com.muyie.security.jwt.service.TokenCacheManager;
+
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * @author larry.qi
  * @since 2.7.13
  */
+@RequiredArgsConstructor
 public class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
   private final JwtTokenProvider jwtTokenProvider;
-
-  public JwtConfigurer(JwtTokenProvider jwtTokenProvider) {
-    this.jwtTokenProvider = jwtTokenProvider;
-  }
+  private final TokenCacheManager tokenCacheManager;
 
   @Override
   public void configure(HttpSecurity http) {
-    JwtFilter jwtFilter = new JwtFilter(jwtTokenProvider);
+    JwtFilter jwtFilter = new JwtFilter(jwtTokenProvider, tokenCacheManager);
     http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
   }
 }

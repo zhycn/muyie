@@ -35,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
-@RequestMapping("api/upload")
+@RequestMapping("${muyie.oss.context-path:api/upload}")
 @RequiredArgsConstructor
 public class OssUploadController {
 

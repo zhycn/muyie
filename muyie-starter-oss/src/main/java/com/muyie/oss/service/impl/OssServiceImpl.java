@@ -10,6 +10,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.muyie.exception.ErrorCodeDefaults;
 import com.muyie.exception.ExceptionUtil;
 import com.muyie.oss.autoconfigure.OssProperties;
+import com.muyie.oss.context.OssUploadCallback;
 import com.muyie.oss.model.BucketProfile;
 import com.muyie.oss.model.StoreResult;
 import com.muyie.oss.service.OssService;
@@ -37,6 +38,7 @@ public class OssServiceImpl implements OssService {
 
   private final OSS ossClient;
   private final OssProperties ossProperties;
+  private final OssUploadCallback ossUploadCallback;
 
   @Override
   public OSS getOssClient() {
@@ -62,8 +64,10 @@ public class OssServiceImpl implements OssService {
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
       storeResult.setBucket(bp.getBucket());
-      storeResult.setStorePath(objectKey);
-      storeResult.setStoreUrl(bp.getBaseUrl() + objectKey);
+      storeResult.setObjectKey(objectKey);
+      storeResult.setObjectUrl(bp.getBaseUrl() + objectKey);
+      storeResult.setEtag(result.getETag());
+      ossUploadCallback.callback(storeResult);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -85,8 +89,10 @@ public class OssServiceImpl implements OssService {
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
       storeResult.setBucket(bp.getBucket());
-      storeResult.setStorePath(objectKey);
-      storeResult.setStoreUrl(bp.getBaseUrl() + objectKey);
+      storeResult.setObjectKey(objectKey);
+      storeResult.setObjectUrl(bp.getBaseUrl() + objectKey);
+      storeResult.setEtag(result.getETag());
+      ossUploadCallback.callback(storeResult);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -161,8 +167,10 @@ public class OssServiceImpl implements OssService {
       log.info("PutObjectResult {}", JSON.toJSONString(result));
       StoreResult storeResult = new StoreResult();
       storeResult.setBucket(bp.getBucket());
-      storeResult.setStorePath(putObjectRequest.getKey());
-      storeResult.setStoreUrl(bp.getBaseUrl() + putObjectRequest.getKey());
+      storeResult.setObjectKey(putObjectRequest.getKey());
+      storeResult.setObjectUrl(bp.getBaseUrl() + putObjectRequest.getKey());
+      storeResult.setEtag(result.getETag());
+      ossUploadCallback.callback(storeResult);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, "文件上传失败：" + e.getMessage());
@@ -187,8 +195,10 @@ public class OssServiceImpl implements OssService {
       }
       StoreResult storeResult = new StoreResult();
       storeResult.setBucket(toBucketProfile.getBucket());
-      storeResult.setStorePath(toObjectKey);
-      storeResult.setStoreUrl(toBucketProfile.getBaseUrl() + toObjectKey);
+      storeResult.setObjectKey(toObjectKey);
+      storeResult.setObjectUrl(toBucketProfile.getBaseUrl() + toObjectKey);
+      storeResult.setEtag(result.getETag());
+      ossUploadCallback.callback(storeResult);
       return storeResult;
     } catch (Exception e) {
       throw ExceptionUtil.business(ErrorCodeDefaults.A0700, e.getMessage()).rewrite("复制文件失败");

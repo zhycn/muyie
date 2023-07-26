@@ -16,6 +16,7 @@ import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,7 @@ import cn.hutool.crypto.digest.HMac;
 import cn.hutool.crypto.digest.HmacAlgorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -116,9 +118,13 @@ public class JwtTokenProvider {
   }
 
   public boolean validateToken(String token) {
+    return this.parseToken(token).isPresent();
+  }
+
+  public Optional<Jws<Claims>> parseToken(String token) {
     try {
-      Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-      return true;
+      Jws<Claims> jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+      return Optional.of(jws);
     } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
       log.info("Invalid JWT signature.");
     } catch (ExpiredJwtException e) {
@@ -128,7 +134,7 @@ public class JwtTokenProvider {
     } catch (IllegalArgumentException e) {
       log.info("JWT token compact of handler are invalid.");
     }
-    return false;
+    return Optional.empty();
   }
 
 }

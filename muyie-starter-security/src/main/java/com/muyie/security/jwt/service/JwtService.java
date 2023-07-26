@@ -32,4 +32,31 @@ public interface JwtService {
    */
   void logout();
 
+  /**
+   * 明文密码加密处理
+   *
+   * @param rawPassword 明文密码
+   * @return 哈希值
+   */
+  String getPasswordHash(String rawPassword);
+
+  /**
+   * 明文密码加密处理
+   *
+   * @param rawPassword 明文密码
+   * @param salt        盐值
+   * @return 哈希值
+   */
+  String getPasswordHashWithSalt(String rawPassword, String salt);
+
+  /**
+   * 明文密码 + 盐值拼接
+   *
+   * @param rawPassword 明文密码
+   * @param salt        盐值
+   * @return 明文密码 + 盐值拼接
+   */
+  String getPasswordWithSalt(String rawPassword, String salt);
+
+
 }

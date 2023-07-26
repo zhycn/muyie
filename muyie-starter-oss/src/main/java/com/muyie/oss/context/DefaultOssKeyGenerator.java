@@ -21,18 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultOssKeyGenerator implements OssKeyGenerator {
 
-  @Override
-  public String getObjectKey(String prefix, String suffix) {
-    return generateObjectKey(prefix, suffix);
-  }
-
-  @Override
-  public String getObjectKey(String prefix, MultipartFile file) {
-    String fileName = file.getOriginalFilename();
-    String suffix = StringUtils.substringAfterLast(fileName, ".").toLowerCase();
-    return generateObjectKey(prefix, suffix);
-  }
-
   /**
    * 生成对象名称
    *
@@ -52,6 +40,18 @@ public class DefaultOssKeyGenerator implements OssKeyGenerator {
     String objectKey = StrUtil.format("{}/{}/{}.{}", prefix, date, random, suffixName);
     log.info("Generate objectKey: {}", objectKey);
     return objectKey;
+  }
+
+  @Override
+  public String getObjectKey(String prefix, String suffix) {
+    return generateObjectKey(prefix, suffix);
+  }
+
+  @Override
+  public String getObjectKey(String prefix, MultipartFile file) {
+    String fileName = file.getOriginalFilename();
+    String suffix = StringUtils.substringAfterLast(fileName, ".").toLowerCase();
+    return generateObjectKey(prefix, suffix);
   }
 
 }

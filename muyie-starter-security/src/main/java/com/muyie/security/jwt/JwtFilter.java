@@ -1,5 +1,7 @@
 package com.muyie.security.jwt;
 
+import com.muyie.security.jwt.service.TokenCacheManager;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -13,6 +15,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.RequiredArgsConstructor;
+
 import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_BEARER;
 import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_HEADER;
 
@@ -23,21 +27,19 @@ import static com.muyie.security.AuthoritiesConstants.AUTHORIZATION_HEADER;
  * @author larry.qi
  * @since 2.7.13
  */
+@RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
 
   private final JwtTokenProvider jwtTokenProvider;
-
-  public JwtFilter(JwtTokenProvider jwtTokenProvider) {
-    this.jwtTokenProvider = jwtTokenProvider;
-  }
+  private final TokenCacheManager tokenCacheManager;
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                        FilterChain filterChain) throws IOException, ServletException {
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-    String jwt = resolveToken(httpServletRequest);
-    if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
-      Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
+    String token = resolveToken(httpServletRequest);
+    if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token) && tokenCacheManager.validateCache(token)) {
+      Authentication authentication = jwtTokenProvider.getAuthentication(token);
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
     filterChain.doFilter(servletRequest, servletResponse);

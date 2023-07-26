@@ -1,4 +1,4 @@
-package com.muyie.mybatis;
+package com.muyie.mybatis.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 

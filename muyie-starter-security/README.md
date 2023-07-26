@@ -30,9 +30,8 @@ muyie.security.authentication.jwt.tokenValidityInSecondsForRememberMe=2592000
 
 1. JwtSecurityConfiguration - 核心配置类，可自定义修改
 2. JwtService - 提供登录管理服务
-3. PasswordService - 提供密码管理服务
-4. TokenCacheManager - 增强令牌保持，可实现该接口。（默认机制下，Token一旦生成，只要不过期，就能一直使用。）
-5. JwtSecurityUtils - 可获取登录用户名、token等
+3. TokenCacheManager - 增强令牌保持，可实现该接口。（默认机制下，Token一旦生成，只要不过期，就能一直使用。）
+4. JwtSecurityUtils - 可获取登录用户名、token等
 
 3）通过 JwtService 完成登录并获取 Token 令牌。如果需要通过密码登录，则要配置 UserDetailsService 接口：
 

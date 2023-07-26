@@ -63,6 +63,8 @@ public class JwtTokenProvider {
 
   /**
    * 指定参数生成一个 JWT key
+   *
+   * @param data 参数
    */
   public static void getJwtSecretKey(String data) {
     String secretKey = new HMac(HmacAlgorithm.HmacSHA512).digestHex(data);

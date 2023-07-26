@@ -104,6 +104,7 @@ public class JwtSecurityConfiguration {
    *
    * @param authenticationConfiguration 配置类
    * @return 认证管理器
+   * @throws Exception
    */
   @Bean
   @ConditionalOnMissingBean

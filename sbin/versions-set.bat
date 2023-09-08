@@ -6,8 +6,8 @@ echo [INFO] mvnw versions:set
 echo.
 
 cd ..
-call mvnw versions:set          -DnewVersion=2.7.14-SNAPSHOT -DgenerateBackupPoms=false
-call mvnw versions:set-property -DnewVersion=2.7.14-SNAPSHOT -DgenerateBackupPoms=false -Dproperty=muyie-framework.version
+call mvnw versions:set          -DnewVersion=2.7.15-SNAPSHOT -DgenerateBackupPoms=false
+call mvnw versions:set-property -DnewVersion=2.7.15-SNAPSHOT -DgenerateBackupPoms=false -Dproperty=muyie-framework.version
 
 cd sbin
 pause

@@ -12,24 +12,24 @@
   <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-parent</artifactId>
-    <version>2.7.14-SNAPSHOT</version>
+    <version>2.7.15-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <properties>
     <apiguardian-api.version>1.1.2</apiguardian-api.version>
-    <alibaba-druid.version>1.2.18</alibaba-druid.version>
-    <alibaba-fastjson2.version>2.0.36</alibaba-fastjson2.version>
+    <alibaba-druid.version>1.2.19</alibaba-druid.version>
+    <alibaba-fastjson2.version>2.0.40</alibaba-fastjson2.version>
     <apollo-client.version>2.1.0</apollo-client.version>
-    <bcprov-jdk15to18.version>1.75</bcprov-jdk15to18.version>
+    <bcprov-jdk15to18.version>1.76</bcprov-jdk15to18.version>
     <commons-io.version>2.13.0</commons-io.version>
-    <guava.version>32.1.1-jre</guava.version>
-    <hutool.version>5.8.20</hutool.version>
-    <htmlunit.version>3.3.0</htmlunit.version>
+    <guava.version>32.1.2-jre</guava.version>
+    <hutool.version>5.8.21</hutool.version>
+    <htmlunit.version>3.5.0</htmlunit.version>
     <jsoup.version>1.16.1</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
     <lz4-java.version>1.8.0</lz4-java.version>
-    <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+    <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
     <!-- Spring 5 (or Spring Boot 2) users may use version 0.27.0 -->
     <problem-spring.version>0.27.0</problem-spring.version>
     <reflections.version>0.10.2</reflections.version>

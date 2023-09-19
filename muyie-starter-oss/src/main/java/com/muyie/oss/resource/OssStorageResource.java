@@ -76,11 +76,11 @@ public class OssStorageResource implements WritableResource {
     return this.location.toURL();
   }
 
-  public URI getURI() throws IOException {
+  public URI getURI() {
     return this.location;
   }
 
-  public File getFile() throws IOException {
+  public File getFile() {
     throw new UnsupportedOperationException(this.getDescription() + " cannot be resolved to absolute file path");
   }
 
@@ -102,7 +102,7 @@ public class OssStorageResource implements WritableResource {
     }
   }
 
-  public Resource createRelative(String relativePath) throws IOException {
+  public Resource createRelative(String relativePath) {
     return new OssStorageResource(this.oss, this.location.resolve(relativePath).toString(), this.beanFactory);
   }
 

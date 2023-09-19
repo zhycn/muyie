@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Map;
-
 /**
  * 通用实体基类
  *
@@ -22,13 +20,5 @@ public abstract class BaseDO {
    */
   @TableField(exist = false)
   protected final JSONObject params = JSONObject.of();
-
-  public JSONObject getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    getParams().putAll(params);
-  }
 
 }

@@ -41,9 +41,7 @@ public class MuyieOssAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public OssUploadCallback ossUploadCallback() {
-    return storeResult -> {
-      log.info("OssUploadCallback {}", JSON.toJSONString(storeResult));
-    };
+    return storeResult -> log.info("OssUploadCallback {}", JSON.toJSONString(storeResult));
   }
 
 }

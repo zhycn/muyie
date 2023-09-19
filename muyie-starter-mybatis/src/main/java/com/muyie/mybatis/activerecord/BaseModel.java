@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Map;
-
 /**
  * 通用实体基类（ActiveRecord模式）
  *
@@ -23,13 +21,5 @@ public abstract class BaseModel<T extends Model<?>> extends Model<T> {
    */
   @TableField(exist = false)
   protected final JSONObject params = JSONObject.of();
-
-  public JSONObject getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    getParams().putAll(params);
-  }
 
 }

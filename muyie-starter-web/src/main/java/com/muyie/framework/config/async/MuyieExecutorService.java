@@ -1,5 +1,6 @@
 package com.muyie.framework.config.async;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -20,6 +21,7 @@ import java.util.concurrent.ScheduledFuture;
  * @author larry.qi
  * @since 1.2.8
  */
+@Getter
 @Slf4j
 public class MuyieExecutorService {
 
@@ -31,14 +33,6 @@ public class MuyieExecutorService {
   public MuyieExecutorService(final ThreadPoolTaskExecutor taskExecutor, final ThreadPoolTaskScheduler taskScheduler) {
     this.taskExecutor = taskExecutor;
     this.taskScheduler = taskScheduler;
-  }
-
-  public ThreadPoolTaskExecutor getTaskExecutor() {
-    return taskExecutor;
-  }
-
-  public ThreadPoolTaskScheduler getTaskScheduler() {
-    return taskScheduler;
   }
 
   private <T> Callable<T> createCallable(Callable<T> task) {

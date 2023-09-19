@@ -1,7 +1,6 @@
 package com.muyie.framework.config.async;
 
 import com.muyie.framework.config.MuyieProperties;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

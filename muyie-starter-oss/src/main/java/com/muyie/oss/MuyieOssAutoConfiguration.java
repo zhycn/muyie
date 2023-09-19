@@ -9,14 +9,12 @@ import com.muyie.oss.context.OssUploadCallback;
 import com.muyie.oss.controller.OssUploadController;
 import com.muyie.oss.service.OssService;
 import com.muyie.oss.service.impl.OssServiceImpl;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author larry.qi

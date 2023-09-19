@@ -1,10 +1,9 @@
 package com.muyie.oss.model;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.unit.DataSize;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.unit.DataSize;
 
 /**
  * Bucket 配置信息

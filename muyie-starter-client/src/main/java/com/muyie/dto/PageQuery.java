@@ -1,23 +1,15 @@
 package com.muyie.dto;
 
+import cn.hutool.core.util.StrUtil;
 import com.muyie.exception.ExceptionUtil;
-
 import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.validation.constraints.Min;
-
-import cn.hutool.core.util.StrUtil;
-
-import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
-import static cn.hutool.core.date.DatePattern.NORM_DATE_PATTERN;
-import static cn.hutool.core.date.DatePattern.PURE_DATETIME_PATTERN;
-import static cn.hutool.core.date.DatePattern.PURE_DATE_PATTERN;
-import static cn.hutool.core.date.DatePattern.UTC_PATTERN;
-import static cn.hutool.core.date.DatePattern.UTC_SIMPLE_PATTERN;
+import static cn.hutool.core.date.DatePattern.*;
 
 /**
  * PageQuery：分页查询对象，内置了几个常用参数。

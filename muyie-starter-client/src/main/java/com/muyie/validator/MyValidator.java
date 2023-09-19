@@ -2,10 +2,9 @@ package com.muyie.validator;
 
 import org.springframework.beans.BeanUtils;
 
-import java.util.Objects;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
 
 /**
  * 自定义校验器（正则表达式不好处理的情况下，可以通过自定义校验来解决）

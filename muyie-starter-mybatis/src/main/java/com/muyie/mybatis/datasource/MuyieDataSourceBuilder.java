@@ -1,11 +1,9 @@
 package com.muyie.mybatis.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
-
+import lombok.experimental.UtilityClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.util.StringUtils;
-
-import lombok.experimental.UtilityClass;
 
 /**
  * @author larry.qi

@@ -1,21 +1,15 @@
 package com.muyie.oss.autoconfigure;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import com.aliyun.oss.OSS;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.muyie.oss.resource.OssStorageProtocolResolver;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author larry

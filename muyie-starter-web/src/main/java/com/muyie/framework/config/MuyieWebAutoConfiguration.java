@@ -1,9 +1,8 @@
 package com.muyie.framework.config;
 
+import cn.hutool.extra.spring.EnableSpringUtil;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-
-import cn.hutool.extra.spring.EnableSpringUtil;
 
 /**
  * @author larry.qi

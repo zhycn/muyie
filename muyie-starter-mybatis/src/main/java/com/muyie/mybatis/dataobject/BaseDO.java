@@ -2,11 +2,10 @@ package com.muyie.mybatis.dataobject;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.util.Map;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.Map;
 
 /**
  * 通用实体基类

@@ -1,5 +1,6 @@
 package com.muyie.framework.config.async;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -12,8 +13,6 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Customize the MuyieExecutorService.

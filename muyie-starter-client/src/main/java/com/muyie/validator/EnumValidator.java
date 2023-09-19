@@ -2,10 +2,9 @@ package com.muyie.validator;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
 
 /**
  * 自定义枚举校验器

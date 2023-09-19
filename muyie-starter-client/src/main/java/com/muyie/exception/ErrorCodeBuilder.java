@@ -1,10 +1,9 @@
 package com.muyie.exception;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.lang.NonNull;
 
 import java.util.Map;
-
-import cn.hutool.core.util.StrUtil;
 
 /**
  * 自定义错误码构建类，增强错误码构建和错误信息重写。

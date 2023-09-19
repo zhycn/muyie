@@ -1,7 +1,6 @@
 package com.muyie.oss.controller;
 
 import com.google.common.collect.Lists;
-
 import com.muyie.dto.MultiResponse;
 import com.muyie.dto.SingleResponse;
 import com.muyie.exception.BaseException;
@@ -12,7 +11,8 @@ import com.muyie.oss.context.OssKeyGenerator;
 import com.muyie.oss.model.BucketProfile;
 import com.muyie.oss.model.StoreResult;
 import com.muyie.oss.service.OssService;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.List;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 对象上传接口

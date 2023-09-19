@@ -1,7 +1,6 @@
 package com.muyie.framework.aspectj;
 
 import com.muyie.framework.config.MuyieProperties;
-
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;

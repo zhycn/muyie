@@ -1,19 +1,13 @@
 package com.muyie.dto;
 
 import com.google.common.collect.Lists;
-
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * API Response with batch record to return, usually use in conditional query.

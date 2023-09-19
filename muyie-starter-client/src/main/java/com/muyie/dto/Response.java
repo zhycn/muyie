@@ -1,18 +1,15 @@
 package com.muyie.dto;
 
-import com.google.common.base.Strings;
-
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Map;
-
-import cn.hutool.core.util.StrUtil;
 
 /**
  * Basic API Response to caller.

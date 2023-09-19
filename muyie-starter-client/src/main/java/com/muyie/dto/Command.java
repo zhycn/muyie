@@ -1,6 +1,7 @@
 package com.muyie.dto;
 
 import com.alibaba.fastjson2.JSONObject;
+import lombok.Getter;
 
 import java.util.Map;
 
@@ -10,18 +11,11 @@ import java.util.Map;
  * @author larry.qi
  * @since 1.2.10
  */
+@Getter
 public class Command extends DTO {
 
   private static final long serialVersionUID = 1L;
 
   protected final JSONObject params = JSONObject.of();
-
-  public JSONObject getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    getParams().putAll(params);
-  }
 
 }

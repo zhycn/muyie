@@ -57,7 +57,7 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
   @Override
   public Object beforeBodyWrite(Object body, @NonNull MethodParameter returnType,
-                                @NonNull MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                @NonNull MediaType selectedContentType, @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                 @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
 
     // Handle Problem Exception

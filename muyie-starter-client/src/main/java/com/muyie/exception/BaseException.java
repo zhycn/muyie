@@ -81,7 +81,7 @@ public abstract class BaseException extends RuntimeException {
    */
   @Override
   public String getMessage() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     sb.append(errorCode.getMessage()).append("(").append(errorCode.getCode()).append(")");
     if (StringUtils.isNotBlank(super.getMessage())) {
       sb.append(" - ").append(super.getMessage());

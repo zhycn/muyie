@@ -2,6 +2,7 @@ package com.muyie.dto;
 
 import cn.hutool.core.util.StrUtil;
 import com.muyie.exception.ExceptionUtil;
+import lombok.Getter;
 import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.validator.constraints.Range;
 
@@ -52,11 +53,13 @@ public class PageQuery extends Query {
   /**
    * 查询字符串
    */
+  @Getter
   private String q;
 
   /**
    * 状态查询字符串
    */
+  @Getter
   private String state;
 
   /**
@@ -72,6 +75,7 @@ public class PageQuery extends Query {
   /**
    * 排序方式
    */
+  @Getter
   private String sortBy;
 
   public static PageQuery of() {
@@ -123,15 +127,6 @@ public class PageQuery extends Query {
   }
 
   /**
-   * 获取查询字符串
-   *
-   * @return 查询字符串
-   */
-  public String getQ() {
-    return q;
-  }
-
-  /**
    * 设置查询字符串
    *
    * @param q 查询字符串
@@ -140,15 +135,6 @@ public class PageQuery extends Query {
   public PageQuery setQ(String q) {
     this.q = q;
     return this;
-  }
-
-  /**
-   * 获取状态查询字符串
-   *
-   * @return 状态查询字符串
-   */
-  public String getState() {
-    return state;
   }
 
   /**
@@ -248,15 +234,6 @@ public class PageQuery extends Query {
   public PageQuery setEndTime(String endTime) {
     this.endTime = endTime;
     return this;
-  }
-
-  /**
-   * 获取排序方式，使用时要判断值是否合法
-   *
-   * @return 排序方式
-   */
-  public String getSortBy() {
-    return sortBy;
   }
 
   /**

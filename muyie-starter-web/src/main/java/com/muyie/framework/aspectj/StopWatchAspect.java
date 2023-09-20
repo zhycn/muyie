@@ -2,14 +2,12 @@ package com.muyie.framework.aspectj;
 
 import com.muyie.framework.aop.AroundAdvice;
 import com.muyie.framework.config.MuyieProperties;
-
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.util.StopWatch;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 监听方法的执行时间

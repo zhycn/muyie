@@ -5,7 +5,7 @@ import com.muyie.security.MuyieSecurityProperties;
 import com.muyie.security.jwt.service.JwtService;
 import com.muyie.security.jwt.service.TokenCacheManager;
 import com.muyie.security.jwt.service.impl.JwtServiceImpl;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,8 +27,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * JWT 安全配置

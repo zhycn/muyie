@@ -1,8 +1,7 @@
 package com.muyie.security;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * MuyieSecurityProperties

@@ -1,18 +1,16 @@
 package com.muyie.dto;
 
-import com.google.common.base.Strings;
-
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
-
+import lombok.Getter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Map;
-
-import cn.hutool.core.util.StrUtil;
 
 /**
  * Basic API Response to caller.
@@ -37,6 +35,7 @@ public class Response extends DTO {
   /**
    * 响应头信息
    */
+  @Getter
   @JsonIgnore
   private HttpHeaders headers;
 
@@ -120,15 +119,6 @@ public class Response extends DTO {
    */
   public String getMessage() {
     return Strings.nullToEmpty(message);
-  }
-
-  /**
-   * 获取响应头信息
-   *
-   * @return 响应头信息
-   */
-  public HttpHeaders getHeaders() {
-    return headers;
   }
 
   /**

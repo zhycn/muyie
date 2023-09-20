@@ -3,9 +3,6 @@ package com.muyie.mybatis.activerecord;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.util.Map;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,13 +21,5 @@ public abstract class BaseModel<T extends Model<?>> extends Model<T> {
    */
   @TableField(exist = false)
   protected final JSONObject params = JSONObject.of();
-
-  public JSONObject getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    getParams().putAll(params);
-  }
 
 }

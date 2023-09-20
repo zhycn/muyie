@@ -3,7 +3,7 @@ package com.muyie.redis;
 import com.muyie.redis.cache.RedisCache;
 import com.muyie.redis.cache.RedissonCache;
 import com.muyie.redis.cache.StringRedisCache;
-
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -15,8 +15,6 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author larry.qi

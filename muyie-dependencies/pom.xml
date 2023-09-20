@@ -35,6 +35,7 @@
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <springdoc.version>1.7.0</springdoc.version>
+    <snakeyaml.version>2.0</snakeyaml.version>
   </properties>
 
   <dependencyManagement>
@@ -174,6 +175,13 @@
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
         <version>${htmlunit.version}</version>
+      </dependency>
+
+      <!-- snakeyaml -->
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

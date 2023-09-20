@@ -2,11 +2,7 @@ package com.muyie.security.jwt;
 
 import org.springframework.context.annotation.Import;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Enable JWT for Spring security and dependency on spring-boot-starter-security.

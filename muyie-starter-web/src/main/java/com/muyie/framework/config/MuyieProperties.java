@@ -1,8 +1,7 @@
 package com.muyie.framework.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Properties specific to MuYie. Properties are configured in the application.yml file.

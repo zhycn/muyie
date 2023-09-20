@@ -2,13 +2,11 @@ package com.muyie.apollo;
 
 import com.ctrip.framework.apollo.ConfigChangeListener;
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.NonNull;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 动态更新属性配置抽象类

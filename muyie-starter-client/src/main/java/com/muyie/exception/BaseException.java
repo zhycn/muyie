@@ -1,5 +1,6 @@
 package com.muyie.exception;
 
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -8,8 +9,6 @@ import org.springframework.lang.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
-
-import lombok.Getter;
 
 /**
  * 异常基类（抽象类），自定义异常继承该类，便于全局异常处理。
@@ -82,7 +81,7 @@ public abstract class BaseException extends RuntimeException {
    */
   @Override
   public String getMessage() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     sb.append(errorCode.getMessage()).append("(").append(errorCode.getCode()).append(")");
     if (StringUtils.isNotBlank(super.getMessage())) {
       sb.append(" - ").append(super.getMessage());

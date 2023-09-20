@@ -1,14 +1,12 @@
 package com.muyie.security.jwt;
 
 import com.muyie.security.AuthoritiesConstants;
-
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
-
-import lombok.experimental.UtilityClass;
 
 /**
  * Utility class for Spring Security.

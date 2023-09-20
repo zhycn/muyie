@@ -2,9 +2,6 @@ package com.muyie.mybatis.dataobject;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.util.Map;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,13 +20,5 @@ public abstract class BaseDO {
    */
   @TableField(exist = false)
   protected final JSONObject params = JSONObject.of();
-
-  public JSONObject getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    getParams().putAll(params);
-  }
 
 }

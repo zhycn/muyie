@@ -1,19 +1,16 @@
 package com.muyie.framework.logging;
 
-import com.google.common.collect.Maps;
-
-import com.muyie.framework.config.MuyieConstants;
-
-import org.slf4j.MDC;
-
-import java.util.Map;
-import java.util.Optional;
-
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import com.google.common.collect.Maps;
+import com.muyie.framework.config.MuyieConstants;
+import org.slf4j.MDC;
+
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * 在日志文件中打印请求追踪日志

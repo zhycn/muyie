@@ -2,11 +2,7 @@ package com.muyie.oss.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.model.CopyObjectResult;
-import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.ObjectMetadata;
-import com.aliyun.oss.model.PutObjectRequest;
-import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.*;
 import com.muyie.exception.ErrorCodeDefaults;
 import com.muyie.exception.ExceptionUtil;
 import com.muyie.oss.autoconfigure.OssProperties;
@@ -14,7 +10,8 @@ import com.muyie.oss.context.OssUploadCallback;
 import com.muyie.oss.model.BucketProfile;
 import com.muyie.oss.model.StoreResult;
 import com.muyie.oss.service.OssService;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
 import java.io.ByteArrayInputStream;
@@ -22,9 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 简单文件操作实现

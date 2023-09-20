@@ -2,7 +2,7 @@ package com.muyie.dto;
 
 import com.muyie.exception.ErrorCode;
 import com.muyie.exception.ErrorCodeDefaults;
-
+import lombok.Getter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -15,6 +15,7 @@ import java.util.Map;
  * @author larry.qi
  * @since 1.2.10
  */
+@Getter
 public class SingleResponse<T> extends Response {
 
   private static final long serialVersionUID = 1L;
@@ -125,15 +126,6 @@ public class SingleResponse<T> extends Response {
   public SingleResponse<T> setHeaders(@Nullable HttpHeaders headers) {
     super.setHeaders(headers);
     return this;
-  }
-
-  /**
-   * 获取结果数据
-   *
-   * @return 结果数据
-   */
-  public T getData() {
-    return data;
   }
 
 }

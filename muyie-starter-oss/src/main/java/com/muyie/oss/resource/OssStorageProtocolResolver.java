@@ -1,7 +1,7 @@
 package com.muyie.oss.resource;
 
 import com.aliyun.oss.OSS;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -12,8 +12,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author larry

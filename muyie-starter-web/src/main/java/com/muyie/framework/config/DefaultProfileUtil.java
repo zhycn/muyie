@@ -1,13 +1,11 @@
 package com.muyie.framework.config;
 
 import com.google.common.collect.Maps;
-
+import lombok.experimental.UtilityClass;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
-
-import lombok.experimental.UtilityClass;
 
 import static org.springframework.core.env.AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME;
 

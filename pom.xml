@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhycn</groupId>
   <artifactId>muyie-parent</artifactId>
-  <version>2.7.15-SNAPSHOT</version>
+  <version>2.7.16-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MuYie server-side parent POM</name>
   <description>MuYie BOM and server-side library</description>
@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.15</version>
+    <version>2.7.16</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -43,27 +43,18 @@
 
   <properties>
     <!-- The muyie-framework version should be the same as the artifact version above -->
-    <muyie-framework.version>2.7.15-SNAPSHOT</muyie-framework.version>
+    <muyie-framework.version>2.7.16-SNAPSHOT</muyie-framework.version>
     <!-- The spring-boot version should be the same as the parent version above -->
-    <spring-boot.version>2.7.15</spring-boot.version>
+    <spring-boot.version>2.7.16</spring-boot.version>
     <spring-cloud.version>2021.0.8</spring-cloud.version>
-    <redisson.version>3.23.4</redisson.version>
+    <redisson.version>3.23.5</redisson.version>
 
     <!-- Build properties -->
     <java.version>1.8</java.version>
     <maven.version>3.3.9</maven.version>
 
     <!-- Plugin versions -->
-    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-    <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <versions-maven-plugin.version>2.11.0</versions-maven-plugin.version>
+    <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
   </properties>
 
   <scm>
@@ -197,107 +188,6 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven-compiler-plugin.version}</version>
-          <configuration>
-            <source>${maven.compiler.source}</source>
-            <target>${maven.compiler.target}</target>
-            <showDeprecation>true</showDeprecation>
-            <showWarnings>true</showWarnings>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-eclipse-plugin</artifactId>
-          <version>${maven-eclipse-plugin.version}</version>
-          <configuration>
-            <downloadSources>true</downloadSources>
-            <downloadJavadocs>true</downloadJavadocs>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>${jacoco-maven-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>default-prepare-agent</id>
-              <goals>
-                <goal>prepare-agent</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>default-report</id>
-              <phase>test</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>default-check</id>
-              <goals>
-                <goal>check</goal>
-              </goals>
-              <configuration>
-                <rules>
-                  <rule>
-                    <element>BUNDLE</element>
-                    <limits>
-                      <limit>
-                        <counter>COMPLEXITY</counter>
-                        <value>COVEREDRATIO</value>
-                        <minimum>0.62</minimum>
-                      </limit>
-                    </limits>
-                  </rule>
-                </rules>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>${maven-enforcer-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>enforce-versions</id>
-              <goals>
-                <goal>enforce</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>enforce-dependencyConvergence</id>
-              <configuration>
-                <rules>
-                  <DependencyConvergence/>
-                </rules>
-                <fail>false</fail>
-              </configuration>
-              <goals>
-                <goal>enforce</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <rules>
-              <requireMavenVersion>
-                <message>You are running an older version of Maven. MuYie
-                  requires at least Maven ${maven.version}
-                </message>
-                <version>[${maven.version},)</version>
-              </requireMavenVersion>
-              <requireJavaVersion>
-                <message>You are running an older version of Java. MuYie
-                  requires at least JDK ${java.version}
-                </message>
-                <version>[${java.version}.0,)</version>
-              </requireJavaVersion>
-            </rules>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>${maven-gpg-plugin.version}</version>
           <executions>
@@ -309,76 +199,6 @@
               </goals>
             </execution>
           </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${maven-javadoc-plugin.version}</version>
-          <configuration>
-            <source>${maven.compiler.source}</source>
-          </configuration>
-          <executions>
-            <execution>
-              <id>attach-javadocs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>${maven-source-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>attach-sources</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>jar-no-fork</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
-          <configuration>
-            <!-- Force alphabetical order to have a reproducible build -->
-            <runOrder>alphabetical</runOrder>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${maven-failsafe-plugin.version}</version>
-          <configuration>
-            <!-- Due to spring-boot repackage, without adding this property test classes are not found
-                 See https://github.com/spring-projects/spring-boot/issues/6254 -->
-            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-            <!-- Force alphabetical order to have a reproducible build -->
-            <runOrder>alphabetical</runOrder>
-          </configuration>
-          <executions>
-            <execution>
-              <id>integration-test</id>
-              <goals>
-                <goal>integration-test</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>verify</id>
-              <goals>
-                <goal>verify</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>versions-maven-plugin</artifactId>
-          <version>${versions-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

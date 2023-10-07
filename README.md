@@ -19,8 +19,8 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 ## 环境要求
 
 - JDK 8+
-- Spring Boot 2.7.15
-  - [System Requirements](https://docs.spring.io/spring-boot/docs/2.7.15/reference/htmlsingle/#getting-started)
+- Spring Boot 2.7.16
+  - [System Requirements](https://docs.spring.io/spring-boot/docs/2.7.16/reference/htmlsingle/#getting-started)
 - Spring Cloud 2021.0.8
 
 ## 快速集成
@@ -31,7 +31,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>2.7.15-SNAPSHOT</version>
+    <version>2.7.16-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -44,7 +44,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>2.7.15-SNAPSHOT</version>
+            <version>2.7.16-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -71,26 +71,26 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 
 | Group ID                        | Artifact ID                  | Version    | Version Property          | Documentation                                                            |
 |---------------------------------|------------------------------|------------|---------------------------|--------------------------------------------------------------------------|
-| org.springframework.boot        | spring-boot-starter-parent   | 2.7.15     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
+| org.springframework.boot        | spring-boot-starter-parent   | 2.7.16     | spring-boot.version       | [Spring Boot](https://spring.io/projects/spring-boot)                    |
 | org.springframework.cloud       | spring-cloud-dependencies    | 2021.0.8   | spring-cloud.version      | [Spring Cloud](https://spring.io/projects/spring-cloud)                  |
 | org.redisson                    | redisson-spring-boot-starter | 3.23.1     | redisson.version          | [Redisson](https://github.com/redisson/redisson)                         |
-| com.alibaba                     | druid-spring-boot-starter    | 1.2.19     | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
-| com.alibaba.fastjson2           | fastjson2                    | 2.0.40     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
-| commons-io                      | commons-io                   | 2.13.0     | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
+| com.alibaba                     | druid-spring-boot-starter    | 1.2.20     | alibaba-druid.version     | [Druid](https://github.com/alibaba/druid)                                |
+| com.alibaba.fastjson2           | fastjson2                    | 2.0.41     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
+| commons-io                      | commons-io                   | 2.14.0     | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.1.0      | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
 | com.google.guava                | guava                        | 32.1.2-jre | guava.version             | [Guava](https://github.com/google/guava)                                 |
 | com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.2    | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
 | com.squareup.retrofit2          | retrofit                     | 2.9.0      | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
-| cn.hutool                       | hutool-all                   | 5.8.21     | hutool.version            | [Hutool](https://hutool.cn/)                                             |
+| cn.hutool                       | hutool-all                   | 5.8.22     | hutool.version            | [Hutool](https://hutool.cn/)                                             |
 | org.zalando                     | problem-spring-web           | 0.27.0     | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
 | org.reflections                 | reflections                  | 0.10.2     | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
 | org.springdoc                   | springdoc-openapi-ui         | 1.7.0      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
 | org.lz4                         | lz4-java                     | 1.8.0      | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
 | org.jsoup                       | jsoup                        | 1.16.1     | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
-| org.htmlunit                    | htmlunit                     | 3.5.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
-| io.jsonwebtoken                 | jjwt-api                     | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
-| io.jsonwebtoken                 | jjwt-impl                    | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
-| io.jsonwebtoken                 | jjwt-jackson                 | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| org.htmlunit                    | htmlunit                     | 3.6.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
+| io.jsonwebtoken                 | jjwt-api                     | 0.12.2     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| io.jsonwebtoken                 | jjwt-impl                    | 0.12.2     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
+| io.jsonwebtoken                 | jjwt-jackson                 | 0.12.2     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |
 
 在集成 MuYie 提供的依赖管理后，你在项目中添加依赖管理时，不需要指定依赖包的版本号。如下所示：
 

@@ -11,6 +11,8 @@ import com.muyie.oss.context.OssKeyGenerator;
 import com.muyie.oss.model.BucketProfile;
 import com.muyie.oss.model.StoreResult;
 import com.muyie.oss.service.OssService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +36,7 @@ import java.util.List;
 @RestController
 @RequestMapping("${muyie.oss.context-path:api/upload}")
 @RequiredArgsConstructor
+@Tag(name = "文件对象上传接口")
 public class OssUploadController {
 
   private final OssService ossService;
@@ -49,6 +52,7 @@ public class OssUploadController {
    * @return 返回上传结果信息
    */
   @PostMapping("single")
+  @Operation(summary = "单文件上传")
   public MultiResponse<StoreResult> uploadSingle(@RequestParam("bucketKey") String bucketKey,
                                                  @RequestParam("file") MultipartFile file,
                                                  @RequestParam(value = "prefix", required = false) String prefix) {
@@ -64,6 +68,7 @@ public class OssUploadController {
    * @return 返回上传结果信息
    */
   @PostMapping("multipart")
+  @Operation(summary = "多文件上传")
   public MultiResponse<StoreResult> uploadMultipart(@RequestParam("bucketKey") String bucketKey,
                                                     @RequestParam("files") MultipartFile[] files,
                                                     @RequestParam(value = "prefix", required = false) String prefix) {
@@ -103,6 +108,7 @@ public class OssUploadController {
    * @return 返回上传结果信息
    */
   @PostMapping("url")
+  @Operation(summary = "上传网络流")
   public SingleResponse<StoreResult> uploadUrl(@RequestParam("bucketKey") String bucketKey,
                                                @RequestParam("url") String url,
                                                @RequestParam(value = "prefix", required = false) String prefix,
@@ -135,6 +141,7 @@ public class OssUploadController {
    * @return 返回上传结果信息
    */
   @PostMapping("object")
+  @Operation(summary = "上传字节流")
   public SingleResponse<StoreResult> uploadObject(@RequestParam("bucketKey") String bucketKey,
                                                   @RequestParam("object") String object,
                                                   @RequestParam(value = "prefix", required = false) String prefix,

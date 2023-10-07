@@ -18,8 +18,6 @@ import java.util.Map;
 @Getter
 public class SingleResponse<T> extends Response {
 
-  private static final long serialVersionUID = 1L;
-
   /**
    * 返回结果数据（泛型对象）
    */

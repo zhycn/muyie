@@ -231,7 +231,7 @@ public class ExceptionUtil {
 
   private static String toString(Set<? extends ConstraintViolation<?>> constraintViolations) {
     return constraintViolations.stream()
-      .map(cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
+      .map(cv -> Objects.isNull(cv) ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
       .collect(Collectors.joining(", "));
   }
 

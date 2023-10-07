@@ -4,8 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.muyie.exception.ExceptionUtil;
 import lombok.Getter;
 import org.apache.commons.lang3.time.DateUtils;
-import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.Objects;
@@ -19,8 +19,6 @@ import static cn.hutool.core.date.DatePattern.*;
  * @since 1.2.10
  */
 public class PageQuery extends Query {
-
-  private static final long serialVersionUID = 1L;
   private static final int DEFAULT_PAGE_NUM = 1;
   private static final int DEFAULT_PAGE_SIZE = 10;
   /**
@@ -47,7 +45,8 @@ public class PageQuery extends Query {
   /**
    * 每页大小
    */
-  @Range(min = 1, max = 500)
+  @Min(1)
+  @Max(500)
   private Integer pageSize = DEFAULT_PAGE_SIZE;
 
   /**

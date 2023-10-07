@@ -29,8 +29,6 @@ import java.util.Optional;
 @RestControllerAdvice
 public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
-  private static final String CODE_HEADER = "S0";
-
   /**
    * 错误码转换，拼接前缀自动匹配错误码。
    *
@@ -39,11 +37,11 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
    * @return 错误码
    */
   private static ErrorCode convert(String statusCode, String defaultMsg) {
-    String code = CODE_HEADER + statusCode;
-    final ErrorCodeDefaults[] list = ErrorCodeDefaults.values();
-    for (final ErrorCodeDefaults defaults : list) {
-      if (StringUtils.equals(defaults.getCode(), code)) {
-        return defaults;
+    String code = "S0" + statusCode;
+    ErrorCodeDefaults[] values = ErrorCodeDefaults.values();
+    for (ErrorCodeDefaults errorCode : values) {
+      if (StringUtils.equals(errorCode.getCode(), code)) {
+        return errorCode;
       }
     }
     return ErrorCodeBuilder.of(code, defaultMsg);

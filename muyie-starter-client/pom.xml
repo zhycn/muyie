@@ -6,6 +6,7 @@
   <artifactId>muyie-starter-client</artifactId>
   <packaging>jar</packaging>
   <name>muyie-starter-client</name>
+  <description>DTO, Exception and Validation</description>
 
   <parent>
     <groupId>com.github.zhycn</groupId>
@@ -43,10 +44,6 @@
     <dependency>
       <groupId>org.zalando</groupId>
       <artifactId>problem-spring-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
     </dependency>
   </dependencies>
 

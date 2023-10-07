@@ -1,20 +1,18 @@
 package com.muyie.dto;
 
 import com.alibaba.fastjson2.JSONObject;
-import lombok.Getter;
-
-import java.util.Map;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * Cmd（Command）：指令对象，用于处理增删改操作。
+ * Cmd（Command）：指令对象，用于处理增删改操作。注意超过 2 个参数的查询封装，禁止使用 Map 类来传输。
  *
  * @author larry.qi
  * @since 1.2.10
  */
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class Command extends DTO {
-
-  private static final long serialVersionUID = 1L;
 
   protected final JSONObject params = JSONObject.of();
 

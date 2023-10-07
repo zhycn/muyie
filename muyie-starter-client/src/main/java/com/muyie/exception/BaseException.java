@@ -1,6 +1,7 @@
 package com.muyie.exception;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -16,9 +17,9 @@ import java.util.function.BooleanSupplier;
  * @author larry.qi
  * @since 1.2.10
  */
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = false)
 public abstract class BaseException extends RuntimeException {
-  private static final long serialVersionUID = 1L;
   /**
    * 异常的错误详情（可选）
    */

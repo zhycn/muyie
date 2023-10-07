@@ -28,8 +28,8 @@ import java.util.Objects;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
   /**

@@ -28,14 +28,12 @@
     <htmlunit.version>3.6.0</htmlunit.version>
     <jsoup.version>1.16.1</jsoup.version>
     <jjwt.version>0.11.5</jjwt.version>
-    <lz4-java.version>1.8.0</lz4-java.version>
     <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
     <!-- Spring 5 (or Spring Boot 2) users may use version 0.27.0 -->
     <problem-spring.version>0.27.0</problem-spring.version>
     <reflections.version>0.10.2</reflections.version>
     <retrofit2.version>2.9.0</retrofit2.version>
     <springdoc.version>1.7.0</springdoc.version>
-    <snakeyaml.version>2.2</snakeyaml.version>
   </properties>
 
   <dependencyManagement>
@@ -130,13 +128,6 @@
         <version>${reflections.version}</version>
       </dependency>
 
-      <!-- LZ4 compression for Java @https://github.com/lz4/lz4-java/ -->
-      <dependency>
-        <groupId>org.lz4</groupId>
-        <artifactId>lz4-java</artifactId>
-        <version>${lz4-java.version}</version>
-      </dependency>
-
       <!-- SpringDoc OpenAPI @https://springdoc.org/ -->
       <dependency>
         <groupId>org.springdoc</groupId>
@@ -175,13 +166,6 @@
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
         <version>${htmlunit.version}</version>
-      </dependency>
-
-      <!-- snakeyaml -->
-      <dependency>
-        <groupId>org.yaml</groupId>
-        <artifactId>snakeyaml</artifactId>
-        <version>${snakeyaml.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

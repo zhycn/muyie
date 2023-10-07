@@ -9,7 +9,6 @@ import static com.muyie.exception.ErrorCodeDefaults.S0400;
  * @since 1.2.10
  */
 public class ValidationException extends BusinessException {
-  private static final long serialVersionUID = 1L;
 
   /**
    * 请求参数校验异常

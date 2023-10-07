@@ -9,7 +9,6 @@ import org.springframework.lang.NonNull;
  * @since 1.2.10
  */
 public class BusinessException extends BaseException {
-  private static final long serialVersionUID = 1L;
 
   /**
    * 业务异常

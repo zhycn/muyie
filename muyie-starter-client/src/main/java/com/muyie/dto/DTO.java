@@ -1,6 +1,7 @@
 package com.muyie.dto;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * DTO（Data Transfer Object）：数据传输对象，Service 或 Manager 向外传输的对象。
@@ -8,9 +9,8 @@ import java.io.Serializable;
  * @author larry.qi
  * @since 1.2.10
  */
-@SuppressWarnings("ALL")
-public abstract class DTO implements Serializable {
-
-  private static final long serialVersionUID = 1L;
+@Data
+@EqualsAndHashCode(callSuper = false)
+public abstract class DTO {
 
 }

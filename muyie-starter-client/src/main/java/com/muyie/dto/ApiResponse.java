@@ -18,7 +18,6 @@ import java.util.Objects;
  */
 public class ApiResponse extends Response {
 
-  private static final long serialVersionUID = 1L;
   /**
    * 返回结果数据
    */

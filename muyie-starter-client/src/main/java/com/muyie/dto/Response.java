@@ -20,8 +20,6 @@ import java.util.Map;
  */
 public class Response extends DTO {
 
-  private static final long serialVersionUID = 1L;
-
   /**
    * 响应错误码
    */

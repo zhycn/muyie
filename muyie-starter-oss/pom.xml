@@ -17,7 +17,7 @@
   </parent>
 
   <properties>
-    <aliyun-sdk-oss.version>3.17.0</aliyun-sdk-oss.version>
+    <aliyun-sdk-oss.version>3.17.1</aliyun-sdk-oss.version>
   </properties>
 
   <dependencies>

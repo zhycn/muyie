@@ -46,10 +46,6 @@
       <groupId>com.github.zhycn</groupId>
       <artifactId>muyie-starter-client</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-    </dependency>
   </dependencies>
 
   <distributionManagement>

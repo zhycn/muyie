@@ -2,7 +2,7 @@
 - [x] [muyie-dependencies](muyie-dependencies)
 - [x] [muyie-starter-apollo](muyie-starter-apollo)
 - [x] [muyie-starter-client](muyie-starter-client)
-- [ ] [muyie-starter-mybatis](muyie-starter-mybatis)
+- [x] [muyie-starter-mybatis](muyie-starter-mybatis)
 - [ ] [muyie-starter-oss](muyie-starter-oss)
 - [ ] [muyie-starter-redis](muyie-starter-redis)
 - [ ] [muyie-starter-security](muyie-starter-security)

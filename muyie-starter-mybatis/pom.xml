@@ -28,18 +28,6 @@
       <artifactId>spring-boot-starter-validation</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- Starter for using JDBC with the HikariCP connection pool -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <!-- Druid Spring Boot Starter -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid-spring-boot-starter</artifactId>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <groupId>com.alibaba.fastjson2</groupId>
       <artifactId>fastjson2</artifactId>

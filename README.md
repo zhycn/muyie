@@ -85,7 +85,6 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | org.zalando                     | problem-spring-web           | 0.27.0     | problem-spring.version    | [Zalando Problem](https://github.com/zalando/problem/)                   |
 | org.reflections                 | reflections                  | 0.10.2     | reflections.version       | [Java runtime metadata analysis](https://github.com/ronmamo/reflections) |
 | org.springdoc                   | springdoc-openapi-ui         | 1.7.0      | springdoc.version         | [SpringDoc](https://springdoc.org/)                                      |
-| org.lz4                         | lz4-java                     | 1.8.0      | lz4-java.version          | [LZ4 compression for Java](https://github.com/lz4/lz4-java/)             |
 | org.jsoup                       | jsoup                        | 1.16.1     | jsoup.version             | [Jsoup](https://jsoup.org/)                                              |
 | org.htmlunit                    | htmlunit                     | 3.6.0      | htmlunit.version          | [HtmlUnit](https://htmlunit.sourceforge.io/)                             |
 | io.jsonwebtoken                 | jjwt-api                     | 0.11.5     | jjwt.version              | [JJWT](https://github.com/jwtk/jjwt)                                     |

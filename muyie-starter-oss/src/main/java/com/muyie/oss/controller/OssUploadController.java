@@ -46,28 +46,26 @@ public class OssUploadController {
   /**
    * 单文件上传 - 注意要添加请求头：content-type=multipart/form-data
    *
-   * @param key    指定上传的BucketKey
-   * @param file   指定上传的文件
+   * @param key  指定上传的BucketKey
+   * @param file 指定上传的文件
    * @return 返回上传结果信息
    */
-  @PostMapping("single")
+  @PostMapping(value = "single", consumes = "multipart/form-data")
   @Operation(summary = "单文件上传")
-  public MultiResponse<StorageInfo> uploadSingle(@RequestParam("key") String key,
-                                                 @RequestParam("file") MultipartFile file) {
+  public MultiResponse<StorageInfo> uploadSingle(@RequestParam("key") String key, @RequestParam("file") MultipartFile file) {
     return this.uploadMultipart(key, new MultipartFile[]{file});
   }
 
   /**
    * 多文件上传 - 注意要添加请求头：content-type=multipart/form-data
    *
-   * @param key    指定上传的BucketKey
-   * @param files  指定上传的文件列表
+   * @param key   指定上传的BucketKey
+   * @param files 指定上传的文件列表
    * @return 返回上传结果信息
    */
-  @PostMapping("multipart")
+  @PostMapping(value = "multipart", consumes = "multipart/form-data")
   @Operation(summary = "多文件上传")
-  public MultiResponse<StorageInfo> uploadMultipart(@RequestParam("key") String key,
-                                                    @RequestParam("files") MultipartFile[] files) {
+  public MultiResponse<StorageInfo> uploadMultipart(@RequestParam("key") String key, @RequestParam("files") MultipartFile[] files) {
     try {
       if (files == null) {
         throw ExceptionUtil.business(ErrorCodeDefaults.A0700);
@@ -93,7 +91,7 @@ public class OssUploadController {
   }
 
   /**
-   * 上传网络流 - 注意要添加请求头：content-type=multipart/form-data
+   * 上传网络流
    *
    * @param key    指定上传的BucketKey
    * @param url    网络资源（主要是图片）
@@ -102,9 +100,7 @@ public class OssUploadController {
    */
   @PostMapping("url")
   @Operation(summary = "上传网络流")
-  public SingleResponse<StorageInfo> uploadUrl(@RequestParam("key") String key,
-                                               @RequestParam("url") String url,
-                                               @RequestParam(value = "suffix", required = false) String suffix) {
+  public SingleResponse<StorageInfo> uploadUrl(@RequestParam("key") String key, @RequestParam("url") String url, @RequestParam(value = "suffix", required = false) String suffix) {
     try {
       StorageConfig config = ossProperties.getStorageConfig(key);
       if (StringUtils.isBlank(suffix)) {
@@ -122,7 +118,7 @@ public class OssUploadController {
   }
 
   /**
-   * 上传字节流 - 注意要添加请求头：content-type=multipart/form-data
+   * 上传字节流
    *
    * @param key    指定上传的BucketKey
    * @param object 上传字节流（Base64编码的字节对象）
@@ -131,9 +127,7 @@ public class OssUploadController {
    */
   @PostMapping("object")
   @Operation(summary = "上传字节流")
-  public SingleResponse<StorageInfo> uploadObject(@RequestParam("key") String key,
-                                                  @RequestParam("object") String object,
-                                                  @RequestParam(value = "suffix") String suffix) {
+  public SingleResponse<StorageInfo> uploadObject(@RequestParam("key") String key, @RequestParam("object") String object, @RequestParam(value = "suffix") String suffix) {
     try {
       StorageConfig config = ossProperties.getStorageConfig(key);
       String objectKey = ossKeyGenerator.getObjectKey(config.getFolder(), suffix);

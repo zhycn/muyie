@@ -33,17 +33,17 @@ public class StorageConfig {
   /**
    * 是否允许上传到指定目录
    */
-  private boolean allowPrefix;
+  private boolean allowFolder;
 
   /**
    * 默认上传文件的目录（可在上传请求中指定）
    */
-  private String defaultPrefix = "tmp";
+  private String defaultFolder = "tmp";
 
   /**
    * 支持上传的目录列表
    */
-  private String[] prefixSupports = new String[]{defaultPrefix};
+  private String[] folderSupports = new String[]{defaultFolder};
 
   /**
    * 支持的文件后缀名称列表

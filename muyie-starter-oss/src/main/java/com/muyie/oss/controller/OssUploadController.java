@@ -180,7 +180,7 @@ public class OssUploadController {
    * @param folder 指定文件上传的目录
    */
   private void anyMatchFolder(StorageConfig config, String folder) {
-    boolean anyMatch = Arrays.stream(config.getPrefixSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(folder, s));
+    boolean anyMatch = Arrays.stream(config.getFolderSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(folder, s));
     ExceptionUtil.business(ErrorCodeDefaults.A0701).rewrite("文件上传目录不支持").doThrow(!anyMatch);
   }
 
@@ -201,10 +201,10 @@ public class OssUploadController {
    * @param folder 指定文件上传的目录
    */
   private String getFolder(StorageConfig config, String folder) {
-    if (config.isAllowPrefix() && StringUtils.isNotBlank(folder)) {
+    if (config.isAllowFolder() && StringUtils.isNotBlank(folder)) {
       return folder;
     }
-    return config.getDefaultPrefix();
+    return config.getDefaultFolder();
   }
 
 }

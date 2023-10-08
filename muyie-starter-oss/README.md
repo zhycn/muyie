@@ -30,13 +30,9 @@ muyie.oss.securityToken=
 muyie.oss.buckets.s1.bucket=
 muyie.oss.buckets.s1.dns=
 muyie.oss.buckets.s1.cdn=
-muyie.oss.buckets.s1.allowPrefix=false
-muyie.oss.buckets.s1.defaultPrefix=tmp
-muyie.oss.buckets.s1.prefixSupports=tmp,
+muyie.oss.buckets.s1.folder=tmp
 muyie.oss.buckets.s1.suffixSupports=bmp,jpg,jpeg,gif,png,svg,webp
 muyie.oss.buckets.s1.maxFiles=10
-muyie.oss.buckets.s1.maxFileSize=1M
-muyie.oss.buckets.s1.maxRequestSize=10M
 # Spring Multipart Configuration
 spring.servlet.multipart.maxFileSize=1M
 spring.servlet.multipart.maxRequestSize=10M
@@ -60,7 +56,7 @@ OssUploadController 提供了4个通用的对象上传接口：
 
 注意：
 
-1. 要添加请求头：content-type=multipart/form-data
+1. 文件上传要添加请求头：content-type=multipart/form-data
 2. 通过属性配置参数 `muyie.oss.context-path=/api/upload` 可以修改接口地址
 
 ### 1.单文件上传
@@ -68,9 +64,8 @@ OssUploadController 提供了4个通用的对象上传接口：
 请求参数说明：
 
 ```
-- String bucketKey - 指定上传的BucketKey（必填）
+- String key - 指定上传的BucketKey（必填）
 - MultipartFile file - 指定上传的文件（必填）
-- String prefix - 指定上传的目录（可选，默认目录：tmp）
 ```
 
 上传结果示例：
@@ -96,9 +91,8 @@ OssUploadController 提供了4个通用的对象上传接口：
 请求参数说明：
 
 ```
-- String bucketKey - 指定上传的BucketKey（必填）
+- String key - 指定上传的BucketKey（必填）
 - MultipartFile[] files - 指定上传的文件列表（必填）
-- String prefix - 指定上传的目录（可选，默认目录：tmp）
 ```
 
 上传结果示例：
@@ -130,9 +124,8 @@ OssUploadController 提供了4个通用的对象上传接口：
 请求参数说明：
 
 ```
-- String bucketKey - 指定上传的BucketKey（必填）
+- String key - 指定上传的BucketKey（必填）
 - String url - 网络资源（主要是图片）
-- String prefix - 指定上传的目录（可选，默认目录：tmp）
 - String suffix - 指定上传的后缀名（可选，默认截取URL中的后缀名）
 ```
 
@@ -157,9 +150,8 @@ OssUploadController 提供了4个通用的对象上传接口：
 请求参数说明：
 
 ```
-- String bucketKey - 指定上传的BucketKey（必填）
+- String key - 指定上传的BucketKey（必填）
 - String object - Base64编码的字节对象
-- String prefix - 指定上传的目录（可选，默认目录：tmp）
 - String suffix - 指定上传的后缀名（必填）
 ```
 

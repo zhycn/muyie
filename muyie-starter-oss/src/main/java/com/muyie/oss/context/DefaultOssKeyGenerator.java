@@ -23,34 +23,34 @@ public class DefaultOssKeyGenerator implements OssKeyGenerator {
   /**
    * 生成对象名称
    *
-   * @param prefix 指定存储目录 (eg: temp | user/temp)
+   * @param folder 指定存储目录 (eg: tmp | user/tmp)
    * @param suffix 指定文件后缀名 (eg: png)
    * @return 对象名称
    */
-  private static String generateObjectKey(String prefix, String suffix) {
-    Assert.hasText(prefix, "ObjectKey prefix must be not empty");
+  private static String generateObjectKey(String folder, String suffix) {
+    Assert.hasText(folder, "ObjectKey folder must be not empty");
     Assert.hasText(suffix, "ObjectKey suffix must be not empty");
     String suffixName = StringUtils.replace(suffix, ".", "").toLowerCase();
     String date = DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN);
     String random = IdUtil.fastSimpleUUID();
     // 注意：要移除前后的斜杠
-    prefix = StringUtils.removeStart(prefix, "/");
-    prefix = StringUtils.removeEnd(prefix, "/");
-    String objectKey = StrUtil.format("{}/{}/{}.{}", prefix, date, random, suffixName);
+    folder = StringUtils.removeStart(folder, "/");
+    folder = StringUtils.removeEnd(folder, "/");
+    String objectKey = StrUtil.format("{}/{}/{}.{}", folder, date, random, suffixName);
     log.info("Generate objectKey: {}", objectKey);
     return objectKey;
   }
 
   @Override
-  public String getObjectKey(String prefix, String suffix) {
-    return generateObjectKey(prefix, suffix);
+  public String getObjectKey(String folder, String suffix) {
+    return generateObjectKey(folder, suffix);
   }
 
   @Override
-  public String getObjectKey(String prefix, MultipartFile file) {
+  public String getObjectKey(String folder, MultipartFile file) {
     String fileName = file.getOriginalFilename();
     String suffix = StringUtils.substringAfterLast(fileName, ".").toLowerCase();
-    return generateObjectKey(prefix, suffix);
+    return generateObjectKey(folder, suffix);
   }
 
 }

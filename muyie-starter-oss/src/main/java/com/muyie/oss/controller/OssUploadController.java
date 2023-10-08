@@ -48,15 +48,13 @@ public class OssUploadController {
    *
    * @param key    指定上传的BucketKey
    * @param file   指定上传的文件
-   * @param folder 指定上传的目录
    * @return 返回上传结果信息
    */
   @PostMapping("single")
   @Operation(summary = "单文件上传")
   public MultiResponse<StorageInfo> uploadSingle(@RequestParam("key") String key,
-                                                 @RequestParam("file") MultipartFile file,
-                                                 @RequestParam(value = "folder", required = false) String folder) {
-    return this.uploadMultipart(key, new MultipartFile[]{file}, folder);
+                                                 @RequestParam("file") MultipartFile file) {
+    return this.uploadMultipart(key, new MultipartFile[]{file});
   }
 
   /**
@@ -64,28 +62,24 @@ public class OssUploadController {
    *
    * @param key    指定上传的BucketKey
    * @param files  指定上传的文件列表
-   * @param folder 指定上传的目录
    * @return 返回上传结果信息
    */
   @PostMapping("multipart")
   @Operation(summary = "多文件上传")
   public MultiResponse<StorageInfo> uploadMultipart(@RequestParam("key") String key,
-                                                    @RequestParam("files") MultipartFile[] files,
-                                                    @RequestParam(value = "folder", required = false) String folder) {
+                                                    @RequestParam("files") MultipartFile[] files) {
     try {
       if (files == null) {
         throw ExceptionUtil.business(ErrorCodeDefaults.A0700);
       }
       StorageConfig config = ossProperties.getStorageConfig(key);
       this.assertMaxFiles(config, files.length);
-      String targetFolder = this.getFolder(config, folder);
-      this.anyMatchFolder(config, targetFolder);
       List<StorageInfo> list = Lists.newArrayList();
       for (MultipartFile file : files) {
         ExceptionUtil.validate().rewrite("文件不能为空").doThrow(file.isEmpty());
         String fileName = file.getOriginalFilename();
         log.info("上传的源文件名为：" + fileName);
-        String objectKey = ossKeyGenerator.getObjectKey(targetFolder, file);
+        String objectKey = ossKeyGenerator.getObjectKey(config.getFolder(), file);
         this.anyMatchSuffix(config, objectKey);
         StorageInfo storageInfo = ossService.putObject(key, objectKey, file.getInputStream());
         list.add(storageInfo);
@@ -103,7 +97,6 @@ public class OssUploadController {
    *
    * @param key    指定上传的BucketKey
    * @param url    网络资源（主要是图片）
-   * @param folder 指定上传的目录
    * @param suffix 指定上传的后缀名
    * @return 返回上传结果信息
    */
@@ -111,16 +104,13 @@ public class OssUploadController {
   @Operation(summary = "上传网络流")
   public SingleResponse<StorageInfo> uploadUrl(@RequestParam("key") String key,
                                                @RequestParam("url") String url,
-                                               @RequestParam(value = "folder", required = false) String folder,
                                                @RequestParam(value = "suffix", required = false) String suffix) {
     try {
       StorageConfig config = ossProperties.getStorageConfig(key);
-      String targetFolder = this.getFolder(config, folder);
-      this.anyMatchFolder(config, targetFolder);
       if (StringUtils.isBlank(suffix)) {
         suffix = StringUtils.substringAfterLast(url, ".");
       }
-      String objectKey = ossKeyGenerator.getObjectKey(targetFolder, suffix);
+      String objectKey = ossKeyGenerator.getObjectKey(config.getFolder(), suffix);
       this.anyMatchSuffix(config, objectKey);
       StorageInfo storageInfo = ossService.putObject(key, objectKey, url);
       return SingleResponse.of(storageInfo);
@@ -136,7 +126,6 @@ public class OssUploadController {
    *
    * @param key    指定上传的BucketKey
    * @param object 上传字节流（Base64编码的字节对象）
-   * @param folder 指定上传的目录
    * @param suffix 指定上传的后缀名
    * @return 返回上传结果信息
    */
@@ -144,13 +133,10 @@ public class OssUploadController {
   @Operation(summary = "上传字节流")
   public SingleResponse<StorageInfo> uploadObject(@RequestParam("key") String key,
                                                   @RequestParam("object") String object,
-                                                  @RequestParam(value = "folder", required = false) String folder,
                                                   @RequestParam(value = "suffix") String suffix) {
     try {
       StorageConfig config = ossProperties.getStorageConfig(key);
-      String targetFolder = this.getFolder(config, folder);
-      this.anyMatchFolder(config, targetFolder);
-      String objectKey = ossKeyGenerator.getObjectKey(targetFolder, suffix);
+      String objectKey = ossKeyGenerator.getObjectKey(config.getFolder(), suffix);
       this.anyMatchSuffix(config, objectKey);
       byte[] bytes = Base64Utils.decodeFromUrlSafeString(object);
       StorageInfo storageInfo = ossService.putObject(key, objectKey, bytes);
@@ -174,17 +160,6 @@ public class OssUploadController {
   }
 
   /**
-   * 校验文件上传指定的目录是否匹配
-   *
-   * @param config 对象存储配置
-   * @param folder 指定文件上传的目录
-   */
-  private void anyMatchFolder(StorageConfig config, String folder) {
-    boolean anyMatch = Arrays.stream(config.getFolderSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(folder, s));
-    ExceptionUtil.business(ErrorCodeDefaults.A0701).rewrite("文件上传目录不支持").doThrow(!anyMatch);
-  }
-
-  /**
    * 校验用户上传的文件数量是否超限
    *
    * @param config 对象存储配置
@@ -192,19 +167,6 @@ public class OssUploadController {
    */
   private void assertMaxFiles(StorageConfig config, int size) {
     ExceptionUtil.business(ErrorCodeDefaults.A0425, "文件上传数量超限：size=" + size).doThrow(size > config.getMaxFiles());
-  }
-
-  /**
-   * 获取文件上传的目录
-   *
-   * @param config 对象存储配置
-   * @param folder 指定文件上传的目录
-   */
-  private String getFolder(StorageConfig config, String folder) {
-    if (config.isAllowFolder() && StringUtils.isNotBlank(folder)) {
-      return folder;
-    }
-    return config.getDefaultFolder();
   }
 
 }

@@ -30,19 +30,9 @@ public class StorageConfig {
   private String cdn;
 
   /**
-   * 是否允许上传到指定目录
+   * 上传文件的目录（默认上传到临时文件目录）
    */
-  private boolean allowFolder;
-
-  /**
-   * 默认上传文件的目录（可在上传请求中指定）
-   */
-  private String defaultFolder = "tmp";
-
-  /**
-   * 支持上传的目录列表
-   */
-  private String[] folderSupports = new String[]{defaultFolder};
+  private String folder = "tmp";
 
   /**
    * 支持的文件后缀名称列表

@@ -25,8 +25,8 @@ public class OssProperties {
   private String securityToken;
   private ClientBuilderConfiguration config;
 
-  public StorageConfig getBucketProfile(String bucketKey) {
-    return Objects.requireNonNull(buckets.get(bucketKey), "BucketProfile key '" + bucketKey + "' not found");
+  public StorageConfig getStorageConfig(String key) {
+    return Objects.requireNonNull(buckets.get(key), "StorageConfig key '" + key + "' not found");
   }
 
 }

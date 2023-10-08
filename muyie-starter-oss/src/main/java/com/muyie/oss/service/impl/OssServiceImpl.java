@@ -40,8 +40,8 @@ public class OssServiceImpl implements OssService {
   }
 
   @Override
-  public StorageConfig getBucketProfile(String bucketKey) {
-    return ossProperties.getBucketProfile(bucketKey);
+  public StorageConfig getStorageConfig(String key) {
+    return ossProperties.getStorageConfig(key);
   }
 
   @Override
@@ -50,7 +50,7 @@ public class OssServiceImpl implements OssService {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
       Assert.notNull(inputStream, "inputStream must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("putObject objectKey={}", objectKey);
       PutObjectResult result = ossClient.putObject(bp.getBucket(), objectKey, inputStream);
@@ -75,7 +75,7 @@ public class OssServiceImpl implements OssService {
       Assert.notNull(objectKey, "objectKey must be not null");
       Assert.notNull(inputStream, "inputStream must be not null");
       Assert.notNull(metadata, "metadata must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("putObject objectKey={}", objectKey);
       PutObjectResult result = ossClient.putObject(bp.getBucket(), objectKey, inputStream, metadata);
@@ -152,7 +152,7 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(putObjectRequest, "putObjectRequest must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       putObjectRequest.setBucketName(bp.getBucket());
       log.info("putObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("putObject objectKey={}", putObjectRequest.getKey());
@@ -174,8 +174,8 @@ public class OssServiceImpl implements OssService {
   @Override
   public StorageInfo copyObject(String fromBucketKey, String fromObjectKey, String toBucketKey, String toObjectKey, boolean isDelete) {
     try {
-      StorageConfig fromStorageConfig = ossProperties.getBucketProfile(fromBucketKey);
-      StorageConfig toStorageConfig = ossProperties.getBucketProfile(toBucketKey);
+      StorageConfig fromStorageConfig = ossProperties.getStorageConfig(fromBucketKey);
+      StorageConfig toStorageConfig = ossProperties.getStorageConfig(toBucketKey);
       log.info("copyObject fromBucketKey={}, fromObjectKey={}", fromBucketKey, fromObjectKey);
       log.info("copyObject toBucketKey={}, toObjectKey={}", toBucketKey, toObjectKey);
       boolean doesObjectExist = ossClient.doesObjectExist(fromStorageConfig.getBucket(), fromObjectKey);
@@ -204,7 +204,7 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       log.info("OSSObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("OSSObject objectKey={}", objectKey);
       OSSObject result = ossClient.getObject(bp.getBucket(), objectKey);
@@ -220,7 +220,7 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       log.info("deleteObject bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("deleteObject objectKey={}", objectKey);
       ossClient.deleteObject(bp.getBucket(), objectKey);
@@ -234,7 +234,7 @@ public class OssServiceImpl implements OssService {
     try {
       Assert.notNull(bucketKey, "bucketKey must be not null");
       Assert.notNull(objectKey, "objectKey must be not null");
-      StorageConfig bp = ossProperties.getBucketProfile(bucketKey);
+      StorageConfig bp = ossProperties.getStorageConfig(bucketKey);
       log.info("ObjectMetadata bucketKey={}, bucketName={}", bucketKey, bp.getBucket());
       log.info("ObjectMetadata objectKey={}", objectKey);
       ObjectMetadata result = ossClient.getObjectMetadata(bp.getBucket(), objectKey);

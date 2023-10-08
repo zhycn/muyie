@@ -3,7 +3,6 @@ package com.muyie.oss.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.unit.DataSize;
 
 /**
  * 对象存储配置
@@ -54,16 +53,6 @@ public class StorageConfig {
    * 多文件上传允许的最大数量
    */
   private int maxFiles = 10;
-
-  /**
-   * 单个文件上传大小限制（默认1M）
-   */
-  private DataSize maxFileSize = DataSize.ofMegabytes(1L);
-
-  /**
-   * 多个文件上传大小限制（默认10M）
-   */
-  private DataSize maxRequestSize = DataSize.ofMegabytes(10L);
 
   /**
    * 获取文件上传后的BaseUrl，如果配置了CDN，则优先取CND地址，否则取DNS地址。

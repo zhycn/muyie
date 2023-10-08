@@ -13,19 +13,19 @@ public interface OssKeyGenerator {
   /**
    * 生成文件对象名称
    *
-   * @param folderName 指定存储目录 (eg: temp | user/temp)
-   * @param suffix     指定文件后缀名 (eg: png)
+   * @param folder 指定存储目录 (eg: tmp | user/tmp)
+   * @param suffix 指定文件后缀名 (eg: png)
    * @return 对象名称
    */
-  String getObjectKey(String folderName, String suffix);
+  String getObjectKey(String folder, String suffix);
 
   /**
    * 生成文件对象名称
    *
-   * @param folderName 指定存储目录 (eg: temp | user/temp)
-   * @param file       上传的文件（从文件名称中获取后缀名）
+   * @param folder 指定存储目录 (eg: temp | user/temp)
+   * @param file   上传的文件（从文件名称中获取后缀名）
    * @return 对象名称
    */
-  String getObjectKey(String folderName, MultipartFile file);
+  String getObjectKey(String folder, MultipartFile file);
 
 }

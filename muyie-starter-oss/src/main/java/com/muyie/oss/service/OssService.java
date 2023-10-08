@@ -26,7 +26,7 @@ public interface OssService {
   OSS getOssClient();
 
   /**
-   * 获取Bucket配置信息
+   * 获取 Bucket 配置信息
    *
    * @param key 配置StorageConfig的key
    * @return 配置信息
@@ -37,9 +37,9 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key         配置StorageConfig的key
-   * @param objectKey   文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey   文件存储路径
    * @param inputStream 文件对象
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, InputStream inputStream);
 
@@ -47,10 +47,10 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key         配置StorageConfig的key
-   * @param objectKey   文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey   文件存储路径
    * @param inputStream 文件对象
    * @param metadata    对象元信息
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, InputStream inputStream, ObjectMetadata metadata);
 
@@ -58,10 +58,10 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param file      文件对象
    * @param metadata  对象元信息
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, File file, ObjectMetadata metadata);
 
@@ -69,9 +69,9 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param file      文件对象
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, File file);
 
@@ -79,10 +79,10 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param bytes     文件对象
    * @param metadata  对象元信息
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, byte[] bytes, ObjectMetadata metadata);
 
@@ -90,9 +90,9 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param bytes     文件对象
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, byte[] bytes);
 
@@ -100,10 +100,10 @@ public interface OssService {
    * 文件对象上传（上传网络流）
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param url       资源网址
    * @param metadata  对象元信息
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, String url, ObjectMetadata metadata);
 
@@ -111,9 +111,9 @@ public interface OssService {
    * 文件对象上传（上传网络流）
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @param url       资源网址
-   * @return 上传结果
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, String objectKey, String url);
 
@@ -121,8 +121,8 @@ public interface OssService {
    * 文件对象上传
    *
    * @param key              配置StorageConfig的key
-   * @param putObjectRequest 原生的文件上传对象（bucketName通过bucketKey自动获取）
-   * @return 上传结果
+   * @param putObjectRequest 原生的文件上传对象（参数bucketName将通过key自动获取）
+   * @return 对象存储信息
    */
   StorageInfo putObject(String key, PutObjectRequest putObjectRequest);
 
@@ -142,7 +142,7 @@ public interface OssService {
    * 获取文件
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @return 结果
    */
   OSSObject getObject(String key, String objectKey);
@@ -151,7 +151,7 @@ public interface OssService {
    * 删除文件
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    */
   void deleteObject(String key, String objectKey);
 
@@ -159,7 +159,7 @@ public interface OssService {
    * 获取对象元信息
    *
    * @param key       配置StorageConfig的key
-   * @param objectKey 文件存储路径，e.g. temp/v1-2390293382.png
+   * @param objectKey 文件存储路径
    * @return 结果
    */
   ObjectMetadata getObjectMetadata(String key, String objectKey);

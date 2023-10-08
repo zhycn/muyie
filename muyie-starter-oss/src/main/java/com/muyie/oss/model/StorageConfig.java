@@ -6,27 +6,27 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.unit.DataSize;
 
 /**
- * Bucket 配置信息
+ * 对象存储配置
  *
  * @author larry
  * @since 2.7.14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class BucketProfile {
+public class StorageConfig {
 
   /**
-   * Bucket 名称
+   * 指定对象存储的 Bucket 名称（必填）
    */
   private String bucket;
 
   /**
-   * 访问文件的DNS
+   * 指定访问文件的DNS
    */
   private String dns;
 
   /**
-   * 如果配置了CND，则优先于DNS
+   * 指定访问文件的CDN。如果配置了CND，则优先于DNS
    */
   private String cdn;
 

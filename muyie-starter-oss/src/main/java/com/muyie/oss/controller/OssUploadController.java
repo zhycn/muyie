@@ -8,8 +8,8 @@ import com.muyie.exception.ErrorCodeDefaults;
 import com.muyie.exception.ExceptionUtil;
 import com.muyie.oss.autoconfigure.OssProperties;
 import com.muyie.oss.context.OssKeyGenerator;
-import com.muyie.oss.model.BucketProfile;
-import com.muyie.oss.model.StoreResult;
+import com.muyie.oss.model.StorageConfig;
+import com.muyie.oss.model.StorageInfo;
 import com.muyie.oss.service.OssService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,7 +53,7 @@ public class OssUploadController {
    */
   @PostMapping("single")
   @Operation(summary = "单文件上传")
-  public MultiResponse<StoreResult> uploadSingle(@RequestParam("bucketKey") String bucketKey,
+  public MultiResponse<StorageInfo> uploadSingle(@RequestParam("bucketKey") String bucketKey,
                                                  @RequestParam("file") MultipartFile file,
                                                  @RequestParam(value = "prefix", required = false) String prefix) {
     return this.uploadMultipart(bucketKey, new MultipartFile[]{file}, prefix);
@@ -69,26 +69,26 @@ public class OssUploadController {
    */
   @PostMapping("multipart")
   @Operation(summary = "多文件上传")
-  public MultiResponse<StoreResult> uploadMultipart(@RequestParam("bucketKey") String bucketKey,
+  public MultiResponse<StorageInfo> uploadMultipart(@RequestParam("bucketKey") String bucketKey,
                                                     @RequestParam("files") MultipartFile[] files,
                                                     @RequestParam(value = "prefix", required = false) String prefix) {
     try {
       if (files == null) {
         throw ExceptionUtil.business(ErrorCodeDefaults.A0700);
       }
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      this.assertMaxFiles(bucketProfile, files.length);
-      String targetPrefix = this.getPrefix(bucketProfile, prefix);
-      this.anyMatchPrefix(bucketProfile, targetPrefix);
-      List<StoreResult> list = Lists.newArrayList();
+      StorageConfig storageConfig = ossProperties.getBucketProfile(bucketKey);
+      this.assertMaxFiles(storageConfig, files.length);
+      String targetPrefix = this.getPrefix(storageConfig, prefix);
+      this.anyMatchPrefix(storageConfig, targetPrefix);
+      List<StorageInfo> list = Lists.newArrayList();
       for (MultipartFile file : files) {
         ExceptionUtil.validate().rewrite("文件不能为空").doThrow(file.isEmpty());
         String fileName = file.getOriginalFilename();
         log.info("上传的源文件名为：" + fileName);
         String objectKey = ossKeyGenerator.getObjectKey(targetPrefix, file);
-        this.anyMatchSuffix(bucketProfile, objectKey);
-        StoreResult storeResult = ossService.putObject(bucketKey, objectKey, file.getInputStream());
-        list.add(storeResult);
+        this.anyMatchSuffix(storageConfig, objectKey);
+        StorageInfo storageInfo = ossService.putObject(bucketKey, objectKey, file.getInputStream());
+        list.add(storageInfo);
       }
       return MultiResponse.of(list);
     } catch (BaseException e) {
@@ -109,21 +109,21 @@ public class OssUploadController {
    */
   @PostMapping("url")
   @Operation(summary = "上传网络流")
-  public SingleResponse<StoreResult> uploadUrl(@RequestParam("bucketKey") String bucketKey,
+  public SingleResponse<StorageInfo> uploadUrl(@RequestParam("bucketKey") String bucketKey,
                                                @RequestParam("url") String url,
                                                @RequestParam(value = "prefix", required = false) String prefix,
                                                @RequestParam(value = "suffix", required = false) String suffix) {
     try {
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      String targetPrefix = this.getPrefix(bucketProfile, prefix);
-      this.anyMatchPrefix(bucketProfile, targetPrefix);
+      StorageConfig storageConfig = ossProperties.getBucketProfile(bucketKey);
+      String targetPrefix = this.getPrefix(storageConfig, prefix);
+      this.anyMatchPrefix(storageConfig, targetPrefix);
       if (StringUtils.isBlank(suffix)) {
         suffix = StringUtils.substringAfterLast(url, ".");
       }
       String objectKey = ossKeyGenerator.getObjectKey(targetPrefix, suffix);
-      this.anyMatchSuffix(bucketProfile, objectKey);
-      StoreResult storeResult = ossService.putObject(bucketKey, objectKey, url);
-      return SingleResponse.of(storeResult);
+      this.anyMatchSuffix(storageConfig, objectKey);
+      StorageInfo storageInfo = ossService.putObject(bucketKey, objectKey, url);
+      return SingleResponse.of(storageInfo);
     } catch (BaseException e) {
       throw e;
     } catch (Exception e) {
@@ -142,19 +142,19 @@ public class OssUploadController {
    */
   @PostMapping("object")
   @Operation(summary = "上传字节流")
-  public SingleResponse<StoreResult> uploadObject(@RequestParam("bucketKey") String bucketKey,
+  public SingleResponse<StorageInfo> uploadObject(@RequestParam("bucketKey") String bucketKey,
                                                   @RequestParam("object") String object,
                                                   @RequestParam(value = "prefix", required = false) String prefix,
                                                   @RequestParam(value = "suffix") String suffix) {
     try {
-      BucketProfile bucketProfile = ossProperties.getBucketProfile(bucketKey);
-      String targetPrefix = this.getPrefix(bucketProfile, prefix);
-      this.anyMatchPrefix(bucketProfile, targetPrefix);
+      StorageConfig storageConfig = ossProperties.getBucketProfile(bucketKey);
+      String targetPrefix = this.getPrefix(storageConfig, prefix);
+      this.anyMatchPrefix(storageConfig, targetPrefix);
       String objectKey = ossKeyGenerator.getObjectKey(targetPrefix, suffix);
-      this.anyMatchSuffix(bucketProfile, objectKey);
+      this.anyMatchSuffix(storageConfig, objectKey);
       byte[] bytes = Base64Utils.decodeFromUrlSafeString(object);
-      StoreResult storeResult = ossService.putObject(bucketKey, objectKey, bytes);
-      return SingleResponse.of(storeResult);
+      StorageInfo storageInfo = ossService.putObject(bucketKey, objectKey, bytes);
+      return SingleResponse.of(storageInfo);
     } catch (BaseException e) {
       throw e;
     } catch (Exception e) {
@@ -165,46 +165,46 @@ public class OssUploadController {
   /**
    * 校验文件上传指定的文件后缀名称是否匹配
    *
-   * @param bucketProfile Bucket配置信息
+   * @param storageConfig Bucket配置信息
    * @param objectKey     对象名称
    */
-  private void anyMatchSuffix(BucketProfile bucketProfile, String objectKey) {
-    boolean anyMatch = Arrays.stream(bucketProfile.getSuffixSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(objectKey, s));
+  private void anyMatchSuffix(StorageConfig storageConfig, String objectKey) {
+    boolean anyMatch = Arrays.stream(storageConfig.getSuffixSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(objectKey, s));
     ExceptionUtil.business(ErrorCodeDefaults.A0701).doThrow(!anyMatch);
   }
 
   /**
    * 校验文件上传指定的目录是否匹配
    *
-   * @param bucketProfile Bucket配置信息
+   * @param storageConfig Bucket配置信息
    * @param prefix        指定文件上传的目录
    */
-  private void anyMatchPrefix(BucketProfile bucketProfile, String prefix) {
-    boolean anyMatch = Arrays.stream(bucketProfile.getPrefixSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(prefix, s));
+  private void anyMatchPrefix(StorageConfig storageConfig, String prefix) {
+    boolean anyMatch = Arrays.stream(storageConfig.getPrefixSupports()).anyMatch(s -> StringUtils.endsWithIgnoreCase(prefix, s));
     ExceptionUtil.business(ErrorCodeDefaults.A0701).rewrite("文件上传目录不支持").doThrow(!anyMatch);
   }
 
   /**
    * 校验用户上传的文件数量是否超限
    *
-   * @param bucketProfile Bucket配置信息
+   * @param storageConfig Bucket配置信息
    * @param size          上传的文件数量
    */
-  private void assertMaxFiles(BucketProfile bucketProfile, int size) {
-    ExceptionUtil.business(ErrorCodeDefaults.A0425, "文件上传数量超限：size=" + size).doThrow(size > bucketProfile.getMaxFiles());
+  private void assertMaxFiles(StorageConfig storageConfig, int size) {
+    ExceptionUtil.business(ErrorCodeDefaults.A0425, "文件上传数量超限：size=" + size).doThrow(size > storageConfig.getMaxFiles());
   }
 
   /**
    * 获取文件上传的目录
    *
-   * @param bucketProfile Bucket配置信息
+   * @param storageConfig Bucket配置信息
    * @param prefix        指定文件上传的目录
    */
-  private String getPrefix(BucketProfile bucketProfile, String prefix) {
-    if (bucketProfile.isAllowPrefix() && StringUtils.isNotBlank(prefix)) {
+  private String getPrefix(StorageConfig storageConfig, String prefix) {
+    if (storageConfig.isAllowPrefix() && StringUtils.isNotBlank(prefix)) {
       return prefix;
     }
-    return bucketProfile.getDefaultPrefix();
+    return storageConfig.getDefaultPrefix();
   }
 
 }

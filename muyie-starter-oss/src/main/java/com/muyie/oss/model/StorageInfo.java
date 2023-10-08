@@ -4,14 +4,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 文件存储结果
+ * 对象存储信息
  *
  * @author larry
  * @since 2.7.13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class StoreResult {
+public class StorageInfo {
 
   /**
    * Bucket名称

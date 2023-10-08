@@ -4,8 +4,8 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
-import com.muyie.oss.model.BucketProfile;
-import com.muyie.oss.model.StoreResult;
+import com.muyie.oss.model.StorageConfig;
+import com.muyie.oss.model.StorageInfo;
 
 import java.io.File;
 import java.io.InputStream;
@@ -31,7 +31,7 @@ public interface OssService {
    * @param bucketKey key
    * @return 配置信息
    */
-  BucketProfile getBucketProfile(String bucketKey);
+  StorageConfig getBucketProfile(String bucketKey);
 
   /**
    * 文件对象上传
@@ -41,7 +41,7 @@ public interface OssService {
    * @param inputStream 文件对象
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, InputStream inputStream);
+  StorageInfo putObject(String bucketKey, String objectKey, InputStream inputStream);
 
   /**
    * 文件对象上传
@@ -52,7 +52,7 @@ public interface OssService {
    * @param metadata    对象元信息
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, InputStream inputStream, ObjectMetadata metadata);
+  StorageInfo putObject(String bucketKey, String objectKey, InputStream inputStream, ObjectMetadata metadata);
 
   /**
    * 文件对象上传
@@ -63,7 +63,7 @@ public interface OssService {
    * @param metadata  对象元信息
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, File file, ObjectMetadata metadata);
+  StorageInfo putObject(String bucketKey, String objectKey, File file, ObjectMetadata metadata);
 
   /**
    * 文件对象上传
@@ -73,7 +73,7 @@ public interface OssService {
    * @param file      文件对象
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, File file);
+  StorageInfo putObject(String bucketKey, String objectKey, File file);
 
   /**
    * 文件对象上传
@@ -84,7 +84,7 @@ public interface OssService {
    * @param metadata  对象元信息
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, byte[] bytes, ObjectMetadata metadata);
+  StorageInfo putObject(String bucketKey, String objectKey, byte[] bytes, ObjectMetadata metadata);
 
   /**
    * 文件对象上传
@@ -94,7 +94,7 @@ public interface OssService {
    * @param bytes     文件对象
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, byte[] bytes);
+  StorageInfo putObject(String bucketKey, String objectKey, byte[] bytes);
 
   /**
    * 文件对象上传（上传网络流）
@@ -105,7 +105,7 @@ public interface OssService {
    * @param metadata  对象元信息
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, String url, ObjectMetadata metadata);
+  StorageInfo putObject(String bucketKey, String objectKey, String url, ObjectMetadata metadata);
 
   /**
    * 文件对象上传（上传网络流）
@@ -115,7 +115,7 @@ public interface OssService {
    * @param url       资源网址
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, String objectKey, String url);
+  StorageInfo putObject(String bucketKey, String objectKey, String url);
 
   /**
    * 文件对象上传
@@ -124,7 +124,7 @@ public interface OssService {
    * @param putObjectRequest 原生的文件上传对象（bucketName通过bucketKey自动获取）
    * @return 上传结果
    */
-  StoreResult putObject(String bucketKey, PutObjectRequest putObjectRequest);
+  StorageInfo putObject(String bucketKey, PutObjectRequest putObjectRequest);
 
   /**
    * 复制文件
@@ -136,7 +136,7 @@ public interface OssService {
    * @param isDelete      是否删除源文件
    * @return 复制后的文件存储信息
    */
-  StoreResult copyObject(String fromBucketKey, String fromObjectKey, String toBucketKey, String toObjectKey, boolean isDelete);
+  StorageInfo copyObject(String fromBucketKey, String fromObjectKey, String toBucketKey, String toObjectKey, boolean isDelete);
 
   /**
    * 获取文件

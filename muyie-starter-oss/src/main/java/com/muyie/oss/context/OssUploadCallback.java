@@ -14,7 +14,7 @@ public interface OssUploadCallback {
   /**
    * 上传结果回调，主要用于管理对象名称
    *
-   * @param storageInfo 上传结果
+   * @param storageInfo 对象存在信息
    */
   void callback(StorageInfo storageInfo);
 

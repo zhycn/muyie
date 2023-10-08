@@ -22,7 +22,7 @@ public interface OssKeyGenerator {
   /**
    * 生成文件对象名称
    *
-   * @param folder 指定存储目录 (eg: temp | user/temp)
+   * @param folder 指定存储目录 (eg: tmp | user/tmp)
    * @param file   上传的文件（从文件名称中获取后缀名）
    * @return 对象名称
    */

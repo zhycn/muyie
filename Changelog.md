@@ -4,7 +4,7 @@
 - [x] [muyie-starter-client](muyie-starter-client)
 - [x] [muyie-starter-mybatis](muyie-starter-mybatis)
 - [x] [muyie-starter-oss](muyie-starter-oss)
-- [ ] [muyie-starter-redis](muyie-starter-redis)
+- [x] [muyie-starter-redis](muyie-starter-redis)
 - [ ] [muyie-starter-security](muyie-starter-security)
 - [x] [muyie-starter-thymeleaf](muyie-starter-thymeleaf)
 - [ ] [muyie-starter-web](muyie-starter-web)

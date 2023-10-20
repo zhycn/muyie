@@ -78,7 +78,7 @@ MuYie 完全支持 Spring Boot 和 Spring Cloud 管理的所有依赖项。 以�
 | com.alibaba.fastjson2           | fastjson2                    | 2.0.41     | alibaba-fastjson2.version | [Fastjson2](https://github.com/alibaba/fastjson2)                        |
 | commons-io                      | commons-io                   | 2.14.0     | commons-io.version        | [Apache Commons IO](https://github.com/apache/commons-io)                |
 | com.ctrip.framework.apollo      | apollo-client                | 2.1.0      | apollo-client.version     | [ApolloConfig](https://www.apolloconfig.com/)                            |
-| com.google.guava                | guava                        | 32.1.2-jre | guava.version             | [Guava](https://github.com/google/guava)                                 |
+| com.google.guava                | guava                        | 32.1.3-jre | guava.version             | [Guava](https://github.com/google/guava)                                 |
 | com.baomidou                    | mybatis-plus-boot-starter    | 3.5.3.2    | mybatis-plus.version      | [MyBatis-Plus](https://baomidou.com/)                                    |
 | com.squareup.retrofit2          | retrofit                     | 2.9.0      | retrofit.version          | [Retrofit](https://square.github.io/retrofit/)                           |
 | cn.hutool                       | hutool-all                   | 5.8.22     | hutool.version            | [Hutool](https://hutool.cn/)                                             |
@@ -109,7 +109,7 @@ MuYie / Spring Boot / Spring Cloud 项目集成的第三方库的版本信息都
 <!-- 应根据项目的实际运行环境来合理选择版本号，除非必须，否则不建议修改版本信息。 -->
 <!-- 在修改依赖包的版本信息时，可通过 IDE 点击坐标来查看依赖包对应的属性名。 -->
 <properties>
-  <guava.version>32.1.2-jre</guava.version>
+  <guava.version>32.1.3-jre</guava.version>
 </properties>
 ```
 

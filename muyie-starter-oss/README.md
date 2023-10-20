@@ -49,10 +49,10 @@ spring.servlet.multipart.maxRequestSize=10M
 
 OssUploadController 提供了4个通用的对象上传接口：
 
-- POST /api/upload/single - 单文件上传
-- POST /api/upload/multipart - 多文件上传
-- POST /api/upload/url - 上传网络流（主要用于网络图片上传）
-- POST /api/upload/object - 上传字节流（Base64编码的字节对象）
+- POST /api/upload/single/{key} - 单文件上传
+- POST /api/upload/multipart/{key} - 多文件上传
+- POST /api/upload/url/{key} - 上传网络流（主要用于网络图片上传）
+- POST /api/upload/object/{key} - 上传字节流（Base64编码的字节对象）
 
 注意：
 

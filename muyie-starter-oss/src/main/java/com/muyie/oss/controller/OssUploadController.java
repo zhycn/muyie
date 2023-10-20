@@ -53,7 +53,7 @@ public class OssUploadController {
   @PostMapping(value = "single/{key}", consumes = "multipart/form-data")
   @Operation(summary = "单文件上传")
   public MultiResponse<StorageInfo> uploadSingle(@PathVariable("key") String key, @RequestParam("file") MultipartFile file) {
-    return this.uploadMultipart(key, new MultipartFile[]{file});
+    return this.uploadMultipart(key, Lists.newArrayList(file));
   }
 
   /**
@@ -65,13 +65,13 @@ public class OssUploadController {
    */
   @PostMapping(value = "multipart/{key}", consumes = "multipart/form-data")
   @Operation(summary = "多文件上传")
-  public MultiResponse<StorageInfo> uploadMultipart(@PathVariable("key") String key, @RequestParam("files") MultipartFile[] files) {
+  public MultiResponse<StorageInfo> uploadMultipart(@PathVariable("key") String key, @RequestParam("files") List<MultipartFile> files) {
     try {
       if (files == null) {
         throw ExceptionUtil.business(ErrorCodeDefaults.A0700);
       }
       StorageConfig config = ossProperties.getStorageConfig(key);
-      this.assertMaxFiles(config, files.length);
+      this.assertMaxFiles(config, files.size());
       List<StorageInfo> list = Lists.newArrayList();
       for (MultipartFile file : files) {
         ExceptionUtil.validate().rewrite("文件不能为空").doThrow(file.isEmpty());

@@ -92,7 +92,7 @@ OssUploadController 提供了4个通用的对象上传接口：
 
 ```
 - String key - 指定上传的BucketKey（必填）
-- MultipartFile[] files - 指定上传的文件列表（必填）
+- List<MultipartFile> files - 指定上传的文件列表（必填）
 ```
 
 上传结果示例：

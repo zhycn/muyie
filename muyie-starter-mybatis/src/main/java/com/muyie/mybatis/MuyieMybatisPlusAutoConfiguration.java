@@ -2,7 +2,9 @@ package com.muyie.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.handler.TableNameHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.muyie.mybatis.handler.AuditingDateMetaObjectHandler;
@@ -57,6 +59,7 @@ public class MuyieMybatisPlusAutoConfiguration {
   @ConditionalOnMissingBean(TableNameHandler.class)
   public TableNameHandler defaultTableNameHandler() {
     // 当使用动态表名时，需要重写此方法
+    // 多表查询时，会多次调用该方法
     return (sql, tableName) -> tableName;
   }
 

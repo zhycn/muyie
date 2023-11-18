@@ -34,11 +34,11 @@ public class MuyieMybatisPlusAutoConfiguration {
    */
   @Bean
   @ConditionalOnMissingBean(MybatisPlusInterceptor.class)
-  public MybatisPlusInterceptor mybatisPlusInterceptor() {
+  public MybatisPlusInterceptor mybatisPlusInterceptor(TableNameHandler tableNameHandler) {
     MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
     // 分页插件（单页分页条数限制5000条 - 默认无限制）
     PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
-    paginationInnerInterceptor.setMaxLimit(5000L);
+    paginationInnerInterceptor.setMaxLimit(500L);
     interceptor.addInnerInterceptor(paginationInnerInterceptor);
     // 乐观锁插件（在实体类的字段上加上 @Version 注解）
     OptimisticLockerInnerInterceptor optimisticLockerInnerInterceptor = new OptimisticLockerInnerInterceptor();
@@ -46,7 +46,18 @@ public class MuyieMybatisPlusAutoConfiguration {
     // 防全表更新与删除插件（针对 update 和 delete 语句，阻止恶意的全表更新和删除）
     BlockAttackInnerInterceptor blockAttackInnerInterceptor = new BlockAttackInnerInterceptor();
     interceptor.addInnerInterceptor(blockAttackInnerInterceptor);
+    // 添加动态表名拦截器（有需要则可配置）
+    DynamicTableNameInnerInterceptor dynamicTableNameInnerInterceptor = new DynamicTableNameInnerInterceptor();
+    dynamicTableNameInnerInterceptor.setTableNameHandler(tableNameHandler);
+    interceptor.addInnerInterceptor(dynamicTableNameInnerInterceptor);
     return interceptor;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean(TableNameHandler.class)
+  public TableNameHandler defaultTableNameHandler() {
+    // 当使用动态表名时，需要重写此方法
+    return (sql, tableName) -> tableName;
   }
 
 }

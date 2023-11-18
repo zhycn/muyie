@@ -20,6 +20,7 @@
     <apiguardian-api.version>1.1.2</apiguardian-api.version>
     <alibaba-druid.version>1.2.20</alibaba-druid.version>
     <alibaba-fastjson2.version>2.0.41</alibaba-fastjson2.version>
+    <alibaba-ttl.version>2.8.1</alibaba-ttl.version>
     <apollo-client.version>2.1.0</apollo-client.version>
     <bcprov-jdk15to18.version>1.76</bcprov-jdk15to18.version>
     <commons-io.version>2.14.0</commons-io.version>
@@ -58,6 +59,13 @@
         <groupId>com.alibaba.fastjson2</groupId>
         <artifactId>fastjson2</artifactId>
         <version>${alibaba-fastjson2.version}</version>
+      </dependency>
+
+      <!-- Alibaba TTL @https://github.com/alibaba/transmittable-thread-local -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>transmittable-thread-local</artifactId>
+        <version>${alibaba-ttl.version}</version>
       </dependency>
 
       <!-- Apollo client @https://www.apolloconfig.com/ -->

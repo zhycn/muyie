@@ -20,7 +20,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 
 - JDK 8+
 - Spring Boot 2.7.17
-  - [System Requirements](https://docs.spring.io/spring-boot/docs/2.7.16/reference/htmlsingle/#getting-started)
+  - [System Requirements](https://docs.spring.io/spring-boot/docs/2.7.17/reference/htmlsingle/#getting-started)
 - Spring Cloud 2021.0.8
 
 ## 快速集成
@@ -31,7 +31,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
 <parent>
     <groupId>com.github.zhycn</groupId>
     <artifactId>muyie-dependencies</artifactId>
-    <version>2.7.16-SNAPSHOT</version>
+    <version>2.7.17-SNAPSHOT</version>
     <relativePath/>
 </parent>
 ```
@@ -44,7 +44,7 @@ MuYie 完全兼容 Spring Boot 和 Spring Cloud，通过 Spring Boot 从根本�
         <dependency>
             <groupId>com.github.zhycn</groupId>
             <artifactId>muyie-dependencies</artifactId>
-            <version>2.7.16-SNAPSHOT</version>
+            <version>2.7.17-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

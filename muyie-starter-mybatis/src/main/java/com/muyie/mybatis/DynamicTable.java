@@ -3,6 +3,7 @@ package com.muyie.mybatis;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.Data;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +67,7 @@ public class DynamicTable {
     List<String> ttlList = TTL_DYNAMIC_TABLE_NAME_LIST.get();
     if (!CollectionUtils.isEmpty(ttlList)) {
       for (String key : ttlList) {
-        if (key.startsWith(tableName)) {
+        if (StringUtils.startsWithIgnoreCase(key, tableName)) {
           return key;
         }
       }

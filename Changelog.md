@@ -5,5 +5,4 @@
 - [x] [muyie-starter-oss](muyie-starter-oss)
 - [x] [muyie-starter-redis](muyie-starter-redis)
 - [ ] [muyie-starter-security](muyie-starter-security)
-- [x] [muyie-starter-thymeleaf](muyie-starter-thymeleaf)
 - [ ] [muyie-starter-web](muyie-starter-web)

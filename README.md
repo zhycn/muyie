@@ -204,20 +204,6 @@ Spring Boot Security 基于 JWT 的登录认证集成，开箱即用。
 
 - [Spring Security - 官网](https://docs.spring.io/spring-security/reference/5.8/index.html)
 
-### muyie-starter-thymeleaf
-
-Spring Boot 与 Thymeleaf 集成，开箱即用。保持默认配置即可，开发时可关闭缓存。
-
-```xml
-
-<dependency>
-  <groupId>com.github.zhycn</groupId>
-  <artifactId>muyie-starter-thymeleaf</artifactId>
-</dependency>
-```
-
-- [Thymeleaf - 官方文档](https://www.thymeleaf.org/)
-
 ### muyie-starter-web
 
 Spring Boot 项目的核心模块，开箱即用，集成大量基础实用功能。

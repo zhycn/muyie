@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 /**
- * RedisCache
+ * RedisCache - 整合了一些常用接口
  *
  * @author larry.qi
  * @since 2.7.13

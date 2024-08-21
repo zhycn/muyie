@@ -1,10 +1,8 @@
 package com.muyie.redis;
 
 import com.muyie.redis.cache.RedisCache;
-import com.muyie.redis.cache.RedissonCache;
 import com.muyie.redis.cache.StringRedisCache;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -56,12 +54,6 @@ public class MuyieRedisAutoConfiguration {
   @ConditionalOnMissingBean(name = "stringRedisCache")
   public StringRedisCache stringRedisCache(StringRedisTemplate redisTemplate) {
     return new StringRedisCache(redisTemplate);
-  }
-
-  @Bean
-  @ConditionalOnMissingBean(name = "redissonCache")
-  public RedissonCache redissonCache(RedissonClient redissonClient) {
-    return new RedissonCache(redissonClient);
   }
 
 }

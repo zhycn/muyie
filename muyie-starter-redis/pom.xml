@@ -16,6 +16,21 @@
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <redisson.version>3.23.5</redisson.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Redisson -->
+      <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-spring-boot-starter</artifactId>
+        <version>${redisson.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <!-- Starter for using Redis key-value data store with Spring Data Redis and the Lettuce client -->
     <!-- Spring Data Redis is currently tested against the latest 4.0 release. -->

@@ -16,6 +16,21 @@
     <relativePath>../muyie-dependencies/pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <apollo-client.version>2.2.0</apollo-client.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Apollo client @https://www.apolloconfig.com/ -->
+      <dependency>
+        <groupId>com.ctrip.framework.apollo</groupId>
+        <artifactId>apollo-client</artifactId>
+        <version>${apollo-client.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

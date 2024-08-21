@@ -1,1 +1,2 @@
 com.muyie.redis.MuyieRedisAutoConfiguration
+com.muyie.redis.topic.RedissonTopicAutoConfiguration
